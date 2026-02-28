@@ -1,130 +1,89 @@
 """
-Orchestrate Blender headless rendering of a USD file into 4 view images.
+Orchestrate Isaac Sim headless rendering of a USD file into 4 view images.
+
+Renders run on Windows (native GPU via Vulkan/RTX), called from WSL2 via
+powershell.exe. Path translation uses wslpath: /mnt/c/... → C:\\...
+
+UsdPreviewSurface materials are read natively by Omniverse — no
+prim_colors.json sidecar needed (unlike the previous Blender backend).
 """
 from __future__ import annotations
 
-import json
 import os
 import subprocess
 from pathlib import Path
 
 
-RENDER_SCRIPT = Path(__file__).parent.parent / "render_usd.py"
+# Windows-side paths (constants — adjust if installation moves)
+_OMNI_PYTHON = Path("C:/Users/raajg/miniconda3/envs/isaacsim/python.exe")
+_RENDER_SCRIPT = Path("C:/Crypt/Projects/physlint/render_omniverse.py")
 
 
-def _extract_prim_colors(usd_path: str) -> dict[str, list[float]]:
+def _to_windows_path(wsl_path: str) -> str:
     """
-    Use pxr to read material colors for every prim that has a material binding.
-    Returns {prim_name: {diffuse, metallic, roughness}}.
-
-    Handles two USD material styles:
-    - Standard: Material prim → UsdPreviewSurface Shader child
-    - MuJoCo-USD-Converter: Material prim with direct inputs:diffuseColor attribute
+    Convert a WSL2 path to a Windows path using wslpath.
+      /mnt/c/Crypt/... → C:\\Crypt\\...
+      /home/raajg/...  → \\\\wsl.localhost\\Ubuntu\\home\\raajg\\...
     """
-    from pxr import Usd, UsdShade
-
-    stage = Usd.Stage.Open(usd_path)
-
-    def _read_mat_props(mat_prim: Usd.Prim) -> dict:
-        """Try all known material property locations."""
-        # Style 1: UsdPreviewSurface Shader child
-        for child in mat_prim.GetChildren():
-            shader = UsdShade.Shader(child)
-            if shader and shader.GetIdAttr().Get() == "UsdPreviewSurface":
-                di  = shader.GetInput("diffuseColor")
-                me  = shader.GetInput("metallic")
-                ro  = shader.GetInput("roughness")
-                return {
-                    "diffuse":   list(di.Get())    if (di  and di.Get()  is not None) else [0.6, 0.6, 0.6],
-                    "metallic":  float(me.Get())   if (me  and me.Get()  is not None) else 0.0,
-                    "roughness": float(ro.Get())   if (ro  and ro.Get()  is not None) else 0.5,
-                }
-        # Style 2: inputs:diffuseColor directly on the Material prim
-        dc_attr = mat_prim.GetAttribute("inputs:diffuseColor")
-        if dc_attr and dc_attr.Get() is not None:
-            me_attr = mat_prim.GetAttribute("inputs:metallic")
-            ro_attr = mat_prim.GetAttribute("inputs:roughness")
-            return {
-                "diffuse":   list(dc_attr.Get()),
-                "metallic":  float(me_attr.Get()) if (me_attr and me_attr.Get() is not None) else 0.0,
-                "roughness": float(ro_attr.Get()) if (ro_attr and ro_attr.Get() is not None) else 0.5,
-            }
-        return {}
-
-    def _infer_material_type(mat_path: str) -> str:
-        p = mat_path.lower()
-        if "steel"    in p: return "steel"
-        if "alum"     in p: return "aluminum"
-        if "rubber"   in p: return "rubber"
-        if "concrete" in p: return "concrete"
-        return "generic"
-
-    # 1. Build material_prim_path → color props
-    mat_props: dict[str, dict] = {}
-    for prim in stage.Traverse():
-        if UsdShade.Material(prim):
-            props = _read_mat_props(prim)
-            if props:
-                path = str(prim.GetPath())
-                props["material_type"] = _infer_material_type(path)
-                mat_props[path] = props
-
-    # 2. Map each geometry prim to its material props via MaterialBindingAPI
-    prim_colors: dict[str, dict] = {}
-    for prim in stage.Traverse():
-        binding = UsdShade.MaterialBindingAPI(prim)
-        bound_mat, _ = binding.ComputeBoundMaterial()
-        if not bound_mat:
-            continue
-        mat_path = str(bound_mat.GetPath())
-        if mat_path in mat_props:
-            prim_colors[prim.GetName()] = mat_props[mat_path]
-
-    return prim_colors
+    result = subprocess.run(
+        ["wslpath", "-w", wsl_path],
+        capture_output=True, text=True, check=True,
+    )
+    return result.stdout.strip()
 
 
 def render_usd_views(
     usd_path: str,
     output_dir: str,
-    blender_exe: str = "blender",
-    samples: int = 32,
+    samples: int = 64,
     res: int = 768,
+    # Legacy params kept for call-site compatibility — not used by Omniverse backend
+    blender_exe: str = "blender",
     engine: str = "CYCLES",
 ) -> list[str]:
     """
-    Render 4 views of a USD scene using Blender headlessly.
+    Render 4 views of a USD scene using Isaac Sim (RTX) on Windows.
     Returns [top.png, front.png, side.png, isometric.png] absolute paths.
+
+    Called from WSL2; the USD file and output dir can be on /mnt/c/ or
+    WSL2-native paths (both are accessible from Windows via wslpath).
     """
     os.makedirs(output_dir, exist_ok=True)
     usd_path   = os.path.abspath(usd_path)
     output_dir = os.path.abspath(output_dir)
 
-    # Extract colors via pxr and write sidecar JSON for the render script
-    prim_colors = _extract_prim_colors(usd_path)
-    colors_json = os.path.join(output_dir, "prim_colors.json")
-    with open(colors_json, "w") as f:
-        json.dump(prim_colors, f)
-    print(f"[renderer] Extracted {len(prim_colors)} material colours from USD")
+    # Translate WSL2 paths → Windows paths for the subprocess
+    win_usd    = _to_windows_path(usd_path)
+    win_output = _to_windows_path(output_dir)
+    win_script = str(_RENDER_SCRIPT).replace("/", "\\")
+    win_python = str(_OMNI_PYTHON).replace("/", "\\")
 
-    cmd = [
-        blender_exe,
-        "--background",
-        "--python", str(RENDER_SCRIPT),
-        "--",
-        "--input",  usd_path,
-        "--output", output_dir,
-        "--colors", colors_json,
-        "--samples", str(samples),
-        "--res",     str(res),
-        "--engine",  engine,
-    ]
+    print(f"[renderer] Launching Isaac Sim render (RTX {res}px × {samples} subframes)")
+    print(f"[renderer]   USD:    {win_usd}")
+    print(f"[renderer]   output: {win_output}")
 
-    result = subprocess.run(cmd, capture_output=True, text=True)
+    # Build the PowerShell command — single-quoted strings handle spaces in paths
+    ps_cmd = (
+        f"& '{win_python}' '{win_script}'"
+        f" --input '{win_usd}'"
+        f" --output '{win_output}'"
+        f" --res {res}"
+        f" --samples {samples}"
+    )
 
+    result = subprocess.run(
+        ["powershell.exe", "-Command", ps_cmd],
+        capture_output=True,
+        text=True,
+        timeout=600,   # Isaac Sim first-run extension download can be slow
+    )
+
+    # Always print stdout so Isaac Sim startup/download messages are visible
+    if result.stdout:
+        print(result.stdout)
     if result.returncode != 0:
-        print("[renderer] Blender stdout:", result.stdout[-3000:])
-        print("[renderer] Blender stderr:", result.stderr[-3000:])
-        raise RuntimeError(f"Blender render failed (exit {result.returncode})")
+        print("[renderer] stderr:", result.stderr[-4000:])
+        raise RuntimeError(f"Isaac Sim render failed (exit {result.returncode})")
 
     view_names = ["top", "front", "side", "isometric"]
     paths = [os.path.join(output_dir, f"{v}.png") for v in view_names]
