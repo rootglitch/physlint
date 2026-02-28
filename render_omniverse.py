@@ -30,6 +30,23 @@ def parse_args():
 
 args = parse_args()
 
+# ── Windows DLL path setup (must happen before Kit/omni imports) ─────────────
+# PyTorch bundles its CUDA DLLs (c10_cuda.dll, cudart64_12.dll, etc.) in torch\lib\.
+# Kit's C++ extension loader uses Win32 LoadLibrary which only searches PATH — not
+# Python's os.add_dll_directory. Prepend torch\lib\ so Kit can resolve these DLLs
+# when it loads omni.isaac.core and similar extensions that depend on torch.
+_torch_lib = os.path.join(
+    os.path.dirname(sys.executable),   # .../envs/isaacsim/
+    "Lib", "site-packages", "torch", "lib",
+)
+if os.path.isdir(_torch_lib):
+    os.environ["PATH"] = _torch_lib + ";" + os.environ.get("PATH", "")
+    os.add_dll_directory(_torch_lib)   # belt-and-suspenders for ctypes paths
+
+# Accept NVIDIA Omniverse EULA non-interactively (required for headless use)
+# See: https://docs.omniverse.nvidia.com/isaacsim/latest/installation/install_python.html
+os.environ["OMNI_KIT_ACCEPT_EULA"] = "yes"
+
 # ── Boot Isaac Sim (must happen before any omni.* imports) ───────────────────
 from isaacsim import SimulationApp
 

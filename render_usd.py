@@ -359,8 +359,27 @@ def render_views(args, center: Vector, radius: float):
     scene.render.image_settings.file_format = "PNG"
     scene.render.engine  = "CYCLES"
     scene.cycles.samples = args.samples
-    scene.cycles.device  = "CPU"
-    scene.cycles.use_denoising   = False
+
+    # Enable GPU rendering if available (CUDA → OptiX fallback → CPU)
+    _device = "CPU"
+    try:
+        prefs = bpy.context.preferences.addons["cycles"].preferences
+        for backend in ("OPTIX", "CUDA"):
+            prefs.compute_device_type = backend
+            prefs.get_devices()
+            gpus = [d for d in prefs.devices if d.type != "CPU"]
+            if gpus:
+                for d in prefs.devices:
+                    d.use = (d.type != "CPU")
+                _device = "GPU"
+                print(f"[render_usd.py] GPU rendering enabled ({backend}): "
+                      f"{', '.join(d.name for d in gpus if d.use)}")
+                break
+    except Exception as e:
+        print(f"[render_usd.py] GPU setup failed ({e}), using CPU")
+    scene.cycles.device = _device
+
+    scene.cycles.use_denoising   = (_device == "GPU")  # OptiX denoiser on GPU
     scene.cycles.max_bounces     = 8
     scene.cycles.diffuse_bounces = 4
     scene.cycles.glossy_bounces  = 4
