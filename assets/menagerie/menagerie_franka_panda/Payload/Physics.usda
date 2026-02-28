@@ -1,0 +1,674 @@
+#usda 1.0
+(
+    customLayerData = {
+        string creator = "MuJoCo USD Converter v0.1.0a6"
+    }
+    defaultPrim = "panda"
+    kilogramsPerUnit = 1
+    metersPerUnit = 1
+    upAxis = "Z"
+)
+
+def Xform "panda"
+{
+    def Scope "Physics"
+    {
+        def Material "PhysicsMaterial" (
+            prepend apiSchemas = ["PhysicsMaterialAPI", "NewtonMaterialAPI", "MjcMaterialAPI"]
+        )
+        {
+            float newton:rollingFriction = 0.0001
+            float newton:torsionalFriction = 0.005
+            float physics:dynamicFriction = 1
+        }
+
+        def MjcTendon "split"
+        {
+            uniform token mjc:actuatorfrclimited = "false"
+            prepend rel mjc:path = [
+                </panda/Geometry/link0/link1/link2/link3/link4/link5/link6/link7/hand/left_finger/finger_joint1>,
+                </panda/Geometry/link0/link1/link2/link3/link4/link5/link6/link7/hand/right_finger/finger_joint2>,
+            ]
+            uniform double[] mjc:path:coef = [0.5, 0.5]
+            uniform int[] mjc:path:indices = [0, 1]
+            uniform token mjc:type = "fixed"
+        }
+
+        def MjcActuator "actuator1"
+        {
+            uniform double[] mjc:biasPrm = [0, -4500, -450, 0, 0, 0, 0, 0, 0, 0]
+            uniform token mjc:biasType = "affine"
+            uniform double mjc:ctrlRange:max = 2.8973
+            uniform double mjc:ctrlRange:min = -2.8973
+            uniform double mjc:forceRange:max = 87
+            uniform double mjc:forceRange:min = -87
+            uniform double[] mjc:gainPrm = [4500, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+            rel mjc:target = </panda/Geometry/link0/link1/joint1>
+        }
+
+        def MjcActuator "actuator2"
+        {
+            uniform double[] mjc:biasPrm = [0, -4500, -450, 0, 0, 0, 0, 0, 0, 0]
+            uniform token mjc:biasType = "affine"
+            uniform double mjc:ctrlRange:max = 1.7628
+            uniform double mjc:ctrlRange:min = -1.7628
+            uniform double mjc:forceRange:max = 87
+            uniform double mjc:forceRange:min = -87
+            uniform double[] mjc:gainPrm = [4500, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+            rel mjc:target = </panda/Geometry/link0/link1/link2/joint2>
+        }
+
+        def MjcActuator "actuator3"
+        {
+            uniform double[] mjc:biasPrm = [0, -3500, -350, 0, 0, 0, 0, 0, 0, 0]
+            uniform token mjc:biasType = "affine"
+            uniform double mjc:ctrlRange:max = 2.8973
+            uniform double mjc:ctrlRange:min = -2.8973
+            uniform double mjc:forceRange:max = 87
+            uniform double mjc:forceRange:min = -87
+            uniform double[] mjc:gainPrm = [3500, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+            rel mjc:target = </panda/Geometry/link0/link1/link2/link3/joint3>
+        }
+
+        def MjcActuator "actuator4"
+        {
+            uniform double[] mjc:biasPrm = [0, -3500, -350, 0, 0, 0, 0, 0, 0, 0]
+            uniform token mjc:biasType = "affine"
+            uniform double mjc:ctrlRange:max = -0.0698
+            uniform double mjc:ctrlRange:min = -3.0718
+            uniform double mjc:forceRange:max = 87
+            uniform double mjc:forceRange:min = -87
+            uniform double[] mjc:gainPrm = [3500, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+            rel mjc:target = </panda/Geometry/link0/link1/link2/link3/link4/joint4>
+        }
+
+        def MjcActuator "actuator5"
+        {
+            uniform double[] mjc:biasPrm = [0, -2000, -200, 0, 0, 0, 0, 0, 0, 0]
+            uniform token mjc:biasType = "affine"
+            uniform double mjc:ctrlRange:max = 2.8973
+            uniform double mjc:ctrlRange:min = -2.8973
+            uniform double mjc:forceRange:max = 12
+            uniform double mjc:forceRange:min = -12
+            uniform double[] mjc:gainPrm = [2000, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+            rel mjc:target = </panda/Geometry/link0/link1/link2/link3/link4/link5/joint5>
+        }
+
+        def MjcActuator "actuator6"
+        {
+            uniform double[] mjc:biasPrm = [0, -2000, -200, 0, 0, 0, 0, 0, 0, 0]
+            uniform token mjc:biasType = "affine"
+            uniform double mjc:ctrlRange:max = 3.7525
+            uniform double mjc:ctrlRange:min = -0.0175
+            uniform double mjc:forceRange:max = 12
+            uniform double mjc:forceRange:min = -12
+            uniform double[] mjc:gainPrm = [2000, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+            rel mjc:target = </panda/Geometry/link0/link1/link2/link3/link4/link5/link6/joint6>
+        }
+
+        def MjcActuator "actuator7"
+        {
+            uniform double[] mjc:biasPrm = [0, -2000, -200, 0, 0, 0, 0, 0, 0, 0]
+            uniform token mjc:biasType = "affine"
+            uniform double mjc:ctrlRange:max = 2.8973
+            uniform double mjc:ctrlRange:min = -2.8973
+            uniform double mjc:forceRange:max = 12
+            uniform double mjc:forceRange:min = -12
+            uniform double[] mjc:gainPrm = [2000, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+            rel mjc:target = </panda/Geometry/link0/link1/link2/link3/link4/link5/link6/link7/joint7>
+        }
+
+        def MjcActuator "actuator8"
+        {
+            uniform double[] mjc:biasPrm = [0, -100, -10, 0, 0, 0, 0, 0, 0, 0]
+            uniform token mjc:biasType = "affine"
+            uniform double mjc:ctrlRange:max = 255
+            uniform double mjc:forceRange:max = 100
+            uniform double mjc:forceRange:min = -100
+            uniform double[] mjc:gainPrm = [0.01568627451, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+            rel mjc:target = </panda/Physics/split>
+        }
+    }
+
+    def "Geometry"
+    {
+        def "link0" (
+            prepend apiSchemas = ["PhysicsRigidBodyAPI", "PhysicsMassAPI", "PhysicsArticulationRootAPI", "NewtonArticulationRootAPI"]
+        )
+        {
+            point3f physics:centerOfMass = (-0.041018, -0.00014, 0.049974)
+            float3 physics:diagonalInertia = (0.0043046502, 0.003879839, 0.0031305107)
+            float physics:mass = 0.629769
+            quatf physics:principalAxes = (0.0063047423, 0.75124454, 0.0074177445, 0.65995216)
+
+            over "link0_c" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "NewtonCollisionAPI", "MjcCollisionAPI", "PhysicsMeshCollisionAPI", "NewtonMeshCollisionAPI", "PhysicsMassAPI", "MaterialBindingAPI"]
+            )
+            {
+                rel material:binding:physics = </panda/Physics/PhysicsMaterial>
+                uniform int mjc:group = 3
+                float newton:contactGap = 0
+                uniform token physics:approximation = "convexHull"
+                float physics:density = 1000
+            }
+
+            def PhysicsFixedJoint "PhysicsFixedJoint"
+            {
+                rel physics:body0 = </panda>
+                rel physics:body1 = </panda/Geometry/link0>
+                point3f physics:localPos0 = (0, 0, 0)
+                point3f physics:localPos1 = (0, 0, 0)
+                quatf physics:localRot0 = (1, 0, 0, 0)
+                quatf physics:localRot1 = (1, 0, 0, 0)
+            }
+
+            def "link1" (
+                prepend apiSchemas = ["PhysicsRigidBodyAPI", "PhysicsMassAPI"]
+            )
+            {
+                point3f physics:centerOfMass = (0.003875, 0.002081, -0.04762)
+                float3 physics:diagonalInertia = (0.707137, 0.7034354, 0.008524557)
+                float physics:mass = 4.970684
+                quatf physics:principalAxes = (0.71154916, 0.0063437712, -0.01311239, 0.7024853)
+
+                over "link1_c" (
+                    prepend apiSchemas = ["PhysicsCollisionAPI", "NewtonCollisionAPI", "MjcCollisionAPI", "PhysicsMeshCollisionAPI", "NewtonMeshCollisionAPI", "PhysicsMassAPI", "MaterialBindingAPI"]
+                )
+                {
+                    rel material:binding:physics = </panda/Physics/PhysicsMaterial>
+                    uniform int mjc:group = 3
+                    float newton:contactGap = 0
+                    uniform token physics:approximation = "convexHull"
+                    float physics:density = 1000
+                }
+
+                def PhysicsRevoluteJoint "joint1" (
+                    prepend apiSchemas = ["MjcJointAPI"]
+                )
+                {
+                    uniform double mjc:armature = 0.1
+                    uniform double mjc:damping = 1
+                    uniform token physics:axis = "Z"
+                    rel physics:body0 = </panda/Geometry/link0>
+                    rel physics:body1 = </panda/Geometry/link0/link1>
+                    point3f physics:localPos0 = (0, 0, 0.333)
+                    point3f physics:localPos1 = (0, 0, 0)
+                    quatf physics:localRot0 = (1, 0, 0, 0)
+                    quatf physics:localRot1 = (1, 0, 0, 0)
+                    float physics:lowerLimit = -166.00307
+                    float physics:upperLimit = 166.00307
+                }
+
+                def "link2" (
+                    prepend apiSchemas = ["PhysicsRigidBodyAPI", "PhysicsMassAPI"]
+                )
+                {
+                    point3f physics:centerOfMass = (-0.003141, -0.02872, 0.003495)
+                    float3 physics:diagonalInertia = (0.031032642, 0.028300107, 0.0027342504)
+                    float physics:mass = 0.646926
+                    quatf physics:principalAxes = (-0.1681748, 0.82836586, -0.12287755, 0.5200272)
+
+                    over "link2_c" (
+                        prepend apiSchemas = ["PhysicsCollisionAPI", "NewtonCollisionAPI", "MjcCollisionAPI", "PhysicsMeshCollisionAPI", "NewtonMeshCollisionAPI", "PhysicsMassAPI", "MaterialBindingAPI"]
+                    )
+                    {
+                        rel material:binding:physics = </panda/Physics/PhysicsMaterial>
+                        uniform int mjc:group = 3
+                        float newton:contactGap = 0
+                        uniform token physics:approximation = "convexHull"
+                        float physics:density = 1000
+                    }
+
+                    def PhysicsRevoluteJoint "joint2" (
+                        prepend apiSchemas = ["MjcJointAPI"]
+                    )
+                    {
+                        uniform double mjc:armature = 0.1
+                        uniform double mjc:damping = 1
+                        uniform token physics:axis = "Z"
+                        rel physics:body0 = </panda/Geometry/link0/link1>
+                        rel physics:body1 = </panda/Geometry/link0/link1/link2>
+                        point3f physics:localPos0 = (0, 0, 0)
+                        point3f physics:localPos1 = (0, 0, 0)
+                        quatf physics:localRot0 = (-0.70710677, 0.70710677, 0, 0)
+                        quatf physics:localRot1 = (1, 0, 0, 0)
+                        float physics:lowerLimit = -101.001
+                        float physics:upperLimit = 101.001
+                    }
+
+                    def "link3" (
+                        prepend apiSchemas = ["PhysicsRigidBodyAPI", "PhysicsMassAPI"]
+                    )
+                    {
+                        point3f physics:centerOfMass = (0.027518, 0.039252, -0.066502)
+                        float3 physics:diagonalInertia = (0.041501388, 0.041479256, 0.0012463544)
+                        float physics:mass = 3.228604
+                        quatf physics:principalAxes = (0.6627688, -0.0067833145, 0.25205317, 0.70509624)
+
+                        over "link3_c" (
+                            prepend apiSchemas = ["PhysicsCollisionAPI", "NewtonCollisionAPI", "MjcCollisionAPI", "PhysicsMeshCollisionAPI", "NewtonMeshCollisionAPI", "PhysicsMassAPI", "MaterialBindingAPI"]
+                        )
+                        {
+                            rel material:binding:physics = </panda/Physics/PhysicsMaterial>
+                            uniform int mjc:group = 3
+                            float newton:contactGap = 0
+                            uniform token physics:approximation = "convexHull"
+                            float physics:density = 1000
+                        }
+
+                        def PhysicsRevoluteJoint "joint3" (
+                            prepend apiSchemas = ["MjcJointAPI"]
+                        )
+                        {
+                            uniform double mjc:armature = 0.1
+                            uniform double mjc:damping = 1
+                            uniform token physics:axis = "Z"
+                            rel physics:body0 = </panda/Geometry/link0/link1/link2>
+                            rel physics:body1 = </panda/Geometry/link0/link1/link2/link3>
+                            point3f physics:localPos0 = (0, -0.316, 1.6543612e-24)
+                            point3f physics:localPos1 = (0, 0, 0)
+                            quatf physics:localRot0 = (-0.70710677, -0.70710677, 0, 0)
+                            quatf physics:localRot1 = (1, 0, 0, 0)
+                            float physics:lowerLimit = -166.00307
+                            float physics:upperLimit = 166.00307
+                        }
+
+                        def "link4" (
+                            prepend apiSchemas = ["PhysicsRigidBodyAPI", "PhysicsMassAPI"]
+                        )
+                        {
+                            point3f physics:centerOfMass = (-0.05317, 0.104419, 0.027454)
+                            float3 physics:diagonalInertia = (0.03495964, 0.028148277, 0.010620084)
+                            float physics:mass = 3.587895
+                            quatf physics:principalAxes = (0.6505804, 0.52982163, -0.096203424, 0.5355176)
+
+                            over "link4_c" (
+                                prepend apiSchemas = ["PhysicsCollisionAPI", "NewtonCollisionAPI", "MjcCollisionAPI", "PhysicsMeshCollisionAPI", "NewtonMeshCollisionAPI", "PhysicsMassAPI", "MaterialBindingAPI"]
+                            )
+                            {
+                                rel material:binding:physics = </panda/Physics/PhysicsMaterial>
+                                uniform int mjc:group = 3
+                                float newton:contactGap = 0
+                                uniform token physics:approximation = "convexHull"
+                                float physics:density = 1000
+                            }
+
+                            def PhysicsRevoluteJoint "joint4" (
+                                prepend apiSchemas = ["MjcJointAPI"]
+                            )
+                            {
+                                uniform double mjc:armature = 0.1
+                                uniform double mjc:damping = 1
+                                uniform token physics:axis = "Z"
+                                rel physics:body0 = </panda/Geometry/link0/link1/link2/link3>
+                                rel physics:body1 = </panda/Geometry/link0/link1/link2/link3/link4>
+                                point3f physics:localPos0 = (0.0825, 0, 0)
+                                point3f physics:localPos1 = (0, 0, 0)
+                                quatf physics:localRot0 = (0.70710677, 0.70710677, 0, 0)
+                                quatf physics:localRot1 = (1, 0, 0, 0)
+                                float physics:lowerLimit = -176.00117
+                                float physics:upperLimit = -3.9992454
+                            }
+
+                            def "link5" (
+                                prepend apiSchemas = ["PhysicsRigidBodyAPI", "PhysicsMassAPI"]
+                            )
+                            {
+                                point3f physics:centerOfMass = (-0.011953, 0.041065, -0.038437)
+                                float3 physics:diagonalInertia = (0.03676254, 0.02885309, 0.008034371)
+                                float physics:mass = 1.225946
+                                quatf physics:principalAxes = (0.9873133, -0.0121953515, 0.07191867, -0.14103724)
+
+                                over "link5_c0" (
+                                    prepend apiSchemas = ["PhysicsCollisionAPI", "NewtonCollisionAPI", "MjcCollisionAPI", "PhysicsMeshCollisionAPI", "NewtonMeshCollisionAPI", "PhysicsMassAPI", "MaterialBindingAPI"]
+                                )
+                                {
+                                    rel material:binding:physics = </panda/Physics/PhysicsMaterial>
+                                    uniform int mjc:group = 3
+                                    float newton:contactGap = 0
+                                    uniform token physics:approximation = "convexHull"
+                                    float physics:density = 1000
+                                }
+
+                                over "link5_c1" (
+                                    prepend apiSchemas = ["PhysicsCollisionAPI", "NewtonCollisionAPI", "MjcCollisionAPI", "PhysicsMeshCollisionAPI", "NewtonMeshCollisionAPI", "PhysicsMassAPI", "MaterialBindingAPI"]
+                                )
+                                {
+                                    rel material:binding:physics = </panda/Physics/PhysicsMaterial>
+                                    uniform int mjc:group = 3
+                                    float newton:contactGap = 0
+                                    uniform token physics:approximation = "convexHull"
+                                    float physics:density = 1000
+                                }
+
+                                over "link5_c2" (
+                                    prepend apiSchemas = ["PhysicsCollisionAPI", "NewtonCollisionAPI", "MjcCollisionAPI", "PhysicsMeshCollisionAPI", "NewtonMeshCollisionAPI", "PhysicsMassAPI", "MaterialBindingAPI"]
+                                )
+                                {
+                                    rel material:binding:physics = </panda/Physics/PhysicsMaterial>
+                                    uniform int mjc:group = 3
+                                    float newton:contactGap = 0
+                                    uniform token physics:approximation = "convexHull"
+                                    float physics:density = 1000
+                                }
+
+                                def PhysicsRevoluteJoint "joint5" (
+                                    prepend apiSchemas = ["MjcJointAPI"]
+                                )
+                                {
+                                    uniform double mjc:armature = 0.1
+                                    uniform double mjc:damping = 1
+                                    uniform token physics:axis = "Z"
+                                    rel physics:body0 = </panda/Geometry/link0/link1/link2/link3/link4>
+                                    rel physics:body1 = </panda/Geometry/link0/link1/link2/link3/link4/link5>
+                                    point3f physics:localPos0 = (-0.0825, 0.384, 6.617445e-24)
+                                    point3f physics:localPos1 = (0, 0, 0)
+                                    quatf physics:localRot0 = (0.70710677, -0.70710677, 0, 0)
+                                    quatf physics:localRot1 = (1, 0, 0, 0)
+                                    float physics:lowerLimit = -166.00307
+                                    float physics:upperLimit = 166.00307
+                                }
+
+                                def "link6" (
+                                    prepend apiSchemas = ["PhysicsRigidBodyAPI", "PhysicsMassAPI"]
+                                )
+                                {
+                                    point3f physics:centerOfMass = (0.060149, -0.014117, -0.010517)
+                                    float3 physics:diagonalInertia = (0.005842761, 0.0043103737, 0.001597865)
+                                    float physics:mass = 1.666555
+                                    quatf physics:principalAxes = (0.10107538, 0.5933199, 0.028722698, 0.79807913)
+
+                                    over "link6_c" (
+                                        prepend apiSchemas = ["PhysicsCollisionAPI", "NewtonCollisionAPI", "MjcCollisionAPI", "PhysicsMeshCollisionAPI", "NewtonMeshCollisionAPI", "PhysicsMassAPI", "MaterialBindingAPI"]
+                                    )
+                                    {
+                                        rel material:binding:physics = </panda/Physics/PhysicsMaterial>
+                                        uniform int mjc:group = 3
+                                        float newton:contactGap = 0
+                                        uniform token physics:approximation = "convexHull"
+                                        float physics:density = 1000
+                                    }
+
+                                    def PhysicsRevoluteJoint "joint6" (
+                                        prepend apiSchemas = ["MjcJointAPI"]
+                                    )
+                                    {
+                                        uniform double mjc:armature = 0.1
+                                        uniform double mjc:damping = 1
+                                        uniform token physics:axis = "Z"
+                                        rel physics:body0 = </panda/Geometry/link0/link1/link2/link3/link4/link5>
+                                        rel physics:body1 = </panda/Geometry/link0/link1/link2/link3/link4/link5/link6>
+                                        point3f physics:localPos0 = (0, 0, 0)
+                                        point3f physics:localPos1 = (0, 0, 0)
+                                        quatf physics:localRot0 = (0.70710677, 0.70710677, 0, 0)
+                                        quatf physics:localRot1 = (1, 0, 0, 0)
+                                        float physics:lowerLimit = -1.0026761
+                                        float physics:upperLimit = 215.00241
+                                    }
+
+                                    def "link7" (
+                                        prepend apiSchemas = ["PhysicsRigidBodyAPI", "PhysicsMassAPI"]
+                                    )
+                                    {
+                                        point3f physics:centerOfMass = (0.010517, -0.004252, 0.061597)
+                                        float3 physics:diagonalInertia = (0.012734493, 0.010105477, 0.00451803)
+                                        float physics:mass = 0.735522
+                                        quatf physics:principalAxes = (0.9929385, -0.07620412, 0.07335952, -0.053706653)
+
+                                        over "link7_c" (
+                                            prepend apiSchemas = ["PhysicsCollisionAPI", "NewtonCollisionAPI", "MjcCollisionAPI", "PhysicsMeshCollisionAPI", "NewtonMeshCollisionAPI", "PhysicsMassAPI", "MaterialBindingAPI"]
+                                        )
+                                        {
+                                            rel material:binding:physics = </panda/Physics/PhysicsMaterial>
+                                            uniform int mjc:group = 3
+                                            float newton:contactGap = 0
+                                            uniform token physics:approximation = "convexHull"
+                                            float physics:density = 1000
+                                        }
+
+                                        def PhysicsRevoluteJoint "joint7" (
+                                            prepend apiSchemas = ["MjcJointAPI"]
+                                        )
+                                        {
+                                            uniform double mjc:armature = 0.1
+                                            uniform double mjc:damping = 1
+                                            uniform token physics:axis = "Z"
+                                            rel physics:body0 = </panda/Geometry/link0/link1/link2/link3/link4/link5/link6>
+                                            rel physics:body1 = </panda/Geometry/link0/link1/link2/link3/link4/link5/link6/link7>
+                                            point3f physics:localPos0 = (0.088, 0, 0)
+                                            point3f physics:localPos1 = (0, 0, 0)
+                                            quatf physics:localRot0 = (0.70710677, 0.70710677, 0, 0)
+                                            quatf physics:localRot1 = (1, 0, 0, 0)
+                                            float physics:lowerLimit = -166.00307
+                                            float physics:upperLimit = 166.00307
+                                        }
+
+                                        def "hand" (
+                                            prepend apiSchemas = ["PhysicsRigidBodyAPI", "PhysicsMassAPI"]
+                                        )
+                                        {
+                                            point3f physics:centerOfMass = (-0.01, 0, 0.03)
+                                            float3 physics:diagonalInertia = (0.001, 0.0025, 0.0017)
+                                            float physics:mass = 0.73
+                                            quatf physics:principalAxes = (1, 0, 0, 0)
+
+                                            over "hand_c" (
+                                                prepend apiSchemas = ["PhysicsCollisionAPI", "NewtonCollisionAPI", "MjcCollisionAPI", "PhysicsMeshCollisionAPI", "NewtonMeshCollisionAPI", "PhysicsMassAPI", "MaterialBindingAPI"]
+                                            )
+                                            {
+                                                rel material:binding:physics = </panda/Physics/PhysicsMaterial>
+                                                uniform int mjc:group = 3
+                                                float newton:contactGap = 0
+                                                uniform token physics:approximation = "convexHull"
+                                                float physics:density = 1000
+                                            }
+
+                                            def PhysicsFixedJoint "PhysicsFixedJoint"
+                                            {
+                                                rel physics:body0 = </panda/Geometry/link0/link1/link2/link3/link4/link5/link6/link7>
+                                                rel physics:body1 = </panda/Geometry/link0/link1/link2/link3/link4/link5/link6/link7/hand>
+                                                point3f physics:localPos0 = (0, 1.323489e-23, 0.107)
+                                                point3f physics:localPos1 = (0, 0, 0)
+                                                quatf physics:localRot0 = (0.92387956, 1.3062791e-16, 3.8011285e-17, -0.38268337)
+                                                quatf physics:localRot1 = (1, 0, 0, 0)
+                                            }
+
+                                            def "left_finger" (
+                                                prepend apiSchemas = ["PhysicsRigidBodyAPI", "PhysicsMassAPI"]
+                                            )
+                                            {
+                                                point3f physics:centerOfMass = (0, 0, 0)
+                                                float3 physics:diagonalInertia = (0.000002375, 0.000002375, 7.5e-7)
+                                                float physics:mass = 0.015
+                                                quatf physics:principalAxes = (1, 0, 0, 0)
+
+                                                over "finger_0_1" (
+                                                    prepend apiSchemas = ["PhysicsCollisionAPI", "NewtonCollisionAPI", "MjcCollisionAPI", "PhysicsMeshCollisionAPI", "NewtonMeshCollisionAPI", "PhysicsMassAPI", "MaterialBindingAPI"]
+                                                )
+                                                {
+                                                    rel material:binding:physics = </panda/Physics/PhysicsMaterial>
+                                                    uniform int mjc:group = 3
+                                                    float newton:contactGap = 0
+                                                    uniform token physics:approximation = "convexHull"
+                                                    float physics:density = 1000
+                                                }
+
+                                                over "Box" (
+                                                    prepend apiSchemas = ["PhysicsCollisionAPI", "NewtonCollisionAPI", "MjcCollisionAPI", "PhysicsMassAPI", "MaterialBindingAPI"]
+                                                )
+                                                {
+                                                    rel material:binding:physics = </panda/Physics/PhysicsMaterial>
+                                                    uniform int mjc:group = 3
+                                                    float newton:contactGap = 0
+                                                    float physics:density = 1000
+                                                }
+
+                                                over "Box_1" (
+                                                    prepend apiSchemas = ["PhysicsCollisionAPI", "NewtonCollisionAPI", "MjcCollisionAPI", "PhysicsMassAPI", "MaterialBindingAPI"]
+                                                )
+                                                {
+                                                    rel material:binding:physics = </panda/Physics/PhysicsMaterial>
+                                                    uniform int mjc:group = 3
+                                                    float newton:contactGap = 0
+                                                    float physics:density = 1000
+                                                }
+
+                                                over "Box_2" (
+                                                    prepend apiSchemas = ["PhysicsCollisionAPI", "NewtonCollisionAPI", "MjcCollisionAPI", "PhysicsMassAPI", "MaterialBindingAPI"]
+                                                )
+                                                {
+                                                    rel material:binding:physics = </panda/Physics/PhysicsMaterial>
+                                                    uniform int mjc:group = 3
+                                                    float newton:contactGap = 0
+                                                    float physics:density = 1000
+                                                }
+
+                                                over "Box_3" (
+                                                    prepend apiSchemas = ["PhysicsCollisionAPI", "NewtonCollisionAPI", "MjcCollisionAPI", "PhysicsMassAPI", "MaterialBindingAPI"]
+                                                )
+                                                {
+                                                    rel material:binding:physics = </panda/Physics/PhysicsMaterial>
+                                                    uniform int mjc:group = 3
+                                                    float newton:contactGap = 0
+                                                    float physics:density = 1000
+                                                }
+
+                                                over "Box_4" (
+                                                    prepend apiSchemas = ["PhysicsCollisionAPI", "NewtonCollisionAPI", "MjcCollisionAPI", "PhysicsMassAPI", "MaterialBindingAPI"]
+                                                )
+                                                {
+                                                    rel material:binding:physics = </panda/Physics/PhysicsMaterial>
+                                                    uniform int mjc:group = 3
+                                                    float newton:contactGap = 0
+                                                    float physics:density = 1000
+                                                }
+
+                                                def PhysicsPrismaticJoint "finger_joint1" (
+                                                    prepend apiSchemas = ["MjcJointAPI"]
+                                                )
+                                                {
+                                                    uniform double mjc:armature = 0.1
+                                                    uniform double mjc:damping = 1
+                                                    uniform token physics:axis = "Y"
+                                                    rel physics:body0 = </panda/Geometry/link0/link1/link2/link3/link4/link5/link6/link7/hand>
+                                                    rel physics:body1 = </panda/Geometry/link0/link1/link2/link3/link4/link5/link6/link7/hand/left_finger>
+                                                    point3f physics:localPos0 = (6.938894e-18, 0, 0.0584)
+                                                    point3f physics:localPos1 = (0, 0, 0)
+                                                    quatf physics:localRot0 = (1, 0, 0, 0)
+                                                    quatf physics:localRot1 = (1, 0, 0, 0)
+                                                    float physics:lowerLimit = 0
+                                                    float physics:upperLimit = 0.04
+                                                }
+                                            }
+
+                                            def "right_finger" (
+                                                prepend apiSchemas = ["PhysicsRigidBodyAPI", "PhysicsMassAPI"]
+                                            )
+                                            {
+                                                point3f physics:centerOfMass = (0, 0, 0)
+                                                float3 physics:diagonalInertia = (0.000002375, 0.000002375, 7.5e-7)
+                                                float physics:mass = 0.015
+                                                quatf physics:principalAxes = (1, 0, 0, 0)
+
+                                                over "finger_0_1" (
+                                                    prepend apiSchemas = ["PhysicsCollisionAPI", "NewtonCollisionAPI", "MjcCollisionAPI", "PhysicsMeshCollisionAPI", "NewtonMeshCollisionAPI", "PhysicsMassAPI", "MaterialBindingAPI"]
+                                                )
+                                                {
+                                                    rel material:binding:physics = </panda/Physics/PhysicsMaterial>
+                                                    uniform int mjc:group = 3
+                                                    float newton:contactGap = 0
+                                                    uniform token physics:approximation = "convexHull"
+                                                    float physics:density = 1000
+                                                }
+
+                                                over "Box" (
+                                                    prepend apiSchemas = ["PhysicsCollisionAPI", "NewtonCollisionAPI", "MjcCollisionAPI", "PhysicsMassAPI", "MaterialBindingAPI"]
+                                                )
+                                                {
+                                                    rel material:binding:physics = </panda/Physics/PhysicsMaterial>
+                                                    uniform int mjc:group = 3
+                                                    float newton:contactGap = 0
+                                                    float physics:density = 1000
+                                                }
+
+                                                over "Box_1" (
+                                                    prepend apiSchemas = ["PhysicsCollisionAPI", "NewtonCollisionAPI", "MjcCollisionAPI", "PhysicsMassAPI", "MaterialBindingAPI"]
+                                                )
+                                                {
+                                                    rel material:binding:physics = </panda/Physics/PhysicsMaterial>
+                                                    uniform int mjc:group = 3
+                                                    float newton:contactGap = 0
+                                                    float physics:density = 1000
+                                                }
+
+                                                over "Box_2" (
+                                                    prepend apiSchemas = ["PhysicsCollisionAPI", "NewtonCollisionAPI", "MjcCollisionAPI", "PhysicsMassAPI", "MaterialBindingAPI"]
+                                                )
+                                                {
+                                                    rel material:binding:physics = </panda/Physics/PhysicsMaterial>
+                                                    uniform int mjc:group = 3
+                                                    float newton:contactGap = 0
+                                                    float physics:density = 1000
+                                                }
+
+                                                over "Box_3" (
+                                                    prepend apiSchemas = ["PhysicsCollisionAPI", "NewtonCollisionAPI", "MjcCollisionAPI", "PhysicsMassAPI", "MaterialBindingAPI"]
+                                                )
+                                                {
+                                                    rel material:binding:physics = </panda/Physics/PhysicsMaterial>
+                                                    uniform int mjc:group = 3
+                                                    float newton:contactGap = 0
+                                                    float physics:density = 1000
+                                                }
+
+                                                over "Box_4" (
+                                                    prepend apiSchemas = ["PhysicsCollisionAPI", "NewtonCollisionAPI", "MjcCollisionAPI", "PhysicsMassAPI", "MaterialBindingAPI"]
+                                                )
+                                                {
+                                                    rel material:binding:physics = </panda/Physics/PhysicsMaterial>
+                                                    uniform int mjc:group = 3
+                                                    float newton:contactGap = 0
+                                                    float physics:density = 1000
+                                                }
+
+                                                def PhysicsPrismaticJoint "finger_joint2" (
+                                                    prepend apiSchemas = ["MjcJointAPI"]
+                                                )
+                                                {
+                                                    uniform double mjc:armature = 0.1
+                                                    uniform double mjc:damping = 1
+                                                    uniform token physics:axis = "Y"
+                                                    rel physics:body0 = </panda/Geometry/link0/link1/link2/link3/link4/link5/link6/link7/hand>
+                                                    rel physics:body1 = </panda/Geometry/link0/link1/link2/link3/link4/link5/link6/link7/hand/right_finger>
+                                                    point3f physics:localPos0 = (6.938894e-18, 0, 0.0584)
+                                                    point3f physics:localPos1 = (0, 0, 0)
+                                                    quatf physics:localRot0 = (-1.6653345e-16, -6.674186e-17, -1.1669192e-16, -1)
+                                                    quatf physics:localRot1 = (1, 0, 0, 0)
+                                                    float physics:lowerLimit = 0
+                                                    float physics:upperLimit = 0.04
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+def PhysicsScene "PhysicsScene" (
+    prepend apiSchemas = ["NewtonSceneAPI", "MjcSceneAPI"]
+)
+{
+    uniform token mjc:compiler:angle = "radian"
+    uniform token mjc:option:integrator = "implicitfast"
+    uniform int newton:maxSolverIterations = 100
+    uniform int newton:timeStepsPerSecond = 500
+    vector3f physics:gravityDirection = (0, 0, -1)
+    float physics:gravityMagnitude = 9.81
+}
+

@@ -1,0 +1,489 @@
+#usda 1.0
+(
+    customLayerData = {
+        string creator = "MuJoCo USD Converter v0.1.0a6"
+    }
+    defaultPrim = "panda"
+    kilogramsPerUnit = 1
+    metersPerUnit = 1
+    upAxis = "Z"
+)
+
+def Xform "panda"
+{
+    def Scope "Materials"
+    {
+        def Material "off_white" (
+            prepend references = @./MaterialsLibrary.usdc@</Materials/off_white>
+        )
+        {
+        }
+
+        def Material "black" (
+            prepend references = @./MaterialsLibrary.usdc@</Materials/black>
+        )
+        {
+        }
+
+        def Material "white" (
+            prepend references = @./MaterialsLibrary.usdc@</Materials/white>
+        )
+        {
+        }
+
+        def Material "light_blue" (
+            prepend references = @./MaterialsLibrary.usdc@</Materials/light_blue>
+        )
+        {
+        }
+
+        def Material "green" (
+            prepend references = @./MaterialsLibrary.usdc@</Materials/green>
+        )
+        {
+        }
+    }
+
+    over "Geometry"
+    {
+        over "link0"
+        {
+            over "link0_0" (
+                prepend apiSchemas = ["MaterialBindingAPI"]
+            )
+            {
+                rel material:binding = </panda/Materials/off_white>
+            }
+
+            over "link0_1" (
+                prepend apiSchemas = ["MaterialBindingAPI"]
+            )
+            {
+                rel material:binding = </panda/Materials/black>
+            }
+
+            over "link0_2" (
+                prepend apiSchemas = ["MaterialBindingAPI"]
+            )
+            {
+                rel material:binding = </panda/Materials/off_white>
+            }
+
+            over "link0_3" (
+                prepend apiSchemas = ["MaterialBindingAPI"]
+            )
+            {
+                rel material:binding = </panda/Materials/black>
+            }
+
+            over "link0_4" (
+                prepend apiSchemas = ["MaterialBindingAPI"]
+            )
+            {
+                rel material:binding = </panda/Materials/off_white>
+            }
+
+            over "link0_5" (
+                prepend apiSchemas = ["MaterialBindingAPI"]
+            )
+            {
+                rel material:binding = </panda/Materials/black>
+            }
+
+            over "link0_7" (
+                prepend apiSchemas = ["MaterialBindingAPI"]
+            )
+            {
+                rel material:binding = </panda/Materials/white>
+            }
+
+            over "link0_8" (
+                prepend apiSchemas = ["MaterialBindingAPI"]
+            )
+            {
+                rel material:binding = </panda/Materials/white>
+            }
+
+            over "link0_9" (
+                prepend apiSchemas = ["MaterialBindingAPI"]
+            )
+            {
+                rel material:binding = </panda/Materials/black>
+            }
+
+            over "link0_10" (
+                prepend apiSchemas = ["MaterialBindingAPI"]
+            )
+            {
+                rel material:binding = </panda/Materials/off_white>
+            }
+
+            over "link0_11" (
+                prepend apiSchemas = ["MaterialBindingAPI"]
+            )
+            {
+                rel material:binding = </panda/Materials/white>
+            }
+
+            over "link1"
+            {
+                over "link1" (
+                    prepend apiSchemas = ["MaterialBindingAPI"]
+                )
+                {
+                    rel material:binding = </panda/Materials/white>
+                }
+
+                over "link2"
+                {
+                    over "link2" (
+                        prepend apiSchemas = ["MaterialBindingAPI"]
+                    )
+                    {
+                        rel material:binding = </panda/Materials/white>
+                    }
+
+                    over "link3"
+                    {
+                        over "link3_0" (
+                            prepend apiSchemas = ["MaterialBindingAPI"]
+                        )
+                        {
+                            rel material:binding = </panda/Materials/white>
+                        }
+
+                        over "link3_1" (
+                            prepend apiSchemas = ["MaterialBindingAPI"]
+                        )
+                        {
+                            rel material:binding = </panda/Materials/white>
+                        }
+
+                        over "link3_2" (
+                            prepend apiSchemas = ["MaterialBindingAPI"]
+                        )
+                        {
+                            rel material:binding = </panda/Materials/white>
+                        }
+
+                        over "link3_3" (
+                            prepend apiSchemas = ["MaterialBindingAPI"]
+                        )
+                        {
+                            rel material:binding = </panda/Materials/black>
+                        }
+
+                        over "link4"
+                        {
+                            over "link4_0" (
+                                prepend apiSchemas = ["MaterialBindingAPI"]
+                            )
+                            {
+                                rel material:binding = </panda/Materials/white>
+                            }
+
+                            over "link4_1" (
+                                prepend apiSchemas = ["MaterialBindingAPI"]
+                            )
+                            {
+                                rel material:binding = </panda/Materials/white>
+                            }
+
+                            over "link4_2" (
+                                prepend apiSchemas = ["MaterialBindingAPI"]
+                            )
+                            {
+                                rel material:binding = </panda/Materials/black>
+                            }
+
+                            over "link4_3" (
+                                prepend apiSchemas = ["MaterialBindingAPI"]
+                            )
+                            {
+                                rel material:binding = </panda/Materials/white>
+                            }
+
+                            over "link5"
+                            {
+                                over "link5_0" (
+                                    prepend apiSchemas = ["MaterialBindingAPI"]
+                                )
+                                {
+                                    rel material:binding = </panda/Materials/black>
+                                }
+
+                                over "link5_1" (
+                                    prepend apiSchemas = ["MaterialBindingAPI"]
+                                )
+                                {
+                                    rel material:binding = </panda/Materials/white>
+                                }
+
+                                over "link5_2" (
+                                    prepend apiSchemas = ["MaterialBindingAPI"]
+                                )
+                                {
+                                    rel material:binding = </panda/Materials/white>
+                                }
+
+                                over "link6"
+                                {
+                                    over "link6_0" (
+                                        prepend apiSchemas = ["MaterialBindingAPI"]
+                                    )
+                                    {
+                                        rel material:binding = </panda/Materials/off_white>
+                                    }
+
+                                    over "link6_1" (
+                                        prepend apiSchemas = ["MaterialBindingAPI"]
+                                    )
+                                    {
+                                        rel material:binding = </panda/Materials/white>
+                                    }
+
+                                    over "link6_2" (
+                                        prepend apiSchemas = ["MaterialBindingAPI"]
+                                    )
+                                    {
+                                        rel material:binding = </panda/Materials/black>
+                                    }
+
+                                    over "link6_3" (
+                                        prepend apiSchemas = ["MaterialBindingAPI"]
+                                    )
+                                    {
+                                        rel material:binding = </panda/Materials/white>
+                                    }
+
+                                    over "link6_4" (
+                                        prepend apiSchemas = ["MaterialBindingAPI"]
+                                    )
+                                    {
+                                        rel material:binding = </panda/Materials/white>
+                                    }
+
+                                    over "link6_5" (
+                                        prepend apiSchemas = ["MaterialBindingAPI"]
+                                    )
+                                    {
+                                        rel material:binding = </panda/Materials/white>
+                                    }
+
+                                    over "link6_6" (
+                                        prepend apiSchemas = ["MaterialBindingAPI"]
+                                    )
+                                    {
+                                        rel material:binding = </panda/Materials/white>
+                                    }
+
+                                    over "link6_7" (
+                                        prepend apiSchemas = ["MaterialBindingAPI"]
+                                    )
+                                    {
+                                        rel material:binding = </panda/Materials/light_blue>
+                                    }
+
+                                    over "link6_8" (
+                                        prepend apiSchemas = ["MaterialBindingAPI"]
+                                    )
+                                    {
+                                        rel material:binding = </panda/Materials/light_blue>
+                                    }
+
+                                    over "link6_9" (
+                                        prepend apiSchemas = ["MaterialBindingAPI"]
+                                    )
+                                    {
+                                        rel material:binding = </panda/Materials/black>
+                                    }
+
+                                    over "link6_10" (
+                                        prepend apiSchemas = ["MaterialBindingAPI"]
+                                    )
+                                    {
+                                        rel material:binding = </panda/Materials/black>
+                                    }
+
+                                    over "link6_11" (
+                                        prepend apiSchemas = ["MaterialBindingAPI"]
+                                    )
+                                    {
+                                        rel material:binding = </panda/Materials/white>
+                                    }
+
+                                    over "link6_12" (
+                                        prepend apiSchemas = ["MaterialBindingAPI"]
+                                    )
+                                    {
+                                        rel material:binding = </panda/Materials/green>
+                                    }
+
+                                    over "link6_13" (
+                                        prepend apiSchemas = ["MaterialBindingAPI"]
+                                    )
+                                    {
+                                        rel material:binding = </panda/Materials/white>
+                                    }
+
+                                    over "link6_14" (
+                                        prepend apiSchemas = ["MaterialBindingAPI"]
+                                    )
+                                    {
+                                        rel material:binding = </panda/Materials/black>
+                                    }
+
+                                    over "link6_15" (
+                                        prepend apiSchemas = ["MaterialBindingAPI"]
+                                    )
+                                    {
+                                        rel material:binding = </panda/Materials/black>
+                                    }
+
+                                    over "link6_16" (
+                                        prepend apiSchemas = ["MaterialBindingAPI"]
+                                    )
+                                    {
+                                        rel material:binding = </panda/Materials/white>
+                                    }
+
+                                    over "link7"
+                                    {
+                                        over "link7_0" (
+                                            prepend apiSchemas = ["MaterialBindingAPI"]
+                                        )
+                                        {
+                                            rel material:binding = </panda/Materials/white>
+                                        }
+
+                                        over "link7_1" (
+                                            prepend apiSchemas = ["MaterialBindingAPI"]
+                                        )
+                                        {
+                                            rel material:binding = </panda/Materials/black>
+                                        }
+
+                                        over "link7_2" (
+                                            prepend apiSchemas = ["MaterialBindingAPI"]
+                                        )
+                                        {
+                                            rel material:binding = </panda/Materials/black>
+                                        }
+
+                                        over "link7_3" (
+                                            prepend apiSchemas = ["MaterialBindingAPI"]
+                                        )
+                                        {
+                                            rel material:binding = </panda/Materials/black>
+                                        }
+
+                                        over "link7_4" (
+                                            prepend apiSchemas = ["MaterialBindingAPI"]
+                                        )
+                                        {
+                                            rel material:binding = </panda/Materials/black>
+                                        }
+
+                                        over "link7_5" (
+                                            prepend apiSchemas = ["MaterialBindingAPI"]
+                                        )
+                                        {
+                                            rel material:binding = </panda/Materials/black>
+                                        }
+
+                                        over "link7_6" (
+                                            prepend apiSchemas = ["MaterialBindingAPI"]
+                                        )
+                                        {
+                                            rel material:binding = </panda/Materials/black>
+                                        }
+
+                                        over "link7_7" (
+                                            prepend apiSchemas = ["MaterialBindingAPI"]
+                                        )
+                                        {
+                                            rel material:binding = </panda/Materials/white>
+                                        }
+
+                                        over "hand"
+                                        {
+                                            over "hand_0" (
+                                                prepend apiSchemas = ["MaterialBindingAPI"]
+                                            )
+                                            {
+                                                rel material:binding = </panda/Materials/off_white>
+                                            }
+
+                                            over "hand_1" (
+                                                prepend apiSchemas = ["MaterialBindingAPI"]
+                                            )
+                                            {
+                                                rel material:binding = </panda/Materials/black>
+                                            }
+
+                                            over "hand_2" (
+                                                prepend apiSchemas = ["MaterialBindingAPI"]
+                                            )
+                                            {
+                                                rel material:binding = </panda/Materials/black>
+                                            }
+
+                                            over "hand_3" (
+                                                prepend apiSchemas = ["MaterialBindingAPI"]
+                                            )
+                                            {
+                                                rel material:binding = </panda/Materials/white>
+                                            }
+
+                                            over "hand_4" (
+                                                prepend apiSchemas = ["MaterialBindingAPI"]
+                                            )
+                                            {
+                                                rel material:binding = </panda/Materials/off_white>
+                                            }
+
+                                            over "left_finger"
+                                            {
+                                                over "finger_0" (
+                                                    prepend apiSchemas = ["MaterialBindingAPI"]
+                                                )
+                                                {
+                                                    rel material:binding = </panda/Materials/off_white>
+                                                }
+
+                                                over "finger_1" (
+                                                    prepend apiSchemas = ["MaterialBindingAPI"]
+                                                )
+                                                {
+                                                    rel material:binding = </panda/Materials/black>
+                                                }
+                                            }
+
+                                            over "right_finger"
+                                            {
+                                                over "finger_0" (
+                                                    prepend apiSchemas = ["MaterialBindingAPI"]
+                                                )
+                                                {
+                                                    rel material:binding = </panda/Materials/off_white>
+                                                }
+
+                                                over "finger_1" (
+                                                    prepend apiSchemas = ["MaterialBindingAPI"]
+                                                )
+                                                {
+                                                    rel material:binding = </panda/Materials/black>
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+

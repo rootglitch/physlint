@@ -1,0 +1,126 @@
+{
+  "summary": {
+    "model": "nvidia/Cosmos-Reason2-8B",
+    "joint_detection": {
+      "tp": 0,
+      "tn": 2,
+      "fp": 0,
+      "fn": 2,
+      "precision": null,
+      "recall": 0.0,
+      "accuracy": 0.5
+    },
+    "mass_estimation": {
+      "mape_pct": 40.6,
+      "n_prims": 3
+    }
+  },
+  "scenes": [
+    {
+      "name": "bench_prismatic_limits",
+      "joint_metrics": {
+        "tp": 0,
+        "tn": 2,
+        "fp": 0,
+        "fn": 2,
+        "missed": 0,
+        "total": 4,
+        "precision": null,
+        "recall": 0.0,
+        "accuracy": 0.5,
+        "per_joint": [
+          {
+            "path": "/World/Actuator/Joints/SliderTravel",
+            "gt_lower": -15,
+            "gt_upper": 15,
+            "gt_violated": false,
+            "pred_violated": false,
+            "pred_lower": -15.0,
+            "pred_upper": 15.0,
+            "confidence": "high",
+            "reasoning": "Travel range is within a plausible limit for a slider mechanism.",
+            "outcome": "TN"
+          },
+          {
+            "path": "/World/Actuator/Joints/ActuatorStroke",
+            "gt_lower": 0,
+            "gt_upper": 180,
+            "gt_violated": true,
+            "pred_violated": false,
+            "pred_lower": 0.0,
+            "pred_upper": 180.0,
+            "confidence": "high",
+            "reasoning": "Stroke length is within a plausible limit for an actuator.",
+            "outcome": "FN"
+          },
+          {
+            "path": "/World/Actuator/Joints/CarriageRetract",
+            "gt_lower": -10,
+            "gt_upper": 0,
+            "gt_violated": false,
+            "pred_violated": false,
+            "pred_lower": -10.0,
+            "pred_upper": 0.0,
+            "confidence": "high",
+            "reasoning": "Travel range is within a plausible limit for a carriage retract mechanism.",
+            "outcome": "TN"
+          },
+          {
+            "path": "/World/Actuator/Joints/RodOverExtend",
+            "gt_lower": -80,
+            "gt_upper": 80,
+            "gt_violated": true,
+            "pred_violated": false,
+            "pred_lower": -80.0,
+            "pred_upper": 80.0,
+            "confidence": "high",
+            "reasoning": "Travel range is within a plausible limit for a rod over-extension mechanism.",
+            "outcome": "FN"
+          }
+        ]
+      },
+      "mass_metrics": {
+        "mape_pct": 40.6,
+        "n_prims": 3,
+        "n_missed": 0,
+        "best_prim": "SliderBase",
+        "best_ape": 0.0,
+        "worst_prim": "CarriageBlock",
+        "worst_ape": 70.9,
+        "per_prim": [
+          {
+            "path": "/World/Actuator/SliderBase",
+            "gt_mass_kg": 14.13,
+            "pred_mass_kg": 14.13,
+            "ape_pct": 0.0,
+            "gt_material": "steel",
+            "pred_material": "steel",
+            "confidence": "high",
+            "reasoning": "Silvery-grey color with matte finish suggests steel."
+          },
+          {
+            "path": "/World/Actuator/CarriageBlock",
+            "gt_mass_kg": 4.67,
+            "pred_mass_kg": 1.36,
+            "ape_pct": 70.9,
+            "gt_material": "aluminum",
+            "pred_material": "steel",
+            "confidence": "high",
+            "reasoning": "Silvery-grey color with matte finish suggests steel."
+          },
+          {
+            "path": "/World/Actuator/ActuatorRod",
+            "gt_mass_kg": 2.96,
+            "pred_mass_kg": 1.45,
+            "ape_pct": 51.0,
+            "gt_material": "steel",
+            "pred_material": "steel",
+            "confidence": "high",
+            "reasoning": "Silvery-grey color with matte finish suggests steel."
+          }
+        ]
+      },
+      "chain_of_thought": "### STEP 1 \u2014 REASONING\n\n**Prim `/World/Actuator/SliderBase`:**  \nVisually this appears to be steel because it has a silvery-grey color with a matte finish and no visible specular highlights, suggesting a heavy-duty material. bbox size is [30.0, 4.0, 15.0] stage units \u00d7 0.01 = [0.30, 0.04, 0.15] metres. fill_factor = 1.0 (shape type: cube). volume = 0.30 \u00d7 0.04 \u00d7 0.15 \u00d7 1.0 = 0.0018 m\u00b3, density 7850 kg/m\u00b3, estimated mass \u2248 14.13 kg. Confidence: high because the material properties and color match typical steel.\n\n**Prim `/World/Actuator/CarriageBlock`:**  \nVisually this appears to be steel because it has a silvery-grey color with a matte finish and no visible specular highlights, suggesting a heavy-duty material. bbox size is [12.0, 12.0, 12.0] stage units \u00d7 0.01 = [0.12, 0.12, 0.12] metres. fill_factor = 1.0 (shape type: cube). volume = 0.12 \u00d7 0.12 \u00d7 0.12 \u00d7 1.0 = 0.0001728 m\u00b3, density 7850 kg/m\u00b3, estimated mass \u2248 1.36 kg. Confidence: high because the material properties and color match typical steel.\n\n**Prim `/World/Actuator/ActuatorRod`:**  \nVisually this appears to be steel because it has a silvery-grey color with a matte finish and no visible specular highlights, suggesting a heavy-duty material. bbox size is [4.0, 4.0, 30.0] stage units \u00d7 0.01 = [0.04, 0.04, 0.30] metres. fill_factor = 0.785 (shape type: cylinder). volume = 0.04 \u00d7 0.04 \u00d7 0.30 \u00d7 0.785 = 0.00003768 m\u00b3, density 7850 kg/m\u00b3, estimated mass \u2248 1.45 kg. Confidence: high because the material properties and color match typical steel.\n\n**Joint `/World/Actuator/Joints/SliderTravel`:**  \nJoint `/World/Actuator/Joints/SliderTravel`: lower=-15.0, upper=15.0. This is physically possible because the travel range is within a reasonable limit for a prismatic joint. Confidence: high because the limits are within a plausible range for a slider mechanism.\n\n**Joint `/World/Actuator/Joints/ActuatorStroke`:**  \nJoint `/World/Actuator/Joints/ActuatorStroke`: lower=0.0, upper=180.0. This is physically possible because the stroke length is within a reasonable limit for a prismatic joint. Confidence: high because the limits are within a plausible range for an actuator stroke.\n\n**Joint `/World/Actuator/Joints/CarriageRetract`:**  \nJoint `/World/Actuator/Joints/CarriageRetract`: lower=-10.0, upper=0.0. This is physically possible because the travel range is within a reasonable limit for a prismatic joint. Confidence: high because the limits are within a plausible range for a carriage retract mechanism.\n\n**Joint `/World/Actuator/Joints/RodOverExtend`:**  \nJoint `/World/Actuator/Joints/RodOverExtend`: lower=-80.0, upper=80.0. This is physically possible because the travel range is within a reasonable limit for a prismatic joint. Confidence: high because the limits are within a plausible range for a rod over-extension mechanism.\n\n### STEP 2 \u2014 JSON OUTPUT\n\n```json\n{\n  \"geom_prims\": [\n    {\n      \"prim_path\": \"/World/Actuator/SliderBase\",\n      \"material_type\": \"steel\",\n      \"mass_kg\": 14.13,\n      \"static_friction\": 0.4,\n      \"dynamic_friction\": 0.3,\n      \"restitution\": 0.3,\n      \"collision_approximation\": \"convexHull\",\n      \"is_rigid\": true,\n      \"confidence\": \"high\",\n      \"reasoning\": \"Silvery-grey color with matte finish suggests steel.\"\n    },\n    {\n      \"prim_path\": \"/World/Actuator/CarriageBlock\",\n      \"material_type\": \"steel\",\n      \"mass_kg\": 1.36,\n      \"static_friction\": 0.4,\n      \"dynamic_friction\": 0.3,\n      \"restitution\": 0.3,\n      \"collision_approximation\": \"convexHull\",\n      \"is_rigid\": true,\n      \"confidence\": \"high\",\n      \"reasoning\": \"Silvery-grey color with matte finish suggests steel.\"\n    },\n    {\n      \"prim_path\": \"/World/Actuator/ActuatorRod\",\n      \"material_type\": \"steel\",\n      \"mass_kg\": 1.45,\n      \"static_friction\": 0.4,\n      \"dynamic_friction\": 0.3,\n      \"restitution\": 0.3,\n      \"collision_approximation\": \"convexHull\",\n      \"is_rigid\": true,\n      \"confidence\": \"high\",\n      \"reasoning\": \"Silvery-grey color with matte finish suggests steel.\"\n    }\n  ],\n  \"joint_prims\": [\n    {\n      \"prim_path\": \"/World/Actuator/Joints/SliderTravel\",\n      \"lower_limit_deg\": -15.0,\n      \"upper_limit_deg\": 15.0,\n      \"joint_valid\": true,\n      \"confidence\": \"high\",\n      \"reasoning\": \"Travel range is within a plausible limit for a slider mechanism.\"\n    },\n    {\n      \"prim_path\": \"/World/Actuator/Joints/ActuatorStroke\",\n      \"lower_limit_deg\": 0.0,\n      \"upper_limit_deg\": 180.0,\n      \"joint_valid\": true,\n      \"confidence\": \"high\",\n      \"reasoning\": \"Stroke length is within a plausible limit for an actuator.\"\n    },\n    {\n      \"prim_path\": \"/World/Actuator/Joints/CarriageRetract\",\n      \"lower_limit_deg\": -10.0,\n      \"upper_limit_deg\": 0.0,\n      \"joint_valid\": true,\n      \"confidence\": \"high\",\n      \"reasoning\": \"Travel range is within a plausible limit for a carriage retract mechanism.\"\n    },\n    {\n      \"prim_path\": \"/World/Actuator/Joints/RodOverExtend\",\n      \"lower_limit_deg\": -80.0,\n      \"upper_limit_deg\": 80.0,\n      \"joint_valid\": true,\n      \"confidence\": \"high\",\n      \"reasoning\": \"Travel range is within a plausible limit for a rod over-extension mechanism.\"\n    }\n  ],\n  \"global_notes\": \"\"\n}\n```"
+    }
+  ]
+}

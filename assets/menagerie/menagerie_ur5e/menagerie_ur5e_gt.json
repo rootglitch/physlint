@@ -1,0 +1,86 @@
+{
+  "name": "menagerie_ur5e",
+  "usd": "assets/menagerie/menagerie_ur5e/menagerie_ur5e_stripped.usda",
+  "description": "Stripped from menagerie_ur5e.usda \u2014 7 bodies, 6 joints (0 violated)",
+  "joints": [
+    {
+      "path": "/ur5e/Geometry/base/shoulder_link/upper_arm_link/forearm_link/wrist_1_link/wrist_2_link/wrist_3_link/wrist_3_joint",
+      "type": "revolute",
+      "lower": -360.0,
+      "upper": 360.0,
+      "violated": false
+    },
+    {
+      "path": "/ur5e/Geometry/base/shoulder_link/upper_arm_link/forearm_link/wrist_1_link/wrist_2_link/wrist_2_joint",
+      "type": "revolute",
+      "lower": -360.0,
+      "upper": 360.0,
+      "violated": false
+    },
+    {
+      "path": "/ur5e/Geometry/base/shoulder_link/upper_arm_link/forearm_link/wrist_1_link/wrist_1_joint",
+      "type": "revolute",
+      "lower": -360.0,
+      "upper": 360.0,
+      "violated": false
+    },
+    {
+      "path": "/ur5e/Geometry/base/shoulder_link/upper_arm_link/forearm_link/elbow_joint",
+      "type": "revolute",
+      "lower": -179.99,
+      "upper": 179.99,
+      "violated": false
+    },
+    {
+      "path": "/ur5e/Geometry/base/shoulder_link/upper_arm_link/shoulder_lift_joint",
+      "type": "revolute",
+      "lower": -360.0,
+      "upper": 360.0,
+      "violated": false
+    },
+    {
+      "path": "/ur5e/Geometry/base/shoulder_link/shoulder_pan_joint",
+      "type": "revolute",
+      "lower": -360.0,
+      "upper": 360.0,
+      "violated": false
+    }
+  ],
+  "masses": [
+    {
+      "path": "/ur5e/Geometry/base",
+      "material": "aluminum",
+      "mass_kg": 4.0
+    },
+    {
+      "path": "/ur5e/Geometry/base/shoulder_link",
+      "material": "aluminum",
+      "mass_kg": 3.7
+    },
+    {
+      "path": "/ur5e/Geometry/base/shoulder_link/upper_arm_link",
+      "material": "aluminum",
+      "mass_kg": 8.393
+    },
+    {
+      "path": "/ur5e/Geometry/base/shoulder_link/upper_arm_link/forearm_link",
+      "material": "aluminum",
+      "mass_kg": 2.275
+    },
+    {
+      "path": "/ur5e/Geometry/base/shoulder_link/upper_arm_link/forearm_link/wrist_1_link",
+      "material": "aluminum",
+      "mass_kg": 1.219
+    },
+    {
+      "path": "/ur5e/Geometry/base/shoulder_link/upper_arm_link/forearm_link/wrist_1_link/wrist_2_link",
+      "material": "aluminum",
+      "mass_kg": 1.219
+    },
+    {
+      "path": "/ur5e/Geometry/base/shoulder_link/upper_arm_link/forearm_link/wrist_1_link/wrist_2_link/wrist_3_link",
+      "material": "aluminum",
+      "mass_kg": 0.1889
+    }
+  ]
+}

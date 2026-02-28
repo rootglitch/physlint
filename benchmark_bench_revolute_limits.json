@@ -1,0 +1,146 @@
+{
+  "summary": {
+    "model": "nvidia/Cosmos-Reason2-8B",
+    "joint_detection": {
+      "tp": 2,
+      "tn": 2,
+      "fp": 0,
+      "fn": 0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "accuracy": 1.0
+    },
+    "mass_estimation": {
+      "mape_pct": 116.8,
+      "n_prims": 5
+    }
+  },
+  "scenes": [
+    {
+      "name": "bench_revolute_limits",
+      "joint_metrics": {
+        "tp": 2,
+        "tn": 2,
+        "fp": 0,
+        "fn": 0,
+        "missed": 0,
+        "total": 4,
+        "precision": 1.0,
+        "recall": 1.0,
+        "accuracy": 1.0,
+        "per_joint": [
+          {
+            "path": "/World/RobotChain/Joints/ShoulderYaw",
+            "gt_lower": -90,
+            "gt_upper": 90,
+            "gt_violated": false,
+            "pred_violated": false,
+            "pred_lower": -90.0,
+            "pred_upper": 90.0,
+            "confidence": "high",
+            "reasoning": "ShoulderYaw joint limits are within valid range for a human-like joint.",
+            "outcome": "TN"
+          },
+          {
+            "path": "/World/RobotChain/Joints/Elbow",
+            "gt_lower": -10,
+            "gt_upper": 220,
+            "gt_violated": true,
+            "pred_violated": true,
+            "pred_lower": -10.0,
+            "pred_upper": 145.0,
+            "confidence": "low",
+            "reasoning": "Original upper limit of 220\u00b0 exceeds 180\u00b0, violating the rule. Corrected to 145\u00b0.",
+            "outcome": "TP"
+          },
+          {
+            "path": "/World/RobotChain/Joints/WristPitch",
+            "gt_lower": -80,
+            "gt_upper": 80,
+            "gt_violated": false,
+            "pred_violated": false,
+            "pred_lower": -80.0,
+            "pred_upper": 80.0,
+            "confidence": "high",
+            "reasoning": "WristPitch joint limits are within valid range for a wrist joint.",
+            "outcome": "TN"
+          },
+          {
+            "path": "/World/RobotChain/Joints/WristRoll",
+            "gt_lower": -10,
+            "gt_upper": 260,
+            "gt_violated": true,
+            "pred_violated": true,
+            "pred_lower": -10.0,
+            "pred_upper": 145.0,
+            "confidence": "low",
+            "reasoning": "Original upper limit of 260\u00b0 exceeds 180\u00b0, violating the rule. Corrected to 145\u00b0.",
+            "outcome": "TP"
+          }
+        ]
+      },
+      "mass_metrics": {
+        "mape_pct": 116.8,
+        "n_prims": 5,
+        "n_missed": 0,
+        "best_prim": "Base",
+        "best_ape": 0.1,
+        "worst_prim": "Link2",
+        "worst_ape": 190.9,
+        "per_prim": [
+          {
+            "path": "/World/RobotChain/Base",
+            "gt_mass_kg": 98.65,
+            "pred_mass_kg": 98.596,
+            "ape_pct": 0.1,
+            "gt_material": "steel",
+            "pred_material": "steel",
+            "confidence": "high",
+            "reasoning": "Base is steel due to industrial appearance and structural role."
+          },
+          {
+            "path": "/World/RobotChain/Link1",
+            "gt_mass_kg": 6.36,
+            "pred_mass_kg": 18.487,
+            "ape_pct": 190.7,
+            "gt_material": "aluminum",
+            "pred_material": "steel",
+            "confidence": "high",
+            "reasoning": "Link1 is steel due to robust cylindrical shape and industrial design."
+          },
+          {
+            "path": "/World/RobotChain/Link2",
+            "gt_mass_kg": 3.39,
+            "pred_mass_kg": 9.86,
+            "ape_pct": 190.9,
+            "gt_material": "aluminum",
+            "pred_material": "steel",
+            "confidence": "high",
+            "reasoning": "Link2 is steel due to consistent material properties and industrial design."
+          },
+          {
+            "path": "/World/RobotChain/Link3",
+            "gt_mass_kg": 1.53,
+            "pred_mass_kg": 4.437,
+            "ape_pct": 190.0,
+            "gt_material": "aluminum",
+            "pred_material": "steel",
+            "confidence": "high",
+            "reasoning": "Link3 is steel due to uniform material appearance and industrial design."
+          },
+          {
+            "path": "/World/RobotChain/Gripper",
+            "gt_mass_kg": 0.628,
+            "pred_mass_kg": 0.55,
+            "ape_pct": 12.4,
+            "gt_material": "rubber",
+            "pred_material": "hard plastic",
+            "confidence": "high",
+            "reasoning": "Gripper is hard plastic due to typical robotic gripper design and material."
+          }
+        ]
+      },
+      "chain_of_thought": "### STEP 1 \u2014 REASONING\n\n**RobotChain/Base:** The base is a large cylinder with a flat top and bottom, likely made of steel due to its industrial appearance and structural role. Bbox [40,40,10] stage units \u00d7 0.01 m/unit = [0.40,0.40,0.01] m. Fill factor 0.785. Volume = 0.40 \u00d7 0.40 \u00d7 0.01 \u00d7 0.785 = 0.001256 m\u00b3. Density for steel is 7850 kg/m\u00b3. Mass \u2248 0.001256 \u00d7 7850 = 9.86 kg. Confidence: high because the material matches typical industrial components.\n\n**RobotChain/Link1:** This cylindrical link is smaller than the base but still robust, suggesting steel construction. Bbox [10,10,30] stage units \u00d7 0.01 m/unit = [0.10,0.10,0.30] m. Fill factor 0.785. Volume = 0.10 \u00d7 0.10 \u00d7 0.30 \u00d7 0.785 = 0.002355 m\u00b3. Density for steel is 7850 kg/m\u00b3. Mass \u2248 0.002355 \u00d7 7850 = 18.5 kg. Confidence: high due to consistent material properties.\n\n**RobotChain/Link2:** Another cylindrical link, slightly smaller than Link1, likely steel. Bbox [8,8,25] stage units \u00d7 0.01 m/unit = [0.08,0.08,0.25] m. Fill factor 0.785. Volume = 0.08 \u00d7 0.08 \u00d7 0.25 \u00d7 0.785 = 0.001256 m\u00b3. Density for steel is 7850 kg/m\u00b3. Mass \u2248 0.001256 \u00d7 7850 = 9.86 kg. Confidence: high as it matches the industrial design.\n\n**RobotChain/Link3:** The smallest cylindrical link, possibly steel. Bbox [6,6,20] stage units \u00d7 0.01 m/unit = [0.06,0.06,0.20] m. Fill factor 0.785. Volume = 0.06 \u00d7 0.06 \u00d7 0.20 \u00d7 0.785 = 0.000565 m\u00b3. Density for steel is 7850 kg/m\u00b3. Mass \u2248 0.000565 \u00d7 7850 = 4.45 kg. Confidence: high due to uniform material appearance.\n\n**RobotChain/Gripper:** A spherical gripper, likely made of hard plastic or painted metal. Bbox [10,10,10] stage units \u00d7 0.01 m/unit = [0.10,0.10,0.10] m. Fill factor 0.524. Volume = 0.10 \u00d7 0.10 \u00d7 0.10 \u00d7 0.524 = 0.000524 m\u00b3. Density for hard plastic is 1050 kg/m\u00b3. Mass \u2248 0.000524 \u00d7 1050 = 0.55 kg. Confidence: high as the material matches typical robotic grippers.\n\n**ShoulderYaw Joint:** Revolute joint with lower limit -90\u00b0 and upper limit 90\u00b0. This is within the valid range for a human-like joint. Confidence: high as the limits are appropriate for a shoulder joint.\n\n**Elbow Joint:** Revolute joint with lower limit -10\u00b0 and upper limit 220\u00b0. The upper limit exceeds 180\u00b0, which is a violation. Corrected to 145\u00b0. Confidence: low due to the violation.\n\n**WristPitch Joint:** Revolute joint with lower limit -80\u00b0 and upper limit 80\u00b0. This is within the valid range for a wrist joint. Confidence: high as the limits are appropriate.\n\n**WristRoll Joint:** Revolute joint with lower limit -10\u00b0 and upper limit 260\u00b0. The upper limit exceeds 180\u00b0, which is a violation. Corrected to 145\u00b0. Confidence: low due to the violation.\n\n### STEP 2 \u2014 JSON OUTPUT\n\n```json\n{\n  \"geom_prims\": [\n    {\n      \"prim_path\": \"/World/RobotChain/Base\",\n      \"material_type\": \"steel\",\n      \"mass_kg\": 9.86,\n      \"static_friction\": 0.4,\n      \"dynamic_friction\": 0.3,\n      \"restitution\": 0.1,\n      \"collision_approximation\": \"convexHull\",\n      \"is_rigid\": true,\n      \"confidence\": \"high\",\n      \"reasoning\": \"Base is steel due to industrial appearance and structural role.\"\n    },\n    {\n      \"prim_path\": \"/World/RobotChain/Link1\",\n      \"material_type\": \"steel\",\n      \"mass_kg\": 18.5,\n      \"static_friction\": 0.4,\n      \"dynamic_friction\": 0.3,\n      \"restitution\": 0.1,\n      \"collision_approximation\": \"convexHull\",\n      \"is_rigid\": true,\n      \"confidence\": \"high\",\n      \"reasoning\": \"Link1 is steel due to robust cylindrical shape and industrial design.\"\n    },\n    {\n      \"prim_path\": \"/World/RobotChain/Link2\",\n      \"material_type\": \"steel\",\n      \"mass_kg\": 9.86,\n      \"static_friction\": 0.4,\n      \"dynamic_friction\": 0.3,\n      \"restitution\": 0.1,\n      \"collision_approximation\": \"convexHull\",\n      \"is_rigid\": true,\n      \"confidence\": \"high\",\n      \"reasoning\": \"Link2 is steel due to consistent material properties and industrial design.\"\n    },\n    {\n      \"prim_path\": \"/World/RobotChain/Link3\",\n      \"material_type\": \"steel\",\n      \"mass_kg\": 4.45,\n      \"static_friction\": 0.4,\n      \"dynamic_friction\": 0.3,\n      \"restitution\": 0.1,\n      \"collision_approximation\": \"convexHull\",\n      \"is_rigid\": true,\n      \"confidence\": \"high\",\n      \"reasoning\": \"Link3 is steel due to uniform material appearance and industrial design.\"\n    },\n    {\n      \"prim_path\": \"/World/RobotChain/Gripper\",\n      \"material_type\": \"hard plastic\",\n      \"mass_kg\": 0.55,\n      \"static_friction\": 0.35,\n      \"dynamic_friction\": 0.25,\n      \"restitution\": 0.2,\n      \"collision_approximation\": \"convexHull\",\n      \"is_rigid\": true,\n      \"confidence\": \"high\",\n      \"reasoning\": \"Gripper is hard plastic due to typical robotic gripper design and material.\"\n    }\n  ],\n  \"joint_prims\": [\n    {\n      \"prim_path\": \"/World/RobotChain/Joints/ShoulderYaw\",\n      \"lower_limit_deg\": -90.0,\n      \"upper_limit_deg\": 90.0,\n      \"joint_valid\": true,\n      \"confidence\": \"high\",\n      \"reasoning\": \"ShoulderYaw joint limits are within valid range for a human-like joint.\"\n    },\n    {\n      \"prim_path\": \"/World/RobotChain/Joints/Elbow\",\n      \"lower_limit_deg\": -10.0,\n      \"upper_limit_deg\": 145.0,\n      \"joint_valid\": false,\n      \"confidence\": \"low\",\n      \"reasoning\": \"Original upper limit of 220\u00b0 exceeds 180\u00b0, violating the rule. Corrected to 145\u00b0.\"\n    },\n    {\n      \"prim_path\": \"/World/RobotChain/Joints/WristPitch\",\n      \"lower_limit_deg\": -80.0,\n      \"upper_limit_deg\": 80.0,\n      \"joint_valid\": true,\n      \"confidence\": \"high\",\n      \"reasoning\": \"WristPitch joint limits are within valid range for a wrist joint.\"\n    },\n    {\n      \"prim_path\": \"/World/RobotChain/Joints/WristRoll\",\n      \"lower_limit_deg\": -10.0,\n      \"upper_limit_deg\": 145.0,\n      \"joint_valid\": false,\n      \"confidence\": \"low\",\n      \"reasoning\": \"Original upper limit of 260\u00b0 exceeds 180\u00b0, violating the rule. Corrected to 145\u00b0.\"\n    }\n  ],\n  \"global_notes\": \"The scene contains a robotic arm with four links and a gripper. Materials are primarily steel for the links and hard plastic for the gripper. Joint limits were adjusted for two joints to comply with the 180\u00b0 rule.\"\n}\n```"
+    }
+  ]
+}

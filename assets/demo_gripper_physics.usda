@@ -1,0 +1,346 @@
+#usda 1.0
+(
+    defaultPrim = "World"
+    metersPerUnit = 0.01
+    upAxis = "Y"
+)
+
+def Xform "World"
+{
+    def Scope "Materials"
+    {
+        def Material "Steel"
+        {
+            token outputs:surface.connect = </World/Materials/Steel/Shader.outputs:surface>
+
+            def Shader "Shader"
+            {
+                uniform token info:id = "UsdPreviewSurface"
+                color3f inputs:diffuseColor = (0.65, 0.67, 0.7)
+                float inputs:metallic = 0
+                float inputs:opacity = 1
+                float inputs:roughness = 0.4
+                token outputs:surface
+            }
+        }
+
+        def Material "DarkSteel"
+        {
+            token outputs:surface.connect = </World/Materials/DarkSteel/Shader.outputs:surface>
+
+            def Shader "Shader"
+            {
+                uniform token info:id = "UsdPreviewSurface"
+                color3f inputs:diffuseColor = (0.2, 0.21, 0.23)
+                float inputs:metallic = 0
+                float inputs:opacity = 1
+                float inputs:roughness = 0.55
+                token outputs:surface
+            }
+        }
+
+        def Material "Rubber"
+        {
+            token outputs:surface.connect = </World/Materials/Rubber/Shader.outputs:surface>
+
+            def Shader "Shader"
+            {
+                uniform token info:id = "UsdPreviewSurface"
+                color3f inputs:diffuseColor = (0.03, 0.03, 0.03)
+                float inputs:metallic = 0
+                float inputs:opacity = 1
+                float inputs:roughness = 0.98
+                token outputs:surface
+            }
+        }
+
+        def Material "RedPlastic"
+        {
+            token outputs:surface.connect = </World/Materials/RedPlastic/Shader.outputs:surface>
+
+            def Shader "Shader"
+            {
+                uniform token info:id = "UsdPreviewSurface"
+                color3f inputs:diffuseColor = (0.85, 0.06, 0.04)
+                float inputs:metallic = 0
+                float inputs:opacity = 1
+                float inputs:roughness = 0.55
+                token outputs:surface
+            }
+        }
+
+        def Material "OrangeRobot"
+        {
+            token outputs:surface.connect = </World/Materials/OrangeRobot/Shader.outputs:surface>
+
+            def Shader "Shader"
+            {
+                uniform token info:id = "UsdPreviewSurface"
+                color3f inputs:diffuseColor = (0.92, 0.35, 0.04)
+                float inputs:metallic = 0
+                float inputs:opacity = 1
+                float inputs:roughness = 0.5
+                token outputs:surface
+            }
+        }
+    }
+
+    def "PressureVessel"
+    {
+        def Cylinder "Body" (
+            prepend apiSchemas = ["MaterialBindingAPI", "PhysicsRigidBodyAPI", "PhysicsCollisionAPI", "PhysicsMassAPI"]
+        )
+        {
+            double height = 50
+            rel material:binding = </World/Materials/Steel>
+            custom token physics:approximation = "convexHull"
+            float physics:mass = 353.25
+            rel physics:material:binding = </PhysicsMaterials/World_PressureVessel_Body_PhysMat>
+            double radius = 15
+            double3 xformOp:scale = (1, 1, 1)
+            double3 xformOp:translate = (0, 25, 0)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:scale"]
+        }
+
+        def Sphere "TopCap" (
+            prepend apiSchemas = ["MaterialBindingAPI", "PhysicsRigidBodyAPI", "PhysicsCollisionAPI", "PhysicsMassAPI"]
+        )
+        {
+            rel material:binding = </World/Materials/Steel>
+            custom token physics:approximation = "convexHull"
+            float physics:mass = 38.2
+            rel physics:material:binding = </PhysicsMaterials/World_PressureVessel_TopCap_PhysMat>
+            double radius = 15
+            double3 xformOp:scale = (1, 0.4, 1)
+            double3 xformOp:translate = (0, 50, 0)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:scale"]
+        }
+
+        def Sphere "BottomCap" (
+            prepend apiSchemas = ["MaterialBindingAPI", "PhysicsRigidBodyAPI", "PhysicsCollisionAPI", "PhysicsMassAPI"]
+        )
+        {
+            rel material:binding = </World/Materials/Steel>
+            custom token physics:approximation = "convexHull"
+            float physics:mass = 38.2
+            rel physics:material:binding = </PhysicsMaterials/World_PressureVessel_BottomCap_PhysMat>
+            double radius = 15
+            double3 xformOp:scale = (1, 0.4, 1)
+            double3 xformOp:translate = (0, 0, 0)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:scale"]
+        }
+    }
+
+    def Cylinder "RubberGasket" (
+        prepend apiSchemas = ["MaterialBindingAPI", "PhysicsRigidBodyAPI", "PhysicsCollisionAPI", "PhysicsMassAPI"]
+    )
+    {
+        double height = 2.5
+        rel material:binding = </World/Materials/Rubber>
+        custom token physics:approximation = "convexHull"
+        float physics:mass = 3.2958
+        rel physics:material:binding = </PhysicsMaterials/World_RubberGasket_PhysMat>
+        double radius = 16.5
+        double3 xformOp:scale = (1, 1, 1)
+        double3 xformOp:translate = (0, 5, 0)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:scale"]
+    }
+
+    def "SupportFrame"
+    {
+        def Cube "Base" (
+            prepend apiSchemas = ["MaterialBindingAPI", "PhysicsRigidBodyAPI", "PhysicsCollisionAPI", "PhysicsMassAPI"]
+        )
+        {
+            rel material:binding = </World/Materials/DarkSteel>
+            custom token physics:approximation = "convexHull"
+            float physics:mass = 3.864
+            rel physics:material:binding = </PhysicsMaterials/World_SupportFrame_Base_PhysMat>
+            double size = 1
+            double3 xformOp:scale = (42, 2, 20)
+            double3 xformOp:translate = (0, -1, 0)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:scale"]
+        }
+
+        def Cube "PillarLeft" (
+            prepend apiSchemas = ["MaterialBindingAPI", "PhysicsRigidBodyAPI", "PhysicsCollisionAPI", "PhysicsMassAPI"]
+        )
+        {
+            rel material:binding = </World/Materials/DarkSteel>
+            custom token physics:approximation = "convexHull"
+            float physics:mass = 4.41
+            rel physics:material:binding = </PhysicsMaterials/World_SupportFrame_PillarLeft_PhysMat>
+            double size = 1
+            double3 xformOp:scale = (3, 62, 3)
+            double3 xformOp:translate = (-19, 30, 0)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:scale"]
+        }
+
+        def Cube "PillarRight" (
+            prepend apiSchemas = ["MaterialBindingAPI", "PhysicsRigidBodyAPI", "PhysicsCollisionAPI", "PhysicsMassAPI"]
+        )
+        {
+            rel material:binding = </World/Materials/DarkSteel>
+            custom token physics:approximation = "convexHull"
+            float physics:mass = 4.41
+            rel physics:material:binding = </PhysicsMaterials/World_SupportFrame_PillarRight_PhysMat>
+            double size = 1
+            double3 xformOp:scale = (3, 62, 3)
+            double3 xformOp:translate = (19, 30, 0)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:scale"]
+        }
+    }
+
+    def "RobotArm"
+    {
+        def Cube "UpperArm" (
+            prepend apiSchemas = ["MaterialBindingAPI", "PhysicsRigidBodyAPI", "PhysicsCollisionAPI", "PhysicsMassAPI"]
+        )
+        {
+            rel material:binding = </World/Materials/OrangeRobot>
+            custom token physics:approximation = "convexHull"
+            float physics:mass = 1.0935
+            rel physics:material:binding = </PhysicsMaterials/World_RobotArm_UpperArm_PhysMat>
+            double size = 1
+            double3 xformOp:scale = (4.5, 20, 4.5)
+            double3 xformOp:translate = (30, 40, 0)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:scale"]
+        }
+
+        def Cube "LowerArm" (
+            prepend apiSchemas = ["MaterialBindingAPI", "PhysicsRigidBodyAPI", "PhysicsCollisionAPI", "PhysicsMassAPI"]
+        )
+        {
+            rel material:binding = </World/Materials/OrangeRobot>
+            custom token physics:approximation = "convexHull"
+            float physics:mass = 1.0935
+            rel physics:material:binding = </PhysicsMaterials/World_RobotArm_LowerArm_PhysMat>
+            double size = 1
+            double3 xformOp:scale = (4.5, 20, 4.5)
+            double3 xformOp:translate = (30, 17, 0)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:scale"]
+        }
+
+        def PhysicsRevoluteJoint "ElbowJoint"
+        {
+            uniform token physics:axis = "Z"
+            rel physics:body0 = </World/RobotArm/UpperArm>
+            rel physics:body1 = </World/RobotArm/LowerArm>
+            float physics:lowerLimit = -10
+            float physics:upperLimit = 145
+        }
+    }
+
+    def Cylinder "ValveHandle" (
+        prepend apiSchemas = ["MaterialBindingAPI", "PhysicsRigidBodyAPI", "PhysicsCollisionAPI", "PhysicsMassAPI"]
+    )
+    {
+        double height = 10
+        rel material:binding = </World/Materials/RedPlastic>
+        custom token physics:approximation = "convexHull"
+        float physics:mass = 2.7
+        rel physics:material:binding = </PhysicsMaterials/World_ValveHandle_PhysMat>
+        double radius = 5
+        double3 xformOp:scale = (1, 1, 1)
+        double3 xformOp:translate = (0, 60, 0)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:scale"]
+    }
+}
+
+def PhysicsScene "PhysicsScene"
+{
+}
+
+def Scope "PhysicsMaterials"
+{
+    def Material "World_PressureVessel_Body_PhysMat" (
+        prepend apiSchemas = ["PhysicsMaterialAPI"]
+    )
+    {
+        float physics:dynamicFriction = 0.35
+        float physics:restitution = 0.3
+        float physics:staticFriction = 0.45
+    }
+
+    def Material "World_PressureVessel_TopCap_PhysMat" (
+        prepend apiSchemas = ["PhysicsMaterialAPI"]
+    )
+    {
+        float physics:dynamicFriction = 0.35
+        float physics:restitution = 0.3
+        float physics:staticFriction = 0.45
+    }
+
+    def Material "World_PressureVessel_BottomCap_PhysMat" (
+        prepend apiSchemas = ["PhysicsMaterialAPI"]
+    )
+    {
+        float physics:dynamicFriction = 0.35
+        float physics:restitution = 0.3
+        float physics:staticFriction = 0.45
+    }
+
+    def Material "World_RubberGasket_PhysMat" (
+        prepend apiSchemas = ["PhysicsMaterialAPI"]
+    )
+    {
+        float physics:dynamicFriction = 0.6
+        float physics:restitution = 0.05
+        float physics:staticFriction = 0.7
+    }
+
+    def Material "World_SupportFrame_Base_PhysMat" (
+        prepend apiSchemas = ["PhysicsMaterialAPI"]
+    )
+    {
+        float physics:dynamicFriction = 0.45
+        float physics:restitution = 0.1
+        float physics:staticFriction = 0.55
+    }
+
+    def Material "World_SupportFrame_PillarLeft_PhysMat" (
+        prepend apiSchemas = ["PhysicsMaterialAPI"]
+    )
+    {
+        float physics:dynamicFriction = 0.35
+        float physics:restitution = 0.3
+        float physics:staticFriction = 0.45
+    }
+
+    def Material "World_SupportFrame_PillarRight_PhysMat" (
+        prepend apiSchemas = ["PhysicsMaterialAPI"]
+    )
+    {
+        float physics:dynamicFriction = 0.35
+        float physics:restitution = 0.3
+        float physics:staticFriction = 0.45
+    }
+
+    def Material "World_RobotArm_UpperArm_PhysMat" (
+        prepend apiSchemas = ["PhysicsMaterialAPI"]
+    )
+    {
+        float physics:dynamicFriction = 0.35
+        float physics:restitution = 0.3
+        float physics:staticFriction = 0.45
+    }
+
+    def Material "World_RobotArm_LowerArm_PhysMat" (
+        prepend apiSchemas = ["PhysicsMaterialAPI"]
+    )
+    {
+        float physics:dynamicFriction = 0.35
+        float physics:restitution = 0.3
+        float physics:staticFriction = 0.45
+    }
+
+    def Material "World_ValveHandle_PhysMat" (
+        prepend apiSchemas = ["PhysicsMaterialAPI"]
+    )
+    {
+        float physics:dynamicFriction = 0.35
+        float physics:restitution = 0.3
+        float physics:staticFriction = 0.45
+    }
+}
+

@@ -1,0 +1,794 @@
+{
+  "description": "Ground truth for PhysInt benchmark. joint.violated=true means the limit is physically implausible. mass.mass_kg is computed analytically from exact primitive geometry \u00d7 material density.",
+  "densities_kg_m3": {
+    "steel": 7850,
+    "aluminum": 2700,
+    "rubber": 1200,
+    "concrete": 2300
+  },
+  "scenes": [
+    {
+      "name": "bench_revolute_limits",
+      "usd": "assets/bench_revolute_limits.usda",
+      "description": "Robot arm chain \u2014 tests revolute joint violation detection",
+      "joints": [
+        {
+          "path": "/World/RobotChain/Joints/ShoulderYaw",
+          "lower": -90,
+          "upper": 90,
+          "violated": false
+        },
+        {
+          "path": "/World/RobotChain/Joints/Elbow",
+          "lower": -10,
+          "upper": 220,
+          "violated": true
+        },
+        {
+          "path": "/World/RobotChain/Joints/WristPitch",
+          "lower": -80,
+          "upper": 80,
+          "violated": false
+        },
+        {
+          "path": "/World/RobotChain/Joints/WristRoll",
+          "lower": -10,
+          "upper": 260,
+          "violated": true
+        }
+      ],
+      "masses": [
+        {
+          "path": "/World/RobotChain/Base",
+          "material": "steel",
+          "mass_kg": 98.65
+        },
+        {
+          "path": "/World/RobotChain/Link1",
+          "material": "aluminum",
+          "mass_kg": 6.36
+        },
+        {
+          "path": "/World/RobotChain/Link2",
+          "material": "aluminum",
+          "mass_kg": 3.39
+        },
+        {
+          "path": "/World/RobotChain/Link3",
+          "material": "aluminum",
+          "mass_kg": 1.53
+        },
+        {
+          "path": "/World/RobotChain/Gripper",
+          "material": "rubber",
+          "mass_kg": 0.628
+        }
+      ]
+    },
+    {
+      "name": "bench_mass_materials",
+      "usd": "assets/bench_mass_materials.usda",
+      "description": "4 materials with known masses \u2014 tests mass estimation accuracy",
+      "joints": [],
+      "masses": [
+        {
+          "path": "/World/SteelCylinder",
+          "material": "steel",
+          "mass_kg": 98.65
+        },
+        {
+          "path": "/World/RubberSphere",
+          "material": "rubber",
+          "mass_kg": 2.57
+        },
+        {
+          "path": "/World/ConcreteCube",
+          "material": "concrete",
+          "mass_kg": 7.762
+        },
+        {
+          "path": "/World/AlumCylinder",
+          "material": "aluminum",
+          "mass_kg": 4.241
+        }
+      ]
+    },
+    {
+      "name": "bench_mixed",
+      "usd": "assets/bench_mixed.usda",
+      "description": "Combined \u2014 3 prims + 3 revolute joints (1 violated)",
+      "joints": [
+        {
+          "path": "/World/Assembly/Joints/BaseRevolute",
+          "lower": -45,
+          "upper": 45,
+          "violated": false
+        },
+        {
+          "path": "/World/Assembly/Joints/ElbowRevolute",
+          "lower": -10,
+          "upper": 190,
+          "violated": true
+        },
+        {
+          "path": "/World/Assembly/Joints/WristRevolute",
+          "lower": -70,
+          "upper": 70,
+          "violated": false
+        }
+      ],
+      "masses": [
+        {
+          "path": "/World/Assembly/SteelFrame",
+          "material": "steel",
+          "mass_kg": 15.33
+        },
+        {
+          "path": "/World/Assembly/AlumArm",
+          "material": "aluminum",
+          "mass_kg": 12.21
+        },
+        {
+          "path": "/World/Assembly/RubberPad",
+          "material": "rubber",
+          "mass_kg": 0.377
+        }
+      ]
+    },
+    {
+      "name": "bench_prismatic_limits",
+      "usd": "assets/bench_prismatic_limits.usda",
+      "description": "Linear actuator \u2014 tests prismatic (slider) joint violation detection",
+      "joints": [
+        {
+          "path": "/World/Actuator/Joints/SliderTravel",
+          "lower": -15,
+          "upper": 15,
+          "violated": false
+        },
+        {
+          "path": "/World/Actuator/Joints/ActuatorStroke",
+          "lower": 0,
+          "upper": 180,
+          "violated": true
+        },
+        {
+          "path": "/World/Actuator/Joints/CarriageRetract",
+          "lower": -10,
+          "upper": 0,
+          "violated": false
+        },
+        {
+          "path": "/World/Actuator/Joints/RodOverExtend",
+          "lower": -80,
+          "upper": 80,
+          "violated": true
+        }
+      ],
+      "masses": [
+        {
+          "path": "/World/Actuator/SliderBase",
+          "material": "steel",
+          "mass_kg": 14.13
+        },
+        {
+          "path": "/World/Actuator/CarriageBlock",
+          "material": "aluminum",
+          "mass_kg": 4.67
+        },
+        {
+          "path": "/World/Actuator/ActuatorRod",
+          "material": "steel",
+          "mass_kg": 2.96
+        }
+      ]
+    },
+    {
+      "name": "bench_humanoid_arm",
+      "usd": "assets/bench_humanoid_arm.usda",
+      "description": "6-DOF humanoid arm \u2014 ShoulderAbduct and WristSupination violated",
+      "joints": [
+        {
+          "path": "/World/Arm/Joints/ShoulderFlexion",
+          "lower": -60,
+          "upper": 170,
+          "violated": false
+        },
+        {
+          "path": "/World/Arm/Joints/ShoulderAbduct",
+          "lower": -45,
+          "upper": 200,
+          "violated": true
+        },
+        {
+          "path": "/World/Arm/Joints/ShoulderRotation",
+          "lower": -90,
+          "upper": 90,
+          "violated": false
+        },
+        {
+          "path": "/World/Arm/Joints/ElbowFlexion",
+          "lower": 0,
+          "upper": 145,
+          "violated": false
+        },
+        {
+          "path": "/World/Arm/Joints/WristFlexion",
+          "lower": -70,
+          "upper": 70,
+          "violated": false
+        },
+        {
+          "path": "/World/Arm/Joints/WristSupination",
+          "lower": -90,
+          "upper": 200,
+          "violated": true
+        }
+      ],
+      "masses": [
+        {
+          "path": "/World/Arm/ShoulderLink",
+          "material": "aluminum",
+          "mass_kg": 4.99
+        },
+        {
+          "path": "/World/Arm/UpperArm",
+          "material": "aluminum",
+          "mass_kg": 6.36
+        },
+        {
+          "path": "/World/Arm/Forearm",
+          "material": "aluminum",
+          "mass_kg": 3.39
+        },
+        {
+          "path": "/World/Arm/WristLink",
+          "material": "aluminum",
+          "mass_kg": 0.611
+        },
+        {
+          "path": "/World/Arm/Hand",
+          "material": "rubber",
+          "mass_kg": 1.086
+        }
+      ]
+    },
+    {
+      "name": "bench_all_valid",
+      "usd": "assets/bench_all_valid.usda",
+      "description": "5 revolute joints all within normal limits \u2014 specificity test (expect 0 violations)",
+      "joints": [
+        {
+          "path": "/World/Robot/Joints/BaseTurn",
+          "lower": -90,
+          "upper": 90,
+          "violated": false
+        },
+        {
+          "path": "/World/Robot/Joints/ShoulderLift",
+          "lower": -30,
+          "upper": 120,
+          "violated": false
+        },
+        {
+          "path": "/World/Robot/Joints/ElbowBend",
+          "lower": 0,
+          "upper": 135,
+          "violated": false
+        },
+        {
+          "path": "/World/Robot/Joints/WristTilt",
+          "lower": -60,
+          "upper": 60,
+          "violated": false
+        },
+        {
+          "path": "/World/Robot/Joints/ToolSpin",
+          "lower": -175,
+          "upper": 175,
+          "violated": false
+        }
+      ],
+      "masses": [
+        {
+          "path": "/World/Robot/Base",
+          "material": "steel",
+          "mass_kg": 39.25
+        },
+        {
+          "path": "/World/Robot/Link1",
+          "material": "aluminum",
+          "mass_kg": 7.42
+        },
+        {
+          "path": "/World/Robot/Link2",
+          "material": "aluminum",
+          "mass_kg": 4.07
+        },
+        {
+          "path": "/World/Robot/Link3",
+          "material": "aluminum",
+          "mass_kg": 1.53
+        },
+        {
+          "path": "/World/Robot/ToolHead",
+          "material": "aluminum",
+          "mass_kg": 0.339
+        }
+      ]
+    },
+    {
+      "name": "bench_crane",
+      "usd": "assets/bench_crane.usda",
+      "description": "Tower crane \u2014 JibSwing revolute and HookTravel prismatic violated",
+      "joints": [
+        {
+          "path": "/World/Crane/Joints/SlewRing",
+          "lower": -180,
+          "upper": 180,
+          "violated": false
+        },
+        {
+          "path": "/World/Crane/Joints/BoomLift",
+          "lower": -5,
+          "upper": 55,
+          "violated": false
+        },
+        {
+          "path": "/World/Crane/Joints/JibSwing",
+          "lower": -10,
+          "upper": 195,
+          "violated": true
+        },
+        {
+          "path": "/World/Crane/Joints/HookTravel",
+          "lower": 0,
+          "upper": 250,
+          "violated": true
+        }
+      ],
+      "masses": [
+        {
+          "path": "/World/Crane/CraneBase",
+          "material": "steel",
+          "mass_kg": 75.36
+        },
+        {
+          "path": "/World/Crane/CraneMast",
+          "material": "steel",
+          "mass_kg": 49.32
+        },
+        {
+          "path": "/World/Crane/CraneBoom",
+          "material": "aluminum",
+          "mass_kg": 5.83
+        },
+        {
+          "path": "/World/Crane/CounterWeight",
+          "material": "concrete",
+          "mass_kg": 7.762
+        },
+        {
+          "path": "/World/Crane/HookRod",
+          "material": "steel",
+          "mass_kg": 7.89
+        }
+      ]
+    },
+    {
+      "name": "bench_symmetric_violation",
+      "usd": "assets/bench_symmetric_violation.usda",
+      "description": "WideSwing \u00b1200\u00b0 (400\u00b0 total range) \u2014 symmetric impossible limit",
+      "joints": [
+        {
+          "path": "/World/Assembly/Joints/WideSwing",
+          "lower": -200,
+          "upper": 200,
+          "violated": true
+        },
+        {
+          "path": "/World/Assembly/Joints/TightPivot",
+          "lower": -25,
+          "upper": 25,
+          "violated": false
+        },
+        {
+          "path": "/World/Assembly/Joints/HalfRotation",
+          "lower": -90,
+          "upper": 90,
+          "violated": false
+        }
+      ],
+      "masses": [
+        {
+          "path": "/World/Assembly/RotorBase",
+          "material": "steel",
+          "mass_kg": 15.7
+        },
+        {
+          "path": "/World/Assembly/ArmPivot",
+          "material": "aluminum",
+          "mass_kg": 3.39
+        },
+        {
+          "path": "/World/Assembly/SwingFixture",
+          "material": "concrete",
+          "mass_kg": 2.59
+        },
+        {
+          "path": "/World/Assembly/SwingArm",
+          "material": "aluminum",
+          "mass_kg": 1.53
+        },
+        {
+          "path": "/World/Assembly/HalfBase",
+          "material": "steel",
+          "mass_kg": 6.28
+        },
+        {
+          "path": "/World/Assembly/HalfArm",
+          "material": "aluminum",
+          "mass_kg": 1.53
+        }
+      ]
+    },
+    {
+      "name": "bench_scara",
+      "usd": "assets/bench_scara.usda",
+      "description": "SCARA robot \u2014 Joint2 elbow revolute and ZTravel prismatic violated",
+      "joints": [
+        {
+          "path": "/World/Scara/Joints/Joint1",
+          "lower": -150,
+          "upper": 150,
+          "violated": false
+        },
+        {
+          "path": "/World/Scara/Joints/Joint2",
+          "lower": -10,
+          "upper": 210,
+          "violated": true
+        },
+        {
+          "path": "/World/Scara/Joints/ZTravel",
+          "lower": 0,
+          "upper": 200,
+          "violated": true
+        },
+        {
+          "path": "/World/Scara/Joints/ToolRotate",
+          "lower": -175,
+          "upper": 175,
+          "violated": false
+        }
+      ],
+      "masses": [
+        {
+          "path": "/World/Scara/Base",
+          "material": "steel",
+          "mass_kg": 25.12
+        },
+        {
+          "path": "/World/Scara/ArmLink1",
+          "material": "aluminum",
+          "mass_kg": 3.4
+        },
+        {
+          "path": "/World/Scara/ArmLink2",
+          "material": "aluminum",
+          "mass_kg": 2.43
+        },
+        {
+          "path": "/World/Scara/ZColumn",
+          "material": "aluminum",
+          "mass_kg": 4.58
+        },
+        {
+          "path": "/World/Scara/ZCarriage",
+          "material": "aluminum",
+          "mass_kg": 2.59
+        },
+        {
+          "path": "/World/Scara/Tool",
+          "material": "rubber",
+          "mass_kg": 0.322
+        }
+      ]
+    },
+    {
+      "name": "bench_gripper",
+      "usd": "assets/bench_gripper.usda",
+      "description": "Parallel jaw gripper \u2014 Spread joints exceed palm width; Close joints valid",
+      "joints": [
+        {
+          "path": "/World/Gripper/Joints/FingerL_Spread",
+          "lower": 0,
+          "upper": 80,
+          "violated": true
+        },
+        {
+          "path": "/World/Gripper/Joints/FingerL_Close",
+          "lower": -8,
+          "upper": 0,
+          "violated": false
+        },
+        {
+          "path": "/World/Gripper/Joints/FingerR_Spread",
+          "lower": 0,
+          "upper": 75,
+          "violated": true
+        },
+        {
+          "path": "/World/Gripper/Joints/FingerR_Close",
+          "lower": -8,
+          "upper": 0,
+          "violated": false
+        }
+      ],
+      "masses": [
+        {
+          "path": "/World/Gripper/Palm",
+          "material": "aluminum",
+          "mass_kg": 9.72
+        },
+        {
+          "path": "/World/Gripper/MountBracket",
+          "material": "steel",
+          "mass_kg": 9.42
+        },
+        {
+          "path": "/World/Gripper/FingerL",
+          "material": "rubber",
+          "mass_kg": 0.432
+        },
+        {
+          "path": "/World/Gripper/FingerR",
+          "material": "rubber",
+          "mass_kg": 0.432
+        }
+      ]
+    },
+    {
+      "name": "bench_excavator",
+      "usd": "assets/bench_excavator.usda",
+      "description": "Excavator arm \u2014 hydraulic cylinders over-stroke (prismatic violated)",
+      "joints": [
+        {
+          "path": "/World/Excavator/Joints/BoomCylinder",
+          "lower": 0,
+          "upper": 150,
+          "violated": true
+        },
+        {
+          "path": "/World/Excavator/Joints/ArmCylinder",
+          "lower": 0,
+          "upper": 120,
+          "violated": true
+        },
+        {
+          "path": "/World/Excavator/Joints/BucketCurl",
+          "lower": -45,
+          "upper": 135,
+          "violated": false
+        },
+        {
+          "path": "/World/Excavator/Joints/CabSwing",
+          "lower": -170,
+          "upper": 170,
+          "violated": false
+        }
+      ],
+      "masses": [
+        {
+          "path": "/World/Excavator/Chassis",
+          "material": "steel",
+          "mass_kg": 282.6
+        },
+        {
+          "path": "/World/Excavator/Cab",
+          "material": "steel",
+          "mass_kg": 147.19
+        },
+        {
+          "path": "/World/Excavator/BoomArm",
+          "material": "aluminum",
+          "mass_kg": 8.48
+        },
+        {
+          "path": "/World/Excavator/StickArm",
+          "material": "aluminum",
+          "mass_kg": 4.75
+        },
+        {
+          "path": "/World/Excavator/Bucket",
+          "material": "aluminum",
+          "mass_kg": 20.25
+        },
+        {
+          "path": "/World/Excavator/BoomPiston",
+          "material": "steel",
+          "mass_kg": 1.256
+        },
+        {
+          "path": "/World/Excavator/StickPiston",
+          "material": "steel",
+          "mass_kg": 1.005
+        }
+      ]
+    },
+    {
+      "name": "bench_wrist_3dof",
+      "usd": "assets/bench_wrist_3dof.usda",
+      "description": "3-DOF wrist \u2014 Roll exceeds 360\u00b0; ToolGrip prismatic over-travels",
+      "joints": [
+        {
+          "path": "/World/Wrist/Joints/Yaw",
+          "lower": -175,
+          "upper": 175,
+          "violated": false
+        },
+        {
+          "path": "/World/Wrist/Joints/Pitch",
+          "lower": -90,
+          "upper": 90,
+          "violated": false
+        },
+        {
+          "path": "/World/Wrist/Joints/Roll",
+          "lower": -10,
+          "upper": 370,
+          "violated": true
+        },
+        {
+          "path": "/World/Wrist/Joints/ToolGrip",
+          "lower": -10,
+          "upper": 80,
+          "violated": true
+        }
+      ],
+      "masses": [
+        {
+          "path": "/World/Wrist/YawBase",
+          "material": "steel",
+          "mass_kg": 15.78
+        },
+        {
+          "path": "/World/Wrist/YawLink",
+          "material": "aluminum",
+          "mass_kg": 2.04
+        },
+        {
+          "path": "/World/Wrist/PitchLink",
+          "material": "aluminum",
+          "mass_kg": 1.25
+        },
+        {
+          "path": "/World/Wrist/RollLink",
+          "material": "aluminum",
+          "mass_kg": 1.53
+        },
+        {
+          "path": "/World/Wrist/ToolBody",
+          "material": "rubber",
+          "mass_kg": 0.346
+        }
+      ]
+    },
+    {
+      "name": "bench_linear_gantry",
+      "usd": "assets/bench_linear_gantry.usda",
+      "description": "Cartesian gantry \u2014 X_Axis and Z_Axis prismatic exceed beam dimensions",
+      "joints": [
+        {
+          "path": "/World/Gantry/Joints/X_Axis",
+          "lower": -300,
+          "upper": 300,
+          "violated": true
+        },
+        {
+          "path": "/World/Gantry/Joints/Z_Axis",
+          "lower": -100,
+          "upper": 100,
+          "violated": true
+        },
+        {
+          "path": "/World/Gantry/Joints/Y_Axis",
+          "lower": -30,
+          "upper": 0,
+          "violated": false
+        },
+        {
+          "path": "/World/Gantry/Joints/ToolSpin",
+          "lower": -175,
+          "upper": 175,
+          "violated": false
+        }
+      ],
+      "masses": [
+        {
+          "path": "/World/Gantry/GantryBeam",
+          "material": "steel",
+          "mass_kg": 157.0
+        },
+        {
+          "path": "/World/Gantry/XBlock",
+          "material": "aluminum",
+          "mass_kg": 6.07
+        },
+        {
+          "path": "/World/Gantry/ZRail",
+          "material": "aluminum",
+          "mass_kg": 21.6
+        },
+        {
+          "path": "/World/Gantry/ZBlock",
+          "material": "aluminum",
+          "mass_kg": 13.5
+        },
+        {
+          "path": "/World/Gantry/ToolSphere",
+          "material": "rubber",
+          "mass_kg": 0.628
+        }
+      ]
+    },
+    {
+      "name": "bench_all_violated",
+      "usd": "assets/bench_all_violated.usda",
+      "description": "All 4 revolute joints violated \u2014 maximum recall stress test",
+      "joints": [
+        {
+          "path": "/World/ViolatedArm/Joints/ShoulderSwing",
+          "lower": -10,
+          "upper": 250,
+          "violated": true
+        },
+        {
+          "path": "/World/ViolatedArm/Joints/ElbowBend",
+          "lower": -10,
+          "upper": 230,
+          "violated": true
+        },
+        {
+          "path": "/World/ViolatedArm/Joints/WristFlex",
+          "lower": -10,
+          "upper": 215,
+          "violated": true
+        },
+        {
+          "path": "/World/ViolatedArm/Joints/GripperSpin",
+          "lower": -220,
+          "upper": 10,
+          "violated": true
+        }
+      ],
+      "masses": [
+        {
+          "path": "/World/ViolatedArm/BaseBlock",
+          "material": "steel",
+          "mass_kg": 39.25
+        },
+        {
+          "path": "/World/ViolatedArm/Link1",
+          "material": "aluminum",
+          "mass_kg": 6.36
+        },
+        {
+          "path": "/World/ViolatedArm/Link2",
+          "material": "aluminum",
+          "mass_kg": 3.39
+        },
+        {
+          "path": "/World/ViolatedArm/Link3",
+          "material": "aluminum",
+          "mass_kg": 1.53
+        },
+        {
+          "path": "/World/ViolatedArm/EndSphere",
+          "material": "rubber",
+          "mass_kg": 0.628
+        }
+      ]
+    }
+  ]
+}

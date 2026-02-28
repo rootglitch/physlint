@@ -1,0 +1,155 @@
+#usda 1.0
+(
+    defaultPrim = "World"
+    metersPerUnit = 0.01
+    upAxis = "Y"
+)
+
+def Xform "World"
+{
+    def "Mats"
+    {
+        def Material "Steel"
+        {
+            token outputs:surface.connect = </World/Mats/Steel/Shader.outputs:surface>
+
+            def Shader "Shader"
+            {
+                uniform token info:id = "UsdPreviewSurface"
+                color3f inputs:diffuseColor = (0.65, 0.67, 0.7)
+                float inputs:metallic = 0
+                float inputs:roughness = 0.4
+                token outputs:surface
+            }
+        }
+
+        def Material "Alum"
+        {
+            token outputs:surface.connect = </World/Mats/Alum/Shader.outputs:surface>
+
+            def Shader "Shader"
+            {
+                uniform token info:id = "UsdPreviewSurface"
+                color3f inputs:diffuseColor = (0.8, 0.83, 0.87)
+                float inputs:metallic = 0
+                float inputs:roughness = 0.35
+                token outputs:surface
+            }
+        }
+
+        def Material "Rubber"
+        {
+            token outputs:surface.connect = </World/Mats/Rubber/Shader.outputs:surface>
+
+            def Shader "Shader"
+            {
+                uniform token info:id = "UsdPreviewSurface"
+                color3f inputs:diffuseColor = (0.03, 0.03, 0.03)
+                float inputs:metallic = 0
+                float inputs:roughness = 0.98
+                token outputs:surface
+            }
+        }
+    }
+
+    def "ViolatedArm"
+    {
+        def Cube "BaseBlock" (
+            prepend apiSchemas = ["MaterialBindingAPI"]
+        )
+        {
+            rel material:binding = </World/Mats/Steel>
+            double size = 1
+            double3 xformOp:scale = (25, 8, 25)
+            double3 xformOp:translate = (0, 4, 0)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:scale"]
+        }
+
+        def Cylinder "Link1" (
+            prepend apiSchemas = ["MaterialBindingAPI"]
+        )
+        {
+            double height = 30
+            rel material:binding = </World/Mats/Alum>
+            double radius = 5
+            double3 xformOp:scale = (1, 1, 1)
+            double3 xformOp:translate = (0, 23, 0)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:scale"]
+        }
+
+        def Cylinder "Link2" (
+            prepend apiSchemas = ["MaterialBindingAPI"]
+        )
+        {
+            double height = 25
+            rel material:binding = </World/Mats/Alum>
+            double radius = 4
+            double3 xformOp:scale = (1, 1, 1)
+            double3 xformOp:translate = (0, 50.5, 0)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:scale"]
+        }
+
+        def Cylinder "Link3" (
+            prepend apiSchemas = ["MaterialBindingAPI"]
+        )
+        {
+            double height = 20
+            rel material:binding = </World/Mats/Alum>
+            double radius = 3
+            double3 xformOp:scale = (1, 1, 1)
+            double3 xformOp:translate = (0, 73, 0)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:scale"]
+        }
+
+        def Sphere "EndSphere" (
+            prepend apiSchemas = ["MaterialBindingAPI"]
+        )
+        {
+            rel material:binding = </World/Mats/Rubber>
+            double radius = 5
+            double3 xformOp:scale = (1, 1, 1)
+            double3 xformOp:translate = (0, 88, 0)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:scale"]
+        }
+
+        def "Joints"
+        {
+            def PhysicsRevoluteJoint "ShoulderSwing"
+            {
+                uniform token physics:axis = "Z"
+                rel physics:body0 = </World/ViolatedArm/BaseBlock>
+                rel physics:body1 = </World/ViolatedArm/Link1>
+                float physics:lowerLimit = -10
+                float physics:upperLimit = 250
+            }
+
+            def PhysicsRevoluteJoint "ElbowBend"
+            {
+                uniform token physics:axis = "Z"
+                rel physics:body0 = </World/ViolatedArm/Link1>
+                rel physics:body1 = </World/ViolatedArm/Link2>
+                float physics:lowerLimit = -10
+                float physics:upperLimit = 230
+            }
+
+            def PhysicsRevoluteJoint "WristFlex"
+            {
+                uniform token physics:axis = "Z"
+                rel physics:body0 = </World/ViolatedArm/Link2>
+                rel physics:body1 = </World/ViolatedArm/Link3>
+                float physics:lowerLimit = -10
+                float physics:upperLimit = 215
+            }
+
+            def PhysicsRevoluteJoint "GripperSpin"
+            {
+                uniform token physics:axis = "Z"
+                rel physics:body0 = </World/ViolatedArm/Link3>
+                rel physics:body1 = </World/ViolatedArm/EndSphere>
+                float physics:lowerLimit = -220
+                float physics:upperLimit = 10
+            }
+        }
+    }
+}
+

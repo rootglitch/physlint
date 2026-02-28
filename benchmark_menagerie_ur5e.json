@@ -1,0 +1,190 @@
+{
+  "summary": {
+    "model": "nvidia/Cosmos-Reason2-8B",
+    "joint_detection": {
+      "tp": 0,
+      "tn": 6,
+      "fp": 0,
+      "fn": 0,
+      "precision": null,
+      "recall": null,
+      "accuracy": 1.0
+    },
+    "mass_estimation": {
+      "mape_pct": 225.6,
+      "n_prims": 7
+    }
+  },
+  "scenes": [
+    {
+      "name": "menagerie_ur5e",
+      "joint_metrics": {
+        "tp": 0,
+        "tn": 6,
+        "fp": 0,
+        "fn": 0,
+        "missed": 0,
+        "total": 6,
+        "precision": null,
+        "recall": null,
+        "accuracy": 1.0,
+        "per_joint": [
+          {
+            "path": "/ur5e/Geometry/base/shoulder_link/upper_arm_link/forearm_link/wrist_1_link/wrist_2_link/wrist_3_link/wrist_3_joint",
+            "gt_lower": -360.0,
+            "gt_upper": 360.0,
+            "gt_violated": false,
+            "pred_violated": false,
+            "pred_lower": -180.0,
+            "pred_upper": 180.0,
+            "confidence": "high",
+            "reasoning": "Industrial robot joints typically have full rotation, so this is valid.",
+            "outcome": "TN"
+          },
+          {
+            "path": "/ur5e/Geometry/base/shoulder_link/upper_arm_link/forearm_link/wrist_1_link/wrist_2_link/wrist_2_joint",
+            "gt_lower": -360.0,
+            "gt_upper": 360.0,
+            "gt_violated": false,
+            "pred_violated": false,
+            "pred_lower": -180.0,
+            "pred_upper": 180.0,
+            "confidence": "high",
+            "reasoning": "Industrial robot joints typically have full rotation, so this is valid.",
+            "outcome": "TN"
+          },
+          {
+            "path": "/ur5e/Geometry/base/shoulder_link/upper_arm_link/forearm_link/wrist_1_link/wrist_1_joint",
+            "gt_lower": -360.0,
+            "gt_upper": 360.0,
+            "gt_violated": false,
+            "pred_violated": false,
+            "pred_lower": -180.0,
+            "pred_upper": 180.0,
+            "confidence": "high",
+            "reasoning": "Industrial robot joints typically have full rotation, so this is valid.",
+            "outcome": "TN"
+          },
+          {
+            "path": "/ur5e/Geometry/base/shoulder_link/upper_arm_link/forearm_link/elbow_joint",
+            "gt_lower": -179.99,
+            "gt_upper": 179.99,
+            "gt_violated": false,
+            "pred_violated": false,
+            "pred_lower": -180.0,
+            "pred_upper": 180.0,
+            "confidence": "high",
+            "reasoning": "Industrial robot joints typically have full rotation, so this is valid.",
+            "outcome": "TN"
+          },
+          {
+            "path": "/ur5e/Geometry/base/shoulder_link/upper_arm_link/shoulder_lift_joint",
+            "gt_lower": -360.0,
+            "gt_upper": 360.0,
+            "gt_violated": false,
+            "pred_violated": false,
+            "pred_lower": -180.0,
+            "pred_upper": 180.0,
+            "confidence": "high",
+            "reasoning": "Industrial robot joints typically have full rotation, so this is valid.",
+            "outcome": "TN"
+          },
+          {
+            "path": "/ur5e/Geometry/base/shoulder_link/shoulder_pan_joint",
+            "gt_lower": -360.0,
+            "gt_upper": 360.0,
+            "gt_violated": false,
+            "pred_violated": false,
+            "pred_lower": -180.0,
+            "pred_upper": 180.0,
+            "confidence": "high",
+            "reasoning": "Industrial robot joints typically have full rotation, so this is valid.",
+            "outcome": "TN"
+          }
+        ]
+      },
+      "mass_metrics": {
+        "mape_pct": 225.6,
+        "n_prims": 7,
+        "n_missed": 0,
+        "best_prim": "wrist_3_link",
+        "best_ape": 6.3,
+        "worst_prim": "forearm_link",
+        "worst_ape": 1189.8,
+        "per_prim": [
+          {
+            "path": "/ur5e/Geometry/base",
+            "gt_mass_kg": 4.0,
+            "pred_mass_kg": 3.661,
+            "ape_pct": 8.5,
+            "gt_material": "aluminum",
+            "pred_material": "aluminium",
+            "confidence": "high",
+            "reasoning": "Silvery color and lightweight parts context."
+          },
+          {
+            "path": "/ur5e/Geometry/base/shoulder_link",
+            "gt_mass_kg": 3.7,
+            "pred_mass_kg": 10.311,
+            "ape_pct": 178.7,
+            "gt_material": "aluminum",
+            "pred_material": "steel",
+            "confidence": "high",
+            "reasoning": "Darker grey and structural context."
+          },
+          {
+            "path": "/ur5e/Geometry/base/shoulder_link/upper_arm_link",
+            "gt_mass_kg": 8.393,
+            "pred_mass_kg": 15.884,
+            "ape_pct": 89.3,
+            "gt_material": "aluminum",
+            "pred_material": "aluminium",
+            "confidence": "high",
+            "reasoning": "Silvery color and lightweight parts context."
+          },
+          {
+            "path": "/ur5e/Geometry/base/shoulder_link/upper_arm_link/forearm_link",
+            "gt_mass_kg": 2.275,
+            "pred_mass_kg": 29.344,
+            "ape_pct": 1189.8,
+            "gt_material": "aluminum",
+            "pred_material": "steel",
+            "confidence": "high",
+            "reasoning": "Darker grey and structural context."
+          },
+          {
+            "path": "/ur5e/Geometry/base/shoulder_link/upper_arm_link/forearm_link/wrist_1_link",
+            "gt_mass_kg": 1.219,
+            "pred_mass_kg": 0.611,
+            "ape_pct": 49.9,
+            "gt_material": "aluminum",
+            "pred_material": "hard plastic",
+            "confidence": "high",
+            "reasoning": "Near-black and rubber-like context."
+          },
+          {
+            "path": "/ur5e/Geometry/base/shoulder_link/upper_arm_link/forearm_link/wrist_1_link/wrist_2_link",
+            "gt_mass_kg": 1.219,
+            "pred_mass_kg": 0.53,
+            "ape_pct": 56.5,
+            "gt_material": "aluminum",
+            "pred_material": "rubber",
+            "confidence": "high",
+            "reasoning": "Near-black and rubber-like context."
+          },
+          {
+            "path": "/ur5e/Geometry/base/shoulder_link/upper_arm_link/forearm_link/wrist_1_link/wrist_2_link/wrist_3_link",
+            "gt_mass_kg": 0.189,
+            "pred_mass_kg": 0.177,
+            "ape_pct": 6.3,
+            "gt_material": "aluminum",
+            "pred_material": "hard plastic",
+            "confidence": "high",
+            "reasoning": "Near-black and rubber-like context."
+          }
+        ]
+      },
+      "chain_of_thought": " STEP 1 \u2014 REASONING\n\nFor each geometry prim write ONE line:\n  \"Prim <path>: material=<X> because <1-2 word visual cue>. Confidence:<level>.\"\n  (Mass is computed automatically from bbox \u2014 you do NOT need to calculate it.)\nFor each joint prim write 2-3 sentences (full reasoning required for joint validation):\n  Revolute: \"Joint <name>: lower=<X>\u00b0, upper=<Y>\u00b0. <reason why valid/invalid>.\n   Corrected: lower=<A>\u00b0, upper=<B>\u00b0. Confidence:<level>.\"\n  Prismatic: \"Joint <name>: lower=<X>, upper=<Y>, body_length_along_axis=<B>.\n   travel=upper\u2212lower=<T>. <T> vs <B>: <exceeds\u2192VIOLATED, joint_valid=false|fits\u2192valid, joint_valid=true>.\n   Corrected if needed: lower=<A>, upper=<C>. Confidence:<level>.\"\n\nPrim /ur5e/Geometry/base: material=aluminium because silvery color and lightweight parts context. Confidence:high.\nPrim /ur5e/Geometry/base/shoulder_link: material=steel because darker grey and structural context. Confidence:high.\nPrim /ur5e/Geometry/base/shoulder_link/upper_arm_link: material=aluminium because silvery color and lightweight parts context. Confidence:high.\nPrim /ur5e/Geometry/base/shoulder_link/upper_arm_link/forearm_link: material=steel because darker grey and structural context. Confidence:high.\nPrim /ur5e/Geometry/base/shoulder_link/upper_arm_link/forearm_link/wrist_1_link: material=hard plastic because near-black and rubber-like context. Confidence:high.\nPrim /ur5e/Geometry/base/shoulder_link/upper_arm_link/forearm_link/wrist_1_link/wrist_2_link: material=rubber because near-black and rubber-like context. Confidence:high.\nPrim /ur5e/Geometry/base/shoulder_link/upper_arm_link/forearm_link/wrist_1_link/wrist_2_link/wrist_3_link: material=hard plastic because near-black and rubber-like context. Confidence:high.\nJoint /ur5e/Geometry/base/shoulder_link/upper_arm_link/forearm_link/wrist_1_link/wrist_2_link/wrist_3_link/wrist_3_joint: lower=-180\u00b0, upper=180\u00b0. Industrial robot joints typically have full rotation, so this is valid. Confidence:high.\nJoint /ur5e/Geometry/base/shoulder_link/upper_arm_link/forearm_link/wrist_1_link/wrist_2_link/wrist_2_joint: lower=-180\u00b0, upper=180\u00b0. Industrial robot joints typically have full rotation, so this is valid. Confidence:high.\nJoint /ur5e/Geometry/base/shoulder_link/upper_arm_link/forearm_link/wrist_1_link/wrist_1_joint: lower=-180\u00b0, upper=180\u00b0. Industrial robot joints typically have full rotation, so this is valid. Confidence:high.\nJoint /ur5e/Geometry/base/shoulder_link/upper_arm_link/forearm_link/elbow_joint: lower=-180\u00b0, upper=180\u00b0. Industrial robot joints typically have full rotation, so this is valid. Confidence:high.\nJoint /ur5e/Geometry/base/shoulder_link/upper_arm_link/shoulder_lift_joint: lower=-180\u00b0, upper=180\u00b0. Industrial robot joints typically have full rotation, so this is valid. Confidence:high.\nJoint /ur5e/Geometry/base/shoulder_link/shoulder_pan_joint: lower=-180\u00b0, upper=180\u00b0. Industrial robot joints typically have full rotation, so this is valid. Confidence:high.\n\n```json\n{\n  \"geom_prims\": [\n    {\n      \"prim_path\": \"/ur5e/Geometry/base\",\n      \"material_type\": \"aluminium\",\n      \"mass_kg\": 0.0,\n      \"static_friction\": 0.0,\n      \"dynamic_friction\": 0.0,\n      \"restitution\": 0.0,\n      \"collision_approximation\": \"convexHull\",\n      \"is_rigid\": true,\n      \"confidence\": \"high\",\n      \"reasoning\": \"Silvery color and lightweight parts context.\"\n    },\n    {\n      \"prim_path\": \"/ur5e/Geometry/base/shoulder_link\",\n      \"material_type\": \"steel\",\n      \"mass_kg\": 0.0,\n      \"static_friction\": 0.0,\n      \"dynamic_friction\": 0.0,\n      \"restitution\": 0.0,\n      \"collision_approximation\": \"convexHull\",\n      \"is_rigid\": true,\n      \"confidence\": \"high\",\n      \"reasoning\": \"Darker grey and structural context.\"\n    },\n    {\n      \"prim_path\": \"/ur5e/Geometry/base/shoulder_link/upper_arm_link\",\n      \"material_type\": \"aluminium\",\n      \"mass_kg\": 0.0,\n      \"static_friction\": 0.0,\n      \"dynamic_friction\": 0.0,\n      \"restitution\": 0.0,\n      \"collision_approximation\": \"convexHull\",\n      \"is_rigid\": true,\n      \"confidence\": \"high\",\n      \"reasoning\": \"Silvery color and lightweight parts context.\"\n    },\n    {\n      \"prim_path\": \"/ur5e/Geometry/base/shoulder_link/upper_arm_link/forearm_link\",\n      \"material_type\": \"steel\",\n      \"mass_kg\": 0.0,\n      \"static_friction\": 0.0,\n      \"dynamic_friction\": 0.0,\n      \"restitution\": 0.0,\n      \"collision_approximation\": \"convexHull\",\n      \"is_rigid\": true,\n      \"confidence\": \"high\",\n      \"reasoning\": \"Darker grey and structural context.\"\n    },\n    {\n      \"prim_path\": \"/ur5e/Geometry/base/shoulder_link/upper_arm_link/forearm_link/wrist_1_link\",\n      \"material_type\": \"hard plastic\",\n      \"mass_kg\": 0.0,\n      \"static_friction\": 0.0,\n      \"dynamic_friction\": 0.0,\n      \"restitution\": 0.0,\n      \"collision_approximation\": \"convexHull\",\n      \"is_rigid\": true,\n      \"confidence\": \"high\",\n      \"reasoning\": \"Near-black and rubber-like context.\"\n    },\n    {\n      \"prim_path\": \"/ur5e/Geometry/base/shoulder_link/upper_arm_link/forearm_link/wrist_1_link/wrist_2_link\",\n      \"material_type\": \"rubber\",\n      \"mass_kg\": 0.0,\n      \"static_friction\": 0.0,\n      \"dynamic_friction\": 0.0,\n      \"restitution\": 0.0,\n      \"collision_approximation\": \"convexHull\",\n      \"is_rigid\": true,\n      \"confidence\": \"high\",\n      \"reasoning\": \"Near-black and rubber-like context.\"\n    },\n    {\n      \"prim_path\": \"/ur5e/Geometry/base/shoulder_link/upper_arm_link/forearm_link/wrist_1_link/wrist_2_link/wrist_3_link\",\n      \"material_type\": \"hard plastic\",\n      \"mass_kg\": 0.0,\n      \"static_friction\": 0.0,\n      \"dynamic_friction\": 0.0,\n      \"restitution\": 0.0,\n      \"collision_approximation\": \"convexHull\",\n      \"is_rigid\": true,\n      \"confidence\": \"high\",\n      \"reasoning\": \"Near-black and rubber-like context.\"\n    }\n  ],\n  \"joint_prims\": [\n    {\n      \"prim_path\": \"/ur5e/Geometry/base/shoulder_link/upper_arm_link/forearm_link/wrist_1_link/wrist_2_link/wrist_3_link/wrist_3_joint\",\n      \"lower_limit_deg\": -180,\n      \"upper_limit_deg\": 180,\n      \"joint_valid\": true,\n      \"confidence\": \"high\",\n      \"reasoning\": \"Industrial robot joints typically have full rotation, so this is valid.\"\n    },\n    {\n      \"prim_path\": \"/ur5e/Geometry/base/shoulder_link/upper_arm_link/forearm_link/wrist_1_link/wrist_2_link/wrist_2_joint\",\n      \"lower_limit_deg\": -180,\n      \"upper_limit_deg\": 180,\n      \"joint_valid\": true,\n      \"confidence\": \"high\",\n      \"reasoning\": \"Industrial robot joints typically have full rotation, so this is valid.\"\n    },\n    {\n      \"prim_path\": \"/ur5e/Geometry/base/shoulder_link/upper_arm_link/forearm_link/wrist_1_link/wrist_1_joint\",\n      \"lower_limit_deg\": -180,\n      \"upper_limit_deg\": 180,\n      \"joint_valid\": true,\n      \"confidence\": \"high\",\n      \"reasoning\": \"Industrial robot joints typically have full rotation, so this is valid.\"\n    },\n    {\n      \"prim_path\": \"/ur5e/Geometry/base/shoulder_link/upper_arm_link/forearm_link/elbow_joint\",\n      \"lower_limit_deg\": -180,\n      \"upper_limit_deg\": 180,\n      \"joint_valid\": true,\n      \"confidence\": \"high\",\n      \"reasoning\": \"Industrial robot joints typically have full rotation, so this is valid.\"\n    },\n    {\n      \"prim_path\": \"/ur5e/Geometry/base/shoulder_link/upper_arm_link/shoulder_lift_joint\",\n      \"lower_limit_deg\": -180,\n      \"upper_limit_deg\": 180,\n      \"joint_valid\": true,\n      \"confidence\": \"high\",\n      \"reasoning\": \"Industrial robot joints typically have full rotation, so this is valid.\"\n    },\n    {\n      \"prim_path\": \"/ur5e/Geometry/base/shoulder_link/shoulder_pan_joint\",\n      \"lower_limit_deg\": -180,\n      \"upper_limit_deg\": 180,\n      \"joint_valid\": true,\n      \"confidence\": \"high\",\n      \"reasoning\": \"Industrial robot joints typically have full rotation, so this is valid.\"\n    }\n  ],\n  \"global_notes\": \"\"\n}\n```"
+    }
+  ]
+}

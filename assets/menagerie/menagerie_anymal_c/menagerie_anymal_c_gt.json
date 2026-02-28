@@ -1,0 +1,158 @@
+{
+  "name": "menagerie_anymal_c",
+  "usd": "assets/menagerie/menagerie_anymal_c/menagerie_anymal_c_stripped.usda",
+  "description": "Stripped from menagerie_anymal_c.usda \u2014 13 bodies, 12 joints (0 violated)",
+  "joints": [
+    {
+      "path": "/anymal_c/Geometry/base/LF_HIP/LF_THIGH/LF_SHANK/LF_KFE",
+      "type": "revolute",
+      "lower": -540.0,
+      "upper": 540.0,
+      "violated": false
+    },
+    {
+      "path": "/anymal_c/Geometry/base/LF_HIP/LF_THIGH/LF_HFE",
+      "type": "revolute",
+      "lower": -540.0,
+      "upper": 540.0,
+      "violated": false
+    },
+    {
+      "path": "/anymal_c/Geometry/base/LF_HIP/LF_HAA",
+      "type": "revolute",
+      "lower": -41.25,
+      "upper": 28.07,
+      "violated": false
+    },
+    {
+      "path": "/anymal_c/Geometry/base/RF_HIP/RF_THIGH/RF_SHANK/RF_KFE",
+      "type": "revolute",
+      "lower": -540.0,
+      "upper": 540.0,
+      "violated": false
+    },
+    {
+      "path": "/anymal_c/Geometry/base/RF_HIP/RF_THIGH/RF_HFE",
+      "type": "revolute",
+      "lower": -540.0,
+      "upper": 540.0,
+      "violated": false
+    },
+    {
+      "path": "/anymal_c/Geometry/base/RF_HIP/RF_HAA",
+      "type": "revolute",
+      "lower": -28.07,
+      "upper": 41.25,
+      "violated": false
+    },
+    {
+      "path": "/anymal_c/Geometry/base/LH_HIP/LH_THIGH/LH_SHANK/LH_KFE",
+      "type": "revolute",
+      "lower": -540.0,
+      "upper": 540.0,
+      "violated": false
+    },
+    {
+      "path": "/anymal_c/Geometry/base/LH_HIP/LH_THIGH/LH_HFE",
+      "type": "revolute",
+      "lower": -540.0,
+      "upper": 540.0,
+      "violated": false
+    },
+    {
+      "path": "/anymal_c/Geometry/base/LH_HIP/LH_HAA",
+      "type": "revolute",
+      "lower": -41.25,
+      "upper": 28.07,
+      "violated": false
+    },
+    {
+      "path": "/anymal_c/Geometry/base/RH_HIP/RH_THIGH/RH_SHANK/RH_KFE",
+      "type": "revolute",
+      "lower": -540.0,
+      "upper": 540.0,
+      "violated": false
+    },
+    {
+      "path": "/anymal_c/Geometry/base/RH_HIP/RH_THIGH/RH_HFE",
+      "type": "revolute",
+      "lower": -540.0,
+      "upper": 540.0,
+      "violated": false
+    },
+    {
+      "path": "/anymal_c/Geometry/base/RH_HIP/RH_HAA",
+      "type": "revolute",
+      "lower": -28.07,
+      "upper": 41.25,
+      "violated": false
+    }
+  ],
+  "masses": [
+    {
+      "path": "/anymal_c/Geometry/base",
+      "material": "aluminum",
+      "mass_kg": 19.2035
+    },
+    {
+      "path": "/anymal_c/Geometry/base/LF_HIP",
+      "material": "aluminum",
+      "mass_kg": 2.781
+    },
+    {
+      "path": "/anymal_c/Geometry/base/LF_HIP/LF_THIGH",
+      "material": "carbon fiber",
+      "mass_kg": 3.071
+    },
+    {
+      "path": "/anymal_c/Geometry/base/LF_HIP/LF_THIGH/LF_SHANK",
+      "material": "carbon fiber",
+      "mass_kg": 0.5884
+    },
+    {
+      "path": "/anymal_c/Geometry/base/RF_HIP",
+      "material": "aluminum",
+      "mass_kg": 2.781
+    },
+    {
+      "path": "/anymal_c/Geometry/base/RF_HIP/RF_THIGH",
+      "material": "carbon fiber",
+      "mass_kg": 3.071
+    },
+    {
+      "path": "/anymal_c/Geometry/base/RF_HIP/RF_THIGH/RF_SHANK",
+      "material": "carbon fiber",
+      "mass_kg": 0.5884
+    },
+    {
+      "path": "/anymal_c/Geometry/base/LH_HIP",
+      "material": "aluminum",
+      "mass_kg": 2.781
+    },
+    {
+      "path": "/anymal_c/Geometry/base/LH_HIP/LH_THIGH",
+      "material": "carbon fiber",
+      "mass_kg": 3.071
+    },
+    {
+      "path": "/anymal_c/Geometry/base/LH_HIP/LH_THIGH/LH_SHANK",
+      "material": "carbon fiber",
+      "mass_kg": 0.5884
+    },
+    {
+      "path": "/anymal_c/Geometry/base/RH_HIP",
+      "material": "aluminum",
+      "mass_kg": 2.781
+    },
+    {
+      "path": "/anymal_c/Geometry/base/RH_HIP/RH_THIGH",
+      "material": "carbon fiber",
+      "mass_kg": 3.071
+    },
+    {
+      "path": "/anymal_c/Geometry/base/RH_HIP/RH_THIGH/RH_SHANK",
+      "material": "carbon fiber",
+      "mass_kg": 0.5884
+    }
+  ]
+}

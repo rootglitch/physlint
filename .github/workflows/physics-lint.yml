@@ -1,0 +1,112 @@
+name: USD Physics Lint
+
+on:
+  push:
+    paths:
+      - "**.usda"
+      - "**.usd"
+      - "**.usdc"
+      - "src/**"
+      - "main.py"
+  pull_request:
+    paths:
+      - "**.usda"
+      - "**.usd"
+      - "**.usdc"
+  workflow_dispatch:
+    inputs:
+      full_inference:
+        description: "Run full Cosmos Reason 2 inference (requires GPU runner)"
+        type: boolean
+        default: false
+
+jobs:
+  # ── Fast job: parse + validate USD structure (no GPU needed) ──────────────
+  parse-validate:
+    name: Parse & validate USD
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+
+      - name: Install dependencies
+        run: pip install usd-core>=24.11 pydantic>=2.0 typer rich
+
+      - name: Parse USD scene graph
+        run: |
+          python main.py run assets/demo_gripper.usda --parse-only
+          echo "USD parsed successfully"
+
+      - name: Validate physics USD output
+        run: |
+          python - <<'EOF'
+          from pxr import Usd, UsdPhysics
+          stage = Usd.Stage.Open("assets/demo_gripper_physics.usda")
+          assert stage, "Cannot open physics USD"
+          prims_with_physics = [
+              p for p in stage.Traverse()
+              if p.HasAPI(UsdPhysics.RigidBodyAPI)
+          ]
+          print(f"  Prims with PhysicsRigidBodyAPI: {len(prims_with_physics)}")
+          assert len(prims_with_physics) > 0, "No physics prims found"
+
+          # Validate the corrected joint limits
+          elbow = stage.GetPrimAtPath("/World/RobotArm/ElbowJoint")
+          upper = elbow.GetAttribute("physics:upperLimit").Get()
+          assert upper <= 160.0, f"ElbowJoint upper limit {upper}° exceeds human maximum"
+          print(f"  ElbowJoint upper limit: {upper}° ✓")
+          print("Physics USD validation passed")
+          EOF
+
+  # ── Full inference job: requires self-hosted GPU runner ───────────────────
+  # To enable: add a self-hosted runner with label 'gpu' and 16GB+ VRAM.
+  # Trigger manually via workflow_dispatch or configure on a schedule.
+  full-physics-lint:
+    name: Full physics lint (GPU)
+    runs-on: [self-hosted, gpu]
+    if: ${{ github.event.inputs.full_inference == 'true' }}
+    timeout-minutes: 45
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up conda environment
+        run: |
+          conda env create -f environment.yml --name physint-ci || \
+          conda env update -f environment.yml --name physint-ci
+          conda run -n physint-ci pip install torch torchvision \
+            --index-url https://download.pytorch.org/whl/cu128
+
+      - name: Run physics lint (dry-run)
+        run: |
+          conda run -n physint-ci python main.py run \
+            assets/demo_gripper.usda \
+            --dry-run \
+            --report-dir /tmp/physint-report \
+            2>&1 | tee /tmp/physint-lint.log
+
+          # Exit code 1 = violations found, exit code 0 = clean
+          # Capture exit code but don't fail the step — violations are expected
+          # in the demo scene (intentional 220° joint). In production, you would
+          # use: if [ $? -ne 0 ]; then exit 1; fi
+          echo "Lint complete. See report below."
+
+      - name: Upload compliance report
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: physics-compliance-report
+          path: /tmp/physint-report/
+          retention-days: 30
+
+      - name: Print report summary
+        if: always()
+        run: |
+          if [ -f /tmp/physint-report/report.md ]; then
+            cat /tmp/physint-report/report.md
+          fi

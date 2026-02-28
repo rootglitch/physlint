@@ -1,0 +1,152 @@
+#usda 1.0
+(
+    defaultPrim = "World"
+    metersPerUnit = 0.01
+    upAxis = "Y"
+)
+
+def Xform "World"
+{
+    def "Mats"
+    {
+        def Material "Steel"
+        {
+            token outputs:surface.connect = </World/Mats/Steel/Shader.outputs:surface>
+
+            def Shader "Shader"
+            {
+                uniform token info:id = "UsdPreviewSurface"
+                color3f inputs:diffuseColor = (0.65, 0.67, 0.7)
+                float inputs:metallic = 0
+                float inputs:roughness = 0.4
+                token outputs:surface
+            }
+        }
+
+        def Material "Alum"
+        {
+            token outputs:surface.connect = </World/Mats/Alum/Shader.outputs:surface>
+
+            def Shader "Shader"
+            {
+                uniform token info:id = "UsdPreviewSurface"
+                color3f inputs:diffuseColor = (0.8, 0.83, 0.87)
+                float inputs:metallic = 0
+                float inputs:roughness = 0.35
+                token outputs:surface
+            }
+        }
+
+        def Material "Rubber"
+        {
+            token outputs:surface.connect = </World/Mats/Rubber/Shader.outputs:surface>
+
+            def Shader "Shader"
+            {
+                uniform token info:id = "UsdPreviewSurface"
+                color3f inputs:diffuseColor = (0.03, 0.03, 0.03)
+                float inputs:metallic = 0
+                float inputs:roughness = 0.98
+                token outputs:surface
+            }
+        }
+    }
+
+    def "Gantry"
+    {
+        def Cube "GantryBeam" (
+            prepend apiSchemas = ["MaterialBindingAPI"]
+        )
+        {
+            rel material:binding = </World/Mats/Steel>
+            double size = 1
+            double3 xformOp:scale = (200, 10, 10)
+            double3 xformOp:translate = (0, 5, 0)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:scale"]
+        }
+
+        def Cube "XBlock" (
+            prepend apiSchemas = ["MaterialBindingAPI"]
+        )
+        {
+            rel material:binding = </World/Mats/Alum>
+            double size = 1
+            double3 xformOp:scale = (15, 15, 10)
+            double3 xformOp:translate = (0, 22.5, 0)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:scale"]
+        }
+
+        def Cube "ZRail" (
+            prepend apiSchemas = ["MaterialBindingAPI"]
+        )
+        {
+            rel material:binding = </World/Mats/Alum>
+            double size = 1
+            double3 xformOp:scale = (10, 10, 80)
+            double3 xformOp:translate = (0, 22.5, 40)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:scale"]
+        }
+
+        def Cube "ZBlock" (
+            prepend apiSchemas = ["MaterialBindingAPI"]
+        )
+        {
+            rel material:binding = </World/Mats/Alum>
+            double size = 1
+            double3 xformOp:scale = (10, 50, 10)
+            double3 xformOp:translate = (0, 47.5, 40)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:scale"]
+        }
+
+        def Sphere "ToolSphere" (
+            prepend apiSchemas = ["MaterialBindingAPI"]
+        )
+        {
+            rel material:binding = </World/Mats/Rubber>
+            double radius = 5
+            double3 xformOp:scale = (1, 1, 1)
+            double3 xformOp:translate = (0, 77, 40)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:scale"]
+        }
+
+        def "Joints"
+        {
+            def PhysicsPrismaticJoint "X_Axis"
+            {
+                uniform token physics:axis = "X"
+                rel physics:body0 = </World/Gantry/GantryBeam>
+                rel physics:body1 = </World/Gantry/XBlock>
+                float physics:lowerLimit = -300
+                float physics:upperLimit = 300
+            }
+
+            def PhysicsPrismaticJoint "Z_Axis"
+            {
+                uniform token physics:axis = "Z"
+                rel physics:body0 = </World/Gantry/ZRail>
+                rel physics:body1 = </World/Gantry/ZBlock>
+                float physics:lowerLimit = -100
+                float physics:upperLimit = 100
+            }
+
+            def PhysicsPrismaticJoint "Y_Axis"
+            {
+                uniform token physics:axis = "Y"
+                rel physics:body0 = </World/Gantry/ZBlock>
+                rel physics:body1 = </World/Gantry/ToolSphere>
+                float physics:lowerLimit = -30
+                float physics:upperLimit = 0
+            }
+
+            def PhysicsRevoluteJoint "ToolSpin"
+            {
+                uniform token physics:axis = "Z"
+                rel physics:body0 = </World/Gantry/ZBlock>
+                rel physics:body1 = </World/Gantry/ToolSphere>
+                float physics:lowerLimit = -175
+                float physics:upperLimit = 175
+            }
+        }
+    }
+}
+

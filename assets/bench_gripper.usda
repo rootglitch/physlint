@@ -1,0 +1,141 @@
+#usda 1.0
+(
+    defaultPrim = "World"
+    metersPerUnit = 0.01
+    upAxis = "Y"
+)
+
+def Xform "World"
+{
+    def "Mats"
+    {
+        def Material "Steel"
+        {
+            token outputs:surface.connect = </World/Mats/Steel/Shader.outputs:surface>
+
+            def Shader "Shader"
+            {
+                uniform token info:id = "UsdPreviewSurface"
+                color3f inputs:diffuseColor = (0.65, 0.67, 0.7)
+                float inputs:metallic = 0
+                float inputs:roughness = 0.4
+                token outputs:surface
+            }
+        }
+
+        def Material "Alum"
+        {
+            token outputs:surface.connect = </World/Mats/Alum/Shader.outputs:surface>
+
+            def Shader "Shader"
+            {
+                uniform token info:id = "UsdPreviewSurface"
+                color3f inputs:diffuseColor = (0.8, 0.83, 0.87)
+                float inputs:metallic = 0
+                float inputs:roughness = 0.35
+                token outputs:surface
+            }
+        }
+
+        def Material "Rubber"
+        {
+            token outputs:surface.connect = </World/Mats/Rubber/Shader.outputs:surface>
+
+            def Shader "Shader"
+            {
+                uniform token info:id = "UsdPreviewSurface"
+                color3f inputs:diffuseColor = (0.03, 0.03, 0.03)
+                float inputs:metallic = 0
+                float inputs:roughness = 0.98
+                token outputs:surface
+            }
+        }
+    }
+
+    def "Gripper"
+    {
+        def Cube "Palm" (
+            prepend apiSchemas = ["MaterialBindingAPI"]
+        )
+        {
+            rel material:binding = </World/Mats/Alum>
+            double size = 1
+            double3 xformOp:scale = (30, 8, 15)
+            double3 xformOp:translate = (0, 4, 0)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:scale"]
+        }
+
+        def Cube "MountBracket" (
+            prepend apiSchemas = ["MaterialBindingAPI"]
+        )
+        {
+            rel material:binding = </World/Mats/Steel>
+            double size = 1
+            double3 xformOp:scale = (10, 15, 8)
+            double3 xformOp:translate = (0, 15.5, 0)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:scale"]
+        }
+
+        def Cube "FingerL" (
+            prepend apiSchemas = ["MaterialBindingAPI"]
+        )
+        {
+            rel material:binding = </World/Mats/Rubber>
+            double size = 1
+            double3 xformOp:scale = (6, 15, 4)
+            double3 xformOp:translate = (-18, 4, 0)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:scale"]
+        }
+
+        def Cube "FingerR" (
+            prepend apiSchemas = ["MaterialBindingAPI"]
+        )
+        {
+            rel material:binding = </World/Mats/Rubber>
+            double size = 1
+            double3 xformOp:scale = (6, 15, 4)
+            double3 xformOp:translate = (18, 4, 0)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:scale"]
+        }
+
+        def "Joints"
+        {
+            def PhysicsPrismaticJoint "FingerL_Spread"
+            {
+                uniform token physics:axis = "X"
+                rel physics:body0 = </World/Gripper/Palm>
+                rel physics:body1 = </World/Gripper/FingerL>
+                float physics:lowerLimit = 0
+                float physics:upperLimit = 80
+            }
+
+            def PhysicsPrismaticJoint "FingerL_Close"
+            {
+                uniform token physics:axis = "X"
+                rel physics:body0 = </World/Gripper/Palm>
+                rel physics:body1 = </World/Gripper/FingerL>
+                float physics:lowerLimit = -8
+                float physics:upperLimit = 0
+            }
+
+            def PhysicsPrismaticJoint "FingerR_Spread"
+            {
+                uniform token physics:axis = "X"
+                rel physics:body0 = </World/Gripper/Palm>
+                rel physics:body1 = </World/Gripper/FingerR>
+                float physics:lowerLimit = 0
+                float physics:upperLimit = 75
+            }
+
+            def PhysicsPrismaticJoint "FingerR_Close"
+            {
+                uniform token physics:axis = "X"
+                rel physics:body0 = </World/Gripper/Palm>
+                rel physics:body1 = </World/Gripper/FingerR>
+                float physics:lowerLimit = -8
+                float physics:upperLimit = 0
+            }
+        }
+    }
+}
+

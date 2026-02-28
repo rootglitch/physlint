@@ -1,0 +1,413 @@
+{
+  "summary": {
+    "model": "nvidia/Cosmos-Reason2-8B",
+    "joint_detection": {
+      "tp": 5,
+      "tn": 6,
+      "fp": 0,
+      "fn": 0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "accuracy": 1.0
+    },
+    "mass_estimation": {
+      "mape_pct": 87.8,
+      "n_prims": 15
+    }
+  },
+  "scenes": [
+    {
+      "name": "bench_revolute_limits",
+      "joint_metrics": {
+        "tp": 2,
+        "tn": 2,
+        "fp": 0,
+        "fn": 0,
+        "missed": 0,
+        "total": 4,
+        "precision": 1.0,
+        "recall": 1.0,
+        "accuracy": 1.0,
+        "per_joint": [
+          {
+            "path": "/World/RobotChain/Joints/ShoulderYaw",
+            "gt_lower": -90,
+            "gt_upper": 90,
+            "gt_violated": false,
+            "pred_violated": false,
+            "pred_lower": -90.0,
+            "pred_upper": 90.0,
+            "confidence": "high",
+            "reasoning": "Joint limits are within valid range for a shoulder joint.",
+            "outcome": "TN"
+          },
+          {
+            "path": "/World/RobotChain/Joints/Elbow",
+            "gt_lower": -10,
+            "gt_upper": 220,
+            "gt_violated": true,
+            "pred_violated": true,
+            "pred_lower": -10.0,
+            "pred_upper": 145.0,
+            "confidence": "high",
+            "reasoning": "Original upper limit of 220\u00b0 exceeds 180\u00b0, violating the rule. Corrected to 145\u00b0.",
+            "outcome": "TP"
+          },
+          {
+            "path": "/World/RobotChain/Joints/WristPitch",
+            "gt_lower": -80,
+            "gt_upper": 80,
+            "gt_violated": false,
+            "pred_violated": false,
+            "pred_lower": -80.0,
+            "pred_upper": 80.0,
+            "confidence": "high",
+            "reasoning": "Joint limits are within valid range for a wrist joint.",
+            "outcome": "TN"
+          },
+          {
+            "path": "/World/RobotChain/Joints/WristRoll",
+            "gt_lower": -10,
+            "gt_upper": 260,
+            "gt_violated": true,
+            "pred_violated": true,
+            "pred_lower": -10.0,
+            "pred_upper": 145.0,
+            "confidence": "high",
+            "reasoning": "Original upper limit of 260\u00b0 exceeds 180\u00b0, violating the rule. Corrected to 145\u00b0.",
+            "outcome": "TP"
+          }
+        ]
+      },
+      "mass_metrics": {
+        "mape_pct": 225.3,
+        "n_prims": 5,
+        "n_missed": 0,
+        "best_prim": "Base",
+        "best_ape": 0.1,
+        "worst_prim": "Gripper",
+        "worst_ape": 554.9,
+        "per_prim": [
+          {
+            "path": "/World/RobotChain/Base",
+            "gt_mass_kg": 98.65,
+            "pred_mass_kg": 98.596,
+            "ape_pct": 0.1,
+            "gt_material": "steel",
+            "pred_material": "steel",
+            "confidence": "high",
+            "reasoning": "Cylindrical base with metallic appearance, likely steel, with calculated mass and friction values."
+          },
+          {
+            "path": "/World/RobotChain/Link1",
+            "gt_mass_kg": 6.36,
+            "pred_mass_kg": 18.487,
+            "ape_pct": 190.7,
+            "gt_material": "aluminum",
+            "pred_material": "steel",
+            "confidence": "high",
+            "reasoning": "Cylindrical link with metallic appearance, likely steel, with calculated mass and friction values."
+          },
+          {
+            "path": "/World/RobotChain/Link2",
+            "gt_mass_kg": 3.39,
+            "pred_mass_kg": 9.86,
+            "ape_pct": 190.9,
+            "gt_material": "aluminum",
+            "pred_material": "steel",
+            "confidence": "high",
+            "reasoning": "Cylindrical link with metallic appearance, likely steel, with calculated mass and friction values."
+          },
+          {
+            "path": "/World/RobotChain/Link3",
+            "gt_mass_kg": 1.53,
+            "pred_mass_kg": 4.437,
+            "ape_pct": 190.0,
+            "gt_material": "aluminum",
+            "pred_material": "steel",
+            "confidence": "high",
+            "reasoning": "Cylindrical link with metallic appearance, likely steel, with calculated mass and friction values."
+          },
+          {
+            "path": "/World/RobotChain/Gripper",
+            "gt_mass_kg": 0.628,
+            "pred_mass_kg": 4.113,
+            "ape_pct": 554.9,
+            "gt_material": "rubber",
+            "pred_material": "steel",
+            "confidence": "high",
+            "reasoning": "Spherical gripper with metallic appearance, likely steel, with calculated mass and friction values."
+          }
+        ]
+      },
+      "chain_of_thought": "### STEP 1 \u2014 REASONING\n\n**RobotChain/Base:** The base is a cylindrical structure with a metallic appearance, likely made of steel due to its dark grey color and industrial context. Bbox [40,40,10] stage units \u00d7 0.01 m/unit = [0.40,0.40,0.01] m. Fill factor 0.785. Volume = 0.40 \u00d7 0.40 \u00d7 0.01 \u00d7 0.785 = 0.001256 m\u00b3. Density for steel is 7850 kg/m\u00b3. Mass \u2248 0.001256 \u00d7 7850 = 9.86 kg. Confidence: High, as the material matches typical steel properties and the dimensions are consistent with an industrial base.\n\n**RobotChain/Link1:** This link is also cylindrical and metallic, matching the steel appearance of the base. Bbox [10,10,30] stage units \u00d7 0.01 m/unit = [0.10,0.10,0.30] m. Fill factor 0.785. Volume = 0.10 \u00d7 0.10 \u00d7 0.30 \u00d7 0.785 = 0.002355 m\u00b3. Mass \u2248 0.002355 \u00d7 7850 = 18.5 kg. Confidence: High, consistent with steel material and similar dimensions to the base.\n\n**RobotChain/Link2:** Another cylindrical link, appearing metallic and likely steel. Bbox [8,8,25] stage units \u00d7 0.01 m/unit = [0.08,0.08,0.25] m. Fill factor 0.785. Volume = 0.08 \u00d7 0.08 \u00d7 0.25 \u00d7 0.785 = 0.001256 m\u00b3. Mass \u2248 0.001256 \u00d7 7850 = 9.86 kg. Confidence: High, matching steel properties and similar geometric scaling.\n\n**RobotChain/Link3:** A smaller cylindrical link, also metallic and likely steel. Bbox [6,6,20] stage units \u00d7 0.01 m/unit = [0.06,0.06,0.20] m. Fill factor 0.785. Volume = 0.06 \u00d7 0.06 \u00d7 0.20 \u00d7 0.785 = 0.000565 m\u00b3. Mass \u2248 0.000565 \u00d7 7850 = 4.46 kg. Confidence: High, consistent with steel material and scaled dimensions.\n\n**RobotChain/Gripper:** The gripper is spherical and metallic, likely steel. Bbox [10,10,10] stage units \u00d7 0.01 m/unit = [0.10,0.10,0.10] m. Fill factor 0.524. Volume = 0.10 \u00d7 0.10 \u00d7 0.10 \u00d7 0.524 = 0.000524 m\u00b3. Mass \u2248 0.000524 \u00d7 7850 = 4.11 kg. Confidence: High, matching steel properties and a typical gripper size.\n\n**ShoulderYaw Joint:** Lower limit -90\u00b0, upper limit 90\u00b0. This is within the valid range for a revolute joint, allowing for a wide range of motion without exceeding the body length along the axis. Confidence: High, as the limits are appropriate for a shoulder joint in a robotic arm.\n\n**Elbow Joint:** Lower limit -10\u00b0, upper limit 220\u00b0. The upper limit exceeds 180\u00b0, which is a violation of the rule for human-like joints. It should be capped at 145\u00b0. Corrected: Lower -10\u00b0, upper 145\u00b0. Confidence: Violation detected, corrected to comply with the rules.\n\n**WristPitch Joint:** Lower limit -80\u00b0, upper limit 80\u00b0. This is within the valid range for a wrist joint, allowing for sufficient motion without exceeding the body length. Confidence: High, as the limits are appropriate for a wrist joint.\n\n**WristRoll Joint:** Lower limit -10\u00b0, upper limit 260\u00b0. The upper limit exceeds 180\u00b0, which is a violation of the rule for human-like joints. It should be capped at 145\u00b0. Corrected: Lower -10\u00b0, upper 145\u00b0. Confidence: Violation detected, corrected to comply with the rules.\n\n### STEP 2 \u2014 JSON OUTPUT\n\n```json\n{\n  \"geom_prims\": [\n    {\n      \"prim_path\": \"/World/RobotChain/Base\",\n      \"material_type\": \"steel\",\n      \"mass_kg\": 9.86,\n      \"static_friction\": 0.4,\n      \"dynamic_friction\": 0.3,\n      \"restitution\": 0.3,\n      \"collision_approximation\": \"convexHull\",\n      \"is_rigid\": true,\n      \"confidence\": \"high\",\n      \"reasoning\": \"Cylindrical base with metallic appearance, likely steel, with calculated mass and friction values.\"\n    },\n    {\n      \"prim_path\": \"/World/RobotChain/Link1\",\n      \"material_type\": \"steel\",\n      \"mass_kg\": 18.5,\n      \"static_friction\": 0.4,\n      \"dynamic_friction\": 0.3,\n      \"restitution\": 0.3,\n      \"collision_approximation\": \"convexHull\",\n      \"is_rigid\": true,\n      \"confidence\": \"high\",\n      \"reasoning\": \"Cylindrical link with metallic appearance, likely steel, with calculated mass and friction values.\"\n    },\n    {\n      \"prim_path\": \"/World/RobotChain/Link2\",\n      \"material_type\": \"steel\",\n      \"mass_kg\": 9.86,\n      \"static_friction\": 0.4,\n      \"dynamic_friction\": 0.3,\n      \"restitution\": 0.3,\n      \"collision_approximation\": \"convexHull\",\n      \"is_rigid\": true,\n      \"confidence\": \"high\",\n      \"reasoning\": \"Cylindrical link with metallic appearance, likely steel, with calculated mass and friction values.\"\n    },\n    {\n      \"prim_path\": \"/World/RobotChain/Link3\",\n      \"material_type\": \"steel\",\n      \"mass_kg\": 4.46,\n      \"static_friction\": 0.4,\n      \"dynamic_friction\": 0.3,\n      \"restitution\": 0.3,\n      \"collision_approximation\": \"convexHull\",\n      \"is_rigid\": true,\n      \"confidence\": \"high\",\n      \"reasoning\": \"Cylindrical link with metallic appearance, likely steel, with calculated mass and friction values.\"\n    },\n    {\n      \"prim_path\": \"/World/RobotChain/Gripper\",\n      \"material_type\": \"steel\",\n      \"mass_kg\": 4.11,\n      \"static_friction\": 0.4,\n      \"dynamic_friction\": 0.3,\n      \"restitution\": 0.3,\n      \"collision_approximation\": \"convexHull\",\n      \"is_rigid\": true,\n      \"confidence\": \"high\",\n      \"reasoning\": \"Spherical gripper with metallic appearance, likely steel, with calculated mass and friction values.\"\n    }\n  ],\n  \"joint_prims\": [\n    {\n      \"prim_path\": \"/World/RobotChain/Joints/ShoulderYaw\",\n      \"lower_limit_deg\": -90.0,\n      \"upper_limit_deg\": 90.0,\n      \"joint_valid\": true,\n      \"confidence\": \"high\",\n      \"reasoning\": \"Joint limits are within valid range for a shoulder joint.\"\n    },\n    {\n      \"prim_path\": \"/World/RobotChain/Joints/Elbow\",\n      \"lower_limit_deg\": -10.0,\n      \"upper_limit_deg\": 145.0,\n      \"joint_valid\": false,\n      \"confidence\": \"high\",\n      \"reasoning\": \"Original upper limit of 220\u00b0 exceeds 180\u00b0, violating the rule. Corrected to 145\u00b0.\"\n    },\n    {\n      \"prim_path\": \"/World/RobotChain/Joints/WristPitch\",\n      \"lower_limit_deg\": -80.0,\n      \"upper_limit_deg\": 80.0,\n      \"joint_valid\": true,\n      \"confidence\": \"high\",\n      \"reasoning\": \"Joint limits are within valid range for a wrist joint.\"\n    },\n    {\n      \"prim_path\": \"/World/RobotChain/Joints/WristRoll\",\n      \"lower_limit_deg\": -10.0,\n      \"upper_limit_deg\": 145.0,\n      \"joint_valid\": false,\n      \"confidence\": \"high\",\n      \"reasoning\": \"Original upper limit of 260\u00b0 exceeds 180\u00b0, violating the rule. Corrected to 145\u00b0.\"\n    }\n  ],\n  \"global_notes\": \"All geometric primitives have been assigned appropriate materials and physical properties based on visual cues and standard material densities. Joints have been validated against the specified rules, with corrections applied where necessary.\"\n}\n```"
+    },
+    {
+      "name": "bench_mass_materials",
+      "joint_metrics": {
+        "tp": 0,
+        "tn": 0,
+        "fp": 0,
+        "fn": 0,
+        "missed": 0,
+        "total": 0,
+        "precision": null,
+        "recall": null,
+        "accuracy": null,
+        "per_joint": []
+      },
+      "mass_metrics": {
+        "mape_pct": 0.1,
+        "n_prims": 4,
+        "n_missed": 0,
+        "best_prim": "ConcreteCube",
+        "best_ape": 0.0,
+        "worst_prim": "RubberSphere",
+        "worst_ape": 0.2,
+        "per_prim": [
+          {
+            "path": "/World/SteelCylinder",
+            "gt_mass_kg": 98.65,
+            "pred_mass_kg": 98.596,
+            "ape_pct": 0.1,
+            "gt_material": "steel",
+            "pred_material": "steel",
+            "confidence": "high",
+            "reasoning": "Silvery appearance and cylindrical shape indicate steel material."
+          },
+          {
+            "path": "/World/RubberSphere",
+            "gt_mass_kg": 2.57,
+            "pred_mass_kg": 2.576,
+            "ape_pct": 0.2,
+            "gt_material": "rubber",
+            "pred_material": "rubber",
+            "confidence": "high",
+            "reasoning": "Near-black color and spherical shape suggest rubber material."
+          },
+          {
+            "path": "/World/ConcreteCube",
+            "gt_mass_kg": 7.762,
+            "pred_mass_kg": 7.763,
+            "ape_pct": 0.0,
+            "gt_material": "concrete",
+            "pred_material": "concrete",
+            "confidence": "high",
+            "reasoning": "Flat grey color and cubic shape indicate concrete material."
+          },
+          {
+            "path": "/World/AlumCylinder",
+            "gt_mass_kg": 4.241,
+            "pred_mass_kg": 4.239,
+            "ape_pct": 0.0,
+            "gt_material": "aluminum",
+            "pred_material": "aluminum",
+            "confidence": "high",
+            "reasoning": "Lighter silver color and cylindrical shape suggest aluminum material."
+          }
+        ]
+      },
+      "chain_of_thought": "STEP 1 \u2014 REASONING:\n\nPrim /World/SteelCylinder: material is steel because its silvery appearance and cylindrical shape suggest a metallic structure. bbox [20.0,20.0,40.0] stage units \u00d7 0.01 m/unit = [0.20,0.20,0.40] metres. fill_factor=0.785. volume=0.20\u00d70.20\u00d70.40\u00d70.785 = 0.01256 m\u00b3. density=7850 kg/m\u00b3. mass\u224898.6 kg. Confidence:high because the material cues and dimensions align with typical steel properties.\n\nPrim /World/RubberSphere: material is rubber because its near-black color and spherical shape indicate a flexible, non-reflective surface. bbox [16.0,16.0,16.0] stage units \u00d7 0.01 m/unit = [0.16,0.16,0.16] metres. fill_factor=0.524. volume=0.16\u00d70.16\u00d70.16\u00d70.524 = 0.00216 m\u00b3. density=1200 kg/m\u00b3. mass\u22482.6 kg. Confidence:high because the material cues and dimensions match typical rubber properties.\n\nPrim /World/ConcreteCube: material is concrete because its flat grey color and cubic shape suggest a solid, architectural material. bbox [15.0,15.0,15.0] stage units \u00d7 0.01 m/unit = [0.15,0.15,0.15] metres. fill_factor=1.0. volume=0.15\u00d70.15\u00d70.15\u00d71.0 = 0.003375 m\u00b3. density=2300 kg/m\u00b3. mass\u22487.8 kg. Confidence:high because the material cues and dimensions align with typical concrete properties.\n\nPrim /World/AlumCylinder: material is aluminum because its lighter silver color and cylindrical shape suggest a lightweight metal. bbox [10.0,10.0,20.0] stage units \u00d7 0.01 m/unit = [0.10,0.10,0.20] metres. fill_factor=0.785. volume=0.10\u00d70.10\u00d70.20\u00d70.785 = 0.00157 m\u00b3. density=2700 kg/m\u00b3. mass\u22484.1 kg. Confidence:high because the material cues and dimensions match typical aluminum properties.\n\nNo joint prims were provided, so no joint reasoning is needed.\n\nSTEP 2 \u2014 JSON OUTPUT:\n\n```json\n{\n  \"geom_prims\": [\n    {\n      \"prim_path\": \"/World/SteelCylinder\",\n      \"material_type\": \"steel\",\n      \"mass_kg\": 98.6,\n      \"static_friction\": 0.45,\n      \"dynamic_friction\": 0.35,\n      \"restitution\": 0.1,\n      \"collision_approximation\": \"convexHull\",\n      \"is_rigid\": true,\n      \"confidence\": \"high\",\n      \"reasoning\": \"Silvery appearance and cylindrical shape indicate steel material.\"\n    },\n    {\n      \"prim_path\": \"/World/RubberSphere\",\n      \"material_type\": \"rubber\",\n      \"mass_kg\": 2.6,\n      \"static_friction\": 0.85,\n      \"dynamic_friction\": 0.7,\n      \"restitution\": 0.2,\n      \"collision_approximation\": \"convexHull\",\n      \"is_rigid\": true,\n      \"confidence\": \"high\",\n      \"reasoning\": \"Near-black color and spherical shape suggest rubber material.\"\n    },\n    {\n      \"prim_path\": \"/World/ConcreteCube\",\n      \"material_type\": \"concrete\",\n      \"mass_kg\": 7.8,\n      \"static_friction\": 0.6,\n      \"dynamic_friction\": 0.45,\n      \"restitution\": 0.15,\n      \"collision_approximation\": \"convexHull\",\n      \"is_rigid\": true,\n      \"confidence\": \"high\",\n      \"reasoning\": \"Flat grey color and cubic shape indicate concrete material.\"\n    },\n    {\n      \"prim_path\": \"/World/AlumCylinder\",\n      \"material_type\": \"aluminum\",\n      \"mass_kg\": 4.1,\n      \"static_friction\": 0.4,\n      \"dynamic_friction\": 0.3,\n      \"restitution\": 0.15,\n      \"collision_approximation\": \"convexHull\",\n      \"is_rigid\": true,\n      \"confidence\": \"high\",\n      \"reasoning\": \"Lighter silver color and cylindrical shape suggest aluminum material.\"\n    }\n  ],\n  \"joint_prims\": [],\n  \"global_notes\": \"All geometry prims have been assigned materials based on visual cues and physical properties. Masses and friction values are calculated using the provided density and fill factor data.\"\n}\n```"
+    },
+    {
+      "name": "bench_mixed",
+      "joint_metrics": {
+        "tp": 1,
+        "tn": 2,
+        "fp": 0,
+        "fn": 0,
+        "missed": 0,
+        "total": 3,
+        "precision": 1.0,
+        "recall": 1.0,
+        "accuracy": 1.0,
+        "per_joint": [
+          {
+            "path": "/World/Assembly/Joints/BaseRevolute",
+            "gt_lower": -45,
+            "gt_upper": 45,
+            "gt_violated": false,
+            "pred_violated": false,
+            "pred_lower": -45.0,
+            "pred_upper": 45.0,
+            "confidence": "high",
+            "reasoning": "Joint BaseRevolute: lower=-45.0\u00b0, upper=45.0\u00b0. The travel is 90.0\u00b0, which is within the body length along the axis. Conf",
+            "outcome": "TN"
+          },
+          {
+            "path": "/World/Assembly/Joints/ElbowRevolute",
+            "gt_lower": -10,
+            "gt_upper": 190,
+            "gt_violated": true,
+            "pred_violated": true,
+            "pred_lower": -10.0,
+            "pred_upper": 190.0,
+            "confidence": "high",
+            "reasoning": "Joint ElbowRevolute: lower=-10.0\u00b0, upper=190.0\u00b0. The travel is 200.0\u00b0, which exceeds the body length along the axis (12.",
+            "outcome": "TP"
+          },
+          {
+            "path": "/World/Assembly/Joints/WristRevolute",
+            "gt_lower": -70,
+            "gt_upper": 70,
+            "gt_violated": false,
+            "pred_violated": false,
+            "pred_lower": -70.0,
+            "pred_upper": 70.0,
+            "confidence": "high",
+            "reasoning": "Joint WristRevolute: lower=-70.0\u00b0, upper=70.0\u00b0. The travel is 140.0\u00b0, which is within the body length along the axis. Co",
+            "outcome": "TN"
+          }
+        ]
+      },
+      "mass_metrics": {
+        "mape_pct": 0.0,
+        "n_prims": 3,
+        "n_missed": 0,
+        "best_prim": "SteelFrame",
+        "best_ape": 0.0,
+        "worst_prim": "RubberPad",
+        "worst_ape": 0.0,
+        "per_prim": [
+          {
+            "path": "/World/Assembly/SteelFrame",
+            "gt_mass_kg": 15.33,
+            "pred_mass_kg": 15.332,
+            "ape_pct": 0.0,
+            "gt_material": "steel",
+            "pred_material": "steel",
+            "confidence": "high",
+            "reasoning": "The steel frame is a cube with a dark grey color, indicating steel material. Bbox [12.5,12.5,12.5] s"
+          },
+          {
+            "path": "/World/Assembly/AlumArm",
+            "gt_mass_kg": 12.21,
+            "pred_mass_kg": 12.208,
+            "ape_pct": 0.0,
+            "gt_material": "aluminum",
+            "pred_material": "aluminium",
+            "confidence": "high",
+            "reasoning": "The aluminium arm is a cylinder with a light silver color, indicating aluminium material. Bbox [12.0"
+          },
+          {
+            "path": "/World/Assembly/RubberPad",
+            "gt_mass_kg": 0.377,
+            "pred_mass_kg": 0.377,
+            "ape_pct": 0.0,
+            "gt_material": "rubber",
+            "pred_material": "rubber",
+            "confidence": "high",
+            "reasoning": "The rubber pad is a cylinder with a near-black color, indicating rubber material. Bbox [10.0,10.0,4."
+          }
+        ]
+      },
+      "chain_of_thought": "```json\n{\n  \"geom_prims\": [\n    {\n      \"prim_path\": \"/World/Assembly/SteelFrame\",\n      \"material_type\": \"steel\",\n      \"mass_kg\": 11000.0,\n      \"static_friction\": 0.5,\n      \"dynamic_friction\": 0.4,\n      \"restitution\": 0.3,\n      \"collision_approximation\": \"convexHull\",\n      \"is_rigid\": true,\n      \"confidence\": \"high\",\n      \"reasoning\": \"The steel frame is a cube with a dark grey color, indicating steel material. Bbox [12.5,12.5,12.5] stage units \u00d7 0.01 m/unit = [0.125,0.125,0.125] m. Volume = 0.125\u00b3 \u00d7 1.0 = 0.001953 m\u00b3. Density of steel is 7850 kg/m\u00b3. Mass \u2248 15.7 kg. Confidence: high because the cube's dimensions and material properties are consistent with steel.\"\n    },\n    {\n      \"prim_path\": \"/World/Assembly/AlumArm\",\n      \"material_type\": \"aluminium\",\n      \"mass_kg\": 1000.0,\n      \"static_friction\": 0.4,\n      \"dynamic_friction\": 0.3,\n      \"restitution\": 0.4,\n      \"collision_approximation\": \"convexHull\",\n      \"is_rigid\": true,\n      \"confidence\": \"high\",\n      \"reasoning\": \"The aluminium arm is a cylinder with a light silver color, indicating aluminium material. Bbox [12.0,12.0,40.0] stage units \u00d7 0.01 m/unit = [0.12,0.12,0.4] m. Volume = 0.12 \u00d7 0.12 \u00d7 0.4 \u00d7 0.785 = 0.00452 m\u00b3. Density of aluminium is 2700 kg/m\u00b3. Mass \u2248 12.2 kg. Confidence: high because the cylinder's dimensions and material properties are consistent with aluminium.\"\n    },\n    {\n      \"prim_path\": \"/World/Assembly/RubberPad\",\n      \"material_type\": \"rubber\",\n      \"mass_kg\": 120.0,\n      \"static_friction\": 0.8,\n      \"dynamic_friction\": 0.7,\n      \"restitution\": 0.1,\n      \"collision_approximation\": \"convexHull\",\n      \"is_rigid\": true,\n      \"confidence\": \"high\",\n      \"reasoning\": \"The rubber pad is a cylinder with a near-black color, indicating rubber material. Bbox [10.0,10.0,4.0] stage units \u00d7 0.01 m/unit = [0.1,0.1,0.04] m. Volume = 0.1 \u00d7 0.1 \u00d7 0.04 \u00d7 0.785 = 0.000314 m\u00b3. Density of rubber is 1200 kg/m\u00b3. Mass \u2248 0.377 kg. Confidence: high because the cylinder's dimensions and material properties are consistent with rubber.\"\n    }\n  ],\n  \"joint_prims\": [\n    {\n      \"prim_path\": \"/World/Assembly/Joints/BaseRevolute\",\n      \"lower_limit_deg\": -45.0,\n      \"upper_limit_deg\": 45.0,\n      \"joint_valid\": true,\n      \"confidence\": \"high\",\n      \"reasoning\": \"Joint BaseRevolute: lower=-45.0\u00b0, upper=45.0\u00b0. The travel is 90.0\u00b0, which is within the body length along the axis. Confidence: high.\"\n    },\n    {\n      \"prim_path\": \"/World/Assembly/Joints/ElbowRevolute\",\n      \"lower_limit_deg\": -10.0,\n      \"upper_limit_deg\": 190.0,\n      \"joint_valid\": true,\n      \"confidence\": \"high\",\n      \"reasoning\": \"Joint ElbowRevolute: lower=-10.0\u00b0, upper=190.0\u00b0. The travel is 200.0\u00b0, which exceeds the body length along the axis (12.5 stage units). VIOLATED. Corrected: lower=-10.0\u00b0, upper=145.0\u00b0. Confidence: high.\"\n    },\n    {\n      \"prim_path\": \"/World/Assembly/Joints/WristRevolute\",\n      \"lower_limit_deg\": -70.0,\n      \"upper_limit_deg\": 70.0,\n      \"joint_valid\": true,\n      \"confidence\": \"high\",\n      \"reasoning\": \"Joint WristRevolute: lower=-70.0\u00b0, upper=70.0\u00b0. The travel is 140.0\u00b0, which is within the body length along the axis. Confidence: high.\"\n    }\n  ],\n  \"global_notes\": \"The scene contains three geometric primitives: a steel frame, an aluminium arm, and a rubber pad. The steel frame is a cube with a mass of 11000.0 kg, the aluminium arm is a cylinder with a mass of 1000.0 kg, and the rubber pad is a cylinder with a mass of 120.0 kg. The joints include a base revolute joint, an elbow revolute joint, and a wrist revolute joint. The elbow revolute joint was VIOLATED because its travel exceeded the body length along the axis. The corrected limits are lower=-10.0\u00b0, upper=145.0\u00b0.\"\n}\n```"
+    },
+    {
+      "name": "bench_prismatic_limits",
+      "joint_metrics": {
+        "tp": 2,
+        "tn": 2,
+        "fp": 0,
+        "fn": 0,
+        "missed": 0,
+        "total": 4,
+        "precision": 1.0,
+        "recall": 1.0,
+        "accuracy": 1.0,
+        "per_joint": [
+          {
+            "path": "/World/Actuator/Joints/SliderTravel",
+            "gt_lower": -15,
+            "gt_upper": 15,
+            "gt_violated": false,
+            "pred_violated": false,
+            "pred_lower": -15.0,
+            "pred_upper": 15.0,
+            "confidence": "high",
+            "reasoning": "The prismatic joint for slider travel has a range of -15 to 15 stage units. The body length along the axis is 30.0 stage",
+            "outcome": "TN"
+          },
+          {
+            "path": "/World/Actuator/Joints/ActuatorStroke",
+            "gt_lower": 0,
+            "gt_upper": 180,
+            "gt_violated": true,
+            "pred_violated": true,
+            "pred_lower": 0.0,
+            "pred_upper": 180.0,
+            "confidence": "high",
+            "reasoning": "The prismatic joint for actuator stroke has a range of 0 to 180 stage units. The body length along the axis is 12.0 stag",
+            "outcome": "TP"
+          },
+          {
+            "path": "/World/Actuator/Joints/CarriageRetract",
+            "gt_lower": -10,
+            "gt_upper": 0,
+            "gt_violated": false,
+            "pred_violated": false,
+            "pred_lower": -10.0,
+            "pred_upper": 0.0,
+            "confidence": "high",
+            "reasoning": "The prismatic joint for carriage retract has a range of -10 to 0 stage units. The body length along the axis is 30.0 sta",
+            "outcome": "TN"
+          },
+          {
+            "path": "/World/Actuator/Joints/RodOverExtend",
+            "gt_lower": -80,
+            "gt_upper": 80,
+            "gt_violated": true,
+            "pred_violated": true,
+            "pred_lower": -80.0,
+            "pred_upper": 80.0,
+            "confidence": "high",
+            "reasoning": "The prismatic joint for rod overextend has a range of -80 to 80 stage units. The body length along the axis is 12.0 stag",
+            "outcome": "TP"
+          }
+        ]
+      },
+      "mass_metrics": {
+        "mape_pct": 63.5,
+        "n_prims": 3,
+        "n_missed": 0,
+        "best_prim": "SliderBase",
+        "best_ape": 0.0,
+        "worst_prim": "CarriageBlock",
+        "worst_ape": 190.5,
+        "per_prim": [
+          {
+            "path": "/World/Actuator/SliderBase",
+            "gt_mass_kg": 14.13,
+            "pred_mass_kg": 14.13,
+            "ape_pct": 0.0,
+            "gt_material": "steel",
+            "pred_material": "steel",
+            "confidence": "high",
+            "reasoning": "The slider base is a rectangular block with a metallic gray color, suggesting steel. Its dimensions "
+          },
+          {
+            "path": "/World/Actuator/CarriageBlock",
+            "gt_mass_kg": 4.67,
+            "pred_mass_kg": 13.565,
+            "ape_pct": 190.5,
+            "gt_material": "aluminum",
+            "pred_material": "steel",
+            "confidence": "high",
+            "reasoning": "The carriage block is a smaller cube with a metallic gray color, indicating steel. Its dimensions ar"
+          },
+          {
+            "path": "/World/Actuator/ActuatorRod",
+            "gt_mass_kg": 2.96,
+            "pred_mass_kg": 2.958,
+            "ape_pct": 0.1,
+            "gt_material": "steel",
+            "pred_material": "steel",
+            "confidence": "high",
+            "reasoning": "The actuator rod is a cylindrical shape with a metallic gray color, suggesting steel. Its dimensions"
+          }
+        ]
+      },
+      "chain_of_thought": "```json\n{\n  \"geom_prims\": [\n    {\n      \"prim_path\": \"/World/Actuator/SliderBase\",\n      \"material_type\": \"steel\",\n      \"mass_kg\": 23.0,\n      \"static_friction\": 0.4,\n      \"dynamic_friction\": 0.3,\n      \"restitution\": 0.1,\n      \"collision_approximation\": \"convexHull\",\n      \"is_rigid\": true,\n      \"confidence\": \"high\",\n      \"reasoning\": \"The slider base is a rectangular block with a metallic gray color, suggesting steel. Its dimensions are 30.0 x 4.0 x 15.0 stage units, which convert to 0.30 x 0.04 x 0.15 meters. With a fill factor of 1.0, the volume is 0.0018 m\u00b3. Using steel's density (7850 kg/m\u00b3), the mass is approximately 14.13 kg. The confidence is high due to the clear metallic appearance and typical industrial design.\"\n    },\n    {\n      \"prim_path\": \"/World/Actuator/CarriageBlock\",\n      \"material_type\": \"steel\",\n      \"mass_kg\": 1.2,\n      \"static_friction\": 0.4,\n      \"dynamic_friction\": 0.3,\n      \"restitution\": 0.1,\n      \"collision_approximation\": \"convexHull\",\n      \"is_rigid\": true,\n      \"confidence\": \"high\",\n      \"reasoning\": \"The carriage block is a smaller cube with a metallic gray color, indicating steel. Its dimensions are 12.0 x 12.0 x 12.0 stage units, which convert to 0.12 x 0.12 x 0.12 meters. With a fill factor of 1.0, the volume is 0.0001728 m\u00b3. Using steel's density, the mass is approximately 0.30 kg. The confidence is high due to the consistent metallic appearance and industrial context.\"\n    },\n    {\n      \"prim_path\": \"/World/Actuator/ActuatorRod\",\n      \"material_type\": \"steel\",\n      \"mass_kg\": 1.8,\n      \"static_friction\": 0.4,\n      \"dynamic_friction\": 0.3,\n      \"restitution\": 0.1,\n      \"collision_approximation\": \"convexHull\",\n      \"is_rigid\": true,\n      \"confidence\": \"high\",\n      \"reasoning\": \"The actuator rod is a cylindrical shape with a metallic gray color, suggesting steel. Its dimensions are 4.0 x 4.0 x 30.0 stage units, which convert to 0.04 x 0.04 x 0.30 meters. With a fill factor of 0.785, the volume is 0.000471 m\u00b3. Using steel's density, the mass is approximately 0.37 kg. The confidence is high due to the cylindrical shape and metallic appearance.\"\n    }\n  ],\n  \"joint_prims\": [\n    {\n      \"prim_path\": \"/World/Actuator/Joints/SliderTravel\",\n      \"lower_limit_deg\": -15.0,\n      \"upper_limit_deg\": 15.0,\n      \"joint_valid\": true,\n      \"confidence\": \"high\",\n      \"reasoning\": \"The prismatic joint for slider travel has a range of -15 to 15 stage units. The body length along the axis is 30.0 stage units. The travel range (30.0) matches the body length, so it is valid.\"\n    },\n    {\n      \"prim_path\": \"/World/Actuator/Joints/ActuatorStroke\",\n      \"lower_limit_deg\": 0.0,\n      \"upper_limit_deg\": 180.0,\n      \"joint_valid\": true,\n      \"confidence\": \"high\",\n      \"reasoning\": \"The prismatic joint for actuator stroke has a range of 0 to 180 stage units. The body length along the axis is 12.0 stage units. The travel range (180.0) exceeds the body length, so it is VIOLATED. The joint_valid is set to false.\"\n    },\n    {\n      \"prim_path\": \"/World/Actuator/Joints/CarriageRetract\",\n      \"lower_limit_deg\": -10.0,\n      \"upper_limit_deg\": 0.0,\n      \"joint_valid\": true,\n      \"confidence\": \"high\",\n      \"reasoning\": \"The prismatic joint for carriage retract has a range of -10 to 0 stage units. The body length along the axis is 30.0 stage units. The travel range (10.0) is within the body length, so it is valid.\"\n    },\n    {\n      \"prim_path\": \"/World/Actuator/Joints/RodOverExtend\",\n      \"lower_limit_deg\": -80.0,\n      \"upper_limit_deg\": 80.0,\n      \"joint_valid\": true,\n      \"confidence\": \"high\",\n      \"reasoning\": \"The prismatic joint for rod overextend has a range of -80 to 80 stage units. The body length along the axis is 12.0 stage units. The travel range (160.0) exceeds the body length, so it is VIOLATED. The joint_valid is set to false.\"\n    }\n  ],\n  \"global_notes\": \"The scene consists of three metallic components (steel) with appropriate masses calculated based on their dimensions and density. The joints include valid and VIOLATED prismatic joints, with the latter requiring correction.\"\n}\n```"
+    }
+  ]
+}

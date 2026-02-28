@@ -1,0 +1,512 @@
+"""
+Cosmos Reason 2 inference client.
+
+Sends 4 renders + scene graph JSON to the model and returns a structured
+PhysicsAnalysis with per-prim physics properties.
+"""
+from __future__ import annotations
+
+import json
+import re
+from dataclasses import dataclass, field
+from pathlib import Path
+from typing import Literal, Optional
+
+import torch
+from PIL import Image
+from pydantic import BaseModel, Field, field_validator
+from transformers import AutoProcessor
+from qwen_vl_utils import process_vision_info
+
+
+# ---------------------------------------------------------------------------
+# Pydantic models for structured output
+# ---------------------------------------------------------------------------
+
+CollisionApprox = Literal["convexHull", "boundingBox", "meshSimplification", "none"]
+
+
+Confidence = Literal["high", "medium", "low"]
+
+
+class GeomPhysics(BaseModel):
+    prim_path: str
+    material_type: str = Field(description="e.g. 'steel', 'rubber', 'plastic', 'wood', 'glass', 'concrete'")
+    mass_kg: float = Field(ge=0.0)
+    static_friction: float = Field(ge=0.0, le=2.0)
+    dynamic_friction: float = Field(ge=0.0, le=2.0)
+    restitution: float = Field(ge=0.0, le=1.0)
+    collision_approximation: CollisionApprox
+    is_rigid: bool
+    confidence: Confidence = Field(
+        description=(
+            "high = clear visual evidence + unambiguous material; "
+            "medium = reasonable inference but some uncertainty; "
+            "low = ambiguous visuals, occluded, or atypical material"
+        )
+    )
+    reasoning: str
+
+    @field_validator("dynamic_friction")
+    @classmethod
+    def dyn_le_static(cls, v, info):
+        static = info.data.get("static_friction", v)
+        if v > static + 0.05:
+            return static  # clamp silently
+        return v
+
+
+class JointPhysics(BaseModel):
+    prim_path: str
+    lower_limit_deg: Optional[float] = None
+    upper_limit_deg: Optional[float] = None
+    joint_valid: bool
+    confidence: Confidence = Field(
+        description=(
+            "high = limit clearly impossible or clearly valid; "
+            "medium = limit plausible but context-dependent; "
+            "low = joint type ambiguous"
+        )
+    )
+    reasoning: str
+
+
+class PhysicsAnalysis(BaseModel):
+    geom_prims: list[GeomPhysics] = Field(default_factory=list)
+    joint_prims: list[JointPhysics] = Field(default_factory=list)
+    global_notes: str = ""
+
+
+# ---------------------------------------------------------------------------
+# Prompt builder
+# ---------------------------------------------------------------------------
+
+SYSTEM_PROMPT = (
+    "You are a physics simulation expert preparing USD scenes for NVIDIA Isaac Sim. "
+    "You have deep knowledge of material properties, mechanical engineering, and robotics simulation. "
+    "Always reason carefully about visual evidence before assigning numeric values."
+)
+
+MATERIAL_REFERENCE = """
+MATERIAL CUES:
+- Silvery/grey = metal. Steel=darker grey (frames, vessels, heavy structural). Aluminium=lighter silver (robot arms, lightweight parts).
+  Grey objects in ROBOT ARM context → metal (steel or aluminium), NOT concrete.
+- Near-black = rubber | Bright saturated = plastic or painted metal
+- Flat grey + architectural context (floors, walls, slabs) = concrete
+- Translucent = glass
+
+| Material     | kg/m³ | Static μ  | Dynamic μ | Rest |
+|--------------|-------|-----------|-----------|------|
+| Steel/Iron   | 7850  | 0.40-0.60 | 0.30-0.50 | 0.30 |
+| Aluminium    | 2700  | 0.35-0.55 | 0.25-0.45 | 0.30 |
+| Hard Plastic | 1050  | 0.35-0.50 | 0.25-0.40 | 0.40 |
+| Rubber       | 1200  | 0.70-1.10 | 0.60-0.90 | 0.05 |
+| Wood         | 700   | 0.40-0.55 | 0.30-0.45 | 0.30 |
+| Glass        | 2500  | 0.40-0.50 | 0.30-0.40 | 0.50 |
+| Concrete     | 2300  | 0.55-0.70 | 0.45-0.60 | 0.10 |
+| Carbon Fiber | 1600  | 0.25-0.40 | 0.20-0.35 | 0.30 |
+
+MASS CALCULATION — follow exactly:
+  Step 1: Convert bbox to metres: xm = bbox_x × mpu, ym = bbox_y × mpu, zm = bbox_z × mpu
+          (mpu = meters_per_unit from Stage metadata, e.g. 0.01 means 1 stage unit = 1 cm)
+  Step 2: volume_m³ = xm × ym × zm × fill_factor
+  Step 3: mass_kg = volume_m³ × density_kg_m3
+  WORKED EXAMPLE (mpu=0.01):
+    bbox [40,40,10]: xm=40×0.01=0.40, ym=40×0.01=0.40, zm=10×0.01=0.10 m  ← NOT 0.01!
+    fill_factor=0.785 (cylinder) → vol = 0.40×0.40×0.10×0.785 = 0.01256 m³
+    density=7850 (steel) → mass = 0.01256×7850 = 98.6 kg
+
+JOINT RULES:
+  Revolute (degrees):
+    Human elbow: lower=-10°, upper=145° (NEVER above 160°). Wrist: lower=-70°, upper=70°.
+    Industrial robot: lower=-180°, upper=180°.
+    If upper_limit > 180° for a human-like joint → VIOLATED, set joint_valid=false, cap at 145°.
+  Prismatic (stage units): RULE: travel = upper_limit − lower_limit.
+    Each joint has body_length_along_axis pre-computed in the scene graph.
+    If travel > body_length_along_axis → VIOLATED. Set joint_valid=false.
+    Example: body_length=30, travel=180 → VIOLATED. body_length=30, travel=30 → valid.
+    (lower_limit_deg / upper_limit_deg carry stage-unit values for prismatic joints)
+"""
+
+
+def _build_prompt(scene_graph: dict) -> str:
+    import copy
+    scene_graph = copy.deepcopy(scene_graph)
+
+    # Replace bbox {min, max, size} with just {size} so the model uses the
+    # correct side lengths and not the world-space corner coordinates.
+    for p in scene_graph.get("geom_prims", []):
+        if isinstance(p.get("bbox"), dict):
+            p["bbox"] = {"size": p["bbox"]["size"]}
+
+    # Strip body-path and body_length from non-prismatic joints to prevent
+    # the model from applying the prismatic travel-check to revolute joints.
+    for j in scene_graph.get("joint_prims", []):
+        if "Prismatic" not in j.get("type_name", ""):
+            for f in ("body0_path", "body1_path", "body_length_along_axis"):
+                j.pop(f, None)
+
+    geom_paths = [p["path"] for p in scene_graph.get("geom_prims", [])]
+    joint_paths = [p["path"] for p in scene_graph.get("joint_prims", [])]
+    meta = scene_graph.get("stage_metadata", {})
+
+    return f"""
+{MATERIAL_REFERENCE}
+
+4 renders: top / front / right / isometric.
+Stage: up_axis={meta.get('up_axis', 'Y')}, meters_per_unit={meta.get('meters_per_unit', 1.0)}
+
+Scene graph:
+{json.dumps(scene_graph, separators=(',', ':'))}
+
+Geometry prims: {geom_paths}
+Joint prims:    {joint_paths}
+
+INSTRUCTIONS — follow this ORDER exactly:
+
+STEP 1 — REASONING (write this out FULLY before any JSON):
+For each geometry prim write ONE line:
+  "Prim <path>: material=<X> because <1-2 word visual cue>. Confidence:<level>."
+  (Mass is computed automatically from bbox — you do NOT need to calculate it.)
+For each joint prim write 2-3 sentences (full reasoning required for joint validation):
+  Revolute: "Joint <name>: lower=<X>°, upper=<Y>°. <reason why valid/invalid>.
+   Corrected: lower=<A>°, upper=<B>°. Confidence:<level>."
+  Prismatic: "Joint <name>: lower=<X>, upper=<Y>, body_length_along_axis=<B>.
+   travel=upper−lower=<T>. <T> vs <B>: <exceeds→VIOLATED, joint_valid=false|fits→valid, joint_valid=true>.
+   Corrected if needed: lower=<A>, upper=<C>. Confidence:<level>."
+
+IMPORTANT JSON RULE: If a joint was VIOLATED in step 1, set joint_valid=false in STEP 2 even if you output corrected limits. joint_valid=false means "original limits were wrong".
+
+STEP 2 — JSON OUTPUT (after ALL step 1 reasoning above):
+
+```json
+{{
+  "geom_prims": [
+    {{
+      "prim_path": "<exact path>",
+      "material_type": "<name>",
+      "mass_kg": 0.0,
+      "static_friction": 0.0,
+      "dynamic_friction": 0.0,
+      "restitution": 0.0,
+      "collision_approximation": "convexHull",
+      "is_rigid": true,
+      "confidence": "high",
+      "reasoning": "<one sentence>"
+    }}
+  ],
+  "joint_prims": [
+    {{
+      "prim_path": "<exact path>",
+      "lower_limit_deg": null,
+      "upper_limit_deg": null,
+      "joint_valid": true,
+      "confidence": "high",
+      "reasoning": "<one sentence>"
+    }}
+  ],
+  "global_notes": "<any overall observations>"
+}}
+```
+""".strip()
+
+
+# ---------------------------------------------------------------------------
+# Model loader (singleton to avoid reloading across calls)
+# ---------------------------------------------------------------------------
+
+_model_cache: dict = {}
+
+
+def _load_model(model_id: str, quantize: bool = False):
+    cache_key = (model_id, quantize)
+    if cache_key in _model_cache:
+        return _model_cache[cache_key]
+
+    from transformers import AutoModelForImageTextToText, BitsAndBytesConfig
+    quant_label = "4-bit NF4" if quantize else "bfloat16"
+    print(f"[cosmos_client] Loading model: {model_id} ({quant_label}) ...")
+
+    kwargs: dict = {"device_map": "auto", "trust_remote_code": True}
+    if quantize:
+        kwargs["quantization_config"] = BitsAndBytesConfig(
+            load_in_4bit=True,
+            bnb_4bit_compute_dtype=torch.bfloat16,
+            bnb_4bit_quant_type="nf4",
+        )
+    else:
+        kwargs["torch_dtype"] = torch.bfloat16
+
+    model = AutoModelForImageTextToText.from_pretrained(model_id, **kwargs)
+    model.eval()
+    processor = AutoProcessor.from_pretrained(model_id, trust_remote_code=True)
+    _model_cache[cache_key] = (model, processor)
+    print(f"[cosmos_client] Model loaded on: {next(model.parameters()).device}")
+    return model, processor
+
+
+# ---------------------------------------------------------------------------
+# Inference
+# ---------------------------------------------------------------------------
+
+def _extract_json(text: str) -> dict:
+    """Pull the first JSON code block out of model output.
+
+    Falls back to json_repair for malformed JSON (missing commas, truncation, etc.).
+    """
+    import json_repair
+
+    def _try_parse(s: str) -> dict | None:
+        try:
+            return json.loads(s)
+        except json.JSONDecodeError:
+            try:
+                result = json_repair.repair_json(s, return_objects=True)
+                if isinstance(result, dict):
+                    return result
+            except Exception:
+                pass
+        return None
+
+    # Try ```json ... ```
+    m = re.search(r"```json\s*(.*?)\s*```", text, re.DOTALL)
+    if m:
+        parsed = _try_parse(m.group(1))
+        if parsed is not None:
+            return parsed
+
+    # Try raw { ... }
+    m = re.search(r"(\{.*\})", text, re.DOTALL)
+    if m:
+        parsed = _try_parse(m.group(1))
+        if parsed is not None:
+            return parsed
+
+    raise ValueError("No JSON block found in model output")
+
+
+def _fix_joint_validity(raw: dict, full_response: str = "") -> dict:
+    """Override joint_valid=True when the model's JSON reasoning says VIOLATED.
+
+    The model occasionally writes correct violation reasoning in STEP 1 but then
+    outputs corrected limits in STEP 2 JSON and marks them valid.  Only the JSON
+    reasoning field is checked (not the full chain-of-thought) to avoid false
+    positives from adjacent joints' text bleeding into the window.
+    """
+    for j in raw.get("joint_prims", []):
+        if j.get("joint_valid", True):
+            # Only check the per-joint reasoning field in the JSON output
+            if "VIOLATED" in j.get("reasoning", "").upper():
+                j["joint_valid"] = False
+    return raw
+
+
+# ---------------------------------------------------------------------------
+# Deterministic physics post-processing
+# ---------------------------------------------------------------------------
+
+# Density table (kg/m³) keyed by lowercase material name fragments.
+_DENSITY_BY_MATERIAL: dict[str, float] = {
+    "steel": 7850.0,
+    "iron": 7850.0,
+    "stainless": 7850.0,
+    "aluminum": 2700.0,
+    "aluminium": 2700.0,
+    "alum": 2700.0,
+    "plastic": 1050.0,
+    "hard plastic": 1050.0,
+    "rubber": 1200.0,
+    "wood": 700.0,
+    "glass": 2500.0,
+    "concrete": 2300.0,
+    "carbon fiber": 1600.0,
+    "carbon": 1600.0,
+}
+
+
+def _lookup_density(material_type: str) -> Optional[float]:
+    mat = material_type.lower().strip()
+    for key, dens in _DENSITY_BY_MATERIAL.items():
+        if key in mat:
+            return dens
+    return None
+
+
+def _apply_mass_correction(raw: dict, scene_graph: dict) -> dict:
+    """Recompute mass_kg from bbox × fill_factor × density.
+
+    The model's material classification (visual reasoning) is preserved;
+    only the arithmetic is re-done deterministically so floating-point
+    mistakes in the chain-of-thought don't corrupt the final value.
+    Skips prims where we can't find bbox or density.
+    """
+    mpu = scene_graph.get("stage_metadata", {}).get("meters_per_unit", 1.0)
+    geom_by_path = {p["path"]: p for p in scene_graph.get("geom_prims", [])}
+
+    for gp in raw.get("geom_prims", []):
+        path = gp.get("prim_path", "")
+        sg_prim = geom_by_path.get(path)
+        if sg_prim is None:
+            continue
+        bbox = sg_prim.get("bbox")
+        if not bbox:
+            continue
+        size = bbox.get("size") if isinstance(bbox, dict) else None
+        if not size or len(size) < 3:
+            continue
+        fill = sg_prim.get("fill_factor", 1.0) or 1.0
+        density = _lookup_density(gp.get("material_type", ""))
+        if density is None:
+            continue
+        xm, ym, zm = [v * mpu for v in size]
+        vol = xm * ym * zm * fill
+        gp["mass_kg"] = round(vol * density, 3)
+
+    return raw
+
+
+def _apply_prismatic_rules(raw: dict, scene_graph: dict) -> dict:
+    """Deterministically enforce the prismatic travel rule.
+
+    For each Prismatic joint: if travel = upper − lower > body_length_along_axis
+    → override joint_valid=False, regardless of what the model said.
+    The model's limits (lower/upper) are taken from the ORIGINAL scene graph
+    so that corrected-limit outputs don't mask the original violation.
+    """
+    joint_by_path = {j["path"]: j for j in scene_graph.get("joint_prims", [])}
+
+    for jp in raw.get("joint_prims", []):
+        path = jp.get("prim_path", "")
+        sg_joint = joint_by_path.get(path)
+        if sg_joint is None:
+            continue
+        if "Prismatic" not in sg_joint.get("type_name", ""):
+            continue
+        body_len = sg_joint.get("body_length_along_axis")
+        if body_len is None:
+            continue
+        # Use ORIGINAL scene-graph limits, not model's (possibly corrected) limits
+        orig_lower = sg_joint.get("lower_limit")
+        orig_upper = sg_joint.get("upper_limit")
+        if orig_lower is None or orig_upper is None:
+            continue
+        # Skip joints whose limits are non-finite (cleared to ±inf) — cannot
+        # evaluate travel vs body_length when limits are unconstrained.
+        import math
+        if not math.isfinite(orig_lower) or not math.isfinite(orig_upper):
+            continue
+        travel = orig_upper - orig_lower
+        if travel > body_len:
+            jp["joint_valid"] = False
+
+    return raw
+
+
+def _fix_cleared_joint_validity(raw: dict, scene_graph: dict) -> dict:
+    """Override joint_valid=False → True for joints whose limits were cleared
+    (i.e., original limits are ±inf in the stripped USD).
+
+    When a joint's limits are cleared, it is impossible to determine whether
+    original limits were violated, so we conservatively assume valid.
+    This prevents false positives on Menagerie robots where limits are cleared
+    and the model misinterprets ±inf as "unlimited travel = violated".
+    """
+    import math
+    joint_by_path = {j["path"]: j for j in scene_graph.get("joint_prims", [])}
+    for jp in raw.get("joint_prims", []):
+        if jp.get("joint_valid", True):
+            continue   # already valid, nothing to fix
+        path = jp.get("prim_path", "")
+        sg_joint = joint_by_path.get(path)
+        if sg_joint is None:
+            continue
+        lo = sg_joint.get("lower_limit")
+        hi = sg_joint.get("upper_limit")
+        # If limits are non-finite (cleared to ±inf), reset to valid
+        if (lo is not None and hi is not None and
+                (not math.isfinite(lo) or not math.isfinite(hi))):
+            jp["joint_valid"] = True
+    return raw
+
+
+def analyze_scene(
+    render_paths: list[str],
+    scene_graph: dict,
+    model_id: str = "nvidia/Cosmos-Reason2-8B",
+    max_new_tokens: int = 16384,
+    temperature: float = 0.1,
+    quantize: bool = False,
+) -> tuple[PhysicsAnalysis, str]:
+    """
+    Run Cosmos Reason 2 on 4 scene renders + scene graph.
+
+    Args:
+      quantize: If True, load model in 4-bit NF4 (requires bitsandbytes).
+                Reduces VRAM from ~16 GB to ~4 GB; suitable for <=8 GB GPUs.
+
+    Returns:
+      (PhysicsAnalysis, chain_of_thought_str)
+    """
+    assert len(render_paths) == 4, "Expected exactly 4 render paths"
+    model, processor = _load_model(model_id, quantize=quantize)
+
+    # Remove FixedJoints — they have no limits and can never be violated.
+    # Filtering reduces output length for complex multi-joint robots.
+    sg_filtered = dict(scene_graph)
+    sg_filtered["joint_prims"] = [
+        j for j in scene_graph.get("joint_prims", [])
+        if "Fixed" not in j.get("type_name", "")
+    ]
+
+    prompt = _build_prompt(sg_filtered)
+
+    # Build multimodal message
+    content = [
+        {"type": "image", "image": Image.open(p).convert("RGB")}
+        for p in render_paths
+    ]
+    content.append({"type": "text", "text": prompt})
+
+    messages = [
+        {"role": "system", "content": SYSTEM_PROMPT},
+        {"role": "user",   "content": content},
+    ]
+
+    # Apply chat template
+    text = processor.apply_chat_template(
+        messages, tokenize=False, add_generation_prompt=True
+    )
+    image_inputs, video_inputs = process_vision_info(messages)
+
+    inputs = processor(
+        text=[text],
+        images=image_inputs,
+        videos=video_inputs,
+        padding=True,
+        return_tensors="pt",
+    ).to(model.device)
+
+    with torch.no_grad():
+        out_ids = model.generate(
+            **inputs,
+            max_new_tokens=max_new_tokens,
+            temperature=temperature,
+            do_sample=temperature > 0,
+        )
+
+    trimmed = out_ids[:, inputs.input_ids.shape[1]:]
+    response = processor.batch_decode(trimmed, skip_special_tokens=True)[0]
+
+    try:
+        raw = _extract_json(response)
+    except (ValueError, Exception) as e:
+        print(f"[cosmos_client] JSON extraction failed ({e}); returning empty analysis")
+        raw = {"geom_prims": [], "joint_prims": [], "global_notes": f"Parse error: {e}"}
+
+    raw = _fix_joint_validity(raw, full_response=response)
+    raw = _fix_cleared_joint_validity(raw, sg_filtered)
+    raw = _apply_mass_correction(raw, scene_graph)
+    raw = _apply_prismatic_rules(raw, scene_graph)
+    analysis = PhysicsAnalysis(**raw)
+
+    return analysis, response

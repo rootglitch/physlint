@@ -1,0 +1,154 @@
+#usda 1.0
+(
+    defaultPrim = "World"
+    metersPerUnit = 0.01
+    upAxis = "Y"
+)
+
+def Xform "World"
+{
+    def "Mats"
+    {
+        def Material "Steel"
+        {
+            token outputs:surface.connect = </World/Mats/Steel/Shader.outputs:surface>
+
+            def Shader "Shader"
+            {
+                uniform token info:id = "UsdPreviewSurface"
+                color3f inputs:diffuseColor = (0.65, 0.67, 0.7)
+                float inputs:metallic = 0
+                float inputs:roughness = 0.4
+                token outputs:surface
+            }
+        }
+
+        def Material "Alum"
+        {
+            token outputs:surface.connect = </World/Mats/Alum/Shader.outputs:surface>
+
+            def Shader "Shader"
+            {
+                uniform token info:id = "UsdPreviewSurface"
+                color3f inputs:diffuseColor = (0.8, 0.83, 0.87)
+                float inputs:metallic = 0
+                float inputs:roughness = 0.35
+                token outputs:surface
+            }
+        }
+
+        def Material "Concrete"
+        {
+            token outputs:surface.connect = </World/Mats/Concrete/Shader.outputs:surface>
+
+            def Shader "Shader"
+            {
+                uniform token info:id = "UsdPreviewSurface"
+                color3f inputs:diffuseColor = (0.55, 0.53, 0.5)
+                float inputs:metallic = 0
+                float inputs:roughness = 0.9
+                token outputs:surface
+            }
+        }
+    }
+
+    def "Crane"
+    {
+        def Cube "CraneBase" (
+            prepend apiSchemas = ["MaterialBindingAPI"]
+        )
+        {
+            rel material:binding = </World/Mats/Steel>
+            double size = 1
+            double3 xformOp:scale = (40, 6, 40)
+            double3 xformOp:translate = (0, 3, 0)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:scale"]
+        }
+
+        def Cylinder "CraneMast" (
+            prepend apiSchemas = ["MaterialBindingAPI"]
+        )
+        {
+            double height = 80
+            rel material:binding = </World/Mats/Steel>
+            double radius = 5
+            double3 xformOp:scale = (1, 1, 1)
+            double3 xformOp:translate = (0, 46, 0)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:scale"]
+        }
+
+        def Cube "CraneBoom" (
+            prepend apiSchemas = ["MaterialBindingAPI"]
+        )
+        {
+            rel material:binding = </World/Mats/Alum>
+            double size = 1
+            double3 xformOp:scale = (60, 6, 6)
+            double3 xformOp:translate = (30, 89, 0)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:scale"]
+        }
+
+        def Cube "CounterWeight" (
+            prepend apiSchemas = ["MaterialBindingAPI"]
+        )
+        {
+            rel material:binding = </World/Mats/Concrete>
+            double size = 1
+            double3 xformOp:scale = (15, 15, 15)
+            double3 xformOp:translate = (-20, 89, 0)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:scale"]
+        }
+
+        def Cylinder "HookRod" (
+            prepend apiSchemas = ["MaterialBindingAPI"]
+        )
+        {
+            double height = 80
+            rel material:binding = </World/Mats/Steel>
+            double radius = 2
+            double3 xformOp:scale = (1, 1, 1)
+            double3 xformOp:translate = (50, 49, 0)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:scale"]
+        }
+
+        def "Joints"
+        {
+            def PhysicsRevoluteJoint "SlewRing"
+            {
+                uniform token physics:axis = "Z"
+                rel physics:body0 = </World/Crane/CraneBase>
+                rel physics:body1 = </World/Crane/CraneMast>
+                float physics:lowerLimit = -180
+                float physics:upperLimit = 180
+            }
+
+            def PhysicsRevoluteJoint "BoomLift"
+            {
+                uniform token physics:axis = "Z"
+                rel physics:body0 = </World/Crane/CraneMast>
+                rel physics:body1 = </World/Crane/CraneBoom>
+                float physics:lowerLimit = -5
+                float physics:upperLimit = 55
+            }
+
+            def PhysicsRevoluteJoint "JibSwing"
+            {
+                uniform token physics:axis = "Z"
+                rel physics:body0 = </World/Crane/CraneBoom>
+                rel physics:body1 = </World/Crane/CounterWeight>
+                float physics:lowerLimit = -10
+                float physics:upperLimit = 195
+            }
+
+            def PhysicsPrismaticJoint "HookTravel"
+            {
+                uniform token physics:axis = "Y"
+                rel physics:body0 = </World/Crane/CraneMast>
+                rel physics:body1 = </World/Crane/HookRod>
+                float physics:lowerLimit = 0
+                float physics:upperLimit = 250
+            }
+        }
+    }
+}
+

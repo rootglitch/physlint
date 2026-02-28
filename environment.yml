@@ -1,0 +1,19 @@
+name: physint
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - python=3.11
+  - pip
+  - pip:
+    - usd-core>=24.11
+    - transformers>=4.49.0
+    - accelerate>=1.0.0
+    - qwen-vl-utils>=0.0.10
+    - Pillow>=10.0
+    - pydantic>=2.0
+    - rich>=13.0
+    - typer>=0.12
+    - numpy>=1.26
+    - bitsandbytes>=0.46.1
+    - pytest>=8.0

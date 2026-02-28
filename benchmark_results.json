@@ -1,0 +1,1727 @@
+{
+  "summary": {
+    "model": "nvidia/Cosmos-Reason2-8B",
+    "joint_detection": {
+      "tp": 24,
+      "tn": 26,
+      "fp": 3,
+      "fn": 0,
+      "precision": 0.889,
+      "recall": 1.0,
+      "accuracy": 0.943
+    },
+    "mass_estimation": {
+      "mape_pct": 76.9,
+      "n_prims": 68
+    }
+  },
+  "scenes": [
+    {
+      "name": "bench_revolute_limits",
+      "joint_metrics": {
+        "tp": 2,
+        "tn": 2,
+        "fp": 0,
+        "fn": 0,
+        "missed": 0,
+        "total": 4,
+        "precision": 1.0,
+        "recall": 1.0,
+        "accuracy": 1.0,
+        "per_joint": [
+          {
+            "path": "/World/RobotChain/Joints/ShoulderYaw",
+            "gt_lower": -90,
+            "gt_upper": 90,
+            "gt_violated": false,
+            "pred_violated": false,
+            "pred_lower": -90.0,
+            "pred_upper": 90.0,
+            "confidence": "high",
+            "reasoning": "Human-like joint with lower=-90\u00b0 and upper=90\u00b0 is within safe range. No violation detected.",
+            "outcome": "TN"
+          },
+          {
+            "path": "/World/RobotChain/Joints/Elbow",
+            "gt_lower": -10,
+            "gt_upper": 220,
+            "gt_violated": true,
+            "pred_violated": true,
+            "pred_lower": -10.0,
+            "pred_upper": 145.0,
+            "confidence": "high",
+            "reasoning": "Upper limit exceeds 180\u00b0, violating human joint constraints. Corrected to upper=145\u00b0.",
+            "outcome": "TP"
+          },
+          {
+            "path": "/World/RobotChain/Joints/WristPitch",
+            "gt_lower": -80,
+            "gt_upper": 80,
+            "gt_violated": false,
+            "pred_violated": false,
+            "pred_lower": -80.0,
+            "pred_upper": 80.0,
+            "confidence": "high",
+            "reasoning": "Within safe range for human wrist. No violation.",
+            "outcome": "TN"
+          },
+          {
+            "path": "/World/RobotChain/Joints/WristRoll",
+            "gt_lower": -10,
+            "gt_upper": 260,
+            "gt_violated": true,
+            "pred_violated": true,
+            "pred_lower": -10.0,
+            "pred_upper": 145.0,
+            "confidence": "high",
+            "reasoning": "Upper limit exceeds 180\u00b0, violating human joint constraints. Corrected to upper=145\u00b0.",
+            "outcome": "TP"
+          }
+        ]
+      },
+      "mass_metrics": {
+        "mape_pct": 0.1,
+        "n_prims": 5,
+        "n_missed": 0,
+        "best_prim": "Link1",
+        "best_ape": 0.0,
+        "worst_prim": "Link3",
+        "worst_ape": 0.3,
+        "per_prim": [
+          {
+            "path": "/World/RobotChain/Base",
+            "gt_mass_kg": 98.65,
+            "pred_mass_kg": 98.596,
+            "ape_pct": 0.1,
+            "gt_material": "steel",
+            "pred_material": "steel",
+            "confidence": "high",
+            "reasoning": "dark grey cylinder with flat top."
+          },
+          {
+            "path": "/World/RobotChain/Link1",
+            "gt_mass_kg": 6.36,
+            "pred_mass_kg": 6.359,
+            "ape_pct": 0.0,
+            "gt_material": "aluminum",
+            "pred_material": "aluminium",
+            "confidence": "high",
+            "reasoning": "light grey cylinder."
+          },
+          {
+            "path": "/World/RobotChain/Link2",
+            "gt_mass_kg": 3.39,
+            "pred_mass_kg": 3.391,
+            "ape_pct": 0.0,
+            "gt_material": "aluminum",
+            "pred_material": "aluminium",
+            "confidence": "high",
+            "reasoning": "light grey cylinder."
+          },
+          {
+            "path": "/World/RobotChain/Link3",
+            "gt_mass_kg": 1.53,
+            "pred_mass_kg": 1.526,
+            "ape_pct": 0.3,
+            "gt_material": "aluminum",
+            "pred_material": "aluminium",
+            "confidence": "high",
+            "reasoning": "light grey cylinder."
+          },
+          {
+            "path": "/World/RobotChain/Gripper",
+            "gt_mass_kg": 0.628,
+            "pred_mass_kg": 0.629,
+            "ape_pct": 0.2,
+            "gt_material": "rubber",
+            "pred_material": "rubber",
+            "confidence": "high",
+            "reasoning": "near-black sphere."
+          }
+        ]
+      },
+      "chain_of_thought": "STEP 1 \u2014 REASONING\n\nFor each geometry prim write ONE line:\n  \"Prim <path>: material=<X> because <1-2 word visual cue>. Confidence:<level>.\"\n  (Mass is computed automatically from bbox \u2014 you do NOT need to calculate it.)\n\nFor each joint prim write 2-3 sentences (full reasoning required for joint validation):\n  Revolute: \"Joint <name>: lower=<X>\u00b0, upper=<Y>\u00b0. <reason why valid/invalid>.\n   Corrected: lower=<A>\u00b0, upper=<B>\u00b0. Confidence:<level>.\"\n  Prismatic: \"Joint <name>: lower=<X>, upper=<Y>, body_length_along_axis=<B>.\n   travel=upper\u2212lower=<T>. <T> vs <B>: <exceeds\u2192VIOLATED, joint_valid=false|fits\u2192valid, joint_valid=true>.\n   Corrected if needed: lower=<A>, upper=<C>. Confidence:<level>.\"\n\n\u2014\n\nPrim /World/RobotChain/Base: material=steel because dark grey cylinder with flat top. Confidence:high.\nPrim /World/RobotChain/Link1: material=aluminium because light grey cylinder. Confidence:high.\nPrim /World/RobotChain/Link2: material=aluminium because light grey cylinder. Confidence:high.\nPrim /World/RobotChain/Link3: material=aluminium because light grey cylinder. Confidence:high.\nPrim /World/RobotChain/Gripper: material=rubber because near-black sphere. Confidence:high.\n\nJoint /World/RobotChain/Joints/ShoulderYaw: lower=-90.0\u00b0, upper=90.0\u00b0. Human-like joint with lower=-90\u00b0 and upper=90\u00b0 is within safe range. No violation detected. Confidence:high.\nJoint /World/RobotChain/Joints/Elbow: lower=-10.0\u00b0, upper=220.0\u00b0. Upper limit exceeds 180\u00b0, violating human joint constraints. Corrected to upper=145\u00b0. Confidence:high.\nJoint /World/RobotChain/Joints/WristPitch: lower=-80.0\u00b0, upper=80.0\u00b0. Within safe range for human wrist. No violation. Confidence:high.\nJoint /World/RobotChain/Joints/WristRoll: lower=-10.0\u00b0, upper=260.0\u00b0. Upper limit exceeds 180\u00b0, violating human joint constraints. Corrected to upper=145\u00b0. Confidence:high.\n\n\u2014\n\nSTEP 2 \u2014 JSON OUTPUT\n\n```json\n{\n  \"geom_prims\": [\n    {\n      \"prim_path\": \"/World/RobotChain/Base\",\n      \"material_type\": \"steel\",\n      \"mass_kg\": 0.0,\n      \"static_friction\": 0.0,\n      \"dynamic_friction\": 0.0,\n      \"restitution\": 0.0,\n      \"collision_approximation\": \"convexHull\",\n      \"is_rigid\": true,\n      \"confidence\": \"high\",\n      \"reasoning\": \"dark grey cylinder with flat top.\"\n    },\n    {\n      \"prim_path\": \"/World/RobotChain/Link1\",\n      \"material_type\": \"aluminium\",\n      \"mass_kg\": 0.0,\n      \"static_friction\": 0.0,\n      \"dynamic_friction\": 0.0,\n      \"restitution\": 0.0,\n      \"collision_approximation\": \"convexHull\",\n      \"is_rigid\": true,\n      \"confidence\": \"high\",\n      \"reasoning\": \"light grey cylinder.\"\n    },\n    {\n      \"prim_path\": \"/World/RobotChain/Link2\",\n      \"material_type\": \"aluminium\",\n      \"mass_kg\": 0.0,\n      \"static_friction\": 0.0,\n      \"dynamic_friction\": 0.0,\n      \"restitution\": 0.0,\n      \"collision_approximation\": \"convexHull\",\n      \"is_rigid\": true,\n      \"confidence\": \"high\",\n      \"reasoning\": \"light grey cylinder.\"\n    },\n    {\n      \"prim_path\": \"/World/RobotChain/Link3\",\n      \"material_type\": \"aluminium\",\n      \"mass_kg\": 0.0,\n      \"static_friction\": 0.0,\n      \"dynamic_friction\": 0.0,\n      \"restitution\": 0.0,\n      \"collision_approximation\": \"convexHull\",\n      \"is_rigid\": true,\n      \"confidence\": \"high\",\n      \"reasoning\": \"light grey cylinder.\"\n    },\n    {\n      \"prim_path\": \"/World/RobotChain/Gripper\",\n      \"material_type\": \"rubber\",\n      \"mass_kg\": 0.0,\n      \"static_friction\": 0.0,\n      \"dynamic_friction\": 0.0,\n      \"restitution\": 0.0,\n      \"collision_approximation\": \"convexHull\",\n      \"is_rigid\": true,\n      \"confidence\": \"high\",\n      \"reasoning\": \"near-black sphere.\"\n    }\n  ],\n  \"joint_prims\": [\n    {\n      \"prim_path\": \"/World/RobotChain/Joints/ShoulderYaw\",\n      \"lower_limit_deg\": -90.0,\n      \"upper_limit_deg\": 90.0,\n      \"joint_valid\": true,\n      \"confidence\": \"high\",\n      \"reasoning\": \"Human-like joint with lower=-90\u00b0 and upper=90\u00b0 is within safe range. No violation detected.\"\n    },\n    {\n      \"prim_path\": \"/World/RobotChain/Joints/Elbow\",\n      \"lower_limit_deg\": -10.0,\n      \"upper_limit_deg\": 145.0,\n      \"joint_valid\": false,\n      \"confidence\": \"high\",\n      \"reasoning\": \"Upper limit exceeds 180\u00b0, violating human joint constraints. Corrected to upper=145\u00b0.\"\n    },\n    {\n      \"prim_path\": \"/World/RobotChain/Joints/WristPitch\",\n      \"lower_limit_deg\": -80.0,\n      \"upper_limit_deg\": 80.0,\n      \"joint_valid\": true,\n      \"confidence\": \"high\",\n      \"reasoning\": \"Within safe range for human wrist. No violation.\"\n    },\n    {\n      \"prim_path\": \"/World/RobotChain/Joints/WristRoll\",\n      \"lower_limit_deg\": -10.0,\n      \"upper_limit_deg\": 145.0,\n      \"joint_valid\": false,\n      \"confidence\": \"high\",\n      \"reasoning\": \"Upper limit exceeds 180\u00b0, violating human joint constraints. Corrected to upper=145\u00b0.\"\n    }\n  ],\n  \"global_notes\": \"The scene contains a robotic arm with a gripper, where the base and links are made of steel and aluminium, respectively, and the gripper is made of rubber. The joints have been validated against human-like movement constraints, with corrections applied to the elbow and wrist roll joints.\"\n}\n```"
+    },
+    {
+      "name": "bench_mass_materials",
+      "joint_metrics": {
+        "tp": 0,
+        "tn": 0,
+        "fp": 0,
+        "fn": 0,
+        "missed": 0,
+        "total": 0,
+        "precision": null,
+        "recall": null,
+        "accuracy": null,
+        "per_joint": []
+      },
+      "mass_metrics": {
+        "mape_pct": 0.1,
+        "n_prims": 4,
+        "n_missed": 0,
+        "best_prim": "ConcreteCube",
+        "best_ape": 0.0,
+        "worst_prim": "RubberSphere",
+        "worst_ape": 0.2,
+        "per_prim": [
+          {
+            "path": "/World/SteelCylinder",
+            "gt_mass_kg": 98.65,
+            "pred_mass_kg": 98.596,
+            "ape_pct": 0.1,
+            "gt_material": "steel",
+            "pred_material": "steel",
+            "confidence": "high",
+            "reasoning": "Darker grey color indicates steel material."
+          },
+          {
+            "path": "/World/RubberSphere",
+            "gt_mass_kg": 2.57,
+            "pred_mass_kg": 2.576,
+            "ape_pct": 0.2,
+            "gt_material": "rubber",
+            "pred_material": "rubber",
+            "confidence": "high",
+            "reasoning": "Near-black color suggests rubber material."
+          },
+          {
+            "path": "/World/ConcreteCube",
+            "gt_mass_kg": 7.762,
+            "pred_mass_kg": 7.763,
+            "ape_pct": 0.0,
+            "gt_material": "concrete",
+            "pred_material": "concrete",
+            "confidence": "high",
+            "reasoning": "Flat grey color matches concrete material."
+          },
+          {
+            "path": "/World/AlumCylinder",
+            "gt_mass_kg": 4.241,
+            "pred_mass_kg": 4.239,
+            "ape_pct": 0.0,
+            "gt_material": "aluminum",
+            "pred_material": "aluminium",
+            "confidence": "high",
+            "reasoning": "Lighter silver color indicates aluminium material."
+          }
+        ]
+      },
+      "chain_of_thought": "STEP 1 \u2014 REASONING:\n\n\"Prim /World/SteelCylinder: material=steel because darker grey color. Confidence:high.\"\n\"Prim /World/RubberSphere: material=rubber because near-black color. Confidence:high.\"\n\"Prim /World/ConcreteCube: material=concrete because flat grey color. Confidence:high.\"\n\"Prim /World/AlumCylinder: material=aluminium because lighter silver color. Confidence:high.\"\n\nNo joints to validate, so no joint reasoning needed.\n\nSTEP 2 \u2014 JSON OUTPUT:\n\n```json\n{\n  \"geom_prims\": [\n    {\n      \"prim_path\": \"/World/SteelCylinder\",\n      \"material_type\": \"steel\",\n      \"mass_kg\": 0.0,\n      \"static_friction\": 0.0,\n      \"dynamic_friction\": 0.0,\n      \"restitution\": 0.0,\n      \"collision_approximation\": \"convexHull\",\n      \"is_rigid\": true,\n      \"confidence\": \"high\",\n      \"reasoning\": \"Darker grey color indicates steel material.\"\n    },\n    {\n      \"prim_path\": \"/World/RubberSphere\",\n      \"material_type\": \"rubber\",\n      \"mass_kg\": 0.0,\n      \"static_friction\": 0.0,\n      \"dynamic_friction\": 0.0,\n      \"restitution\": 0.0,\n      \"collision_approximation\": \"convexHull\",\n      \"is_rigid\": true,\n      \"confidence\": \"high\",\n      \"reasoning\": \"Near-black color suggests rubber material.\"\n    },\n    {\n      \"prim_path\": \"/World/ConcreteCube\",\n      \"material_type\": \"concrete\",\n      \"mass_kg\": 0.0,\n      \"static_friction\": 0.0,\n      \"dynamic_friction\": 0.0,\n      \"restitution\": 0.0,\n      \"collision_approximation\": \"convexHull\",\n      \"is_rigid\": true,\n      \"confidence\": \"high\",\n      \"reasoning\": \"Flat grey color matches concrete material.\"\n    },\n    {\n      \"prim_path\": \"/World/AlumCylinder\",\n      \"material_type\": \"aluminium\",\n      \"mass_kg\": 0.0,\n      \"static_friction\": 0.0,\n      \"dynamic_friction\": 0.0,\n      \"restitution\": 0.0,\n      \"collision_approximation\": \"convexHull\",\n      \"is_rigid\": true,\n      \"confidence\": \"high\",\n      \"reasoning\": \"Lighter silver color indicates aluminium material.\"\n    }\n  ],\n  \"joint_prims\": [],\n  \"global_notes\": \"\"\n}\n```"
+    },
+    {
+      "name": "bench_mixed",
+      "joint_metrics": {
+        "tp": 1,
+        "tn": 2,
+        "fp": 0,
+        "fn": 0,
+        "missed": 0,
+        "total": 3,
+        "precision": 1.0,
+        "recall": 1.0,
+        "accuracy": 1.0,
+        "per_joint": [
+          {
+            "path": "/World/Assembly/Joints/BaseRevolute",
+            "gt_lower": -45,
+            "gt_upper": 45,
+            "gt_violated": false,
+            "pred_violated": false,
+            "pred_lower": -45.0,
+            "pred_upper": 45.0,
+            "confidence": "high",
+            "reasoning": "Travel (90.0\u00b0) matches body length along the axis (12.0 units).",
+            "outcome": "TN"
+          },
+          {
+            "path": "/World/Assembly/Joints/ElbowRevolute",
+            "gt_lower": -10,
+            "gt_upper": 190,
+            "gt_violated": true,
+            "pred_violated": true,
+            "pred_lower": -10.0,
+            "pred_upper": 145.0,
+            "confidence": "high",
+            "reasoning": "Upper limit exceeds 180\u00b0, violating the rule for human-like joints. Capped at 145\u00b0.",
+            "outcome": "TP"
+          },
+          {
+            "path": "/World/Assembly/Joints/WristRevolute",
+            "gt_lower": -70,
+            "gt_upper": 70,
+            "gt_violated": false,
+            "pred_violated": false,
+            "pred_lower": -70.0,
+            "pred_upper": 70.0,
+            "confidence": "high",
+            "reasoning": "Travel (140.0\u00b0) fits within the body length along the axis (12.0 units).",
+            "outcome": "TN"
+          }
+        ]
+      },
+      "mass_metrics": {
+        "mape_pct": 0.0,
+        "n_prims": 3,
+        "n_missed": 0,
+        "best_prim": "SteelFrame",
+        "best_ape": 0.0,
+        "worst_prim": "RubberPad",
+        "worst_ape": 0.0,
+        "per_prim": [
+          {
+            "path": "/World/Assembly/SteelFrame",
+            "gt_mass_kg": 15.33,
+            "pred_mass_kg": 15.332,
+            "ape_pct": 0.0,
+            "gt_material": "steel",
+            "pred_material": "steel",
+            "confidence": "high",
+            "reasoning": "Darker grey and cubic shape suggest heavy structural metal."
+          },
+          {
+            "path": "/World/Assembly/AlumArm",
+            "gt_mass_kg": 12.21,
+            "pred_mass_kg": 12.208,
+            "ape_pct": 0.0,
+            "gt_material": "aluminum",
+            "pred_material": "aluminium",
+            "confidence": "high",
+            "reasoning": "Lighter silver and cylindrical form indicate lightweight robotic part."
+          },
+          {
+            "path": "/World/Assembly/RubberPad",
+            "gt_mass_kg": 0.377,
+            "pred_mass_kg": 0.377,
+            "ape_pct": 0.0,
+            "gt_material": "rubber",
+            "pred_material": "rubber",
+            "confidence": "high",
+            "reasoning": "Near-black color and cylindrical shape imply flexible material."
+          }
+        ]
+      },
+      "chain_of_thought": "### STEP 1 \u2014 REASONING\n\n**Geometry Primitives:**\n- **Prim `/World/Assembly/SteelFrame`:** material=steel because darker grey and cubic shape suggest heavy structural metal. Confidence:high.\n- **Prim `/World/Assembly/AlumArm`:** material=aluminium because lighter silver and cylindrical form indicate lightweight robotic part. Confidence:high.\n- **Prim `/World/Assembly/RubberPad`:** material=rubber because near-black color and cylindrical shape imply flexible material. Confidence:high.\n\n**Joint Primitives:**\n- **Joint `/World/Assembly/Joints/BaseRevolute`:** lower=-45.0\u00b0, upper=45.0\u00b0. This joint is valid as the travel (90.0\u00b0) matches the body length along the axis (12.0 units). Confidence:high.\n- **Joint `/World/Assembly/Joints/ElbowRevolute`:** lower=-10.0\u00b0, upper=190.0\u00b0. The upper limit exceeds 180\u00b0, violating the rule for human-like joints. Set joint_valid=false and cap at 145\u00b0. Confidence:high.\n- **Joint `/World/Assembly/Joints/WristRevolute`:** lower=-70.0\u00b0, upper=70.0\u00b0. This joint is valid as the travel (140.0\u00b0) fits within the body length along the axis (12.0 units). Confidence:high.\n\n### STEP 2 \u2014 JSON OUTPUT\n\n```json\n{\n  \"geom_prims\": [\n    {\n      \"prim_path\": \"/World/Assembly/SteelFrame\",\n      \"material_type\": \"steel\",\n      \"mass_kg\": 0.0,\n      \"static_friction\": 0.0,\n      \"dynamic_friction\": 0.0,\n      \"restitution\": 0.0,\n      \"collision_approximation\": \"convexHull\",\n      \"is_rigid\": true,\n      \"confidence\": \"high\",\n      \"reasoning\": \"Darker grey and cubic shape suggest heavy structural metal.\"\n    },\n    {\n      \"prim_path\": \"/World/Assembly/AlumArm\",\n      \"material_type\": \"aluminium\",\n      \"mass_kg\": 0.0,\n      \"static_friction\": 0.0,\n      \"dynamic_friction\": 0.0,\n      \"restitution\": 0.0,\n      \"collision_approximation\": \"convexHull\",\n      \"is_rigid\": true,\n      \"confidence\": \"high\",\n      \"reasoning\": \"Lighter silver and cylindrical form indicate lightweight robotic part.\"\n    },\n    {\n      \"prim_path\": \"/World/Assembly/RubberPad\",\n      \"material_type\": \"rubber\",\n      \"mass_kg\": 0.0,\n      \"static_friction\": 0.0,\n      \"dynamic_friction\": 0.0,\n      \"restitution\": 0.0,\n      \"collision_approximation\": \"convexHull\",\n      \"is_rigid\": true,\n      \"confidence\": \"high\",\n      \"reasoning\": \"Near-black color and cylindrical shape imply flexible material.\"\n    }\n  ],\n  \"joint_prims\": [\n    {\n      \"prim_path\": \"/World/Assembly/Joints/BaseRevolute\",\n      \"lower_limit_deg\": -45.0,\n      \"upper_limit_deg\": 45.0,\n      \"joint_valid\": true,\n      \"confidence\": \"high\",\n      \"reasoning\": \"Travel (90.0\u00b0) matches body length along the axis (12.0 units).\"\n    },\n    {\n      \"prim_path\": \"/World/Assembly/Joints/ElbowRevolute\",\n      \"lower_limit_deg\": -10.0,\n      \"upper_limit_deg\": 145.0,\n      \"joint_valid\": false,\n      \"confidence\": \"high\",\n      \"reasoning\": \"Upper limit exceeds 180\u00b0, violating the rule for human-like joints. Capped at 145\u00b0.\"\n    },\n    {\n      \"prim_path\": \"/World/Assembly/Joints/WristRevolute\",\n      \"lower_limit_deg\": -70.0,\n      \"upper_limit_deg\": 70.0,\n      \"joint_valid\": true,\n      \"confidence\": \"high\",\n      \"reasoning\": \"Travel (140.0\u00b0) fits within the body length along the axis (12.0 units).\"\n    }\n  ],\n  \"global_notes\": \"\"\n}\n```"
+    },
+    {
+      "name": "bench_prismatic_limits",
+      "joint_metrics": {
+        "tp": 2,
+        "tn": 2,
+        "fp": 0,
+        "fn": 0,
+        "missed": 0,
+        "total": 4,
+        "precision": 1.0,
+        "recall": 1.0,
+        "accuracy": 1.0,
+        "per_joint": [
+          {
+            "path": "/World/Actuator/Joints/SliderTravel",
+            "gt_lower": -15,
+            "gt_upper": 15,
+            "gt_violated": false,
+            "pred_violated": false,
+            "pred_lower": -15.0,
+            "pred_upper": 15.0,
+            "confidence": "high",
+            "reasoning": "Travel range (30) matches body length (30), so valid.",
+            "outcome": "TN"
+          },
+          {
+            "path": "/World/Actuator/Joints/ActuatorStroke",
+            "gt_lower": 0,
+            "gt_upper": 180,
+            "gt_violated": true,
+            "pred_violated": true,
+            "pred_lower": 0.0,
+            "pred_upper": 180.0,
+            "confidence": "high",
+            "reasoning": "Travel range (180) exceeds body length (12), VIOLATED. Must reduce travel to 12.",
+            "outcome": "TP"
+          },
+          {
+            "path": "/World/Actuator/Joints/CarriageRetract",
+            "gt_lower": -10,
+            "gt_upper": 0,
+            "gt_violated": false,
+            "pred_violated": false,
+            "pred_lower": -10.0,
+            "pred_upper": 0.0,
+            "confidence": "high",
+            "reasoning": "Travel range (10) is within body length (30), so valid.",
+            "outcome": "TN"
+          },
+          {
+            "path": "/World/Actuator/Joints/RodOverExtend",
+            "gt_lower": -80,
+            "gt_upper": 80,
+            "gt_violated": true,
+            "pred_violated": true,
+            "pred_lower": -80.0,
+            "pred_upper": 80.0,
+            "confidence": "high",
+            "reasoning": "Travel range (160) exceeds body length (12), VIOLATED. Must reduce travel to 12.",
+            "outcome": "TP"
+          }
+        ]
+      },
+      "mass_metrics": {
+        "mape_pct": 0.1,
+        "n_prims": 3,
+        "n_missed": 0,
+        "best_prim": "SliderBase",
+        "best_ape": 0.0,
+        "worst_prim": "ActuatorRod",
+        "worst_ape": 0.1,
+        "per_prim": [
+          {
+            "path": "/World/Actuator/SliderBase",
+            "gt_mass_kg": 14.13,
+            "pred_mass_kg": 14.13,
+            "ape_pct": 0.0,
+            "gt_material": "steel",
+            "pred_material": "steel",
+            "confidence": "high",
+            "reasoning": "Flat grey color and industrial context suggest steel."
+          },
+          {
+            "path": "/World/Actuator/CarriageBlock",
+            "gt_mass_kg": 4.67,
+            "pred_mass_kg": 4.666,
+            "ape_pct": 0.1,
+            "gt_material": "aluminum",
+            "pred_material": "aluminium",
+            "confidence": "high",
+            "reasoning": "Lightweight parts context and silvery appearance suggest aluminium."
+          },
+          {
+            "path": "/World/Actuator/ActuatorRod",
+            "gt_mass_kg": 2.96,
+            "pred_mass_kg": 2.958,
+            "ape_pct": 0.1,
+            "gt_material": "steel",
+            "pred_material": "steel",
+            "confidence": "high",
+            "reasoning": "Cylindrical metal part with flat grey color suggests steel."
+          }
+        ]
+      },
+      "chain_of_thought": " STEP 1 \u2014 REASONING\n\nFor the geometry prims, I see three components: a cube-shaped base, a carriage block, and a cylindrical actuator rod. The base and carriage block are both cubes, likely made of steel or aluminum given their industrial context and silvery appearance. The actuator rod is a cylinder, which also fits the metallic look. All three have a flat grey color, so I\u2019ll assume they\u2019re metal. For the joints, there are four prismatic joints. The first two (SliderTravel and ActuatorStroke) have travel ranges that seem appropriate for their body lengths. The last two (CarriageRetract and RodOverExtend) have travel ranges that exceed their body lengths, which would cause VIOLATIONS. I\u2019ll need to adjust those to fit within the body lengths.\n\nPrim /World/Actuator/SliderBase: material=steel because flat grey + industrial context. Confidence:high.\nPrim /World/Actuator/CarriageBlock: material=aluminium because lightweight parts context. Confidence:high.\nPrim /World/Actuator/ActuatorRod: material=steel because cylindrical metal part. Confidence:high.\nJoint /World/Actuator/Joints/SliderTravel: lower=-15, upper=15, body_length=30. travel=30. travel matches body_length, so valid. Confidence:high.\nJoint /World/Actuator/Joints/ActuatorStroke: lower=0, upper=180, body_length=12. travel=180. travel exceeds body_length, VIOLATED. Must reduce travel to 12. Confidence:high.\nJoint /World/Actuator/Joints/CarriageRetract: lower=-10, upper=0, body_length=30. travel=10. travel is within body_length, so valid. Confidence:high.\nJoint /World/Actuator/Joints/RodOverExtend: lower=-80, upper=80, body_length=12. travel=160. travel exceeds body_length, VIOLATED. Must reduce travel to 12. Confidence:high.\n\n STEP 2 \u2014 JSON OUTPUT\n\n```json\n{\n  \"geom_prims\": [\n    {\n      \"prim_path\": \"/World/Actuator/SliderBase\",\n      \"material_type\": \"steel\",\n      \"mass_kg\": 0.0,\n      \"static_friction\": 0.0,\n      \"dynamic_friction\": 0.0,\n      \"restitution\": 0.0,\n      \"collision_approximation\": \"convexHull\",\n      \"is_rigid\": true,\n      \"confidence\": \"high\",\n      \"reasoning\": \"Flat grey color and industrial context suggest steel.\"\n    },\n    {\n      \"prim_path\": \"/World/Actuator/CarriageBlock\",\n      \"material_type\": \"aluminium\",\n      \"mass_kg\": 0.0,\n      \"static_friction\": 0.0,\n      \"dynamic_friction\": 0.0,\n      \"restitution\": 0.0,\n      \"collision_approximation\": \"convexHull\",\n      \"is_rigid\": true,\n      \"confidence\": \"high\",\n      \"reasoning\": \"Lightweight parts context and silvery appearance suggest aluminium.\"\n    },\n    {\n      \"prim_path\": \"/World/Actuator/ActuatorRod\",\n      \"material_type\": \"steel\",\n      \"mass_kg\": 0.0,\n      \"static_friction\": 0.0,\n      \"dynamic_friction\": 0.0,\n      \"restitution\": 0.0,\n      \"collision_approximation\": \"convexHull\",\n      \"is_rigid\": true,\n      \"confidence\": \"high\",\n      \"reasoning\": \"Cylindrical metal part with flat grey color suggests steel.\"\n    }\n  ],\n  \"joint_prims\": [\n    {\n      \"prim_path\": \"/World/Actuator/Joints/SliderTravel\",\n      \"lower_limit_deg\": -15.0,\n      \"upper_limit_deg\": 15.0,\n      \"joint_valid\": true,\n      \"confidence\": \"high\",\n      \"reasoning\": \"Travel range (30) matches body length (30), so valid.\"\n    },\n    {\n      \"prim_path\": \"/World/Actuator/Joints/ActuatorStroke\",\n      \"lower_limit_deg\": 0.0,\n      \"upper_limit_deg\": 180.0,\n      \"joint_valid\": false,\n      \"confidence\": \"high\",\n      \"reasoning\": \"Travel range (180) exceeds body length (12), VIOLATED. Must reduce travel to 12.\"\n    },\n    {\n      \"prim_path\": \"/World/Actuator/Joints/CarriageRetract\",\n      \"lower_limit_deg\": -10.0,\n      \"upper_limit_deg\": 0.0,\n      \"joint_valid\": true,\n      \"confidence\": \"high\",\n      \"reasoning\": \"Travel range (10) is within body length (30), so valid.\"\n    },\n    {\n      \"prim_path\": \"/World/Actuator/Joints/RodOverExtend\",\n      \"lower_limit_deg\": -80.0,\n      \"upper_limit_deg\": 80.0,\n      \"joint_valid\": false,\n      \"confidence\": \"high\",\n      \"reasoning\": \"Travel range (160) exceeds body length (12), VIOLATED. Must reduce travel to 12.\"\n    }\n  ],\n  \"global_notes\": \"Two prismatic joints (ActuatorStroke and RodOverExtend) have travel ranges that exceed their body lengths, requiring adjustment to avoid VIOLATIONS.\"\n}\n```"
+    },
+    {
+      "name": "bench_humanoid_arm",
+      "joint_metrics": {
+        "tp": 2,
+        "tn": 4,
+        "fp": 0,
+        "fn": 0,
+        "missed": 0,
+        "total": 6,
+        "precision": 1.0,
+        "recall": 1.0,
+        "accuracy": 1.0,
+        "per_joint": [
+          {
+            "path": "/World/Arm/Joints/ShoulderFlexion",
+            "gt_lower": -60,
+            "gt_upper": 170,
+            "gt_violated": false,
+            "pred_violated": false,
+            "pred_lower": -60.0,
+            "pred_upper": 170.0,
+            "confidence": "high",
+            "reasoning": "Joint ShoulderFlexion: lower=-60.0\u00b0, upper=170.0\u00b0. The upper limit is within the valid range for a human-like joint. Con",
+            "outcome": "TN"
+          },
+          {
+            "path": "/World/Arm/Joints/ShoulderAbduct",
+            "gt_lower": -45,
+            "gt_upper": 200,
+            "gt_violated": true,
+            "pred_violated": true,
+            "pred_lower": -45.0,
+            "pred_upper": 180.0,
+            "confidence": "high",
+            "reasoning": "Joint ShoulderAbduct: lower=-45.0\u00b0, upper=200.0\u00b0. The upper limit exceeds 180\u00b0, which is VIOLATED. Corrected: lower=-45.",
+            "outcome": "TP"
+          },
+          {
+            "path": "/World/Arm/Joints/ShoulderRotation",
+            "gt_lower": -90,
+            "gt_upper": 90,
+            "gt_violated": false,
+            "pred_violated": false,
+            "pred_lower": -90.0,
+            "pred_upper": 90.0,
+            "confidence": "high",
+            "reasoning": "Joint ShoulderRotation: lower=-90.0\u00b0, upper=90.0\u00b0. The upper limit is within the valid range for a human-like joint. Con",
+            "outcome": "TN"
+          },
+          {
+            "path": "/World/Arm/Joints/ElbowFlexion",
+            "gt_lower": 0,
+            "gt_upper": 145,
+            "gt_violated": false,
+            "pred_violated": false,
+            "pred_lower": 0.0,
+            "pred_upper": 145.0,
+            "confidence": "high",
+            "reasoning": "Joint ElbowFlexion: lower=0.0\u00b0, upper=145.0\u00b0. The upper limit is within the valid range for a human-like joint. Confiden",
+            "outcome": "TN"
+          },
+          {
+            "path": "/World/Arm/Joints/WristFlexion",
+            "gt_lower": -70,
+            "gt_upper": 70,
+            "gt_violated": false,
+            "pred_violated": false,
+            "pred_lower": -70.0,
+            "pred_upper": 70.0,
+            "confidence": "high",
+            "reasoning": "Joint WristFlexion: lower=-70.0\u00b0, upper=70.0\u00b0. The upper limit is within the valid range for a human-like joint. Confide",
+            "outcome": "TN"
+          },
+          {
+            "path": "/World/Arm/Joints/WristSupination",
+            "gt_lower": -90,
+            "gt_upper": 200,
+            "gt_violated": true,
+            "pred_violated": true,
+            "pred_lower": -90.0,
+            "pred_upper": 180.0,
+            "confidence": "high",
+            "reasoning": "Joint WristSupination: lower=-90.0\u00b0, upper=200.0\u00b0. The upper limit exceeds 180\u00b0, which is VIOLATED. Corrected: lower=-90",
+            "outcome": "TP"
+          }
+        ]
+      },
+      "mass_metrics": {
+        "mape_pct": 187.2,
+        "n_prims": 5,
+        "n_missed": 0,
+        "best_prim": "Forearm",
+        "best_ape": 0.0,
+        "worst_prim": "Hand",
+        "worst_ape": 554.5,
+        "per_prim": [
+          {
+            "path": "/World/Arm/ShoulderLink",
+            "gt_mass_kg": 4.99,
+            "pred_mass_kg": 14.494,
+            "ape_pct": 190.5,
+            "gt_material": "aluminum",
+            "pred_material": "steel",
+            "confidence": "high",
+            "reasoning": "Prim /World/Arm/ShoulderLink: material=steel because darker grey color and structural context. Confi"
+          },
+          {
+            "path": "/World/Arm/UpperArm",
+            "gt_mass_kg": 6.36,
+            "pred_mass_kg": 18.487,
+            "ape_pct": 190.7,
+            "gt_material": "aluminum",
+            "pred_material": "steel",
+            "confidence": "high",
+            "reasoning": "Prim /World/Arm/UpperArm: material=steel because darker grey color and structural context. Confidenc"
+          },
+          {
+            "path": "/World/Arm/Forearm",
+            "gt_mass_kg": 3.39,
+            "pred_mass_kg": 3.391,
+            "ape_pct": 0.0,
+            "gt_material": "aluminum",
+            "pred_material": "aluminium",
+            "confidence": "high",
+            "reasoning": "Prim /World/Arm/Forearm: material=aluminium because lighter silver color and lightweight context. Co"
+          },
+          {
+            "path": "/World/Arm/WristLink",
+            "gt_mass_kg": 0.611,
+            "pred_mass_kg": 0.61,
+            "ape_pct": 0.2,
+            "gt_material": "aluminum",
+            "pred_material": "aluminium",
+            "confidence": "high",
+            "reasoning": "Prim /World/Arm/WristLink: material=aluminium because lighter silver color and lightweight context. "
+          },
+          {
+            "path": "/World/Arm/Hand",
+            "gt_mass_kg": 1.086,
+            "pred_mass_kg": 7.108,
+            "ape_pct": 554.5,
+            "gt_material": "rubber",
+            "pred_material": "steel",
+            "confidence": "high",
+            "reasoning": "Prim /World/Arm/Hand: material=steel because darker grey color and structural context. Confidence:hi"
+          }
+        ]
+      },
+      "chain_of_thought": " STEP 1 \u2014 REASONING\n\nFor the geometry prims, I see that all components are cylinders or a sphere, with a uniform grey color. The visual cue for metal is a silvery/grey appearance, so I will assign steel (darker grey) for structural parts like the shoulder link and upper arm, and aluminium (lighter silver) for lighter components like the forearm and wrist link. The hand is a sphere, likely made of a similar material as the rest of the arm, so I will also assign steel or aluminium. For the joints, I need to check the limits. The shoulder flexion joint has a lower limit of -60\u00b0 and upper limit of 170\u00b0, which is within the valid range for a human-like joint. The shoulder abduction joint has a lower limit of -45\u00b0 and upper limit of 200\u00b0, which is above 180\u00b0, so this is VIOLATED. The shoulder rotation joint has a lower limit of -90\u00b0 and upper limit of 90\u00b0, which is within the valid range. The elbow flexion joint has a lower limit of 0\u00b0 and upper limit of 145\u00b0, which is within the valid range. The wrist flexion joint has a lower limit of -70\u00b0 and upper limit of 70\u00b0, which is within the valid range. The wrist supination joint has a lower limit of -90\u00b0 and upper limit of 200\u00b0, which is above 180\u00b0, so this is VIOLATED. I will set joint_valid=false for these two joints and correct the limits to 145\u00b0 and 180\u00b0 respectively.\n\nFor the material assignment, I will use steel for the shoulder link and upper arm, aluminium for the forearm and wrist link, and steel for the hand. The mass will be calculated based on the bbox and density. The static and dynamic friction will be assigned based on the material type. The restitution will be set to 0.0 for all objects. The collision approximation will be set to convexHull for all objects. The is_rigid flag will be set to true for all objects.\n\nFor the joints, I will set the lower and upper limits based on the reasoning above. For the shoulder abduction joint, I will set the upper limit to 180\u00b0. For the wrist supination joint, I will set the upper limit to 180\u00b0. I will set joint_valid=false for these two joints.\n\nI will now output the JSON.\n```json\n{\n  \"geom_prims\": [\n    {\n      \"prim_path\": \"/World/Arm/ShoulderLink\",\n      \"material_type\": \"steel\",\n      \"mass_kg\": 10.0,\n      \"static_friction\": 0.4,\n      \"dynamic_friction\": 0.3,\n      \"restitution\": 0.0,\n      \"collision_approximation\": \"convexHull\",\n      \"is_rigid\": true,\n      \"confidence\": \"high\",\n      \"reasoning\": \"Prim /World/Arm/ShoulderLink: material=steel because darker grey color and structural context. Confidence:high.\"\n    },\n    {\n      \"prim_path\": \"/World/Arm/UpperArm\",\n      \"material_type\": \"steel\",\n      \"mass_kg\": 15.0,\n      \"static_friction\": 0.4,\n      \"dynamic_friction\": 0.3,\n      \"restitution\": 0.0,\n      \"collision_approximation\": \"convexHull\",\n      \"is_rigid\": true,\n      \"confidence\": \"high\",\n      \"reasoning\": \"Prim /World/Arm/UpperArm: material=steel because darker grey color and structural context. Confidence:high.\"\n    },\n    {\n      \"prim_path\": \"/World/Arm/Forearm\",\n      \"material_type\": \"aluminium\",\n      \"mass_kg\": 8.0,\n      \"static_friction\": 0.35,\n      \"dynamic_friction\": 0.25,\n      \"restitution\": 0.0,\n      \"collision_approximation\": \"convexHull\",\n      \"is_rigid\": true,\n      \"confidence\": \"high\",\n      \"reasoning\": \"Prim /World/Arm/Forearm: material=aluminium because lighter silver color and lightweight context. Confidence:high.\"\n    },\n    {\n      \"prim_path\": \"/World/Arm/WristLink\",\n      \"material_type\": \"aluminium\",\n      \"mass_kg\": 4.0,\n      \"static_friction\": 0.35,\n      \"dynamic_friction\": 0.25,\n      \"restitution\": 0.0,\n      \"collision_approximation\": \"convexHull\",\n      \"is_rigid\": true,\n      \"confidence\": \"high\",\n      \"reasoning\": \"Prim /World/Arm/WristLink: material=aluminium because lighter silver color and lightweight context. Confidence:high.\"\n    },\n    {\n      \"prim_path\": \"/World/Arm/Hand\",\n      \"material_type\": \"steel\",\n      \"mass_kg\": 12.0,\n      \"static_friction\": 0.4,\n      \"dynamic_friction\": 0.3,\n      \"restitution\": 0.0,\n      \"collision_approximation\": \"convexHull\",\n      \"is_rigid\": true,\n      \"confidence\": \"high\",\n      \"reasoning\": \"Prim /World/Arm/Hand: material=steel because darker grey color and structural context. Confidence:high.\"\n    }\n  ],\n  \"joint_prims\": [\n    {\n      \"prim_path\": \"/World/Arm/Joints/ShoulderFlexion\",\n      \"lower_limit_deg\": -60.0,\n      \"upper_limit_deg\": 170.0,\n      \"joint_valid\": true,\n      \"confidence\": \"high\",\n      \"reasoning\": \"Joint ShoulderFlexion: lower=-60.0\u00b0, upper=170.0\u00b0. The upper limit is within the valid range for a human-like joint. Confidence:high.\"\n    },\n    {\n      \"prim_path\": \"/World/Arm/Joints/ShoulderAbduct\",\n      \"lower_limit_deg\": -45.0,\n      \"upper_limit_deg\": 180.0,\n      \"joint_valid\": false,\n      \"confidence\": \"high\",\n      \"reasoning\": \"Joint ShoulderAbduct: lower=-45.0\u00b0, upper=200.0\u00b0. The upper limit exceeds 180\u00b0, which is VIOLATED. Corrected: lower=-45.0\u00b0, upper=180.0\u00b0. Confidence:high.\"\n    },\n    {\n      \"prim_path\": \"/World/Arm/Joints/ShoulderRotation\",\n      \"lower_limit_deg\": -90.0,\n      \"upper_limit_deg\": 90.0,\n      \"joint_valid\": true,\n      \"confidence\": \"high\",\n      \"reasoning\": \"Joint ShoulderRotation: lower=-90.0\u00b0, upper=90.0\u00b0. The upper limit is within the valid range for a human-like joint. Confidence:high.\"\n    },\n    {\n      \"prim_path\": \"/World/Arm/Joints/ElbowFlexion\",\n      \"lower_limit_deg\": 0.0,\n      \"upper_limit_deg\": 145.0,\n      \"joint_valid\": true,\n      \"confidence\": \"high\",\n      \"reasoning\": \"Joint ElbowFlexion: lower=0.0\u00b0, upper=145.0\u00b0. The upper limit is within the valid range for a human-like joint. Confidence:high.\"\n    },\n    {\n      \"prim_path\": \"/World/Arm/Joints/WristFlexion\",\n      \"lower_limit_deg\": -70.0,\n      \"upper_limit_deg\": 70.0,\n      \"joint_valid\": true,\n      \"confidence\": \"high\",\n      \"reasoning\": \"Joint WristFlexion: lower=-70.0\u00b0, upper=70.0\u00b0. The upper limit is within the valid range for a human-like joint. Confidence:high.\"\n    },\n    {\n      \"prim_path\": \"/World/Arm/Joints/WristSupination\",\n      \"lower_limit_deg\": -90.0,\n      \"upper_limit_deg\": 180.0,\n      \"joint_valid\": false,\n      \"confidence\": \"high\",\n      \"reasoning\": \"Joint WristSupination: lower=-90.0\u00b0, upper=200.0\u00b0. The upper limit exceeds 180\u00b0, which is VIOLATED. Corrected: lower=-90.0\u00b0, upper=180.0\u00b0. Confidence:high.\"\n    }\n  ],\n  \"global_notes\": \"The shoulder abduction and wrist supination joints have upper limits exceeding 180\u00b0, which is VIOLATED. These have been corrected to 180\u00b0.\"\n}\n```"
+    },
+    {
+      "name": "bench_all_valid",
+      "joint_metrics": {
+        "tp": 0,
+        "tn": 3,
+        "fp": 2,
+        "fn": 0,
+        "missed": 0,
+        "total": 5,
+        "precision": 0.0,
+        "recall": null,
+        "accuracy": 0.6,
+        "per_joint": [
+          {
+            "path": "/World/Robot/Joints/BaseTurn",
+            "gt_lower": -90,
+            "gt_upper": 90,
+            "gt_violated": false,
+            "pred_violated": false,
+            "pred_lower": -90.0,
+            "pred_upper": 90.0,
+            "confidence": "high",
+            "reasoning": "Human-like joint with lower=-90\u00b0 and upper=90\u00b0 is within safe range.",
+            "outcome": "TN"
+          },
+          {
+            "path": "/World/Robot/Joints/ShoulderLift",
+            "gt_lower": -30,
+            "gt_upper": 120,
+            "gt_violated": false,
+            "pred_violated": true,
+            "pred_lower": -30.0,
+            "pred_upper": 120.0,
+            "confidence": "high",
+            "reasoning": "Upper limit exceeds 180\u00b0 for human-like joint, VIOLATED. Set joint_valid=false. Corrected to upper=145\u00b0.",
+            "outcome": "FP"
+          },
+          {
+            "path": "/World/Robot/Joints/ElbowBend",
+            "gt_lower": 0,
+            "gt_upper": 135,
+            "gt_violated": false,
+            "pred_violated": true,
+            "pred_lower": 0.0,
+            "pred_upper": 135.0,
+            "confidence": "high",
+            "reasoning": "Upper limit exceeds 180\u00b0 for human-like joint, VIOLATED. Set joint_valid=false. Corrected to upper=145\u00b0.",
+            "outcome": "FP"
+          },
+          {
+            "path": "/World/Robot/Joints/WristTilt",
+            "gt_lower": -60,
+            "gt_upper": 60,
+            "gt_violated": false,
+            "pred_violated": false,
+            "pred_lower": -60.0,
+            "pred_upper": 60.0,
+            "confidence": "high",
+            "reasoning": "Within safe range for human-like joint. No violation.",
+            "outcome": "TN"
+          },
+          {
+            "path": "/World/Robot/Joints/ToolSpin",
+            "gt_lower": -175,
+            "gt_upper": 175,
+            "gt_violated": false,
+            "pred_violated": false,
+            "pred_lower": -175.0,
+            "pred_upper": 175.0,
+            "confidence": "high",
+            "reasoning": "Industrial robot joint with full 360\u00b0 range. No violation.",
+            "outcome": "TN"
+          }
+        ]
+      },
+      "mass_metrics": {
+        "mape_pct": 128.4,
+        "n_prims": 5,
+        "n_missed": 0,
+        "best_prim": "ToolHead",
+        "best_ape": 0.0,
+        "worst_prim": "Link2",
+        "worst_ape": 190.7,
+        "per_prim": [
+          {
+            "path": "/World/Robot/Base",
+            "gt_mass_kg": 39.25,
+            "pred_mass_kg": 11.5,
+            "ape_pct": 70.7,
+            "gt_material": "steel",
+            "pred_material": "concrete",
+            "confidence": "high",
+            "reasoning": "Flat grey + architectural context."
+          },
+          {
+            "path": "/World/Robot/Link1",
+            "gt_mass_kg": 7.42,
+            "pred_mass_kg": 21.568,
+            "ape_pct": 190.7,
+            "gt_material": "aluminum",
+            "pred_material": "steel",
+            "confidence": "high",
+            "reasoning": "Darker grey (structural)."
+          },
+          {
+            "path": "/World/Robot/Link2",
+            "gt_mass_kg": 4.07,
+            "pred_mass_kg": 11.832,
+            "ape_pct": 190.7,
+            "gt_material": "aluminum",
+            "pred_material": "steel",
+            "confidence": "high",
+            "reasoning": "Darker grey (structural)."
+          },
+          {
+            "path": "/World/Robot/Link3",
+            "gt_mass_kg": 1.53,
+            "pred_mass_kg": 4.437,
+            "ape_pct": 190.0,
+            "gt_material": "aluminum",
+            "pred_material": "steel",
+            "confidence": "high",
+            "reasoning": "Darker grey (structural)."
+          },
+          {
+            "path": "/World/Robot/ToolHead",
+            "gt_mass_kg": 0.339,
+            "pred_mass_kg": 0.339,
+            "ape_pct": 0.0,
+            "gt_material": "aluminum",
+            "pred_material": "aluminium",
+            "confidence": "high",
+            "reasoning": "Lighter silver (lightweight parts)."
+          }
+        ]
+      },
+      "chain_of_thought": " STEP 1 \u2014 REASONING\n\nFor each geometry prim write ONE line:\n  \"Prim <path>: material=<X> because <1-2 word visual cue>. Confidence:<level>.\"\n  (Mass is computed automatically from bbox \u2014 you do NOT need to calculate it.)\n\nFor each joint prim write 2-3 sentences (full reasoning required for joint validation):\n  Revolute: \"Joint <name>: lower=<X>\u00b0, upper=<Y>\u00b0. <reason why valid/invalid>.\n   Corrected: lower=<A>\u00b0, upper=<B>\u00b0. Confidence:<level>.\"\n  Prismatic: \"Joint <name>: lower=<X>, upper=<Y>, body_length_along_axis=<B>.\n   travel=upper\u2212lower=<T>. <T> vs <B>: <exceeds\u2192VIOLATED, joint_valid=false|fits\u2192valid, joint_valid=true>.\n   Corrected if needed: lower=<A>, upper=<C>. Confidence:<level>.\"\n\nPrim /World/Robot/Base: material=concrete because flat grey + architectural context. Confidence:high.\nPrim /World/Robot/Link1: material=steel because darker grey (structural). Confidence:high.\nPrim /World/Robot/Link2: material=steel because darker grey (structural). Confidence:high.\nPrim /World/Robot/Link3: material=steel because darker grey (structural). Confidence:high.\nPrim /World/Robot/ToolHead: material=aluminium because lighter silver (lightweight parts). Confidence:high.\nJoint /World/Robot/Joints/BaseTurn: lower=-90.0\u00b0, upper=90.0\u00b0. Human-like joint with lower=-90\u00b0 and upper=90\u00b0 is within safe range. No violation. Confidence:high.\nJoint /World/Robot/Joints/ShoulderLift: lower=-30.0\u00b0, upper=120.0\u00b0. Upper limit exceeds 180\u00b0 for human-like joint, VIOLATED. Set joint_valid=false. Corrected to upper=145\u00b0. Confidence:high.\nJoint /World/Robot/Joints/ElbowBend: lower=0.0\u00b0, upper=135.0\u00b0. Upper limit exceeds 180\u00b0 for human-like joint, VIOLATED. Set joint_valid=false. Corrected to upper=145\u00b0. Confidence:high.\nJoint /World/Robot/Joints/WristTilt: lower=-60.0\u00b0, upper=60.0\u00b0. Within safe range for human-like joint. No violation. Confidence:high.\nJoint /World/Robot/Joints/ToolSpin: lower=-175.0\u00b0, upper=175.0\u00b0. Industrial robot joint with full 360\u00b0 range. No violation. Confidence:high.\n\n STEP 2 \u2014 JSON OUTPUT\n\n```json\n{\n  \"geom_prims\": [\n    {\n      \"prim_path\": \"/World/Robot/Base\",\n      \"material_type\": \"concrete\",\n      \"mass_kg\": 0.0,\n      \"static_friction\": 0.0,\n      \"dynamic_friction\": 0.0,\n      \"restitution\": 0.0,\n      \"collision_approximation\": \"convexHull\",\n      \"is_rigid\": true,\n      \"confidence\": \"high\",\n      \"reasoning\": \"Flat grey + architectural context.\"\n    },\n    {\n      \"prim_path\": \"/World/Robot/Link1\",\n      \"material_type\": \"steel\",\n      \"mass_kg\": 0.0,\n      \"static_friction\": 0.0,\n      \"dynamic_friction\": 0.0,\n      \"restitution\": 0.0,\n      \"collision_approximation\": \"convexHull\",\n      \"is_rigid\": true,\n      \"confidence\": \"high\",\n      \"reasoning\": \"Darker grey (structural).\"\n    },\n    {\n      \"prim_path\": \"/World/Robot/Link2\",\n      \"material_type\": \"steel\",\n      \"mass_kg\": 0.0,\n      \"static_friction\": 0.0,\n      \"dynamic_friction\": 0.0,\n      \"restitution\": 0.0,\n      \"collision_approximation\": \"convexHull\",\n      \"is_rigid\": true,\n      \"confidence\": \"high\",\n      \"reasoning\": \"Darker grey (structural).\"\n    },\n    {\n      \"prim_path\": \"/World/Robot/Link3\",\n      \"material_type\": \"steel\",\n      \"mass_kg\": 0.0,\n      \"static_friction\": 0.0,\n      \"dynamic_friction\": 0.0,\n      \"restitution\": 0.0,\n      \"collision_approximation\": \"convexHull\",\n      \"is_rigid\": true,\n      \"confidence\": \"high\",\n      \"reasoning\": \"Darker grey (structural).\"\n    },\n    {\n      \"prim_path\": \"/World/Robot/ToolHead\",\n      \"material_type\": \"aluminium\",\n      \"mass_kg\": 0.0,\n      \"static_friction\": 0.0,\n      \"dynamic_friction\": 0.0,\n      \"restitution\": 0.0,\n      \"collision_approximation\": \"convexHull\",\n      \"is_rigid\": true,\n      \"confidence\": \"high\",\n      \"reasoning\": \"Lighter silver (lightweight parts).\"\n    }\n  ],\n  \"joint_prims\": [\n    {\n      \"prim_path\": \"/World/Robot/Joints/BaseTurn\",\n      \"lower_limit_deg\": -90.0,\n      \"upper_limit_deg\": 90.0,\n      \"joint_valid\": true,\n      \"confidence\": \"high\",\n      \"reasoning\": \"Human-like joint with lower=-90\u00b0 and upper=90\u00b0 is within safe range.\"\n    },\n    {\n      \"prim_path\": \"/World/Robot/Joints/ShoulderLift\",\n      \"lower_limit_deg\": -30.0,\n      \"upper_limit_deg\": 120.0,\n      \"joint_valid\": false,\n      \"confidence\": \"high\",\n      \"reasoning\": \"Upper limit exceeds 180\u00b0 for human-like joint, VIOLATED. Set joint_valid=false. Corrected to upper=145\u00b0.\"\n    },\n    {\n      \"prim_path\": \"/World/Robot/Joints/ElbowBend\",\n      \"lower_limit_deg\": 0.0,\n      \"upper_limit_deg\": 135.0,\n      \"joint_valid\": false,\n      \"confidence\": \"high\",\n      \"reasoning\": \"Upper limit exceeds 180\u00b0 for human-like joint, VIOLATED. Set joint_valid=false. Corrected to upper=145\u00b0.\"\n    },\n    {\n      \"prim_path\": \"/World/Robot/Joints/WristTilt\",\n      \"lower_limit_deg\": -60.0,\n      \"upper_limit_deg\": 60.0,\n      \"joint_valid\": true,\n      \"confidence\": \"high\",\n      \"reasoning\": \"Within safe range for human-like joint. No violation.\"\n    },\n    {\n      \"prim_path\": \"/World/Robot/Joints/ToolSpin\",\n      \"lower_limit_deg\": -175.0,\n      \"upper_limit_deg\": 175.0,\n      \"joint_valid\": true,\n      \"confidence\": \"high\",\n      \"reasoning\": \"Industrial robot joint with full 360\u00b0 range. No violation.\"\n    }\n  ],\n  \"global_notes\": \"All materials and joint validations completed. Two joints violated human-like limits and were corrected.\"\n}\n```"
+    },
+    {
+      "name": "bench_crane",
+      "joint_metrics": {
+        "tp": 2,
+        "tn": 2,
+        "fp": 0,
+        "fn": 0,
+        "missed": 0,
+        "total": 4,
+        "precision": 1.0,
+        "recall": 1.0,
+        "accuracy": 1.0,
+        "per_joint": [
+          {
+            "path": "/World/Crane/Joints/SlewRing",
+            "gt_lower": -180,
+            "gt_upper": 180,
+            "gt_violated": false,
+            "pred_violated": false,
+            "pred_lower": -180.0,
+            "pred_upper": 180.0,
+            "confidence": "high",
+            "reasoning": "Industrial robot joints typically have \u00b1180\u00b0 range, so valid.",
+            "outcome": "TN"
+          },
+          {
+            "path": "/World/Crane/Joints/BoomLift",
+            "gt_lower": -5,
+            "gt_upper": 55,
+            "gt_violated": false,
+            "pred_violated": false,
+            "pred_lower": -5.0,
+            "pred_upper": 55.0,
+            "confidence": "high",
+            "reasoning": "Travel=60.0\u00b0, which is within the body length along axis (10.0). Valid.",
+            "outcome": "TN"
+          },
+          {
+            "path": "/World/Crane/Joints/JibSwing",
+            "gt_lower": -10,
+            "gt_upper": 195,
+            "gt_violated": true,
+            "pred_violated": true,
+            "pred_lower": -10.0,
+            "pred_upper": 195.0,
+            "confidence": "high",
+            "reasoning": "Upper limit exceeds 180\u00b0, violating human-like joint constraints. Set joint_valid=false, capped at 145\u00b0.",
+            "outcome": "TP"
+          },
+          {
+            "path": "/World/Crane/Joints/HookTravel",
+            "gt_lower": 0,
+            "gt_upper": 250,
+            "gt_violated": true,
+            "pred_violated": true,
+            "pred_lower": 0.0,
+            "pred_upper": 250.0,
+            "confidence": "high",
+            "reasoning": "travel=250.0 exceeds body length, VIOLATED. Set joint_valid=false.",
+            "outcome": "TP"
+          }
+        ]
+      },
+      "mass_metrics": {
+        "mape_pct": 48.3,
+        "n_prims": 5,
+        "n_missed": 0,
+        "best_prim": "CraneBase",
+        "best_ape": 0.0,
+        "worst_prim": "CounterWeight",
+        "worst_ape": 241.3,
+        "per_prim": [
+          {
+            "path": "/World/Crane/CraneBase",
+            "gt_mass_kg": 75.36,
+            "pred_mass_kg": 75.36,
+            "ape_pct": 0.0,
+            "gt_material": "steel",
+            "pred_material": "steel",
+            "confidence": "high",
+            "reasoning": "Darker grey and structural context indicate steel."
+          },
+          {
+            "path": "/World/Crane/CraneMast",
+            "gt_mass_kg": 49.32,
+            "pred_mass_kg": 49.298,
+            "ape_pct": 0.0,
+            "gt_material": "steel",
+            "pred_material": "steel",
+            "confidence": "high",
+            "reasoning": "Darker grey and structural context indicate steel."
+          },
+          {
+            "path": "/World/Crane/CraneBoom",
+            "gt_mass_kg": 5.83,
+            "pred_mass_kg": 5.832,
+            "ape_pct": 0.0,
+            "gt_material": "aluminum",
+            "pred_material": "aluminium",
+            "confidence": "high",
+            "reasoning": "Lighter silver and lightweight parts context indicate aluminium."
+          },
+          {
+            "path": "/World/Crane/CounterWeight",
+            "gt_mass_kg": 7.762,
+            "pred_mass_kg": 26.494,
+            "ape_pct": 241.3,
+            "gt_material": "concrete",
+            "pred_material": "steel",
+            "confidence": "high",
+            "reasoning": "Darker grey and structural context indicate steel."
+          },
+          {
+            "path": "/World/Crane/HookRod",
+            "gt_mass_kg": 7.89,
+            "pred_mass_kg": 7.888,
+            "ape_pct": 0.0,
+            "gt_material": "steel",
+            "pred_material": "steel",
+            "confidence": "high",
+            "reasoning": "Darker grey and structural context indicate steel."
+          }
+        ]
+      },
+      "chain_of_thought": "STEP 1 \u2014 REASONING\n\nFor each geometry prim write ONE line:\n  \"Prim <path>: material=<X> because <1-2 word visual cue>. Confidence:<level>.\"\n  (Mass is computed automatically from bbox \u2014 you do NOT need to calculate it.)\n\nFor each joint prim write 2-3 sentences (full reasoning required for joint validation):\n  Revolute: \"Joint <name>: lower=<X>\u00b0, upper=<Y>\u00b0. <reason why valid/invalid>.\n   Corrected: lower=<A>\u00b0, upper=<B>\u00b0. Confidence:<level>.\"\n  Prismatic: \"Joint <name>: lower=<X>, upper=<Y>, body_length_along_axis=<B>.\n   travel=upper\u2212lower=<T>. <T> vs <B>: <exceeds\u2192VIOLATED, joint_valid=false|fits\u2192valid, joint_valid=true>.\n   Corrected if needed: lower=<A>, upper=<C>. Confidence:<level>.\"\n\nPrim /World/Crane/CraneBase: material=steel because darker grey and structural context. Confidence:high.\nPrim /World/Crane/CraneMast: material=steel because darker grey and structural context. Confidence:high.\nPrim /World/Crane/CraneBoom: material=aluminium because lighter silver and lightweight parts context. Confidence:high.\nPrim /World/Crane/CounterWeight: material=steel because darker grey and structural context. Confidence:high.\nPrim /World/Crane/HookRod: material=steel because darker grey and structural context. Confidence:high.\n\nJoint /World/Crane/Joints/SlewRing: lower=-180.0\u00b0, upper=180.0\u00b0. Industrial robot joints typically have \u00b1180\u00b0 range, so valid. Confidence:high.\nJoint /World/Crane/Joints/BoomLift: lower=-5.0\u00b0, upper=55.0\u00b0. Travel=60.0\u00b0, which is within the body length along axis (10.0). Valid. Confidence:high.\nJoint /World/Crane/Joints/JibSwing: lower=-10.0\u00b0, upper=195.0\u00b0. Upper limit exceeds 180\u00b0, violating human-like joint constraints. Set joint_valid=false, capped at 145\u00b0. Confidence:high.\nJoint /World/Crane/Joints/HookTravel: lower=0.0, upper=250.0, body_length_along_axis=10.0. travel=250.0 exceeds body length, VIOLATED. Set joint_valid=false. Confidence:high.\n\n```json\n{\n  \"geom_prims\": [\n    {\n      \"prim_path\": \"/World/Crane/CraneBase\",\n      \"material_type\": \"steel\",\n      \"mass_kg\": 0.0,\n      \"static_friction\": 0.0,\n      \"dynamic_friction\": 0.0,\n      \"restitution\": 0.0,\n      \"collision_approximation\": \"convexHull\",\n      \"is_rigid\": true,\n      \"confidence\": \"high\",\n      \"reasoning\": \"Darker grey and structural context indicate steel.\"\n    },\n    {\n      \"prim_path\": \"/World/Crane/CraneMast\",\n      \"material_type\": \"steel\",\n      \"mass_kg\": 0.0,\n      \"static_friction\": 0.0,\n      \"dynamic_friction\": 0.0,\n      \"restitution\": 0.0,\n      \"collision_approximation\": \"convexHull\",\n      \"is_rigid\": true,\n      \"confidence\": \"high\",\n      \"reasoning\": \"Darker grey and structural context indicate steel.\"\n    },\n    {\n      \"prim_path\": \"/World/Crane/CraneBoom\",\n      \"material_type\": \"aluminium\",\n      \"mass_kg\": 0.0,\n      \"static_friction\": 0.0,\n      \"dynamic_friction\": 0.0,\n      \"restitution\": 0.0,\n      \"collision_approximation\": \"convexHull\",\n      \"is_rigid\": true,\n      \"confidence\": \"high\",\n      \"reasoning\": \"Lighter silver and lightweight parts context indicate aluminium.\"\n    },\n    {\n      \"prim_path\": \"/World/Crane/CounterWeight\",\n      \"material_type\": \"steel\",\n      \"mass_kg\": 0.0,\n      \"static_friction\": 0.0,\n      \"dynamic_friction\": 0.0,\n      \"restitution\": 0.0,\n      \"collision_approximation\": \"convexHull\",\n      \"is_rigid\": true,\n      \"confidence\": \"high\",\n      \"reasoning\": \"Darker grey and structural context indicate steel.\"\n    },\n    {\n      \"prim_path\": \"/World/Crane/HookRod\",\n      \"material_type\": \"steel\",\n      \"mass_kg\": 0.0,\n      \"static_friction\": 0.0,\n      \"dynamic_friction\": 0.0,\n      \"restitution\": 0.0,\n      \"collision_approximation\": \"convexHull\",\n      \"is_rigid\": true,\n      \"confidence\": \"high\",\n      \"reasoning\": \"Darker grey and structural context indicate steel.\"\n    }\n  ],\n  \"joint_prims\": [\n    {\n      \"prim_path\": \"/World/Crane/Joints/SlewRing\",\n      \"lower_limit_deg\": -180.0,\n      \"upper_limit_deg\": 180.0,\n      \"joint_valid\": true,\n      \"confidence\": \"high\",\n      \"reasoning\": \"Industrial robot joints typically have \u00b1180\u00b0 range, so valid.\"\n    },\n    {\n      \"prim_path\": \"/World/Crane/Joints/BoomLift\",\n      \"lower_limit_deg\": -5.0,\n      \"upper_limit_deg\": 55.0,\n      \"joint_valid\": true,\n      \"confidence\": \"high\",\n      \"reasoning\": \"Travel=60.0\u00b0, which is within the body length along axis (10.0). Valid.\"\n    },\n    {\n      \"prim_path\": \"/World/Crane/Joints/JibSwing\",\n      \"lower_limit_deg\": -10.0,\n      \"upper_limit_deg\": 195.0,\n      \"joint_valid\": false,\n      \"confidence\": \"high\",\n      \"reasoning\": \"Upper limit exceeds 180\u00b0, violating human-like joint constraints. Set joint_valid=false, capped at 145\u00b0.\"\n    },\n    {\n      \"prim_path\": \"/World/Crane/Joints/HookTravel\",\n      \"lower_limit_deg\": 0.0,\n      \"upper_limit_deg\": 250.0,\n      \"joint_valid\": false,\n      \"confidence\": \"high\",\n      \"reasoning\": \"travel=250.0 exceeds body length, VIOLATED. Set joint_valid=false.\"\n    }\n  ],\n  \"global_notes\": \"Crane components are correctly identified as steel or aluminium based on visual cues. Joints JibSwing and HookTravel violate constraints and are marked as invalid.\"\n}\n```"
+    },
+    {
+      "name": "bench_symmetric_violation",
+      "joint_metrics": {
+        "tp": 1,
+        "tn": 1,
+        "fp": 1,
+        "fn": 0,
+        "missed": 0,
+        "total": 3,
+        "precision": 0.5,
+        "recall": 1.0,
+        "accuracy": 0.667,
+        "per_joint": [
+          {
+            "path": "/World/Assembly/Joints/WideSwing",
+            "gt_lower": -200,
+            "gt_upper": 200,
+            "gt_violated": true,
+            "pred_violated": true,
+            "pred_lower": -180.0,
+            "pred_upper": 180.0,
+            "confidence": "high",
+            "reasoning": "Travel (400.0\u00b0) exceeds body_length_along_axis (25.0 stage units). VIOLATED.",
+            "outcome": "TP"
+          },
+          {
+            "path": "/World/Assembly/Joints/TightPivot",
+            "gt_lower": -25,
+            "gt_upper": 25,
+            "gt_violated": false,
+            "pred_violated": false,
+            "pred_lower": -25.0,
+            "pred_upper": 25.0,
+            "confidence": "high",
+            "reasoning": "Travel (50.0\u00b0) is within body_length_along_axis (8.0 stage units). Valid.",
+            "outcome": "TN"
+          },
+          {
+            "path": "/World/Assembly/Joints/HalfRotation",
+            "gt_lower": -90,
+            "gt_upper": 90,
+            "gt_violated": false,
+            "pred_violated": true,
+            "pred_lower": -90.0,
+            "pred_upper": 90.0,
+            "confidence": "high",
+            "reasoning": "Travel (180.0\u00b0) exceeds body_length_along_axis (6.0 stage units). VIOLATED.",
+            "outcome": "FP"
+          }
+        ]
+      },
+      "mass_metrics": {
+        "mape_pct": 40.3,
+        "n_prims": 6,
+        "n_missed": 0,
+        "best_prim": "RotorBase",
+        "best_ape": 0.0,
+        "worst_prim": "SwingFixture",
+        "worst_ape": 241.0,
+        "per_prim": [
+          {
+            "path": "/World/Assembly/RotorBase",
+            "gt_mass_kg": 15.7,
+            "pred_mass_kg": 15.7,
+            "ape_pct": 0.0,
+            "gt_material": "steel",
+            "pred_material": "steel",
+            "confidence": "high",
+            "reasoning": "Darker grey metallic cube."
+          },
+          {
+            "path": "/World/Assembly/ArmPivot",
+            "gt_mass_kg": 3.39,
+            "pred_mass_kg": 3.391,
+            "ape_pct": 0.0,
+            "gt_material": "aluminum",
+            "pred_material": "aluminium",
+            "confidence": "high",
+            "reasoning": "Lighter silver metallic cylinder."
+          },
+          {
+            "path": "/World/Assembly/SwingFixture",
+            "gt_mass_kg": 2.59,
+            "pred_mass_kg": 8.831,
+            "ape_pct": 241.0,
+            "gt_material": "concrete",
+            "pred_material": "steel",
+            "confidence": "high",
+            "reasoning": "Darker grey metallic cube."
+          },
+          {
+            "path": "/World/Assembly/SwingArm",
+            "gt_mass_kg": 1.53,
+            "pred_mass_kg": 1.526,
+            "ape_pct": 0.3,
+            "gt_material": "aluminum",
+            "pred_material": "aluminium",
+            "confidence": "high",
+            "reasoning": "Lighter silver metallic cylinder."
+          },
+          {
+            "path": "/World/Assembly/HalfBase",
+            "gt_mass_kg": 6.28,
+            "pred_mass_kg": 6.28,
+            "ape_pct": 0.0,
+            "gt_material": "steel",
+            "pred_material": "steel",
+            "confidence": "high",
+            "reasoning": "Darker grey metallic cube."
+          },
+          {
+            "path": "/World/Assembly/HalfArm",
+            "gt_mass_kg": 1.53,
+            "pred_mass_kg": 1.526,
+            "ape_pct": 0.3,
+            "gt_material": "aluminum",
+            "pred_material": "aluminium",
+            "confidence": "high",
+            "reasoning": "Lighter silver metallic cylinder."
+          }
+        ]
+      },
+      "chain_of_thought": "STEP 1 \u2014 REASONING:\n\nFor each geometry prim write ONE line:\n  \"Prim <path>: material=<X> because <1-2 word visual cue>. Confidence:<level>.\"\n  (Mass is computed automatically from bbox \u2014 you do NOT need to calculate it.)\n\nFor each joint prim write 2-3 sentences (full reasoning required for joint validation):\n  Revolute: \"Joint <name>: lower=<X>\u00b0, upper=<Y>\u00b0. <reason why valid/invalid>.\n   Corrected: lower=<A>\u00b0, upper=<B>\u00b0. Confidence:<level>.\"\n  Prismatic: \"Joint <name>: lower=<X>, upper=<Y>, body_length_along_axis=<B>.\n   travel=upper\u2212lower=<T>. <T> vs <B>: <exceeds\u2192VIOLATED, joint_valid=false|fits\u2192valid, joint_valid=true>.\n   Corrected if needed: lower=<A>, upper=<C>. Confidence:<level>.\"\n\n\u2014\n\nPrim /World/Assembly/RotorBase: material=steel because darker grey metallic cube. Confidence:high.\nPrim /World/Assembly/ArmPivot: material=aluminium because lighter silver metallic cylinder. Confidence:high.\nPrim /World/Assembly/SwingFixture: material=steel because darker grey metallic cube. Confidence:high.\nPrim /World/Assembly/SwingArm: material=aluminium because lighter silver metallic cylinder. Confidence:high.\nPrim /World/Assembly/HalfBase: material=steel because darker grey metallic cube. Confidence:high.\nPrim /World/Assembly/HalfArm: material=aluminium because lighter silver metallic cylinder. Confidence:high.\n\nJoint /World/Assembly/Joints/WideSwing: lower=-200.0\u00b0, upper=200.0\u00b0. The travel (400.0\u00b0) exceeds the body_length_along_axis (25.0 stage units). VIOLATED. Corrected: lower=-180.0\u00b0, upper=180.0\u00b0. Confidence:high.\nJoint /World/Assembly/Joints/TightPivot: lower=-25.0\u00b0, upper=25.0\u00b0. The travel (50.0\u00b0) is within the body_length_along_axis (8.0 stage units). Valid. Confidence:high.\nJoint /World/Assembly/Joints/HalfRotation: lower=-90.0\u00b0, upper=90.0\u00b0. The travel (180.0\u00b0) exceeds the body_length_along_axis (6.0 stage units). VIOLATED. Corrected: lower=-90.0\u00b0, upper=90.0\u00b0. Confidence:high.\n\n\u2014\n\n```json\n{\n  \"geom_prims\": [\n    {\n      \"prim_path\": \"/World/Assembly/RotorBase\",\n      \"material_type\": \"steel\",\n      \"mass_kg\": 0.0,\n      \"static_friction\": 0.0,\n      \"dynamic_friction\": 0.0,\n      \"restitution\": 0.0,\n      \"collision_approximation\": \"convexHull\",\n      \"is_rigid\": true,\n      \"confidence\": \"high\",\n      \"reasoning\": \"Darker grey metallic cube.\"\n    },\n    {\n      \"prim_path\": \"/World/Assembly/ArmPivot\",\n      \"material_type\": \"aluminium\",\n      \"mass_kg\": 0.0,\n      \"static_friction\": 0.0,\n      \"dynamic_friction\": 0.0,\n      \"restitution\": 0.0,\n      \"collision_approximation\": \"convexHull\",\n      \"is_rigid\": true,\n      \"confidence\": \"high\",\n      \"reasoning\": \"Lighter silver metallic cylinder.\"\n    },\n    {\n      \"prim_path\": \"/World/Assembly/SwingFixture\",\n      \"material_type\": \"steel\",\n      \"mass_kg\": 0.0,\n      \"static_friction\": 0.0,\n      \"dynamic_friction\": 0.0,\n      \"restitution\": 0.0,\n      \"collision_approximation\": \"convexHull\",\n      \"is_rigid\": true,\n      \"confidence\": \"high\",\n      \"reasoning\": \"Darker grey metallic cube.\"\n    },\n    {\n      \"prim_path\": \"/World/Assembly/SwingArm\",\n      \"material_type\": \"aluminium\",\n      \"mass_kg\": 0.0,\n      \"static_friction\": 0.0,\n      \"dynamic_friction\": 0.0,\n      \"restitution\": 0.0,\n      \"collision_approximation\": \"convexHull\",\n      \"is_rigid\": true,\n      \"confidence\": \"high\",\n      \"reasoning\": \"Lighter silver metallic cylinder.\"\n    },\n    {\n      \"prim_path\": \"/World/Assembly/HalfBase\",\n      \"material_type\": \"steel\",\n      \"mass_kg\": 0.0,\n      \"static_friction\": 0.0,\n      \"dynamic_friction\": 0.0,\n      \"restitution\": 0.0,\n      \"collision_approximation\": \"convexHull\",\n      \"is_rigid\": true,\n      \"confidence\": \"high\",\n      \"reasoning\": \"Darker grey metallic cube.\"\n    },\n    {\n      \"prim_path\": \"/World/Assembly/HalfArm\",\n      \"material_type\": \"aluminium\",\n      \"mass_kg\": 0.0,\n      \"static_friction\": 0.0,\n      \"dynamic_friction\": 0.0,\n      \"restitution\": 0.0,\n      \"collision_approximation\": \"convexHull\",\n      \"is_rigid\": true,\n      \"confidence\": \"high\",\n      \"reasoning\": \"Lighter silver metallic cylinder.\"\n    }\n  ],\n  \"joint_prims\": [\n    {\n      \"prim_path\": \"/World/Assembly/Joints/WideSwing\",\n      \"lower_limit_deg\": -180.0,\n      \"upper_limit_deg\": 180.0,\n      \"joint_valid\": false,\n      \"confidence\": \"high\",\n      \"reasoning\": \"Travel (400.0\u00b0) exceeds body_length_along_axis (25.0 stage units). VIOLATED.\"\n    },\n    {\n      \"prim_path\": \"/World/Assembly/Joints/TightPivot\",\n      \"lower_limit_deg\": -25.0,\n      \"upper_limit_deg\": 25.0,\n      \"joint_valid\": true,\n      \"confidence\": \"high\",\n      \"reasoning\": \"Travel (50.0\u00b0) is within body_length_along_axis (8.0 stage units). Valid.\"\n    },\n    {\n      \"prim_path\": \"/World/Assembly/Joints/HalfRotation\",\n      \"lower_limit_deg\": -90.0,\n      \"upper_limit_deg\": 90.0,\n      \"joint_valid\": false,\n      \"confidence\": \"high\",\n      \"reasoning\": \"Travel (180.0\u00b0) exceeds body_length_along_axis (6.0 stage units). VIOLATED.\"\n    }\n  ],\n  \"global_notes\": \"All geometry prims are correctly identified as steel or aluminium based on visual cues. Joints WideSwing and HalfRotation are VIOLATED due to excessive travel compared to their body lengths.\"\n}\n```"
+    },
+    {
+      "name": "bench_scara",
+      "joint_metrics": {
+        "tp": 2,
+        "tn": 2,
+        "fp": 0,
+        "fn": 0,
+        "missed": 0,
+        "total": 4,
+        "precision": 1.0,
+        "recall": 1.0,
+        "accuracy": 1.0,
+        "per_joint": [
+          {
+            "path": "/World/Scara/Joints/Joint1",
+            "gt_lower": -150,
+            "gt_upper": 150,
+            "gt_violated": false,
+            "pred_violated": false,
+            "pred_lower": -150.0,
+            "pred_upper": 150.0,
+            "confidence": "high",
+            "reasoning": "Industrial range (-180\u00b0 to 180\u00b0) is satisfied.",
+            "outcome": "TN"
+          },
+          {
+            "path": "/World/Scara/Joints/Joint2",
+            "gt_lower": -10,
+            "gt_upper": 210,
+            "gt_violated": true,
+            "pred_violated": true,
+            "pred_lower": -10.0,
+            "pred_upper": 145.0,
+            "confidence": "high",
+            "reasoning": "Original upper limit (210\u00b0) exceeds 180\u00b0, violating human-like joint constraints. Corrected to 145\u00b0.",
+            "outcome": "TP"
+          },
+          {
+            "path": "/World/Scara/Joints/ZTravel",
+            "gt_lower": 0,
+            "gt_upper": 200,
+            "gt_violated": true,
+            "pred_violated": true,
+            "pred_lower": 0.0,
+            "pred_upper": 15.0,
+            "confidence": "high",
+            "reasoning": "Original travel (200) exceeds body length (15), violating prismatic joint constraints. Corrected to 15.",
+            "outcome": "TP"
+          },
+          {
+            "path": "/World/Scara/Joints/ToolRotate",
+            "gt_lower": -175,
+            "gt_upper": 175,
+            "gt_violated": false,
+            "pred_violated": false,
+            "pred_lower": -175.0,
+            "pred_upper": 175.0,
+            "confidence": "high",
+            "reasoning": "Human-like range (-180\u00b0 to 180\u00b0) is satisfied.",
+            "outcome": "TN"
+          }
+        ]
+      },
+      "mass_metrics": {
+        "mape_pct": 127.2,
+        "n_prims": 6,
+        "n_missed": 0,
+        "best_prim": "Base",
+        "best_ape": 0.0,
+        "worst_prim": "ZCarriage",
+        "worst_ape": 191.0,
+        "per_prim": [
+          {
+            "path": "/World/Scara/Base",
+            "gt_mass_kg": 25.12,
+            "pred_mass_kg": 25.12,
+            "ape_pct": 0.0,
+            "gt_material": "steel",
+            "pred_material": "steel",
+            "confidence": "high",
+            "reasoning": "Flat grey, structural context suggests steel."
+          },
+          {
+            "path": "/World/Scara/ArmLink1",
+            "gt_mass_kg": 3.4,
+            "pred_mass_kg": 9.891,
+            "ape_pct": 190.9,
+            "gt_material": "aluminum",
+            "pred_material": "steel",
+            "confidence": "high",
+            "reasoning": "Flat grey, structural context suggests steel."
+          },
+          {
+            "path": "/World/Scara/ArmLink2",
+            "gt_mass_kg": 2.43,
+            "pred_mass_kg": 7.065,
+            "ape_pct": 190.7,
+            "gt_material": "aluminum",
+            "pred_material": "steel",
+            "confidence": "high",
+            "reasoning": "Flat grey, structural context suggests steel."
+          },
+          {
+            "path": "/World/Scara/ZColumn",
+            "gt_mass_kg": 4.58,
+            "pred_mass_kg": 13.31,
+            "ape_pct": 190.6,
+            "gt_material": "aluminum",
+            "pred_material": "steel",
+            "confidence": "high",
+            "reasoning": "Flat grey, structural context suggests steel."
+          },
+          {
+            "path": "/World/Scara/ZCarriage",
+            "gt_mass_kg": 2.59,
+            "pred_mass_kg": 7.536,
+            "ape_pct": 191.0,
+            "gt_material": "aluminum",
+            "pred_material": "steel",
+            "confidence": "high",
+            "reasoning": "Flat grey, structural context suggests steel."
+          },
+          {
+            "path": "/World/Scara/Tool",
+            "gt_mass_kg": 0.322,
+            "pred_mass_kg": 0.322,
+            "ape_pct": 0.0,
+            "gt_material": "rubber",
+            "pred_material": "rubber",
+            "confidence": "high",
+            "reasoning": "Near-black color and gripping function suggest rubber."
+          }
+        ]
+      },
+      "chain_of_thought": " STEP 1 \u2014 REASONING\n\nFor the geometry prims, I see that all objects are shown as silvery or grey, which typically indicates metal. The Base, ArmLink1, ArmLink2, and ZCarriage have a flat grey appearance, suggesting steel (darker grey) for structural components. The ZColumn is a tall cylinder, likely steel as well. The Tool is a sphere with a near-black color, which might be rubber or a dark plastic, but given the context of a robotic tool, rubber is more plausible for grip. The fill factors indicate they are not solid, so I\u2019ll use the densities for steel and rubber.\n\nLooking at the joints: Joint1 is a revolute with limits -150\u00b0 to 150\u00b0, which is within the industrial range. Joint2 has -10\u00b0 to 210\u00b0, which exceeds 180\u00b0, so that\u2019s a violation. I\u2019ll cap it at 145\u00b0. Joint ZTravel is prismatic with 0 to 200 stage units. The body length is 15, so travel is 200, which exceeds 15\u2014VIOLATED. I\u2019ll adjust to 15. ToolRotate is -175\u00b0 to 175\u00b0, which is within the human-like range, so it\u2019s valid.\n\nNow, for the material assignments: Base, ArmLink1, ArmLink2, ZColumn, and ZCarriage are all structural parts, so steel. The Tool is a gripping sphere, so rubber. The fill factors are already given, so I don\u2019t need to adjust those. The masses will be calculated using the densities for steel (7850 kg/m\u00b3) and rubber (1200 kg/m\u00b3).\n\nJoint validations: Joint2\u2019s upper limit is too high, so I\u2019ll set it to 145\u00b0. Joint ZTravel\u2019s travel exceeds the body length, so I\u2019ll set the upper limit to 15. The other joints are fine. The ToolRotate is within the human-like range, so no adjustment needed.\n\nI\u2019m confident in the material assignments because the silvery/grey color and structural context point to steel. The Tool\u2019s near-black color and gripping function suggest rubber. The joint limits are validated based on the rules, with corrections for violations.\n\nI\u2019ll now output the JSON with these assignments and validations.\n\t\n```json\n{\n  \"geom_prims\": [\n    {\n      \"prim_path\": \"/World/Scara/Base\",\n      \"material_type\": \"steel\",\n      \"mass_kg\": 0.0,\n      \"static_friction\": 0.0,\n      \"dynamic_friction\": 0.0,\n      \"restitution\": 0.0,\n      \"collision_approximation\": \"convexHull\",\n      \"is_rigid\": true,\n      \"confidence\": \"high\",\n      \"reasoning\": \"Flat grey, structural context suggests steel.\"\n    },\n    {\n      \"prim_path\": \"/World/Scara/ArmLink1\",\n      \"material_type\": \"steel\",\n      \"mass_kg\": 0.0,\n      \"static_friction\": 0.0,\n      \"dynamic_friction\": 0.0,\n      \"restitution\": 0.0,\n      \"collision_approximation\": \"convexHull\",\n      \"is_rigid\": true,\n      \"confidence\": \"high\",\n      \"reasoning\": \"Flat grey, structural context suggests steel.\"\n    },\n    {\n      \"prim_path\": \"/World/Scara/ArmLink2\",\n      \"material_type\": \"steel\",\n      \"mass_kg\": 0.0,\n      \"static_friction\": 0.0,\n      \"dynamic_friction\": 0.0,\n      \"restitution\": 0.0,\n      \"collision_approximation\": \"convexHull\",\n      \"is_rigid\": true,\n      \"confidence\": \"high\",\n      \"reasoning\": \"Flat grey, structural context suggests steel.\"\n    },\n    {\n      \"prim_path\": \"/World/Scara/ZColumn\",\n      \"material_type\": \"steel\",\n      \"mass_kg\": 0.0,\n      \"static_friction\": 0.0,\n      \"dynamic_friction\": 0.0,\n      \"restitution\": 0.0,\n      \"collision_approximation\": \"convexHull\",\n      \"is_rigid\": true,\n      \"confidence\": \"high\",\n      \"reasoning\": \"Flat grey, structural context suggests steel.\"\n    },\n    {\n      \"prim_path\": \"/World/Scara/ZCarriage\",\n      \"material_type\": \"steel\",\n      \"mass_kg\": 0.0,\n      \"static_friction\": 0.0,\n      \"dynamic_friction\": 0.0,\n      \"restitution\": 0.0,\n      \"collision_approximation\": \"convexHull\",\n      \"is_rigid\": true,\n      \"confidence\": \"high\",\n      \"reasoning\": \"Flat grey, structural context suggests steel.\"\n    },\n    {\n      \"prim_path\": \"/World/Scara/Tool\",\n      \"material_type\": \"rubber\",\n      \"mass_kg\": 0.0,\n      \"static_friction\": 0.0,\n      \"dynamic_friction\": 0.0,\n      \"restitution\": 0.0,\n      \"collision_approximation\": \"convexHull\",\n      \"is_rigid\": true,\n      \"confidence\": \"high\",\n      \"reasoning\": \"Near-black color and gripping function suggest rubber.\"\n    }\n  ],\n  \"joint_prims\": [\n    {\n      \"prim_path\": \"/World/Scara/Joints/Joint1\",\n      \"lower_limit_deg\": -150.0,\n      \"upper_limit_deg\": 150.0,\n      \"joint_valid\": true,\n      \"confidence\": \"high\",\n      \"reasoning\": \"Industrial range (-180\u00b0 to 180\u00b0) is satisfied.\"\n    },\n    {\n      \"prim_path\": \"/World/Scara/Joints/Joint2\",\n      \"lower_limit_deg\": -10.0,\n      \"upper_limit_deg\": 145.0,\n      \"joint_valid\": false,\n      \"confidence\": \"high\",\n      \"reasoning\": \"Original upper limit (210\u00b0) exceeds 180\u00b0, violating human-like joint constraints. Corrected to 145\u00b0.\"\n    },\n    {\n      \"prim_path\": \"/World/Scara/Joints/ZTravel\",\n      \"lower_limit_deg\": 0.0,\n      \"upper_limit_deg\": 15.0,\n      \"joint_valid\": false,\n      \"confidence\": \"high\",\n      \"reasoning\": \"Original travel (200) exceeds body length (15), violating prismatic joint constraints. Corrected to 15.\"\n    },\n    {\n      \"prim_path\": \"/World/Scara/Joints/ToolRotate\",\n      \"lower_limit_deg\": -175.0,\n      \"upper_limit_deg\": 175.0,\n      \"joint_valid\": true,\n      \"confidence\": \"high\",\n      \"reasoning\": \"Human-like range (-180\u00b0 to 180\u00b0) is satisfied.\"\n    }\n  ],\n  \"global_notes\": \"Material assignments based on color and context; joint validations corrected for violations.\"\n}\n```"
+    },
+    {
+      "name": "bench_gripper",
+      "joint_metrics": {
+        "tp": 2,
+        "tn": 2,
+        "fp": 0,
+        "fn": 0,
+        "missed": 0,
+        "total": 4,
+        "precision": 1.0,
+        "recall": 1.0,
+        "accuracy": 1.0,
+        "per_joint": [
+          {
+            "path": "/World/Gripper/Joints/FingerL_Spread",
+            "gt_lower": 0,
+            "gt_upper": 80,
+            "gt_violated": true,
+            "pred_violated": true,
+            "pred_lower": 0.0,
+            "pred_upper": 80.0,
+            "confidence": "high",
+            "reasoning": "Joint /World/Gripper/Joints/FingerL_Spread: lower=0.0, upper=80.0, body_length=30.0. travel=80.0. 80.0 vs 30.0: VIOLATED",
+            "outcome": "TP"
+          },
+          {
+            "path": "/World/Gripper/Joints/FingerL_Close",
+            "gt_lower": -8,
+            "gt_upper": 0,
+            "gt_violated": false,
+            "pred_violated": false,
+            "pred_lower": -8.0,
+            "pred_upper": 0.0,
+            "confidence": "high",
+            "reasoning": "Joint /World/Gripper/Joints/FingerL_Close: lower=-8.0, upper=0.0, body_length=30.0. travel=8.0. 8.0 vs 30.0: valid, join",
+            "outcome": "TN"
+          },
+          {
+            "path": "/World/Gripper/Joints/FingerR_Spread",
+            "gt_lower": 0,
+            "gt_upper": 75,
+            "gt_violated": true,
+            "pred_violated": true,
+            "pred_lower": 0.0,
+            "pred_upper": 75.0,
+            "confidence": "high",
+            "reasoning": "Joint /World/Gripper/Joints/FingerR_Spread: lower=0.0, upper=75.0, body_length=30.0. travel=75.0. 75.0 vs 30.0: VIOLATED",
+            "outcome": "TP"
+          },
+          {
+            "path": "/World/Gripper/Joints/FingerR_Close",
+            "gt_lower": -8,
+            "gt_upper": 0,
+            "gt_violated": false,
+            "pred_violated": false,
+            "pred_lower": -8.0,
+            "pred_upper": 0.0,
+            "confidence": "high",
+            "reasoning": "Joint /World/Gripper/Joints/FingerR_Close: lower=-8.0, upper=0.0, body_length=30.0. travel=8.0. 8.0 vs 30.0: valid, join",
+            "outcome": "TN"
+          }
+        ]
+      },
+      "mass_metrics": {
+        "mape_pct": 110.2,
+        "n_prims": 4,
+        "n_missed": 0,
+        "best_prim": "MountBracket",
+        "best_ape": 0.0,
+        "worst_prim": "Palm",
+        "worst_ape": 190.7,
+        "per_prim": [
+          {
+            "path": "/World/Gripper/Palm",
+            "gt_mass_kg": 9.72,
+            "pred_mass_kg": 28.26,
+            "ape_pct": 190.7,
+            "gt_material": "aluminum",
+            "pred_material": "steel",
+            "confidence": "high",
+            "reasoning": "Prim /World/Gripper/Palm: material=steel because darker grey and structural context."
+          },
+          {
+            "path": "/World/Gripper/MountBracket",
+            "gt_mass_kg": 9.42,
+            "pred_mass_kg": 9.42,
+            "ape_pct": 0.0,
+            "gt_material": "steel",
+            "pred_material": "steel",
+            "confidence": "high",
+            "reasoning": "Prim /World/Gripper/MountBracket: material=steel because darker grey and structural context."
+          },
+          {
+            "path": "/World/Gripper/FingerL",
+            "gt_mass_kg": 0.432,
+            "pred_mass_kg": 0.972,
+            "ape_pct": 125.0,
+            "gt_material": "rubber",
+            "pred_material": "aluminium",
+            "confidence": "high",
+            "reasoning": "Prim /World/Gripper/FingerL: material=aluminium because lighter silver and lightweight part context."
+          },
+          {
+            "path": "/World/Gripper/FingerR",
+            "gt_mass_kg": 0.432,
+            "pred_mass_kg": 0.972,
+            "ape_pct": 125.0,
+            "gt_material": "rubber",
+            "pred_material": "aluminium",
+            "confidence": "high",
+            "reasoning": "Prim /World/Gripper/FingerR: material=aluminium because lighter silver and lightweight part context."
+          }
+        ]
+      },
+      "chain_of_thought": "STEP 1 \u2014 REASONING\n\nFor the geometry prims, I see that the Palm, MountBracket, FingerL, and FingerR are all shown as cubes with no visible texture or color cues. However, the context suggests they are part of a robotic gripper, which typically uses metal components. The MountBracket and Palm are likely made of steel (darker grey) for structural integrity, while the FingerL and FingerR might be aluminum (lighter silver) for lightweight parts. The confidence is high because the material cues align with standard robotic design.\n\nFor the joints, all four are prismatic joints along the X-axis. The travel for each joint is calculated as upper \u2212 lower. For example, FingerL_Close has a travel of 8.0 (0.0 \u2212 (\u22128.0)). The body_length_along_axis is 30.0 for all joints. Since the travel (8.0) is less than the body length (30.0), these joints are valid. No violations are detected, so joint_valid=true for all.\n\nPrim /World/Gripper/Palm: material=steel because darker grey and structural context. Confidence:high.\nPrim /World/Gripper/MountBracket: material=steel because darker grey and structural context. Confidence:high.\nPrim /World/Gripper/FingerL: material=aluminium because lighter silver and lightweight part context. Confidence:high.\nPrim /World/Gripper/FingerR: material=aluminium because lighter silver and lightweight part context. Confidence:high.\nJoint /World/Gripper/Joints/FingerL_Spread: lower=0.0, upper=80.0, body_length=30.0. travel=80.0. 80.0 vs 30.0: VIOLATED, joint_valid=false. Corrected: lower=0.0, upper=30.0. Confidence:high.\nJoint /World/Gripper/Joints/FingerL_Close: lower=-8.0, upper=0.0, body_length=30.0. travel=8.0. 8.0 vs 30.0: valid, joint_valid=true. Confidence:high.\nJoint /World/Gripper/Joints/FingerR_Spread: lower=0.0, upper=75.0, body_length=30.0. travel=75.0. 75.0 vs 30.0: VIOLATED, joint_valid=false. Corrected: lower=0.0, upper=30.0. Confidence:high.\nJoint /World/Gripper/Joints/FingerR_Close: lower=-8.0, upper=0.0, body_length=30.0. travel=8.0. 8.0 vs 30.0: valid, joint_valid=true. Confidence:high.\n\n```json\n{\n  \"geom_prims\": [\n    {\n      \"prim_path\": \"/World/Gripper/Palm\",\n      \"material_type\": \"steel\",\n      \"mass_kg\": 0.0,\n      \"static_friction\": 0.0,\n      \"dynamic_friction\": 0.0,\n      \"restitution\": 0.0,\n      \"collision_approximation\": \"convexHull\",\n      \"is_rigid\": true,\n      \"confidence\": \"high\",\n      \"reasoning\": \"Prim /World/Gripper/Palm: material=steel because darker grey and structural context.\"\n    },\n    {\n      \"prim_path\": \"/World/Gripper/MountBracket\",\n      \"material_type\": \"steel\",\n      \"mass_kg\": 0.0,\n      \"static_friction\": 0.0,\n      \"dynamic_friction\": 0.0,\n      \"restitution\": 0.0,\n      \"collision_approximation\": \"convexHull\",\n      \"is_rigid\": true,\n      \"confidence\": \"high\",\n      \"reasoning\": \"Prim /World/Gripper/MountBracket: material=steel because darker grey and structural context.\"\n    },\n    {\n      \"prim_path\": \"/World/Gripper/FingerL\",\n      \"material_type\": \"aluminium\",\n      \"mass_kg\": 0.0,\n      \"static_friction\": 0.0,\n      \"dynamic_friction\": 0.0,\n      \"restitution\": 0.0,\n      \"collision_approximation\": \"convexHull\",\n      \"is_rigid\": true,\n      \"confidence\": \"high\",\n      \"reasoning\": \"Prim /World/Gripper/FingerL: material=aluminium because lighter silver and lightweight part context.\"\n    },\n    {\n      \"prim_path\": \"/World/Gripper/FingerR\",\n      \"material_type\": \"aluminium\",\n      \"mass_kg\": 0.0,\n      \"static_friction\": 0.0,\n      \"dynamic_friction\": 0.0,\n      \"restitution\": 0.0,\n      \"collision_approximation\": \"convexHull\",\n      \"is_rigid\": true,\n      \"confidence\": \"high\",\n      \"reasoning\": \"Prim /World/Gripper/FingerR: material=aluminium because lighter silver and lightweight part context.\"\n    }\n  ],\n  \"joint_prims\": [\n    {\n      \"prim_path\": \"/World/Gripper/Joints/FingerL_Spread\",\n      \"lower_limit_deg\": 0.0,\n      \"upper_limit_deg\": 80.0,\n      \"joint_valid\": false,\n      \"confidence\": \"high\",\n      \"reasoning\": \"Joint /World/Gripper/Joints/FingerL_Spread: lower=0.0, upper=80.0, body_length=30.0. travel=80.0. 80.0 vs 30.0: VIOLATED, joint_valid=false. Corrected: lower=0.0, upper=30.0.\"\n    },\n    {\n      \"prim_path\": \"/World/Gripper/Joints/FingerL_Close\",\n      \"lower_limit_deg\": -8.0,\n      \"upper_limit_deg\": 0.0,\n      \"joint_valid\": true,\n      \"confidence\": \"high\",\n      \"reasoning\": \"Joint /World/Gripper/Joints/FingerL_Close: lower=-8.0, upper=0.0, body_length=30.0. travel=8.0. 8.0 vs 30.0: valid, joint_valid=true.\"\n    },\n    {\n      \"prim_path\": \"/World/Gripper/Joints/FingerR_Spread\",\n      \"lower_limit_deg\": 0.0,\n      \"upper_limit_deg\": 75.0,\n      \"joint_valid\": false,\n      \"confidence\": \"high\",\n      \"reasoning\": \"Joint /World/Gripper/Joints/FingerR_Spread: lower=0.0, upper=75.0, body_length=30.0. travel=75.0. 75.0 vs 30.0: VIOLATED, joint_valid=false. Corrected: lower=0.0, upper=30.0.\"\n    },\n    {\n      \"prim_path\": \"/World/Gripper/Joints/FingerR_Close\",\n      \"lower_limit_deg\": -8.0,\n      \"upper_limit_deg\": 0.0,\n      \"joint_valid\": true,\n      \"confidence\": \"high\",\n      \"reasoning\": \"Joint /World/Gripper/Joints/FingerR_Close: lower=-8.0, upper=0.0, body_length=30.0. travel=8.0. 8.0 vs 30.0: valid, joint_valid=true.\"\n    }\n  ],\n  \"global_notes\": \"The scene contains a robotic gripper with prismatic joints. Two joints (FingerL_Spread and FingerR_Spread) have travel limits exceeding the body length, violating the joint rules. These were corrected to 30.0 for travel. The remaining joints are valid.\"\n}\n```"
+    },
+    {
+      "name": "bench_excavator",
+      "joint_metrics": {
+        "tp": 2,
+        "tn": 2,
+        "fp": 0,
+        "fn": 0,
+        "missed": 0,
+        "total": 4,
+        "precision": 1.0,
+        "recall": 1.0,
+        "accuracy": 1.0,
+        "per_joint": [
+          {
+            "path": "/World/Excavator/Joints/BoomCylinder",
+            "gt_lower": 0,
+            "gt_upper": 150,
+            "gt_violated": true,
+            "pred_violated": true,
+            "pred_lower": 0.0,
+            "pred_upper": 150.0,
+            "confidence": "high",
+            "reasoning": "travel=upper\u2212lower=150.0 exceeds body_length=10.0",
+            "outcome": "TP"
+          },
+          {
+            "path": "/World/Excavator/Joints/ArmCylinder",
+            "gt_lower": 0,
+            "gt_upper": 120,
+            "gt_violated": true,
+            "pred_violated": true,
+            "pred_lower": 0.0,
+            "pred_upper": 120.0,
+            "confidence": "high",
+            "reasoning": "travel=upper\u2212lower=120.0 exceeds body_length=8.0",
+            "outcome": "TP"
+          },
+          {
+            "path": "/World/Excavator/Joints/BucketCurl",
+            "gt_lower": -45,
+            "gt_upper": 135,
+            "gt_violated": false,
+            "pred_violated": false,
+            "pred_lower": -45.0,
+            "pred_upper": 135.0,
+            "confidence": "high",
+            "reasoning": "upper_limit=135.0 is below 145.0, so valid",
+            "outcome": "TN"
+          },
+          {
+            "path": "/World/Excavator/Joints/CabSwing",
+            "gt_lower": -170,
+            "gt_upper": 170,
+            "gt_violated": false,
+            "pred_violated": false,
+            "pred_lower": -170.0,
+            "pred_upper": 170.0,
+            "confidence": "high",
+            "reasoning": "upper_limit=170.0 is below 180.0, so valid",
+            "outcome": "TN"
+          }
+        ]
+      },
+      "mass_metrics": {
+        "mape_pct": 27.3,
+        "n_prims": 7,
+        "n_missed": 0,
+        "best_prim": "Chassis",
+        "best_ape": 0.0,
+        "worst_prim": "Bucket",
+        "worst_ape": 190.7,
+        "per_prim": [
+          {
+            "path": "/World/Excavator/Chassis",
+            "gt_mass_kg": 282.6,
+            "pred_mass_kg": 282.6,
+            "ape_pct": 0.0,
+            "gt_material": "steel",
+            "pred_material": "steel",
+            "confidence": "high",
+            "reasoning": "darker grey metal"
+          },
+          {
+            "path": "/World/Excavator/Cab",
+            "gt_mass_kg": 147.19,
+            "pred_mass_kg": 147.188,
+            "ape_pct": 0.0,
+            "gt_material": "steel",
+            "pred_material": "steel",
+            "confidence": "high",
+            "reasoning": "darker grey metal"
+          },
+          {
+            "path": "/World/Excavator/BoomArm",
+            "gt_mass_kg": 8.48,
+            "pred_mass_kg": 8.478,
+            "ape_pct": 0.0,
+            "gt_material": "aluminum",
+            "pred_material": "aluminium",
+            "confidence": "high",
+            "reasoning": "lighter silver metal"
+          },
+          {
+            "path": "/World/Excavator/StickArm",
+            "gt_mass_kg": 4.75,
+            "pred_mass_kg": 4.748,
+            "ape_pct": 0.0,
+            "gt_material": "aluminum",
+            "pred_material": "aluminium",
+            "confidence": "high",
+            "reasoning": "lighter silver metal"
+          },
+          {
+            "path": "/World/Excavator/Bucket",
+            "gt_mass_kg": 20.25,
+            "pred_mass_kg": 58.875,
+            "ape_pct": 190.7,
+            "gt_material": "aluminum",
+            "pred_material": "steel",
+            "confidence": "high",
+            "reasoning": "darker grey metal"
+          },
+          {
+            "path": "/World/Excavator/BoomPiston",
+            "gt_mass_kg": 1.256,
+            "pred_mass_kg": 1.256,
+            "ape_pct": 0.0,
+            "gt_material": "steel",
+            "pred_material": "steel",
+            "confidence": "high",
+            "reasoning": "darker grey metal"
+          },
+          {
+            "path": "/World/Excavator/StickPiston",
+            "gt_mass_kg": 1.005,
+            "pred_mass_kg": 1.005,
+            "ape_pct": 0.0,
+            "gt_material": "steel",
+            "pred_material": "steel",
+            "confidence": "high",
+            "reasoning": "darker grey metal"
+          }
+        ]
+      },
+      "chain_of_thought": "STEP 1 \u2014 REASONING\n\nFor each geometry prim write ONE line:\n  \"Prim <path>: material=<X> because <1-2 word visual cue>. Confidence:<level>.\"\n  (Mass is computed automatically from bbox \u2014 you do NOT need to calculate it.)\n\nPrim /World/Excavator/Chassis: material=steel because darker grey metal. Confidence:high.\nPrim /World/Excavator/Cab: material=steel because darker grey metal. Confidence:high.\nPrim /World/Excavator/BoomArm: material=aluminium because lighter silver metal. Confidence:high.\nPrim /World/Excavator/StickArm: material=aluminium because lighter silver metal. Confidence:high.\nPrim /World/Excavator/Bucket: material=steel because darker grey metal. Confidence:high.\nPrim /World/Excavator/BoomPiston: material=steel because darker grey metal. Confidence:high.\nPrim /World/Excavator/StickPiston: material=steel because darker grey metal. Confidence:high.\n\nFor each joint prim write 2-3 sentences (full reasoning required for joint validation):\n  Revolute: \"Joint <name>: lower=<X>\u00b0, upper=<Y>\u00b0. <reason why valid/invalid>.\n   Corrected: lower=<A>\u00b0, upper=<B>\u00b0. Confidence:<level>.\"\n  Prismatic: \"Joint <name>: lower=<X>, upper=<Y>, body_length_along_axis=<B>.\n   travel=upper\u2212lower=<T>. <T> vs <B>: <exceeds\u2192VIOLATED, joint_valid=false|fits\u2192valid, joint_valid=true>.\n   Corrected if needed: lower=<A>, upper=<C>. Confidence:<level>.\"\n\nJoint /World/Excavator/Joints/BoomCylinder: Prismatic joint with lower=0.0, upper=150.0, body_length_along_axis=10.0. travel=150.0. travel (150.0) exceeds body_length (10.0) \u2192 VIOLATED. Set joint_valid=false.\nJoint /World/Excavator/Joints/ArmCylinder: Prismatic joint with lower=0.0, upper=120.0, body_length_along_axis=8.0. travel=120.0. travel (120.0) exceeds body_length (8.0) \u2192 VIOLATED. Set joint_valid=false.\nJoint /World/Excavator/Joints/BucketCurl: Revolute joint with lower=-45.0, upper=135.0. upper_limit (135.0) is below 145.0, so valid. No correction needed.\nJoint /World/Excavator/Joints/CabSwing: Revolute joint with lower=-170.0, upper=170.0. upper_limit (170.0) exceeds 180.0, so valid. No correction needed.\n\nSTEP 2 \u2014 JSON OUTPUT\n\n```json\n{\n  \"geom_prims\": [\n    {\n      \"prim_path\": \"/World/Excavator/Chassis\",\n      \"material_type\": \"steel\",\n      \"mass_kg\": 0.0,\n      \"static_friction\": 0.0,\n      \"dynamic_friction\": 0.0,\n      \"restitution\": 0.0,\n      \"collision_approximation\": \"convexHull\",\n      \"is_rigid\": true,\n      \"confidence\": \"high\",\n      \"reasoning\": \"darker grey metal\"\n    },\n    {\n      \"prim_path\": \"/World/Excavator/Cab\",\n      \"material_type\": \"steel\",\n      \"mass_kg\": 0.0,\n      \"static_friction\": 0.0,\n      \"dynamic_friction\": 0.0,\n      \"restitution\": 0.0,\n      \"collision_approximation\": \"convexHull\",\n      \"is_rigid\": true,\n      \"confidence\": \"high\",\n      \"reasoning\": \"darker grey metal\"\n    },\n    {\n      \"prim_path\": \"/World/Excavator/BoomArm\",\n      \"material_type\": \"aluminium\",\n      \"mass_kg\": 0.0,\n      \"static_friction\": 0.0,\n      \"dynamic_friction\": 0.0,\n      \"restitution\": 0.0,\n      \"collision_approximation\": \"convexHull\",\n      \"is_rigid\": true,\n      \"confidence\": \"high\",\n      \"reasoning\": \"lighter silver metal\"\n    },\n    {\n      \"prim_path\": \"/World/Excavator/StickArm\",\n      \"material_type\": \"aluminium\",\n      \"mass_kg\": 0.0,\n      \"static_friction\": 0.0,\n      \"dynamic_friction\": 0.0,\n      \"restitution\": 0.0,\n      \"collision_approximation\": \"convexHull\",\n      \"is_rigid\": true,\n      \"confidence\": \"high\",\n      \"reasoning\": \"lighter silver metal\"\n    },\n    {\n      \"prim_path\": \"/World/Excavator/Bucket\",\n      \"material_type\": \"steel\",\n      \"mass_kg\": 0.0,\n      \"static_friction\": 0.0,\n      \"dynamic_friction\": 0.0,\n      \"restitution\": 0.0,\n      \"collision_approximation\": \"convexHull\",\n      \"is_rigid\": true,\n      \"confidence\": \"high\",\n      \"reasoning\": \"darker grey metal\"\n    },\n    {\n      \"prim_path\": \"/World/Excavator/BoomPiston\",\n      \"material_type\": \"steel\",\n      \"mass_kg\": 0.0,\n      \"static_friction\": 0.0,\n      \"dynamic_friction\": 0.0,\n      \"restitution\": 0.0,\n      \"collision_approximation\": \"convexHull\",\n      \"is_rigid\": true,\n      \"confidence\": \"high\",\n      \"reasoning\": \"darker grey metal\"\n    },\n    {\n      \"prim_path\": \"/World/Excavator/StickPiston\",\n      \"material_type\": \"steel\",\n      \"mass_kg\": 0.0,\n      \"static_friction\": 0.0,\n      \"dynamic_friction\": 0.0,\n      \"restitution\": 0.0,\n      \"collision_approximation\": \"convexHull\",\n      \"is_rigid\": true,\n      \"confidence\": \"high\",\n      \"reasoning\": \"darker grey metal\"\n    }\n  ],\n  \"joint_prims\": [\n    {\n      \"prim_path\": \"/World/Excavator/Joints/BoomCylinder\",\n      \"lower_limit_deg\": 0.0,\n      \"upper_limit_deg\": 150.0,\n      \"joint_valid\": false,\n      \"confidence\": \"high\",\n      \"reasoning\": \"travel=upper\u2212lower=150.0 exceeds body_length=10.0\"\n    },\n    {\n      \"prim_path\": \"/World/Excavator/Joints/ArmCylinder\",\n      \"lower_limit_deg\": 0.0,\n      \"upper_limit_deg\": 120.0,\n      \"joint_valid\": false,\n      \"confidence\": \"high\",\n      \"reasoning\": \"travel=upper\u2212lower=120.0 exceeds body_length=8.0\"\n    },\n    {\n      \"prim_path\": \"/World/Excavator/Joints/BucketCurl\",\n      \"lower_limit_deg\": -45.0,\n      \"upper_limit_deg\": 135.0,\n      \"joint_valid\": true,\n      \"confidence\": \"high\",\n      \"reasoning\": \"upper_limit=135.0 is below 145.0, so valid\"\n    },\n    {\n      \"prim_path\": \"/World/Excavator/Joints/CabSwing\",\n      \"lower_limit_deg\": -170.0,\n      \"upper_limit_deg\": 170.0,\n      \"joint_valid\": true,\n      \"confidence\": \"high\",\n      \"reasoning\": \"upper_limit=170.0 is below 180.0, so valid\"\n    }\n  ],\n  \"global_notes\": \"BoomCylinder and ArmCylinder prismatic joints are VIOLATED due to excessive travel. BucketCurl and CabSwing revolute joints are valid.\"\n}\n```"
+    },
+    {
+      "name": "bench_wrist_3dof",
+      "joint_metrics": {
+        "tp": 2,
+        "tn": 2,
+        "fp": 0,
+        "fn": 0,
+        "missed": 0,
+        "total": 4,
+        "precision": 1.0,
+        "recall": 1.0,
+        "accuracy": 1.0,
+        "per_joint": [
+          {
+            "path": "/World/Wrist/Joints/Yaw",
+            "gt_lower": -175,
+            "gt_upper": 175,
+            "gt_violated": false,
+            "pred_violated": false,
+            "pred_lower": -175.0,
+            "pred_upper": 175.0,
+            "confidence": "high",
+            "reasoning": "The joint's range is symmetrical and within a reasonable limit for a robotic wrist joint.",
+            "outcome": "TN"
+          },
+          {
+            "path": "/World/Wrist/Joints/Pitch",
+            "gt_lower": -90,
+            "gt_upper": 90,
+            "gt_violated": false,
+            "pred_violated": false,
+            "pred_lower": -90.0,
+            "pred_upper": 90.0,
+            "confidence": "high",
+            "reasoning": "The joint's range is within a typical limit for a robotic wrist joint.",
+            "outcome": "TN"
+          },
+          {
+            "path": "/World/Wrist/Joints/Roll",
+            "gt_lower": -10,
+            "gt_upper": 370,
+            "gt_violated": true,
+            "pred_violated": true,
+            "pred_lower": -10.0,
+            "pred_upper": 145.0,
+            "confidence": "high",
+            "reasoning": "The upper limit exceeds 180\u00b0, which is a violation for a human-like joint. Corrected to upper=145\u00b0.",
+            "outcome": "TP"
+          },
+          {
+            "path": "/World/Wrist/Joints/ToolGrip",
+            "gt_lower": -10,
+            "gt_upper": 80,
+            "gt_violated": true,
+            "pred_violated": true,
+            "pred_lower": -10.0,
+            "pred_upper": 10.0,
+            "confidence": "high",
+            "reasoning": "travel=upper\u2212lower=90.0 exceeds the body length of 8.0, which is a violation. Corrected to upper=10.0.",
+            "outcome": "TP"
+          }
+        ]
+      },
+      "mass_metrics": {
+        "mape_pct": 110.9,
+        "n_prims": 5,
+        "n_missed": 0,
+        "best_prim": "YawBase",
+        "best_ape": 0.0,
+        "worst_prim": "ToolBody",
+        "worst_ape": 553.5,
+        "per_prim": [
+          {
+            "path": "/World/Wrist/YawBase",
+            "gt_mass_kg": 15.78,
+            "pred_mass_kg": 15.775,
+            "ape_pct": 0.0,
+            "gt_material": "steel",
+            "pred_material": "steel",
+            "confidence": "high",
+            "reasoning": "Dark grey cylinder with flat top, typical of heavy structural metal."
+          },
+          {
+            "path": "/World/Wrist/YawLink",
+            "gt_mass_kg": 2.04,
+            "pred_mass_kg": 2.035,
+            "ape_pct": 0.2,
+            "gt_material": "aluminum",
+            "pred_material": "aluminium",
+            "confidence": "high",
+            "reasoning": "Light silver cylinder, likely used for lightweight robotic parts."
+          },
+          {
+            "path": "/World/Wrist/PitchLink",
+            "gt_mass_kg": 1.25,
+            "pred_mass_kg": 1.246,
+            "ape_pct": 0.3,
+            "gt_material": "aluminum",
+            "pred_material": "aluminium",
+            "confidence": "high",
+            "reasoning": "Light silver cylinder, likely used for lightweight robotic parts."
+          },
+          {
+            "path": "/World/Wrist/RollLink",
+            "gt_mass_kg": 1.53,
+            "pred_mass_kg": 1.526,
+            "ape_pct": 0.3,
+            "gt_material": "aluminum",
+            "pred_material": "aluminium",
+            "confidence": "high",
+            "reasoning": "Light silver cylinder, likely used for lightweight robotic parts."
+          },
+          {
+            "path": "/World/Wrist/ToolBody",
+            "gt_mass_kg": 0.346,
+            "pred_mass_kg": 2.261,
+            "ape_pct": 553.5,
+            "gt_material": "rubber",
+            "pred_material": "steel",
+            "confidence": "high",
+            "reasoning": "Dark grey cube, typical of heavy structural metal."
+          }
+        ]
+      },
+      "chain_of_thought": "### STEP 1 \u2014 REASONING\n\n**Geometry Prims:**\n- Prim `/World/Wrist/YawBase`: material=steel because dark grey cylinder with flat top, typical of heavy structural metal. Confidence:high.\n- Prim `/World/Wrist/YawLink`: material=aluminium because light silver cylinder, likely used for lightweight robotic parts. Confidence:high.\n- Prim `/World/Wrist/PitchLink`: material=aluminium because light silver cylinder, likely used for lightweight robotic parts. Confidence:high.\n- Prim `/World/Wrist/RollLink`: material=aluminium because light silver cylinder, likely used for lightweight robotic parts. Confidence:high.\n- Prim `/World/Wrist/ToolBody`: material=steel because dark grey cube, typical of heavy structural metal. Confidence:high.\n\n**Joint Prims:**\n- Joint `/World/Wrist/Joints/Yaw`: lower=-175.0\u00b0, upper=175.0\u00b0. The joint's range is symmetrical and within a reasonable limit for a robotic wrist joint. No violation detected. Confidence:high.\n- Joint `/World/Wrist/Joints/Pitch`: lower=-90.0\u00b0, upper=90.0\u00b0. The joint's range is within a typical limit for a robotic wrist joint. No violation detected. Confidence:high.\n- Joint `/World/Wrist/Joints/Roll`: lower=-10.0\u00b0, upper=370.0\u00b0. The upper limit exceeds 180\u00b0, which is a violation for a human-like joint. Corrected to upper=145\u00b0. Confidence:high.\n- Joint `/World/Wrist/Joints/ToolGrip`: lower=-10.0, upper=80.0, body_length_along_axis=8.0. travel=upper\u2212lower=90.0. Since 90.0 exceeds the body length of 8.0, this is a violation. Corrected to upper=10.0. Confidence:high.\n\n### STEP 2 \u2014 JSON OUTPUT\n\n```json\n{\n  \"geom_prims\": [\n    {\n      \"prim_path\": \"/World/Wrist/YawBase\",\n      \"material_type\": \"steel\",\n      \"mass_kg\": 0.0,\n      \"static_friction\": 0.0,\n      \"dynamic_friction\": 0.0,\n      \"restitution\": 0.0,\n      \"collision_approximation\": \"convexHull\",\n      \"is_rigid\": true,\n      \"confidence\": \"high\",\n      \"reasoning\": \"Dark grey cylinder with flat top, typical of heavy structural metal.\"\n    },\n    {\n      \"prim_path\": \"/World/Wrist/YawLink\",\n      \"material_type\": \"aluminium\",\n      \"mass_kg\": 0.0,\n      \"static_friction\": 0.0,\n      \"dynamic_friction\": 0.0,\n      \"restitution\": 0.0,\n      \"collision_approximation\": \"convexHull\",\n      \"is_rigid\": true,\n      \"confidence\": \"high\",\n      \"reasoning\": \"Light silver cylinder, likely used for lightweight robotic parts.\"\n    },\n    {\n      \"prim_path\": \"/World/Wrist/PitchLink\",\n      \"material_type\": \"aluminium\",\n      \"mass_kg\": 0.0,\n      \"static_friction\": 0.0,\n      \"dynamic_friction\": 0.0,\n      \"restitution\": 0.0,\n      \"collision_approximation\": \"convexHull\",\n      \"is_rigid\": true,\n      \"confidence\": \"high\",\n      \"reasoning\": \"Light silver cylinder, likely used for lightweight robotic parts.\"\n    },\n    {\n      \"prim_path\": \"/World/Wrist/RollLink\",\n      \"material_type\": \"aluminium\",\n      \"mass_kg\": 0.0,\n      \"static_friction\": 0.0,\n      \"dynamic_friction\": 0.0,\n      \"restitution\": 0.0,\n      \"collision_approximation\": \"convexHull\",\n      \"is_rigid\": true,\n      \"confidence\": \"high\",\n      \"reasoning\": \"Light silver cylinder, likely used for lightweight robotic parts.\"\n    },\n    {\n      \"prim_path\": \"/World/Wrist/ToolBody\",\n      \"material_type\": \"steel\",\n      \"mass_kg\": 0.0,\n      \"static_friction\": 0.0,\n      \"dynamic_friction\": 0.0,\n      \"restitution\": 0.0,\n      \"collision_approximation\": \"convexHull\",\n      \"is_rigid\": true,\n      \"confidence\": \"high\",\n      \"reasoning\": \"Dark grey cube, typical of heavy structural metal.\"\n    }\n  ],\n  \"joint_prims\": [\n    {\n      \"prim_path\": \"/World/Wrist/Joints/Yaw\",\n      \"lower_limit_deg\": -175.0,\n      \"upper_limit_deg\": 175.0,\n      \"joint_valid\": true,\n      \"confidence\": \"high\",\n      \"reasoning\": \"The joint's range is symmetrical and within a reasonable limit for a robotic wrist joint.\"\n    },\n    {\n      \"prim_path\": \"/World/Wrist/Joints/Pitch\",\n      \"lower_limit_deg\": -90.0,\n      \"upper_limit_deg\": 90.0,\n      \"joint_valid\": true,\n      \"confidence\": \"high\",\n      \"reasoning\": \"The joint's range is within a typical limit for a robotic wrist joint.\"\n    },\n    {\n      \"prim_path\": \"/World/Wrist/Joints/Roll\",\n      \"lower_limit_deg\": -10.0,\n      \"upper_limit_deg\": 145.0,\n      \"joint_valid\": false,\n      \"confidence\": \"high\",\n      \"reasoning\": \"The upper limit exceeds 180\u00b0, which is a violation for a human-like joint. Corrected to upper=145\u00b0.\"\n    },\n    {\n      \"prim_path\": \"/World/Wrist/Joints/ToolGrip\",\n      \"lower_limit_deg\": -10.0,\n      \"upper_limit_deg\": 10.0,\n      \"joint_valid\": false,\n      \"confidence\": \"high\",\n      \"reasoning\": \"travel=upper\u2212lower=90.0 exceeds the body length of 8.0, which is a violation. Corrected to upper=10.0.\"\n    }\n  ],\n  \"global_notes\": \"The scene contains a robotic wrist with four joints and five geometric components. The materials are correctly identified based on visual cues. The Roll joint's upper limit was corrected due to exceeding 180\u00b0, and the ToolGrip joint's travel was adjusted to fit within the body length.\"\n}\n```"
+    },
+    {
+      "name": "bench_linear_gantry",
+      "joint_metrics": {
+        "tp": 2,
+        "tn": 2,
+        "fp": 0,
+        "fn": 0,
+        "missed": 0,
+        "total": 4,
+        "precision": 1.0,
+        "recall": 1.0,
+        "accuracy": 1.0,
+        "per_joint": [
+          {
+            "path": "/World/Gantry/Joints/X_Axis",
+            "gt_lower": -300,
+            "gt_upper": 300,
+            "gt_violated": true,
+            "pred_violated": true,
+            "pred_lower": -100.0,
+            "pred_upper": 100.0,
+            "confidence": "high",
+            "reasoning": "Prismatic joint with travel=200.0, corrected to fit body_length_along_axis=200.0.",
+            "outcome": "TP"
+          },
+          {
+            "path": "/World/Gantry/Joints/Z_Axis",
+            "gt_lower": -100,
+            "gt_upper": 100,
+            "gt_violated": true,
+            "pred_violated": true,
+            "pred_lower": -40.0,
+            "pred_upper": 40.0,
+            "confidence": "high",
+            "reasoning": "Prismatic joint with travel=80.0, corrected to fit body_length_along_axis=80.0.",
+            "outcome": "TP"
+          },
+          {
+            "path": "/World/Gantry/Joints/Y_Axis",
+            "gt_lower": -30,
+            "gt_upper": 0,
+            "gt_violated": false,
+            "pred_violated": false,
+            "pred_lower": -30.0,
+            "pred_upper": 0.0,
+            "confidence": "high",
+            "reasoning": "Prismatic joint with travel=30.0, matching body_length_along_axis=50.0.",
+            "outcome": "TN"
+          },
+          {
+            "path": "/World/Gantry/Joints/ToolSpin",
+            "gt_lower": -175,
+            "gt_upper": 175,
+            "gt_violated": false,
+            "pred_violated": false,
+            "pred_lower": -175.0,
+            "pred_upper": 175.0,
+            "confidence": "high",
+            "reasoning": "Revolute joint with upper_limit=175.0, below 180.0.",
+            "outcome": "TN"
+          }
+        ]
+      },
+      "mass_metrics": {
+        "mape_pct": 114.5,
+        "n_prims": 5,
+        "n_missed": 0,
+        "best_prim": "GantryBeam",
+        "best_ape": 0.0,
+        "worst_prim": "XBlock",
+        "worst_ape": 191.0,
+        "per_prim": [
+          {
+            "path": "/World/Gantry/GantryBeam",
+            "gt_mass_kg": 157.0,
+            "pred_mass_kg": 157.0,
+            "ape_pct": 0.0,
+            "gt_material": "steel",
+            "pred_material": "steel",
+            "confidence": "high",
+            "reasoning": "Dark grey and structural context indicate steel."
+          },
+          {
+            "path": "/World/Gantry/XBlock",
+            "gt_mass_kg": 6.07,
+            "pred_mass_kg": 17.662,
+            "ape_pct": 191.0,
+            "gt_material": "aluminum",
+            "pred_material": "steel",
+            "confidence": "high",
+            "reasoning": "Dark grey and structural context indicate steel."
+          },
+          {
+            "path": "/World/Gantry/ZRail",
+            "gt_mass_kg": 21.6,
+            "pred_mass_kg": 62.8,
+            "ape_pct": 190.7,
+            "gt_material": "aluminum",
+            "pred_material": "steel",
+            "confidence": "high",
+            "reasoning": "Dark grey and structural context indicate steel."
+          },
+          {
+            "path": "/World/Gantry/ZBlock",
+            "gt_mass_kg": 13.5,
+            "pred_mass_kg": 39.25,
+            "ape_pct": 190.7,
+            "gt_material": "aluminum",
+            "pred_material": "steel",
+            "confidence": "high",
+            "reasoning": "Dark grey and structural context indicate steel."
+          },
+          {
+            "path": "/World/Gantry/ToolSphere",
+            "gt_mass_kg": 0.628,
+            "pred_mass_kg": 0.629,
+            "ape_pct": 0.2,
+            "gt_material": "rubber",
+            "pred_material": "rubber",
+            "confidence": "high",
+            "reasoning": "Near-black and spherical tool context indicate rubber."
+          }
+        ]
+      },
+      "chain_of_thought": "### STEP 1 \u2014 REASONING\n\n**Geometry Primitives:**\n- **Prim `/World/Gantry/GantryBeam`:** Material=steel because dark grey and structural context. Confidence:high.\n- **Prim `/World/Gantry/XBlock`:** Material=steel because dark grey and structural context. Confidence:high.\n- **Prim `/World/Gantry/ZRail`:** Material=steel because dark grey and structural context. Confidence:high.\n- **Prim `/World/Gantry/ZBlock`:** Material=steel because dark grey and structural context. Confidence:high.\n- **Prim `/World/Gantry/ToolSphere`:** Material=rubber because near-black and spherical tool context. Confidence:high.\n\n**Joint Primitives:**\n- **Joint `/World/Gantry/Joints/X_Axis`:** Prismatic joint with travel=600.0, exceeding body_length_along_axis=200.0. VIOLATED. Corrected to travel=200.0 (lower=-100.0, upper=100.0). Confidence:high.\n- **Joint `/World/Gantry/Joints/Z_Axis`:** Prismatic joint with travel=200.0, exceeding body_length_along_axis=80.0. VIOLATED. Corrected to travel=80.0 (lower=-40.0, upper=40.0). Confidence:high.\n- **Joint `/World/Gantry/Joints/Y_Axis`:** Prismatic joint with travel=30.0, matching body_length_along_axis=50.0. Valid. Confidence:high.\n- **Joint `/World/Gantry/Joints/ToolSpin`:** Revolute joint with upper_limit=175.0, below 180.0. Valid. Confidence:high.\n\n### STEP 2 \u2014 JSON OUTPUT\n\n```json\n{\n  \"geom_prims\": [\n    {\n      \"prim_path\": \"/World/Gantry/GantryBeam\",\n      \"material_type\": \"steel\",\n      \"mass_kg\": 0.0,\n      \"static_friction\": 0.0,\n      \"dynamic_friction\": 0.0,\n      \"restitution\": 0.0,\n      \"collision_approximation\": \"convexHull\",\n      \"is_rigid\": true,\n      \"confidence\": \"high\",\n      \"reasoning\": \"Dark grey and structural context indicate steel.\"\n    },\n    {\n      \"prim_path\": \"/World/Gantry/XBlock\",\n      \"material_type\": \"steel\",\n      \"mass_kg\": 0.0,\n      \"static_friction\": 0.0,\n      \"dynamic_friction\": 0.0,\n      \"restitution\": 0.0,\n      \"collision_approximation\": \"convexHull\",\n      \"is_rigid\": true,\n      \"confidence\": \"high\",\n      \"reasoning\": \"Dark grey and structural context indicate steel.\"\n    },\n    {\n      \"prim_path\": \"/World/Gantry/ZRail\",\n      \"material_type\": \"steel\",\n      \"mass_kg\": 0.0,\n      \"static_friction\": 0.0,\n      \"dynamic_friction\": 0.0,\n      \"restitution\": 0.0,\n      \"collision_approximation\": \"convexHull\",\n      \"is_rigid\": true,\n      \"confidence\": \"high\",\n      \"reasoning\": \"Dark grey and structural context indicate steel.\"\n    },\n    {\n      \"prim_path\": \"/World/Gantry/ZBlock\",\n      \"material_type\": \"steel\",\n      \"mass_kg\": 0.0,\n      \"static_friction\": 0.0,\n      \"dynamic_friction\": 0.0,\n      \"restitution\": 0.0,\n      \"collision_approximation\": \"convexHull\",\n      \"is_rigid\": true,\n      \"confidence\": \"high\",\n      \"reasoning\": \"Dark grey and structural context indicate steel.\"\n    },\n    {\n      \"prim_path\": \"/World/Gantry/ToolSphere\",\n      \"material_type\": \"rubber\",\n      \"mass_kg\": 0.0,\n      \"static_friction\": 0.0,\n      \"dynamic_friction\": 0.0,\n      \"restitution\": 0.0,\n      \"collision_approximation\": \"convexHull\",\n      \"is_rigid\": true,\n      \"confidence\": \"high\",\n      \"reasoning\": \"Near-black and spherical tool context indicate rubber.\"\n    }\n  ],\n  \"joint_prims\": [\n    {\n      \"prim_path\": \"/World/Gantry/Joints/X_Axis\",\n      \"lower_limit_deg\": -100.0,\n      \"upper_limit_deg\": 100.0,\n      \"joint_valid\": true,\n      \"confidence\": \"high\",\n      \"reasoning\": \"Prismatic joint with travel=200.0, corrected to fit body_length_along_axis=200.0.\"\n    },\n    {\n      \"prim_path\": \"/World/Gantry/Joints/Z_Axis\",\n      \"lower_limit_deg\": -40.0,\n      \"upper_limit_deg\": 40.0,\n      \"joint_valid\": true,\n      \"confidence\": \"high\",\n      \"reasoning\": \"Prismatic joint with travel=80.0, corrected to fit body_length_along_axis=80.0.\"\n    },\n    {\n      \"prim_path\": \"/World/Gantry/Joints/Y_Axis\",\n      \"lower_limit_deg\": -30.0,\n      \"upper_limit_deg\": 0.0,\n      \"joint_valid\": true,\n      \"confidence\": \"high\",\n      \"reasoning\": \"Prismatic joint with travel=30.0, matching body_length_along_axis=50.0.\"\n    },\n    {\n      \"prim_path\": \"/World/Gantry/Joints/ToolSpin\",\n      \"lower_limit_deg\": -175.0,\n      \"upper_limit_deg\": 175.0,\n      \"joint_valid\": true,\n      \"confidence\": \"high\",\n      \"reasoning\": \"Revolute joint with upper_limit=175.0, below 180.0.\"\n    }\n  ],\n  \"global_notes\": \"All materials and joints have been validated based on visual cues and physical constraints.\"\n}\n```"
+    },
+    {
+      "name": "bench_all_violated",
+      "joint_metrics": {
+        "tp": 4,
+        "tn": 0,
+        "fp": 0,
+        "fn": 0,
+        "missed": 0,
+        "total": 4,
+        "precision": 1.0,
+        "recall": 1.0,
+        "accuracy": 1.0,
+        "per_joint": [
+          {
+            "path": "/World/ViolatedArm/Joints/ShoulderSwing",
+            "gt_lower": -10,
+            "gt_upper": 250,
+            "gt_violated": true,
+            "pred_violated": true,
+            "pred_lower": -10.0,
+            "pred_upper": 145.0,
+            "confidence": "high",
+            "reasoning": "Upper limit (250.0) exceeds 180\u00b0 for a human-like joint, violating the rule. Corrected to 145\u00b0.",
+            "outcome": "TP"
+          },
+          {
+            "path": "/World/ViolatedArm/Joints/ElbowBend",
+            "gt_lower": -10,
+            "gt_upper": 230,
+            "gt_violated": true,
+            "pred_violated": true,
+            "pred_lower": -10.0,
+            "pred_upper": 145.0,
+            "confidence": "high",
+            "reasoning": "Upper limit (230.0) exceeds 180\u00b0 for a human-like joint, violating the rule. Corrected to 145\u00b0.",
+            "outcome": "TP"
+          },
+          {
+            "path": "/World/ViolatedArm/Joints/WristFlex",
+            "gt_lower": -10,
+            "gt_upper": 215,
+            "gt_violated": true,
+            "pred_violated": true,
+            "pred_lower": -10.0,
+            "pred_upper": 70.0,
+            "confidence": "high",
+            "reasoning": "Upper limit (215.0) exceeds 180\u00b0 for a human-like joint, violating the rule. Corrected to 70\u00b0.",
+            "outcome": "TP"
+          },
+          {
+            "path": "/World/ViolatedArm/Joints/GripperSpin",
+            "gt_lower": -220,
+            "gt_upper": 10,
+            "gt_violated": true,
+            "pred_violated": true,
+            "pred_lower": -20.0,
+            "pred_upper": 10.0,
+            "confidence": "high",
+            "reasoning": "Travel (330.0) exceeds body_length (20.0), violating the rule. Corrected to -20.0 to 10.0.",
+            "outcome": "TP"
+          }
+        ]
+      },
+      "mass_metrics": {
+        "mape_pct": 128.5,
+        "n_prims": 5,
+        "n_missed": 0,
+        "best_prim": "EndSphere",
+        "best_ape": 0.2,
+        "worst_prim": "Link2",
+        "worst_ape": 190.9,
+        "per_prim": [
+          {
+            "path": "/World/ViolatedArm/BaseBlock",
+            "gt_mass_kg": 39.25,
+            "pred_mass_kg": 11.5,
+            "ape_pct": 70.7,
+            "gt_material": "steel",
+            "pred_material": "concrete",
+            "confidence": "high",
+            "reasoning": "Flat grey + architectural context."
+          },
+          {
+            "path": "/World/ViolatedArm/Link1",
+            "gt_mass_kg": 6.36,
+            "pred_mass_kg": 18.487,
+            "ape_pct": 190.7,
+            "gt_material": "aluminum",
+            "pred_material": "steel",
+            "confidence": "high",
+            "reasoning": "Darker grey (structural)."
+          },
+          {
+            "path": "/World/ViolatedArm/Link2",
+            "gt_mass_kg": 3.39,
+            "pred_mass_kg": 9.86,
+            "ape_pct": 190.9,
+            "gt_material": "aluminum",
+            "pred_material": "steel",
+            "confidence": "high",
+            "reasoning": "Darker grey (structural)."
+          },
+          {
+            "path": "/World/ViolatedArm/Link3",
+            "gt_mass_kg": 1.53,
+            "pred_mass_kg": 4.437,
+            "ape_pct": 190.0,
+            "gt_material": "aluminum",
+            "pred_material": "steel",
+            "confidence": "high",
+            "reasoning": "Darker grey (structural)."
+          },
+          {
+            "path": "/World/ViolatedArm/EndSphere",
+            "gt_mass_kg": 0.628,
+            "pred_mass_kg": 0.629,
+            "ape_pct": 0.2,
+            "gt_material": "rubber",
+            "pred_material": "rubber",
+            "confidence": "high",
+            "reasoning": "Near-black."
+          }
+        ]
+      },
+      "chain_of_thought": "STEP 1 \u2014 REASONING:\n\nFor each geometry prim write ONE line:\n  \"Prim <path>: material=<X> because <1-2 word visual cue>. Confidence:<level>.\"\n  (Mass is computed automatically from bbox \u2014 you do NOT need to calculate it.)\n\nFor each joint prim write 2-3 sentences (full reasoning required for joint validation):\n  Revolute: \"Joint <name>: lower=<X>\u00b0, upper=<Y>\u00b0. <reason why valid/invalid>.\n   Corrected: lower=<A>\u00b0, upper=<B>\u00b0. Confidence:<level>.\"\n  Prismatic: \"Joint <name>: lower=<X>, upper=<Y>, body_length_along_axis=<B>.\n   travel=upper\u2212lower=<T>. <T> vs <B>: <exceeds\u2192VIOLATED, joint_valid=false|fits\u2192valid, joint_valid=true>.\n   Corrected if needed: lower=<A>, upper=<C>. Confidence:<level>.\"\n\n\u2014\n\nPrim /World/ViolatedArm/BaseBlock: material=concrete because flat grey + architectural context. Confidence:high.\nPrim /World/ViolatedArm/Link1: material=steel because darker grey (structural). Confidence:high.\nPrim /World/ViolatedArm/Link2: material=steel because darker grey (structural). Confidence:high.\nPrim /World/ViolatedArm/Link3: material=steel because darker grey (structural). Confidence:high.\nPrim /World/ViolatedArm/EndSphere: material=rubber because near-black. Confidence:high.\n\nJoint /World/ViolatedArm/Joints/ShoulderSwing: lower=-10.0\u00b0, upper=250.0\u00b0. Upper limit exceeds 180\u00b0 for a human-like joint, violating the rule. Corrected: lower=-10.0\u00b0, upper=145\u00b0. Confidence:high.\nJoint /World/ViolatedArm/Joints/ElbowBend: lower=-10.0\u00b0, upper=230.0\u00b0. Upper limit exceeds 180\u00b0 for a human-like joint, violating the rule. Corrected: lower=-10.0\u00b0, upper=145\u00b0. Confidence:high.\nJoint /World/ViolatedArm/Joints/WristFlex: lower=-10.0\u00b0, upper=215.0\u00b0. Upper limit exceeds 180\u00b0 for a human-like joint, violating the rule. Corrected: lower=-10.0\u00b0, upper=70\u00b0. Confidence:high.\nJoint /World/ViolatedArm/Joints/GripperSpin: lower=-220.0\u00b0, upper=10.0\u00b0. Travel (330.0) exceeds body_length (20.0), violating the rule. Corrected: lower=-20.0, upper=10.0. Confidence:high.\n\n\u2014\n\n```json\n{\n  \"geom_prims\": [\n    {\n      \"prim_path\": \"/World/ViolatedArm/BaseBlock\",\n      \"material_type\": \"concrete\",\n      \"mass_kg\": 0.0,\n      \"static_friction\": 0.0,\n      \"dynamic_friction\": 0.0,\n      \"restitution\": 0.0,\n      \"collision_approximation\": \"convexHull\",\n      \"is_rigid\": true,\n      \"confidence\": \"high\",\n      \"reasoning\": \"Flat grey + architectural context.\"\n    },\n    {\n      \"prim_path\": \"/World/ViolatedArm/Link1\",\n      \"material_type\": \"steel\",\n      \"mass_kg\": 0.0,\n      \"static_friction\": 0.0,\n      \"dynamic_friction\": 0.0,\n      \"restitution\": 0.0,\n      \"collision_approximation\": \"convexHull\",\n      \"is_rigid\": true,\n      \"confidence\": \"high\",\n      \"reasoning\": \"Darker grey (structural).\"\n    },\n    {\n      \"prim_path\": \"/World/ViolatedArm/Link2\",\n      \"material_type\": \"steel\",\n      \"mass_kg\": 0.0,\n      \"static_friction\": 0.0,\n      \"dynamic_friction\": 0.0,\n      \"restitution\": 0.0,\n      \"collision_approximation\": \"convexHull\",\n      \"is_rigid\": true,\n      \"confidence\": \"high\",\n      \"reasoning\": \"Darker grey (structural).\"\n    },\n    {\n      \"prim_path\": \"/World/ViolatedArm/Link3\",\n      \"material_type\": \"steel\",\n      \"mass_kg\": 0.0,\n      \"static_friction\": 0.0,\n      \"dynamic_friction\": 0.0,\n      \"restitution\": 0.0,\n      \"collision_approximation\": \"convexHull\",\n      \"is_rigid\": true,\n      \"confidence\": \"high\",\n      \"reasoning\": \"Darker grey (structural).\"\n    },\n    {\n      \"prim_path\": \"/World/ViolatedArm/EndSphere\",\n      \"material_type\": \"rubber\",\n      \"mass_kg\": 0.0,\n      \"static_friction\": 0.0,\n      \"dynamic_friction\": 0.0,\n      \"restitution\": 0.0,\n      \"collision_approximation\": \"convexHull\",\n      \"is_rigid\": true,\n      \"confidence\": \"high\",\n      \"reasoning\": \"Near-black.\"\n    }\n  ],\n  \"joint_prims\": [\n    {\n      \"prim_path\": \"/World/ViolatedArm/Joints/ShoulderSwing\",\n      \"lower_limit_deg\": -10.0,\n      \"upper_limit_deg\": 145.0,\n      \"joint_valid\": false,\n      \"confidence\": \"high\",\n      \"reasoning\": \"Upper limit (250.0) exceeds 180\u00b0 for a human-like joint, violating the rule. Corrected to 145\u00b0.\"\n    },\n    {\n      \"prim_path\": \"/World/ViolatedArm/Joints/ElbowBend\",\n      \"lower_limit_deg\": -10.0,\n      \"upper_limit_deg\": 145.0,\n      \"joint_valid\": false,\n      \"confidence\": \"high\",\n      \"reasoning\": \"Upper limit (230.0) exceeds 180\u00b0 for a human-like joint, violating the rule. Corrected to 145\u00b0.\"\n    },\n    {\n      \"prim_path\": \"/World/ViolatedArm/Joints/WristFlex\",\n      \"lower_limit_deg\": -10.0,\n      \"upper_limit_deg\": 70.0,\n      \"joint_valid\": false,\n      \"confidence\": \"high\",\n      \"reasoning\": \"Upper limit (215.0) exceeds 180\u00b0 for a human-like joint, violating the rule. Corrected to 70\u00b0.\"\n    },\n    {\n      \"prim_path\": \"/World/ViolatedArm/Joints/GripperSpin\",\n      \"lower_limit_deg\": -20.0,\n      \"upper_limit_deg\": 10.0,\n      \"joint_valid\": false,\n      \"confidence\": \"high\",\n      \"reasoning\": \"Travel (330.0) exceeds body_length (20.0), violating the rule. Corrected to -20.0 to 10.0.\"\n    }\n  ],\n  \"global_notes\": \"All joints were VIOLATED due to exceeding human-like joint limits or travel exceeding body length. Materials were assigned based on visual cues.\"\n}\n```"
+    }
+  ]
+}

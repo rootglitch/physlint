@@ -1,0 +1,322 @@
+{
+  "summary": {
+    "model": "nvidia/Cosmos-Reason2-8B",
+    "joint_detection": {
+      "tp": 0,
+      "tn": 12,
+      "fp": 0,
+      "fn": 0,
+      "precision": null,
+      "recall": null,
+      "accuracy": 1.0
+    },
+    "mass_estimation": {
+      "mape_pct": 2467.0,
+      "n_prims": 13
+    }
+  },
+  "scenes": [
+    {
+      "name": "menagerie_anymal_c",
+      "joint_metrics": {
+        "tp": 0,
+        "tn": 12,
+        "fp": 0,
+        "fn": 0,
+        "missed": 0,
+        "total": 12,
+        "precision": null,
+        "recall": null,
+        "accuracy": 1.0,
+        "per_joint": [
+          {
+            "path": "/anymal_c/Geometry/base/LF_HIP/LF_THIGH/LF_SHANK/LF_KFE",
+            "gt_lower": -540.0,
+            "gt_upper": 540.0,
+            "gt_violated": false,
+            "pred_violated": false,
+            "pred_lower": -180.0,
+            "pred_upper": 180.0,
+            "confidence": "high",
+            "reasoning": "Industrial robot joint with unrestricted range.",
+            "outcome": "TN"
+          },
+          {
+            "path": "/anymal_c/Geometry/base/LF_HIP/LF_THIGH/LF_HFE",
+            "gt_lower": -540.0,
+            "gt_upper": 540.0,
+            "gt_violated": false,
+            "pred_violated": false,
+            "pred_lower": -180.0,
+            "pred_upper": 180.0,
+            "confidence": "high",
+            "reasoning": "Industrial robot joint with unrestricted range.",
+            "outcome": "TN"
+          },
+          {
+            "path": "/anymal_c/Geometry/base/LF_HIP/LF_HAA",
+            "gt_lower": -41.25,
+            "gt_upper": 28.07,
+            "gt_violated": false,
+            "pred_violated": false,
+            "pred_lower": -180.0,
+            "pred_upper": 180.0,
+            "confidence": "high",
+            "reasoning": "Industrial robot joint with unrestricted range.",
+            "outcome": "TN"
+          },
+          {
+            "path": "/anymal_c/Geometry/base/RF_HIP/RF_THIGH/RF_SHANK/RF_KFE",
+            "gt_lower": -540.0,
+            "gt_upper": 540.0,
+            "gt_violated": false,
+            "pred_violated": false,
+            "pred_lower": -180.0,
+            "pred_upper": 180.0,
+            "confidence": "high",
+            "reasoning": "Industrial robot joint with unrestricted range.",
+            "outcome": "TN"
+          },
+          {
+            "path": "/anymal_c/Geometry/base/RF_HIP/RF_THIGH/RF_HFE",
+            "gt_lower": -540.0,
+            "gt_upper": 540.0,
+            "gt_violated": false,
+            "pred_violated": false,
+            "pred_lower": -180.0,
+            "pred_upper": 180.0,
+            "confidence": "high",
+            "reasoning": "Industrial robot joint with unrestricted range.",
+            "outcome": "TN"
+          },
+          {
+            "path": "/anymal_c/Geometry/base/RF_HIP/RF_HAA",
+            "gt_lower": -28.07,
+            "gt_upper": 41.25,
+            "gt_violated": false,
+            "pred_violated": false,
+            "pred_lower": -180.0,
+            "pred_upper": 180.0,
+            "confidence": "high",
+            "reasoning": "Industrial robot joint with unrestricted range.",
+            "outcome": "TN"
+          },
+          {
+            "path": "/anymal_c/Geometry/base/LH_HIP/LH_THIGH/LH_SHANK/LH_KFE",
+            "gt_lower": -540.0,
+            "gt_upper": 540.0,
+            "gt_violated": false,
+            "pred_violated": false,
+            "pred_lower": -180.0,
+            "pred_upper": 180.0,
+            "confidence": "high",
+            "reasoning": "Industrial robot joint with unrestricted range.",
+            "outcome": "TN"
+          },
+          {
+            "path": "/anymal_c/Geometry/base/LH_HIP/LH_THIGH/LH_HFE",
+            "gt_lower": -540.0,
+            "gt_upper": 540.0,
+            "gt_violated": false,
+            "pred_violated": false,
+            "pred_lower": -180.0,
+            "pred_upper": 180.0,
+            "confidence": "high",
+            "reasoning": "Industrial robot joint with unrestricted range.",
+            "outcome": "TN"
+          },
+          {
+            "path": "/anymal_c/Geometry/base/LH_HIP/LH_HAA",
+            "gt_lower": -41.25,
+            "gt_upper": 28.07,
+            "gt_violated": false,
+            "pred_violated": false,
+            "pred_lower": -180.0,
+            "pred_upper": 180.0,
+            "confidence": "high",
+            "reasoning": "Industrial robot joint with unrestricted range.",
+            "outcome": "TN"
+          },
+          {
+            "path": "/anymal_c/Geometry/base/RH_HIP/RH_THIGH/RH_SHANK/RH_KFE",
+            "gt_lower": -540.0,
+            "gt_upper": 540.0,
+            "gt_violated": false,
+            "pred_violated": false,
+            "pred_lower": -180.0,
+            "pred_upper": 180.0,
+            "confidence": "high",
+            "reasoning": "Industrial robot joint with unrestricted range.",
+            "outcome": "TN"
+          },
+          {
+            "path": "/anymal_c/Geometry/base/RH_HIP/RH_THIGH/RH_HFE",
+            "gt_lower": -540.0,
+            "gt_upper": 540.0,
+            "gt_violated": false,
+            "pred_violated": false,
+            "pred_lower": -180.0,
+            "pred_upper": 180.0,
+            "confidence": "high",
+            "reasoning": "Industrial robot joint with unrestricted range.",
+            "outcome": "TN"
+          },
+          {
+            "path": "/anymal_c/Geometry/base/RH_HIP/RH_HAA",
+            "gt_lower": -28.07,
+            "gt_upper": 41.25,
+            "gt_violated": false,
+            "pred_violated": false,
+            "pred_lower": -180.0,
+            "pred_upper": 180.0,
+            "confidence": "high",
+            "reasoning": "Industrial robot joint with unrestricted range.",
+            "outcome": "TN"
+          }
+        ]
+      },
+      "mass_metrics": {
+        "mape_pct": 2466.9,
+        "n_prims": 13,
+        "n_missed": 0,
+        "best_prim": "LF_HIP",
+        "best_ape": 400.6,
+        "worst_prim": "LH_SHANK",
+        "worst_ape": 5691.0,
+        "per_prim": [
+          {
+            "path": "/anymal_c/Geometry/base",
+            "gt_mass_kg": 19.203,
+            "pred_mass_kg": 641.162,
+            "ape_pct": 3238.8,
+            "gt_material": "aluminum",
+            "pred_material": "steel",
+            "confidence": "high",
+            "reasoning": "Silvery grey, structural."
+          },
+          {
+            "path": "/anymal_c/Geometry/base/LF_HIP",
+            "gt_mass_kg": 2.781,
+            "pred_mass_kg": 13.921,
+            "ape_pct": 400.6,
+            "gt_material": "aluminum",
+            "pred_material": "steel",
+            "confidence": "high",
+            "reasoning": "Silvery grey, structural."
+          },
+          {
+            "path": "/anymal_c/Geometry/base/LF_HIP/LF_THIGH",
+            "gt_mass_kg": 3.071,
+            "pred_mass_kg": 37.357,
+            "ape_pct": 1116.4,
+            "gt_material": "carbon fiber",
+            "pred_material": "steel",
+            "confidence": "high",
+            "reasoning": "Silvery grey, structural."
+          },
+          {
+            "path": "/anymal_c/Geometry/base/LF_HIP/LF_THIGH/LF_SHANK",
+            "gt_mass_kg": 0.588,
+            "pred_mass_kg": 34.073,
+            "ape_pct": 5690.8,
+            "gt_material": "carbon fiber",
+            "pred_material": "steel",
+            "confidence": "high",
+            "reasoning": "Silvery grey, structural."
+          },
+          {
+            "path": "/anymal_c/Geometry/base/RF_HIP",
+            "gt_mass_kg": 2.781,
+            "pred_mass_kg": 13.921,
+            "ape_pct": 400.6,
+            "gt_material": "aluminum",
+            "pred_material": "steel",
+            "confidence": "high",
+            "reasoning": "Silvery grey, structural."
+          },
+          {
+            "path": "/anymal_c/Geometry/base/RF_HIP/RF_THIGH",
+            "gt_mass_kg": 3.071,
+            "pred_mass_kg": 37.357,
+            "ape_pct": 1116.4,
+            "gt_material": "carbon fiber",
+            "pred_material": "steel",
+            "confidence": "high",
+            "reasoning": "Silvery grey, structural."
+          },
+          {
+            "path": "/anymal_c/Geometry/base/RF_HIP/RF_THIGH/RF_SHANK",
+            "gt_mass_kg": 0.588,
+            "pred_mass_kg": 34.074,
+            "ape_pct": 5691.0,
+            "gt_material": "carbon fiber",
+            "pred_material": "steel",
+            "confidence": "high",
+            "reasoning": "Silvery grey, structural."
+          },
+          {
+            "path": "/anymal_c/Geometry/base/LH_HIP",
+            "gt_mass_kg": 2.781,
+            "pred_mass_kg": 13.921,
+            "ape_pct": 400.6,
+            "gt_material": "aluminum",
+            "pred_material": "steel",
+            "confidence": "high",
+            "reasoning": "Silvery grey, structural."
+          },
+          {
+            "path": "/anymal_c/Geometry/base/LH_HIP/LH_THIGH",
+            "gt_mass_kg": 3.071,
+            "pred_mass_kg": 37.357,
+            "ape_pct": 1116.4,
+            "gt_material": "carbon fiber",
+            "pred_material": "steel",
+            "confidence": "high",
+            "reasoning": "Silvery grey, structural."
+          },
+          {
+            "path": "/anymal_c/Geometry/base/LH_HIP/LH_THIGH/LH_SHANK",
+            "gt_mass_kg": 0.588,
+            "pred_mass_kg": 34.074,
+            "ape_pct": 5691.0,
+            "gt_material": "carbon fiber",
+            "pred_material": "steel",
+            "confidence": "high",
+            "reasoning": "Silvery grey, structural."
+          },
+          {
+            "path": "/anymal_c/Geometry/base/RH_HIP",
+            "gt_mass_kg": 2.781,
+            "pred_mass_kg": 13.921,
+            "ape_pct": 400.6,
+            "gt_material": "aluminum",
+            "pred_material": "steel",
+            "confidence": "high",
+            "reasoning": "Silvery grey, structural."
+          },
+          {
+            "path": "/anymal_c/Geometry/base/RH_HIP/RH_THIGH",
+            "gt_mass_kg": 3.071,
+            "pred_mass_kg": 37.357,
+            "ape_pct": 1116.4,
+            "gt_material": "carbon fiber",
+            "pred_material": "steel",
+            "confidence": "high",
+            "reasoning": "Silvery grey, structural."
+          },
+          {
+            "path": "/anymal_c/Geometry/base/RH_HIP/RH_THIGH/RH_SHANK",
+            "gt_mass_kg": 0.588,
+            "pred_mass_kg": 34.073,
+            "ape_pct": 5690.8,
+            "gt_material": "carbon fiber",
+            "pred_material": "steel",
+            "confidence": "high",
+            "reasoning": "Silvery grey, structural."
+          }
+        ]
+      },
+      "chain_of_thought": "STEP 1 \u2014 REASONING:\n\nFor each geometry prim write ONE line:\n  \"Prim <path>: material=<X> because <1-2 word visual cue>. Confidence:<level>.\"\n  (Mass is computed automatically from bbox \u2014 you do NOT need to calculate it.)\n\nPrim /anymal_c/Geometry/base: material=steel because silvery grey, structural. Confidence:high.\nPrim /anymal_c/Geometry/base/LF_HIP: material=steel because silvery grey, structural. Confidence:high.\nPrim /anymal_c/Geometry/base/LF_HIP/LF_THIGH: material=steel because silvery grey, structural. Confidence:high.\nPrim /anymal_c/Geometry/base/LF_HIP/LF_THIGH/LF_SHANK: material=steel because silvery grey, structural. Confidence:high.\nPrim /anymal_c/Geometry/base/RF_HIP: material=steel because silvery grey, structural. Confidence:high.\nPrim /anymal_c/Geometry/base/RF_HIP/RF_THIGH: material=steel because silvery grey, structural. Confidence:high.\nPrim /anymal_c/Geometry/base/RF_HIP/RF_THIGH/RF_SHANK: material=steel because silvery grey, structural. Confidence:high.\nPrim /anymal_c/Geometry/base/LH_HIP: material=steel because silvery grey, structural. Confidence:high.\nPrim /anymal_c/Geometry/base/LH_HIP/LH_THIGH: material=steel because silvery grey, structural. Confidence:high.\nPrim /anymal_c/Geometry/base/LH_HIP/LH_THIGH/LH_SHANK: material=steel because silvery grey, structural. Confidence:high.\nPrim /anymal_c/Geometry/base/RH_HIP: material=steel because silvery grey, structural. Confidence:high.\nPrim /anymal_c/Geometry/base/RH_HIP/RH_THIGH: material=steel because silvery grey, structural. Confidence:high.\nPrim /anymal_c/Geometry/base/RH_HIP/RH_THIGH/RH_SHANK: material=steel because silvery grey, structural. Confidence:high.\n\nFor each joint prim write 2-3 sentences (full reasoning required for joint validation):\n  Revolute: \"Joint <name>: lower=<X>\u00b0, upper=<Y>\u00b0. <reason why valid/invalid>.\n   Corrected: lower=<A>\u00b0, upper=<B>\u00b0. Confidence:<level>.\"\n  Prismatic: \"Joint <name>: lower=<X>, upper=<Y>, body_length_along_axis=<B>.\n   travel=upper\u2212lower=<T>. <T> vs <B>: <exceeds\u2192VIOLATED, joint_valid=false|fits\u2192valid, joint_valid=true>.\n   Corrected if needed: lower=<A>, upper=<C>. Confidence:<level>.\"\n\nJoint /anymal_c/Geometry/base/LF_HIP/LF_THIGH/LF_SHANK/LF_KFE: Revolute joint with lower=-Infinity, upper=Infinity. Human-like joints typically have limited range, but this is an industrial robot joint. Set joint_valid=true, lower=-180\u00b0, upper=180\u00b0.\nJoint /anymal_c/Geometry/base/LF_HIP/LF_THIGH/LF_HFE: Revolute joint with lower=-Infinity, upper=Infinity. Industrial robot joint, set joint_valid=true, lower=-180\u00b0, upper=180\u00b0.\nJoint /anymal_c/Geometry/base/LF_HIP/LF_HAA: Revolute joint with lower=-Infinity, upper=Infinity. Industrial robot joint, set joint_valid=true, lower=-180\u00b0, upper=180\u00b0.\nJoint /anymal_c/Geometry/base/RF_HIP/RF_THIGH/RF_SHANK/RF_KFE: Revolute joint with lower=-Infinity, upper=Infinity. Industrial robot joint, set joint_valid=true, lower=-180\u00b0, upper=180\u00b0.\nJoint /anymal_c/Geometry/base/RF_HIP/RF_THIGH/RF_HFE: Revolute joint with lower=-Infinity, upper=Infinity. Industrial robot joint, set joint_valid=true, lower=-180\u00b0, upper=180\u00b0.\nJoint /anymal_c/Geometry/base/RF_HIP/RF_HAA: Revolute joint with lower=-Infinity, upper=Infinity. Industrial robot joint, set joint_valid=true, lower=-180\u00b0, upper=180\u00b0.\nJoint /anymal_c/Geometry/base/LH_HIP/LH_THIGH/LH_SHANK/LH_KFE: Revolute joint with lower=-Infinity, upper=Infinity. Industrial robot joint, set joint_valid=true, lower=-180\u00b0, upper=180\u00b0.\nJoint /anymal_c/Geometry/base/LH_HIP/LH_THIGH/LH_HFE: Revolute joint with lower=-Infinity, upper=Infinity. Industrial robot joint, set joint_valid=true, lower=-180\u00b0, upper=180\u00b0.\nJoint /anymal_c/Geometry/base/LH_HIP/LH_HAA: Revolute joint with lower=-Infinity, upper=Infinity. Industrial robot joint, set joint_valid=true, lower=-180\u00b0, upper=180\u00b0.\nJoint /anymal_c/Geometry/base/RH_HIP/RH_THIGH/RH_SHANK/RH_KFE: Revolute joint with lower=-Infinity, upper=Infinity. Industrial robot joint, set joint_valid=true, lower=-180\u00b0, upper=180\u00b0.\nJoint /anymal_c/Geometry/base/RH_HIP/RH_THIGH/RH_HFE: Revolute joint with lower=-Infinity, upper=Infinity. Industrial robot joint, set joint_valid=true, lower=-180\u00b0, upper=180\u00b0.\nJoint /anymal_c/Geometry/base/RH_HIP/RH_HAA: Revolute joint with lower=-Infinity, upper=Infinity. Industrial robot joint, set joint_valid=true, lower=-180\u00b0, upper=180\u00b0.\n\nAll joints are industrial robot joints with unrestricted range, so set joint_valid=true and use the standard industrial limits of -180\u00b0 to 180\u00b0.\n\n```json\n{\n  \"geom_prims\": [\n    {\n      \"prim_path\": \"/anymal_c/Geometry/base\",\n      \"material_type\": \"steel\",\n      \"mass_kg\": 0.0,\n      \"static_friction\": 0.0,\n      \"dynamic_friction\": 0.0,\n      \"restitution\": 0.0,\n      \"collision_approximation\": \"convexHull\",\n      \"is_rigid\": true,\n      \"confidence\": \"high\",\n      \"reasoning\": \"Silvery grey, structural.\"\n    },\n    {\n      \"prim_path\": \"/anymal_c/Geometry/base/LF_HIP\",\n      \"material_type\": \"steel\",\n      \"mass_kg\": 0.0,\n      \"static_friction\": 0.0,\n      \"dynamic_friction\": 0.0,\n      \"restitution\": 0.0,\n      \"collision_approximation\": \"convexHull\",\n      \"is_rigid\": true,\n      \"confidence\": \"high\",\n      \"reasoning\": \"Silvery grey, structural.\"\n    },\n    {\n      \"prim_path\": \"/anymal_c/Geometry/base/LF_HIP/LF_THIGH\",\n      \"material_type\": \"steel\",\n      \"mass_kg\": 0.0,\n      \"static_friction\": 0.0,\n      \"dynamic_friction\": 0.0,\n      \"restitution\": 0.0,\n      \"collision_approximation\": \"convexHull\",\n      \"is_rigid\": true,\n      \"confidence\": \"high\",\n      \"reasoning\": \"Silvery grey, structural.\"\n    },\n    {\n      \"prim_path\": \"/anymal_c/Geometry/base/LF_HIP/LF_THIGH/LF_SHANK\",\n      \"material_type\": \"steel\",\n      \"mass_kg\": 0.0,\n      \"static_friction\": 0.0,\n      \"dynamic_friction\": 0.0,\n      \"restitution\": 0.0,\n      \"collision_approximation\": \"convexHull\",\n      \"is_rigid\": true,\n      \"confidence\": \"high\",\n      \"reasoning\": \"Silvery grey, structural.\"\n    },\n    {\n      \"prim_path\": \"/anymal_c/Geometry/base/RF_HIP\",\n      \"material_type\": \"steel\",\n      \"mass_kg\": 0.0,\n      \"static_friction\": 0.0,\n      \"dynamic_friction\": 0.0,\n      \"restitution\": 0.0,\n      \"collision_approximation\": \"convexHull\",\n      \"is_rigid\": true,\n      \"confidence\": \"high\",\n      \"reasoning\": \"Silvery grey, structural.\"\n    },\n    {\n      \"prim_path\": \"/anymal_c/Geometry/base/RF_HIP/RF_THIGH\",\n      \"material_type\": \"steel\",\n      \"mass_kg\": 0.0,\n      \"static_friction\": 0.0,\n      \"dynamic_friction\": 0.0,\n      \"restitution\": 0.0,\n      \"collision_approximation\": \"convexHull\",\n      \"is_rigid\": true,\n      \"confidence\": \"high\",\n      \"reasoning\": \"Silvery grey, structural.\"\n    },\n    {\n      \"prim_path\": \"/anymal_c/Geometry/base/RF_HIP/RF_THIGH/RF_SHANK\",\n      \"material_type\": \"steel\",\n      \"mass_kg\": 0.0,\n      \"static_friction\": 0.0,\n      \"dynamic_friction\": 0.0,\n      \"restitution\": 0.0,\n      \"collision_approximation\": \"convexHull\",\n      \"is_rigid\": true,\n      \"confidence\": \"high\",\n      \"reasoning\": \"Silvery grey, structural.\"\n    },\n    {\n      \"prim_path\": \"/anymal_c/Geometry/base/LH_HIP\",\n      \"material_type\": \"steel\",\n      \"mass_kg\": 0.0,\n      \"static_friction\": 0.0,\n      \"dynamic_friction\": 0.0,\n      \"restitution\": 0.0,\n      \"collision_approximation\": \"convexHull\",\n      \"is_rigid\": true,\n      \"confidence\": \"high\",\n      \"reasoning\": \"Silvery grey, structural.\"\n    },\n    {\n      \"prim_path\": \"/anymal_c/Geometry/base/LH_HIP/LH_THIGH\",\n      \"material_type\": \"steel\",\n      \"mass_kg\": 0.0,\n      \"static_friction\": 0.0,\n      \"dynamic_friction\": 0.0,\n      \"restitution\": 0.0,\n      \"collision_approximation\": \"convexHull\",\n      \"is_rigid\": true,\n      \"confidence\": \"high\",\n      \"reasoning\": \"Silvery grey, structural.\"\n    },\n    {\n      \"prim_path\": \"/anymal_c/Geometry/base/LH_HIP/LH_THIGH/LH_SHANK\",\n      \"material_type\": \"steel\",\n      \"mass_kg\": 0.0,\n      \"static_friction\": 0.0,\n      \"dynamic_friction\": 0.0,\n      \"restitution\": 0.0,\n      \"collision_approximation\": \"convexHull\",\n      \"is_rigid\": true,\n      \"confidence\": \"high\",\n      \"reasoning\": \"Silvery grey, structural.\"\n    },\n    {\n      \"prim_path\": \"/anymal_c/Geometry/base/RH_HIP\",\n      \"material_type\": \"steel\",\n      \"mass_kg\": 0.0,\n      \"static_friction\": 0.0,\n      \"dynamic_friction\": 0.0,\n      \"restitution\": 0.0,\n      \"collision_approximation\": \"convexHull\",\n      \"is_rigid\": true,\n      \"confidence\": \"high\",\n      \"reasoning\": \"Silvery grey, structural.\"\n    },\n    {\n      \"prim_path\": \"/anymal_c/Geometry/base/RH_HIP/RH_THIGH\",\n      \"material_type\": \"steel\",\n      \"mass_kg\": 0.0,\n      \"static_friction\": 0.0,\n      \"dynamic_friction\": 0.0,\n      \"restitution\": 0.0,\n      \"collision_approximation\": \"convexHull\",\n      \"is_rigid\": true,\n      \"confidence\": \"high\",\n      \"reasoning\": \"Silvery grey, structural.\"\n    },\n    {\n      \"prim_path\": \"/anymal_c/Geometry/base/RH_HIP/RH_THIGH/RH_SHANK\",\n      \"material_type\": \"steel\",\n      \"mass_kg\": 0.0,\n      \"static_friction\": 0.0,\n      \"dynamic_friction\": 0.0,\n      \"restitution\": 0.0,\n      \"collision_approximation\": \"convexHull\",\n      \"is_rigid\": true,\n      \"confidence\": \"high\",\n      \"reasoning\": \"Silvery grey, structural.\"\n    }\n  ],\n  \"joint_prims\": [\n    {\n      \"prim_path\": \"/anymal_c/Geometry/base/LF_HIP/LF_THIGH/LF_SHANK/LF_KFE\",\n      \"lower_limit_deg\": -180,\n      \"upper_limit_deg\": 180,\n      \"joint_valid\": true,\n      \"confidence\": \"high\",\n      \"reasoning\": \"Industrial robot joint with unrestricted range.\"\n    },\n    {\n      \"prim_path\": \"/anymal_c/Geometry/base/LF_HIP/LF_THIGH/LF_HFE\",\n      \"lower_limit_deg\": -180,\n      \"upper_limit_deg\": 180,\n      \"joint_valid\": true,\n      \"confidence\": \"high\",\n      \"reasoning\": \"Industrial robot joint with unrestricted range.\"\n    },\n    {\n      \"prim_path\": \"/anymal_c/Geometry/base/LF_HIP/LF_HAA\",\n      \"lower_limit_deg\": -180,\n      \"upper_limit_deg\": 180,\n      \"joint_valid\": true,\n      \"confidence\": \"high\",\n      \"reasoning\": \"Industrial robot joint with unrestricted range.\"\n    },\n    {\n      \"prim_path\": \"/anymal_c/Geometry/base/RF_HIP/RF_THIGH/RF_SHANK/RF_KFE\",\n      \"lower_limit_deg\": -180,\n      \"upper_limit_deg\": 180,\n      \"joint_valid\": true,\n      \"confidence\": \"high\",\n      \"reasoning\": \"Industrial robot joint with unrestricted range.\"\n    },\n    {\n      \"prim_path\": \"/anymal_c/Geometry/base/RF_HIP/RF_THIGH/RF_HFE\",\n      \"lower_limit_deg\": -180,\n      \"upper_limit_deg\": 180,\n      \"joint_valid\": true,\n      \"confidence\": \"high\",\n      \"reasoning\": \"Industrial robot joint with unrestricted range.\"\n    },\n    {\n      \"prim_path\": \"/anymal_c/Geometry/base/RF_HIP/RF_HAA\",\n      \"lower_limit_deg\": -180,\n      \"upper_limit_deg\": 180,\n      \"joint_valid\": true,\n      \"confidence\": \"high\",\n      \"reasoning\": \"Industrial robot joint with unrestricted range.\"\n    },\n    {\n      \"prim_path\": \"/anymal_c/Geometry/base/LH_HIP/LH_THIGH/LH_SHANK/LH_KFE\",\n      \"lower_limit_deg\": -180,\n      \"upper_limit_deg\": 180,\n      \"joint_valid\": true,\n      \"confidence\": \"high\",\n      \"reasoning\": \"Industrial robot joint with unrestricted range.\"\n    },\n    {\n      \"prim_path\": \"/anymal_c/Geometry/base/LH_HIP/LH_THIGH/LH_HFE\",\n      \"lower_limit_deg\": -180,\n      \"upper_limit_deg\": 180,\n      \"joint_valid\": true,\n      \"confidence\": \"high\",\n      \"reasoning\": \"Industrial robot joint with unrestricted range.\"\n    },\n    {\n      \"prim_path\": \"/anymal_c/Geometry/base/LH_HIP/LH_HAA\",\n      \"lower_limit_deg\": -180,\n      \"upper_limit_deg\": 180,\n      \"joint_valid\": true,\n      \"confidence\": \"high\",\n      \"reasoning\": \"Industrial robot joint with unrestricted range.\"\n    },\n    {\n      \"prim_path\": \"/anymal_c/Geometry/base/RH_HIP/RH_THIGH/RH_SHANK/RH_KFE\",\n      \"lower_limit_deg\": -180,\n      \"upper_limit_deg\": 180,\n      \"joint_valid\": true,\n      \"confidence\": \"high\",\n      \"reasoning\": \"Industrial robot joint with unrestricted range.\"\n    },\n    {\n      \"prim_path\": \"/anymal_c/Geometry/base/RH_HIP/RH_THIGH/RH_HFE\",\n      \"lower_limit_deg\": -180,\n      \"upper_limit_deg\": 180,\n      \"joint_valid\": true,\n      \"confidence\": \"high\",\n      \"reasoning\": \"Industrial robot joint with unrestricted range.\"\n    },\n    {\n      \"prim_path\": \"/anymal_c/Geometry/base/RH_HIP/RH_HAA\",\n      \"lower_limit_deg\": -180,\n      \"upper_limit_deg\": 180,\n      \"joint_valid\": true,\n      \"confidence\": \"high\",\n      \"reasoning\": \"Industrial robot joint with unrestricted range.\"\n    }\n  ],\n  \"global_notes\": \"All joints are industrial robot joints with unrestricted range, so set joint_valid=true and use the standard industrial limits of -180\u00b0 to 180\u00b0.\"\n}\n```"
+    }
+  ]
+}

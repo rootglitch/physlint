@@ -1,0 +1,117 @@
+#usda 1.0
+(
+    defaultPrim = "World"
+    metersPerUnit = 0.01
+    upAxis = "Y"
+)
+
+def Xform "World"
+{
+    def "Mats"
+    {
+        def Material "Steel"
+        {
+            token outputs:surface.connect = </World/Mats/Steel/Shader.outputs:surface>
+
+            def Shader "Shader"
+            {
+                uniform token info:id = "UsdPreviewSurface"
+                color3f inputs:diffuseColor = (0.65, 0.67, 0.7)
+                float inputs:metallic = 0
+                float inputs:roughness = 0.4
+                token outputs:surface
+            }
+        }
+
+        def Material "Alum"
+        {
+            token outputs:surface.connect = </World/Mats/Alum/Shader.outputs:surface>
+
+            def Shader "Shader"
+            {
+                uniform token info:id = "UsdPreviewSurface"
+                color3f inputs:diffuseColor = (0.8, 0.83, 0.87)
+                float inputs:metallic = 0
+                float inputs:roughness = 0.35
+                token outputs:surface
+            }
+        }
+    }
+
+    def "Actuator"
+    {
+        def Cube "SliderBase" (
+            prepend apiSchemas = ["MaterialBindingAPI"]
+        )
+        {
+            rel material:binding = </World/Mats/Steel>
+            double size = 1
+            double3 xformOp:scale = (30, 4, 15)
+            double3 xformOp:translate = (0, 2, 0)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:scale"]
+        }
+
+        def Cube "CarriageBlock" (
+            prepend apiSchemas = ["MaterialBindingAPI"]
+        )
+        {
+            rel material:binding = </World/Mats/Alum>
+            double size = 1
+            double3 xformOp:scale = (12, 12, 12)
+            double3 xformOp:translate = (0, 10, 0)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:scale"]
+        }
+
+        def Cylinder "ActuatorRod" (
+            prepend apiSchemas = ["MaterialBindingAPI"]
+        )
+        {
+            double height = 30
+            rel material:binding = </World/Mats/Steel>
+            double radius = 2
+            double3 xformOp:scale = (1, 1, 1)
+            double3 xformOp:translate = (0, 31, 0)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:scale"]
+        }
+
+        def "Joints"
+        {
+            def PhysicsPrismaticJoint "SliderTravel"
+            {
+                uniform token physics:axis = "X"
+                rel physics:body0 = </World/Actuator/SliderBase>
+                rel physics:body1 = </World/Actuator/CarriageBlock>
+                float physics:lowerLimit = -15
+                float physics:upperLimit = 15
+            }
+
+            def PhysicsPrismaticJoint "ActuatorStroke"
+            {
+                uniform token physics:axis = "Y"
+                rel physics:body0 = </World/Actuator/CarriageBlock>
+                rel physics:body1 = </World/Actuator/ActuatorRod>
+                float physics:lowerLimit = 0
+                float physics:upperLimit = 180
+            }
+
+            def PhysicsPrismaticJoint "CarriageRetract"
+            {
+                uniform token physics:axis = "X"
+                rel physics:body0 = </World/Actuator/SliderBase>
+                rel physics:body1 = </World/Actuator/CarriageBlock>
+                float physics:lowerLimit = -10
+                float physics:upperLimit = 0
+            }
+
+            def PhysicsPrismaticJoint "RodOverExtend"
+            {
+                uniform token physics:axis = "Y"
+                rel physics:body0 = </World/Actuator/CarriageBlock>
+                rel physics:body1 = </World/Actuator/ActuatorRod>
+                float physics:lowerLimit = -80
+                float physics:upperLimit = 80
+            }
+        }
+    }
+}
+

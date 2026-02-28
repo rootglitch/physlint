@@ -1,0 +1,266 @@
+{
+  "summary": {
+    "model": "nvidia/Cosmos-Reason2-8B",
+    "joint_detection": {
+      "tp": 0,
+      "tn": 7,
+      "fp": 2,
+      "fn": 0,
+      "precision": 0.0,
+      "recall": null,
+      "accuracy": 0.778
+    },
+    "mass_estimation": {
+      "mape_pct": 507.8,
+      "n_prims": 11
+    }
+  },
+  "scenes": [
+    {
+      "name": "menagerie_franka_panda",
+      "joint_metrics": {
+        "tp": 0,
+        "tn": 7,
+        "fp": 2,
+        "fn": 0,
+        "missed": 0,
+        "total": 9,
+        "precision": 0.0,
+        "recall": null,
+        "accuracy": 0.778,
+        "per_joint": [
+          {
+            "path": "/panda/Geometry/link0/link1/link2/link3/link4/link5/link6/link7/hand/left_finger/finger_joint1",
+            "gt_lower": 0.0,
+            "gt_upper": 0.04,
+            "gt_violated": false,
+            "pred_violated": true,
+            "pred_lower": -Infinity,
+            "pred_upper": Infinity,
+            "confidence": "high",
+            "reasoning": "Joint /panda/Geometry/link0/link1/link2/link3/link4/link5/link6/link7/hand/left_finger/finger_joint1: lower=-Infinity, u",
+            "outcome": "FP"
+          },
+          {
+            "path": "/panda/Geometry/link0/link1/link2/link3/link4/link5/link6/link7/hand/right_finger/finger_joint2",
+            "gt_lower": 0.0,
+            "gt_upper": 0.04,
+            "gt_violated": false,
+            "pred_violated": true,
+            "pred_lower": -Infinity,
+            "pred_upper": Infinity,
+            "confidence": "high",
+            "reasoning": "Joint /panda/Geometry/link0/link1/link2/link3/link4/link5/link6/link7/hand/right_finger/finger_joint2: lower=-Infinity, ",
+            "outcome": "FP"
+          },
+          {
+            "path": "/panda/Geometry/link0/link1/link2/link3/link4/link5/link6/link7/joint7",
+            "gt_lower": -166.0,
+            "gt_upper": 166.0,
+            "gt_violated": false,
+            "pred_violated": false,
+            "pred_lower": -Infinity,
+            "pred_upper": Infinity,
+            "confidence": "high",
+            "reasoning": "Joint /panda/Geometry/link0/link1/link2/link3/link4/link5/link6/link7/joint7: lower=-Infinity, upper=Infinity. [VALID: n",
+            "outcome": "TN"
+          },
+          {
+            "path": "/panda/Geometry/link0/link1/link2/link3/link4/link5/link6/joint6",
+            "gt_lower": -1.0,
+            "gt_upper": 215.0,
+            "gt_violated": false,
+            "pred_violated": false,
+            "pred_lower": -Infinity,
+            "pred_upper": Infinity,
+            "confidence": "high",
+            "reasoning": "Joint /panda/Geometry/link0/link1/link2/link3/link4/link5/link6/joint6: lower=-Infinity, upper=Infinity. [VALID: no viol",
+            "outcome": "TN"
+          },
+          {
+            "path": "/panda/Geometry/link0/link1/link2/link3/link4/link5/joint5",
+            "gt_lower": -166.0,
+            "gt_upper": 166.0,
+            "gt_violated": false,
+            "pred_violated": false,
+            "pred_lower": -Infinity,
+            "pred_upper": Infinity,
+            "confidence": "high",
+            "reasoning": "Joint /panda/Geometry/link0/link1/link2/link3/link4/link5/joint5: lower=-Infinity, upper=Infinity. [VALID: no violation]",
+            "outcome": "TN"
+          },
+          {
+            "path": "/panda/Geometry/link0/link1/link2/link3/link4/joint4",
+            "gt_lower": -176.0,
+            "gt_upper": -4.0,
+            "gt_violated": false,
+            "pred_violated": false,
+            "pred_lower": -Infinity,
+            "pred_upper": Infinity,
+            "confidence": "high",
+            "reasoning": "Joint /panda/Geometry/link0/link1/link2/link3/link4/joint4: lower=-Infinity, upper=Infinity. [VALID: no violation]. Conf",
+            "outcome": "TN"
+          },
+          {
+            "path": "/panda/Geometry/link0/link1/link2/link3/joint3",
+            "gt_lower": -166.0,
+            "gt_upper": 166.0,
+            "gt_violated": false,
+            "pred_violated": false,
+            "pred_lower": -Infinity,
+            "pred_upper": Infinity,
+            "confidence": "high",
+            "reasoning": "Joint /panda/Geometry/link0/link1/link2/link3/joint3: lower=-Infinity, upper=Infinity. [VALID: no violation]. Confidence",
+            "outcome": "TN"
+          },
+          {
+            "path": "/panda/Geometry/link0/link1/link2/joint2",
+            "gt_lower": -101.0,
+            "gt_upper": 101.0,
+            "gt_violated": false,
+            "pred_violated": false,
+            "pred_lower": -Infinity,
+            "pred_upper": Infinity,
+            "confidence": "high",
+            "reasoning": "Joint /panda/Geometry/link0/link1/link2/joint2: lower=-Infinity, upper=Infinity. [VALID: no violation]. Confidence:high.",
+            "outcome": "TN"
+          },
+          {
+            "path": "/panda/Geometry/link0/link1/joint1",
+            "gt_lower": -166.0,
+            "gt_upper": 166.0,
+            "gt_violated": false,
+            "pred_violated": false,
+            "pred_lower": -Infinity,
+            "pred_upper": Infinity,
+            "confidence": "high",
+            "reasoning": "Joint /panda/Geometry/link0/link1/joint1: lower=-Infinity, upper=Infinity. [VALID: no violation]. Confidence:high.",
+            "outcome": "TN"
+          }
+        ]
+      },
+      "mass_metrics": {
+        "mape_pct": 507.8,
+        "n_prims": 11,
+        "n_missed": 0,
+        "best_prim": "link1",
+        "best_ape": 63.3,
+        "worst_prim": "link0",
+        "worst_ape": 1437.0,
+        "per_prim": [
+          {
+            "path": "/panda/Geometry/link0",
+            "gt_mass_kg": 0.63,
+            "pred_mass_kg": 9.68,
+            "ape_pct": 1437.0,
+            "gt_material": "aluminum",
+            "pred_material": "aluminium",
+            "confidence": "high",
+            "reasoning": "Prim /panda/Geometry/link0: material=aluminium [visual cue]. mass\u22480.0kg. Confidence:high."
+          },
+          {
+            "path": "/panda/Geometry/link0/link1",
+            "gt_mass_kg": 4.971,
+            "pred_mass_kg": 8.118,
+            "ape_pct": 63.3,
+            "gt_material": "aluminum",
+            "pred_material": "aluminium",
+            "confidence": "high",
+            "reasoning": "Prim /panda/Geometry/link0/link1: material=aluminium [visual cue]. mass\u22480.0kg. Confidence:high."
+          },
+          {
+            "path": "/panda/Geometry/link0/link1/link2",
+            "gt_mass_kg": 0.647,
+            "pred_mass_kg": 8.185,
+            "ape_pct": 1165.3,
+            "gt_material": "aluminum",
+            "pred_material": "aluminium",
+            "confidence": "high",
+            "reasoning": "Prim /panda/Geometry/link0/link1/link2: material=aluminium [visual cue]. mass\u22480.0kg. Confidence:high"
+          },
+          {
+            "path": "/panda/Geometry/link0/link1/link2/link3",
+            "gt_mass_kg": 3.229,
+            "pred_mass_kg": 9.115,
+            "ape_pct": 182.3,
+            "gt_material": "aluminum",
+            "pred_material": "aluminium",
+            "confidence": "high",
+            "reasoning": "Prim /panda/Geometry/link0/link1/link2/link3: material=aluminium [visual cue]. mass\u22480.0kg. Confidenc"
+          },
+          {
+            "path": "/panda/Geometry/link0/link1/link2/link3/link4",
+            "gt_mass_kg": 3.588,
+            "pred_mass_kg": 9.27,
+            "ape_pct": 158.4,
+            "gt_material": "aluminum",
+            "pred_material": "aluminium",
+            "confidence": "high",
+            "reasoning": "Prim /panda/Geometry/link0/link1/link2/link3/link4: material=aluminium [visual cue]. mass\u22480.0kg. Con"
+          },
+          {
+            "path": "/panda/Geometry/link0/link1/link2/link3/link4/link5",
+            "gt_mass_kg": 1.226,
+            "pred_mass_kg": 10.255,
+            "ape_pct": 736.5,
+            "gt_material": "aluminum",
+            "pred_material": "aluminium",
+            "confidence": "high",
+            "reasoning": "Prim /panda/Geometry/link0/link1/link2/link3/link4/link5: material=aluminium [visual cue]. mass\u22480.0k"
+          },
+          {
+            "path": "/panda/Geometry/link0/link1/link2/link3/link4/link5/link6",
+            "gt_mass_kg": 1.667,
+            "pred_mass_kg": 3.882,
+            "ape_pct": 132.9,
+            "gt_material": "aluminum",
+            "pred_material": "aluminium",
+            "confidence": "high",
+            "reasoning": "Prim /panda/Geometry/link0/link1/link2/link3/link4/link5/link6: material=aluminium [visual cue]. mas"
+          },
+          {
+            "path": "/panda/Geometry/link0/link1/link2/link3/link4/link5/link6/link7",
+            "gt_mass_kg": 0.736,
+            "pred_mass_kg": 1.394,
+            "ape_pct": 89.5,
+            "gt_material": "aluminum",
+            "pred_material": "aluminium",
+            "confidence": "high",
+            "reasoning": "Prim /panda/Geometry/link0/link1/link2/link3/link4/link5/link6/link7: material=aluminium [visual cue"
+          },
+          {
+            "path": "/panda/Geometry/link0/link1/link2/link3/link4/link5/link6/link7/hand",
+            "gt_mass_kg": 0.73,
+            "pred_mass_kg": 5.064,
+            "ape_pct": 593.7,
+            "gt_material": "aluminum",
+            "pred_material": "aluminium",
+            "confidence": "high",
+            "reasoning": "Prim /panda/Geometry/link0/link1/link2/link3/link4/link5/link6/link7/hand: material=aluminium [visua"
+          },
+          {
+            "path": "/panda/Geometry/link0/link1/link2/link3/link4/link5/link6/link7/hand/left_finger",
+            "gt_mass_kg": 0.015,
+            "pred_mass_kg": 0.092,
+            "ape_pct": 513.3,
+            "gt_material": "hard plastic",
+            "pred_material": "aluminium",
+            "confidence": "high",
+            "reasoning": "Prim /panda/Geometry/link0/link1/link2/link3/link4/link5/link6/link7/hand/left_finger: material=alum"
+          },
+          {
+            "path": "/panda/Geometry/link0/link1/link2/link3/link4/link5/link6/link7/hand/right_finger",
+            "gt_mass_kg": 0.015,
+            "pred_mass_kg": 0.092,
+            "ape_pct": 513.3,
+            "gt_material": "hard plastic",
+            "pred_material": "aluminium",
+            "confidence": "high",
+            "reasoning": "Prim /panda/Geometry/link0/link1/link2/link3/link4/link5/link6/link7/hand/right_finger: material=alu"
+          }
+        ]
+      },
+      "chain_of_thought": "```json\n{\n  \"geom_prims\": [\n    {\n      \"prim_path\": \"/panda/Geometry/link0\",\n      \"material_type\": \"aluminium\",\n      \"mass_kg\": 0.0,\n      \"static_friction\": 0.35,\n      \"dynamic_friction\": 0.25,\n      \"restitution\": 0.0,\n      \"collision_approximation\": \"convexHull\",\n      \"is_rigid\": true,\n      \"confidence\": \"high\",\n      \"reasoning\": \"Prim /panda/Geometry/link0: material=aluminium [visual cue]. mass\u22480.0kg. Confidence:high.\"\n    },\n    {\n      \"prim_path\": \"/panda/Geometry/link0/link1\",\n      \"material_type\": \"aluminium\",\n      \"mass_kg\": 0.0,\n      \"static_friction\": 0.35,\n      \"dynamic_friction\": 0.25,\n      \"restitution\": 0.0,\n      \"collision_approximation\": \"convexHull\",\n      \"is_rigid\": true,\n      \"confidence\": \"high\",\n      \"reasoning\": \"Prim /panda/Geometry/link0/link1: material=aluminium [visual cue]. mass\u22480.0kg. Confidence:high.\"\n    },\n    {\n      \"prim_path\": \"/panda/Geometry/link0/link1/link2\",\n      \"material_type\": \"aluminium\",\n      \"mass_kg\": 0.0,\n      \"static_friction\": 0.35,\n      \"dynamic_friction\": 0.25,\n      \"restitution\": 0.0,\n      \"collision_approximation\": \"convexHull\",\n      \"is_rigid\": true,\n      \"confidence\": \"high\",\n      \"reasoning\": \"Prim /panda/Geometry/link0/link1/link2: material=aluminium [visual cue]. mass\u22480.0kg. Confidence:high.\"\n    },\n    {\n      \"prim_path\": \"/panda/Geometry/link0/link1/link2/link3\",\n      \"material_type\": \"aluminium\",\n      \"mass_kg\": 0.0,\n      \"static_friction\": 0.35,\n      \"dynamic_friction\": 0.25,\n      \"restitution\": 0.0,\n      \"collision_approximation\": \"convexHull\",\n      \"is_rigid\": true,\n      \"confidence\": \"high\",\n      \"reasoning\": \"Prim /panda/Geometry/link0/link1/link2/link3: material=aluminium [visual cue]. mass\u22480.0kg. Confidence:high.\"\n    },\n    {\n      \"prim_path\": \"/panda/Geometry/link0/link1/link2/link3/link4\",\n      \"material_type\": \"aluminium\",\n      \"mass_kg\": 0.0,\n      \"static_friction\": 0.35,\n      \"dynamic_friction\": 0.25,\n      \"restitution\": 0.0,\n      \"collision_approximation\": \"convexHull\",\n      \"is_rigid\": true,\n      \"confidence\": \"high\",\n      \"reasoning\": \"Prim /panda/Geometry/link0/link1/link2/link3/link4: material=aluminium [visual cue]. mass\u22480.0kg. Confidence:high.\"\n    },\n    {\n      \"prim_path\": \"/panda/Geometry/link0/link1/link2/link3/link4/link5\",\n      \"material_type\": \"aluminium\",\n      \"mass_kg\": 0.0,\n      \"static_friction\": 0.35,\n      \"dynamic_friction\": 0.25,\n      \"restitution\": 0.0,\n      \"collision_approximation\": \"convexHull\",\n      \"is_rigid\": true,\n      \"confidence\": \"high\",\n      \"reasoning\": \"Prim /panda/Geometry/link0/link1/link2/link3/link4/link5: material=aluminium [visual cue]. mass\u22480.0kg. Confidence:high.\"\n    },\n    {\n      \"prim_path\": \"/panda/Geometry/link0/link1/link2/link3/link4/link5/link6\",\n      \"material_type\": \"aluminium\",\n      \"mass_kg\": 0.0,\n      \"static_friction\": 0.35,\n      \"dynamic_friction\": 0.25,\n      \"restitution\": 0.0,\n      \"collision_approximation\": \"convexHull\",\n      \"is_rigid\": true,\n      \"confidence\": \"high\",\n      \"reasoning\": \"Prim /panda/Geometry/link0/link1/link2/link3/link4/link5/link6: material=aluminium [visual cue]. mass\u22480.0kg. Confidence:high.\"\n    },\n    {\n      \"prim_path\": \"/panda/Geometry/link0/link1/link2/link3/link4/link5/link6/link7\",\n      \"material_type\": \"aluminium\",\n      \"mass_kg\": 0.0,\n      \"static_friction\": 0.35,\n      \"dynamic_friction\": 0.25,\n      \"restitution\": 0.0,\n      \"collision_approximation\": \"convexHull\",\n      \"is_rigid\": true,\n      \"confidence\": \"high\",\n      \"reasoning\": \"Prim /panda/Geometry/link0/link1/link2/link3/link4/link5/link6/link7: material=aluminium [visual cue]. mass\u22480.0kg. Confidence:high.\"\n    },\n    {\n      \"prim_path\": \"/panda/Geometry/link0/link1/link2/link3/link4/link5/link6/link7/hand\",\n      \"material_type\": \"aluminium\",\n      \"mass_kg\": 0.0,\n      \"static_friction\": 0.35,\n      \"dynamic_friction\": 0.25,\n      \"restitution\": 0.0,\n      \"collision_approximation\": \"convexHull\",\n      \"is_rigid\": true,\n      \"confidence\": \"high\",\n      \"reasoning\": \"Prim /panda/Geometry/link0/link1/link2/link3/link4/link5/link6/link7/hand: material=aluminium [visual cue]. mass\u22480.0kg. Confidence:high.\"\n    },\n    {\n      \"prim_path\": \"/panda/Geometry/link0/link1/link2/link3/link4/link5/link6/link7/hand/left_finger\",\n      \"material_type\": \"aluminium\",\n      \"mass_kg\": 0.0,\n      \"static_friction\": 0.35,\n      \"dynamic_friction\": 0.25,\n      \"restitution\": 0.0,\n      \"collision_approximation\": \"convexHull\",\n      \"is_rigid\": true,\n      \"confidence\": \"high\",\n      \"reasoning\": \"Prim /panda/Geometry/link0/link1/link2/link3/link4/link5/link6/link7/hand/left_finger: material=aluminium [visual cue]. mass\u22480.0kg. Confidence:high.\"\n    },\n    {\n      \"prim_path\": \"/panda/Geometry/link0/link1/link2/link3/link4/link5/link6/link7/hand/right_finger\",\n      \"material_type\": \"aluminium\",\n      \"mass_kg\": 0.0,\n      \"static_friction\": 0.35,\n      \"dynamic_friction\": 0.25,\n      \"restitution\": 0.0,\n      \"collision_approximation\": \"convexHull\",\n      \"is_rigid\": true,\n      \"confidence\": \"high\",\n      \"reasoning\": \"Prim /panda/Geometry/link0/link1/link2/link3/link4/link5/link6/link7/hand/right_finger: material=aluminium [visual cue]. mass\u22480.0kg. Confidence:high.\"\n    }\n  ],\n  \"joint_prims\": [\n    {\n      \"prim_path\": \"/panda/Geometry/link0/link1/link2/link3/link4/link5/link6/link7/hand/left_finger/finger_joint1\",\n      \"lower_limit_deg\": -Infinity,\n      \"upper_limit_deg\": Infinity,\n      \"joint_valid\": true,\n      \"confidence\": \"high\",\n      \"reasoning\": \"Joint /panda/Geometry/link0/link1/link2/link3/link4/link5/link6/link7/hand/left_finger/finger_joint1: lower=-Infinity, upper=Infinity. [VALID: no violation]. Confidence:high.\"\n    },\n    {\n      \"prim_path\": \"/panda/Geometry/link0/link1/link2/link3/link4/link5/link6/link7/hand/right_finger/finger_joint2\",\n      \"lower_limit_deg\": -Infinity,\n      \"upper_limit_deg\": Infinity,\n      \"joint_valid\": true,\n      \"confidence\": \"high\",\n      \"reasoning\": \"Joint /panda/Geometry/link0/link1/link2/link3/link4/link5/link6/link7/hand/right_finger/finger_joint2: lower=-Infinity, upper=Infinity. [VALID: no violation]. Confidence:high.\"\n    },\n    {\n      \"prim_path\": \"/panda/Geometry/link0/link1/link2/link3/link4/link5/link6/link7/joint7\",\n      \"lower_limit_deg\": -Infinity,\n      \"upper_limit_deg\": Infinity,\n      \"joint_valid\": true,\n      \"confidence\": \"high\",\n      \"reasoning\": \"Joint /panda/Geometry/link0/link1/link2/link3/link4/link5/link6/link7/joint7: lower=-Infinity, upper=Infinity. [VALID: no violation]. Confidence:high.\"\n    },\n    {\n      \"prim_path\": \"/panda/Geometry/link0/link1/link2/link3/link4/link5/link6/joint6\",\n      \"lower_limit_deg\": -Infinity,\n      \"upper_limit_deg\": Infinity,\n      \"joint_valid\": true,\n      \"confidence\": \"high\",\n      \"reasoning\": \"Joint /panda/Geometry/link0/link1/link2/link3/link4/link5/link6/joint6: lower=-Infinity, upper=Infinity. [VALID: no violation]. Confidence:high.\"\n    },\n    {\n      \"prim_path\": \"/panda/Geometry/link0/link1/link2/link3/link4/link5/joint5\",\n      \"lower_limit_deg\": -Infinity,\n      \"upper_limit_deg\": Infinity,\n      \"joint_valid\": true,\n      \"confidence\": \"high\",\n      \"reasoning\": \"Joint /panda/Geometry/link0/link1/link2/link3/link4/link5/joint5: lower=-Infinity, upper=Infinity. [VALID: no violation]. Confidence:high.\"\n    },\n    {\n      \"prim_path\": \"/panda/Geometry/link0/link1/link2/link3/link4/joint4\",\n      \"lower_limit_deg\": -Infinity,\n      \"upper_limit_deg\": Infinity,\n      \"joint_valid\": true,\n      \"confidence\": \"high\",\n      \"reasoning\": \"Joint /panda/Geometry/link0/link1/link2/link3/link4/joint4: lower=-Infinity, upper=Infinity. [VALID: no violation]. Confidence:high.\"\n    },\n    {\n      \"prim_path\": \"/panda/Geometry/link0/link1/link2/link3/joint3\",\n      \"lower_limit_deg\": -Infinity,\n      \"upper_limit_deg\": Infinity,\n      \"joint_valid\": true,\n      \"confidence\": \"high\",\n      \"reasoning\": \"Joint /panda/Geometry/link0/link1/link2/link3/joint3: lower=-Infinity, upper=Infinity. [VALID: no violation]. Confidence:high.\"\n    },\n    {\n      \"prim_path\": \"/panda/Geometry/link0/link1/link2/joint2\",\n      \"lower_limit_deg\": -Infinity,\n      \"upper_limit_deg\": Infinity,\n      \"joint_valid\": true,\n      \"confidence\": \"high\",\n      \"reasoning\": \"Joint /panda/Geometry/link0/link1/link2/joint2: lower=-Infinity, upper=Infinity. [VALID: no violation]. Confidence:high.\"\n    },\n    {\n      \"prim_path\": \"/panda/Geometry/link0/link1/joint1\",\n      \"lower_limit_deg\": -Infinity,\n      \"upper_limit_deg\": Infinity,\n      \"joint_valid\": true,\n      \"confidence\": \"high\",\n      \"reasoning\": \"Joint /panda/Geometry/link0/link1/joint1: lower=-Infinity, upper=Infinity. [VALID: no violation]. Confidence:high.\"\n    }\n  ],\n  \"global_notes\": \"All joints have infinite limits, which is valid for robotic arms. All links are assigned aluminium material based on visual cues.\"\n}\n```"
+    }
+  ]
+}

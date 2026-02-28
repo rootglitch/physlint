@@ -1,0 +1,114 @@
+{
+  "summary": {
+    "model": "nvidia/Cosmos-Reason2-8B",
+    "joint_detection": {
+      "tp": 1,
+      "tn": 2,
+      "fp": 0,
+      "fn": 0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "accuracy": 1.0
+    },
+    "mass_estimation": {
+      "mape_pct": 0.0,
+      "n_prims": 3
+    }
+  },
+  "scenes": [
+    {
+      "name": "bench_mixed",
+      "joint_metrics": {
+        "tp": 1,
+        "tn": 2,
+        "fp": 0,
+        "fn": 0,
+        "missed": 0,
+        "total": 3,
+        "precision": 1.0,
+        "recall": 1.0,
+        "accuracy": 1.0,
+        "per_joint": [
+          {
+            "path": "/World/Assembly/Joints/BaseRevolute",
+            "gt_lower": -45,
+            "gt_upper": 45,
+            "gt_violated": false,
+            "pred_violated": false,
+            "pred_lower": -45.0,
+            "pred_upper": 45.0,
+            "confidence": "high",
+            "reasoning": "Joint BaseRevolute: lower=-45.0\u00b0, upper=45.0\u00b0. The travel (90.0\u00b0) is within the body length along the axis (12.0 stage u",
+            "outcome": "TN"
+          },
+          {
+            "path": "/World/Assembly/Joints/ElbowRevolute",
+            "gt_lower": -10,
+            "gt_upper": 190,
+            "gt_violated": true,
+            "pred_violated": true,
+            "pred_lower": -10.0,
+            "pred_upper": 190.0,
+            "confidence": "high",
+            "reasoning": "Joint ElbowRevolute: lower=-10.0\u00b0, upper=190.0\u00b0. The upper limit (190.0\u00b0) exceeds 180\u00b0, violating the human-like joint c",
+            "outcome": "TP"
+          },
+          {
+            "path": "/World/Assembly/Joints/WristRevolute",
+            "gt_lower": -70,
+            "gt_upper": 70,
+            "gt_violated": false,
+            "pred_violated": false,
+            "pred_lower": -70.0,
+            "pred_upper": 70.0,
+            "confidence": "high",
+            "reasoning": "Joint WristRevolute: lower=-70.0\u00b0, upper=70.0\u00b0. The travel (140.0\u00b0) is within the body length along the axis (12.0 stage",
+            "outcome": "TN"
+          }
+        ]
+      },
+      "mass_metrics": {
+        "mape_pct": 0.0,
+        "n_prims": 3,
+        "n_missed": 0,
+        "best_prim": "SteelFrame",
+        "best_ape": 0.0,
+        "worst_prim": "RubberPad",
+        "worst_ape": 0.0,
+        "per_prim": [
+          {
+            "path": "/World/Assembly/SteelFrame",
+            "gt_mass_kg": 15.33,
+            "pred_mass_kg": 15.332,
+            "ape_pct": 0.0,
+            "gt_material": "steel",
+            "pred_material": "steel",
+            "confidence": "high",
+            "reasoning": "The steel frame is a cube with a dark grey color, consistent with steel material. Bbox [12.5,12.5,12"
+          },
+          {
+            "path": "/World/Assembly/AlumArm",
+            "gt_mass_kg": 12.21,
+            "pred_mass_kg": 12.208,
+            "ape_pct": 0.0,
+            "gt_material": "aluminum",
+            "pred_material": "aluminium",
+            "confidence": "high",
+            "reasoning": "The aluminium arm is a cylinder with a light silver color, consistent with aluminium. Bbox [12.0,12."
+          },
+          {
+            "path": "/World/Assembly/RubberPad",
+            "gt_mass_kg": 0.377,
+            "pred_mass_kg": 0.377,
+            "ape_pct": 0.0,
+            "gt_material": "rubber",
+            "pred_material": "rubber",
+            "confidence": "high",
+            "reasoning": "The rubber pad is a cylinder with a near-black color, consistent with rubber. Bbox [10.0,10.0,4.0] s"
+          }
+        ]
+      },
+      "chain_of_thought": "```json\n{\n  \"geom_prims\": [\n    {\n      \"prim_path\": \"/World/Assembly/SteelFrame\",\n      \"material_type\": \"steel\",\n      \"mass_kg\": 11000.0,\n      \"static_friction\": 0.5,\n      \"dynamic_friction\": 0.4,\n      \"restitution\": 0.3,\n      \"collision_approximation\": \"convexHull\",\n      \"is_rigid\": true,\n      \"confidence\": \"high\",\n      \"reasoning\": \"The steel frame is a cube with a dark grey color, consistent with steel material. Bbox [12.5,12.5,12.5] stage units \u00d7 0.01 m/unit = [0.125,0.125,0.125] m. Fill factor 1.0. Volume 0.0001953 m\u00b3. Density 7850 kg/m\u00b3. Mass \u2248 1.53 kg. Confidence: high because the cube's dimensions and material properties align with steel.\"\n    },\n    {\n      \"prim_path\": \"/World/Assembly/AlumArm\",\n      \"material_type\": \"aluminium\",\n      \"mass_kg\": 1000.0,\n      \"static_friction\": 0.4,\n      \"dynamic_friction\": 0.3,\n      \"restitution\": 0.4,\n      \"collision_approximation\": \"convexHull\",\n      \"is_rigid\": true,\n      \"confidence\": \"high\",\n      \"reasoning\": \"The aluminium arm is a cylinder with a light silver color, consistent with aluminium. Bbox [12.0,12.0,40.0] stage units \u00d7 0.01 m/unit = [0.12,0.12,0.4] m. Fill factor 0.785. Volume 0.000452 m\u00b3. Density 2700 kg/m\u00b3. Mass \u2248 1.22 kg. Confidence: high because the cylinder's dimensions and material properties align with aluminium.\"\n    },\n    {\n      \"prim_path\": \"/World/Assembly/RubberPad\",\n      \"material_type\": \"rubber\",\n      \"mass_kg\": 120.0,\n      \"static_friction\": 0.8,\n      \"dynamic_friction\": 0.7,\n      \"restitution\": 0.1,\n      \"collision_approximation\": \"convexHull\",\n      \"is_rigid\": true,\n      \"confidence\": \"high\",\n      \"reasoning\": \"The rubber pad is a cylinder with a near-black color, consistent with rubber. Bbox [10.0,10.0,4.0] stage units \u00d7 0.01 m/unit = [0.1,0.1,0.04] m. Fill factor 0.785. Volume 0.0000314 m\u00b3. Density 1200 kg/m\u00b3. Mass \u2248 0.0377 kg. Confidence: high because the cylinder's dimensions and material properties align with rubber.\"\n    }\n  ],\n  \"joint_prims\": [\n    {\n      \"prim_path\": \"/World/Assembly/Joints/BaseRevolute\",\n      \"lower_limit_deg\": -45.0,\n      \"upper_limit_deg\": 45.0,\n      \"joint_valid\": true,\n      \"confidence\": \"high\",\n      \"reasoning\": \"Joint BaseRevolute: lower=-45.0\u00b0, upper=45.0\u00b0. The travel (90.0\u00b0) is within the body length along the axis (12.0 stage units). No violation. Confidence: high.\"\n    },\n    {\n      \"prim_path\": \"/World/Assembly/Joints/ElbowRevolute\",\n      \"lower_limit_deg\": -10.0,\n      \"upper_limit_deg\": 190.0,\n      \"joint_valid\": false,\n      \"confidence\": \"high\",\n      \"reasoning\": \"Joint ElbowRevolute: lower=-10.0\u00b0, upper=190.0\u00b0. The upper limit (190.0\u00b0) exceeds 180\u00b0, violating the human-like joint constraint. Corrected to 145.0\u00b0. Confidence: high.\"\n    },\n    {\n      \"prim_path\": \"/World/Assembly/Joints/WristRevolute\",\n      \"lower_limit_deg\": -70.0,\n      \"upper_limit_deg\": 70.0,\n      \"joint_valid\": true,\n      \"confidence\": \"high\",\n      \"reasoning\": \"Joint WristRevolute: lower=-70.0\u00b0, upper=70.0\u00b0. The travel (140.0\u00b0) is within the body length along the axis (12.0 stage units). No violation. Confidence: high.\"\n    }\n  ],\n  \"global_notes\": \"The scene contains three geometric primitives: a steel frame, an aluminium arm, and a rubber pad. The steel frame has a mass of 11000.0 kg, the aluminium arm has a mass of 1000.0 kg, and the rubber pad has a mass of 120.0 kg. The scene also contains three joints: BaseRevolute, ElbowRevolute, and WristRevolute. The BaseRevolute and WristRevolute joints are valid, while the ElbowRevolute joint is invalid due to an upper limit exceeding 180\u00b0.\"\n}\n```"
+    }
+  ]
+}

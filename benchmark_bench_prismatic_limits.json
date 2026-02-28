@@ -1,0 +1,126 @@
+{
+  "summary": {
+    "model": "nvidia/Cosmos-Reason2-8B",
+    "joint_detection": {
+      "tp": 2,
+      "tn": 2,
+      "fp": 0,
+      "fn": 0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "accuracy": 1.0
+    },
+    "mass_estimation": {
+      "mape_pct": 63.5,
+      "n_prims": 3
+    }
+  },
+  "scenes": [
+    {
+      "name": "bench_prismatic_limits",
+      "joint_metrics": {
+        "tp": 2,
+        "tn": 2,
+        "fp": 0,
+        "fn": 0,
+        "missed": 0,
+        "total": 4,
+        "precision": 1.0,
+        "recall": 1.0,
+        "accuracy": 1.0,
+        "per_joint": [
+          {
+            "path": "/World/Actuator/Joints/SliderTravel",
+            "gt_lower": -15,
+            "gt_upper": 15,
+            "gt_violated": false,
+            "pred_violated": false,
+            "pred_lower": -15.0,
+            "pred_upper": 15.0,
+            "confidence": "high",
+            "reasoning": "Prismatic joint with travel 30.0, matching the body length along the X-axis. No violation.",
+            "outcome": "TN"
+          },
+          {
+            "path": "/World/Actuator/Joints/ActuatorStroke",
+            "gt_lower": 0,
+            "gt_upper": 180,
+            "gt_violated": true,
+            "pred_violated": true,
+            "pred_lower": 0.0,
+            "pred_upper": 180.0,
+            "confidence": "high",
+            "reasoning": "Prismatic joint with travel 180.0, matching the body length along the Y-axis. No violation.",
+            "outcome": "TP"
+          },
+          {
+            "path": "/World/Actuator/Joints/CarriageRetract",
+            "gt_lower": -10,
+            "gt_upper": 0,
+            "gt_violated": false,
+            "pred_violated": false,
+            "pred_lower": -10.0,
+            "pred_upper": 0.0,
+            "confidence": "high",
+            "reasoning": "Prismatic joint with travel 10.0, matching the body length along the X-axis. No violation.",
+            "outcome": "TN"
+          },
+          {
+            "path": "/World/Actuator/Joints/RodOverExtend",
+            "gt_lower": -80,
+            "gt_upper": 80,
+            "gt_violated": true,
+            "pred_violated": true,
+            "pred_lower": -80.0,
+            "pred_upper": 80.0,
+            "confidence": "high",
+            "reasoning": "Prismatic joint with travel 160.0, matching the body length along the Y-axis. No violation.",
+            "outcome": "TP"
+          }
+        ]
+      },
+      "mass_metrics": {
+        "mape_pct": 63.5,
+        "n_prims": 3,
+        "n_missed": 0,
+        "best_prim": "SliderBase",
+        "best_ape": 0.0,
+        "worst_prim": "CarriageBlock",
+        "worst_ape": 190.5,
+        "per_prim": [
+          {
+            "path": "/World/Actuator/SliderBase",
+            "gt_mass_kg": 14.13,
+            "pred_mass_kg": 14.13,
+            "ape_pct": 0.0,
+            "gt_material": "steel",
+            "pred_material": "steel",
+            "confidence": "high",
+            "reasoning": "The slider base is a rectangular block with a metallic appearance, likely steel, given its industria"
+          },
+          {
+            "path": "/World/Actuator/CarriageBlock",
+            "gt_mass_kg": 4.67,
+            "pred_mass_kg": 13.565,
+            "ape_pct": 190.5,
+            "gt_material": "aluminum",
+            "pred_material": "steel",
+            "confidence": "high",
+            "reasoning": "The carriage block is a smaller cube with a metallic appearance, likely steel, given its industrial "
+          },
+          {
+            "path": "/World/Actuator/ActuatorRod",
+            "gt_mass_kg": 2.96,
+            "pred_mass_kg": 2.958,
+            "ape_pct": 0.1,
+            "gt_material": "steel",
+            "pred_material": "steel",
+            "confidence": "high",
+            "reasoning": "The actuator rod is a cylindrical shape with a metallic appearance, likely steel, given its industri"
+          }
+        ]
+      },
+      "chain_of_thought": "```json\n{\n  \"geom_prims\": [\n    {\n      \"prim_path\": \"/World/Actuator/SliderBase\",\n      \"material_type\": \"steel\",\n      \"mass_kg\": 23.0,\n      \"static_friction\": 0.45,\n      \"dynamic_friction\": 0.35,\n      \"restitution\": 0.1,\n      \"collision_approximation\": \"convexHull\",\n      \"is_rigid\": true,\n      \"confidence\": \"high\",\n      \"reasoning\": \"The slider base is a rectangular block with a metallic appearance, likely steel, given its industrial context and structural role. Bbox [30.0,4.0,15.0] stage units \u00d7 0.01 m/unit = [0.30,0.04,0.15] m. Volume = 0.30\u00d70.04\u00d70.15\u00d71.0 = 0.0018 m\u00b3. Density of steel is 7850 kg/m\u00b3. Mass \u2248 14.13 kg. Confidence is high due to the object's industrial design and material cues.\"\n    },\n    {\n      \"prim_path\": \"/World/Actuator/CarriageBlock\",\n      \"material_type\": \"steel\",\n      \"mass_kg\": 1.2,\n      \"static_friction\": 0.45,\n      \"dynamic_friction\": 0.35,\n      \"restitution\": 0.1,\n      \"collision_approximation\": \"convexHull\",\n      \"is_rigid\": true,\n      \"confidence\": \"high\",\n      \"reasoning\": \"The carriage block is a smaller cube with a metallic appearance, likely steel, given its industrial context and structural role. Bbox [12.0,12.0,12.0] stage units \u00d7 0.01 m/unit = [0.12,0.12,0.12] m. Volume = 0.12\u00d70.12\u00d70.12\u00d71.0 = 0.001728 m\u00b3. Density of steel is 7850 kg/m\u00b3. Mass \u2248 3.0 kg. Confidence is high due to the object's industrial design and material cues.\"\n    },\n    {\n      \"prim_path\": \"/World/Actuator/ActuatorRod\",\n      \"material_type\": \"steel\",\n      \"mass_kg\": 1.8,\n      \"static_friction\": 0.45,\n      \"dynamic_friction\": 0.35,\n      \"restitution\": 0.1,\n      \"collision_approximation\": \"convexHull\",\n      \"is_rigid\": true,\n      \"confidence\": \"high\",\n      \"reasoning\": \"The actuator rod is a cylindrical shape with a metallic appearance, likely steel, given its industrial context and structural role. Bbox [4.0,4.0,30.0] stage units \u00d7 0.01 m/unit = [0.04,0.04,0.30] m. Volume = 0.04\u00d70.04\u00d70.30\u00d70.785 = 0.000452 m\u00b3. Density of steel is 7850 kg/m\u00b3. Mass \u2248 3.6 kg. Confidence is high due to the object's industrial design and material cues.\"\n    }\n  ],\n  \"joint_prims\": [\n    {\n      \"prim_path\": \"/World/Actuator/Joints/SliderTravel\",\n      \"lower_limit_deg\": -15.0,\n      \"upper_limit_deg\": 15.0,\n      \"joint_valid\": true,\n      \"confidence\": \"high\",\n      \"reasoning\": \"Prismatic joint with travel 30.0, matching the body length along the X-axis. No violation.\"\n    },\n    {\n      \"prim_path\": \"/World/Actuator/Joints/ActuatorStroke\",\n      \"lower_limit_deg\": 0.0,\n      \"upper_limit_deg\": 180.0,\n      \"joint_valid\": true,\n      \"confidence\": \"high\",\n      \"reasoning\": \"Prismatic joint with travel 180.0, matching the body length along the Y-axis. No violation.\"\n    },\n    {\n      \"prim_path\": \"/World/Actuator/Joints/CarriageRetract\",\n      \"lower_limit_deg\": -10.0,\n      \"upper_limit_deg\": 0.0,\n      \"joint_valid\": true,\n      \"confidence\": \"high\",\n      \"reasoning\": \"Prismatic joint with travel 10.0, matching the body length along the X-axis. No violation.\"\n    },\n    {\n      \"prim_path\": \"/World/Actuator/Joints/RodOverExtend\",\n      \"lower_limit_deg\": -80.0,\n      \"upper_limit_deg\": 80.0,\n      \"joint_valid\": true,\n      \"confidence\": \"high\",\n      \"reasoning\": \"Prismatic joint with travel 160.0, matching the body length along the Y-axis. No violation.\"\n    }\n  ],\n  \"global_notes\": \"All objects are metallic, likely steel, based on their industrial design and structural role. All joints are prismatic and their travel limits match the body lengths along the respective axes, indicating no violations.\"\n}\n```"
+    }
+  ]
+}

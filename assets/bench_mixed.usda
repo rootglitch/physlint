@@ -1,0 +1,123 @@
+#usda 1.0
+(
+    defaultPrim = "World"
+    metersPerUnit = 0.01
+    upAxis = "Y"
+)
+
+def Xform "World"
+{
+    def "Mats"
+    {
+        def Material "Steel"
+        {
+            token outputs:surface.connect = </World/Mats/Steel/Shader.outputs:surface>
+
+            def Shader "Shader"
+            {
+                uniform token info:id = "UsdPreviewSurface"
+                color3f inputs:diffuseColor = (0.65, 0.67, 0.7)
+                float inputs:metallic = 0
+                float inputs:roughness = 0.4
+                token outputs:surface
+            }
+        }
+
+        def Material "Alum"
+        {
+            token outputs:surface.connect = </World/Mats/Alum/Shader.outputs:surface>
+
+            def Shader "Shader"
+            {
+                uniform token info:id = "UsdPreviewSurface"
+                color3f inputs:diffuseColor = (0.8, 0.83, 0.87)
+                float inputs:metallic = 0
+                float inputs:roughness = 0.35
+                token outputs:surface
+            }
+        }
+
+        def Material "Rubber"
+        {
+            token outputs:surface.connect = </World/Mats/Rubber/Shader.outputs:surface>
+
+            def Shader "Shader"
+            {
+                uniform token info:id = "UsdPreviewSurface"
+                color3f inputs:diffuseColor = (0.03, 0.03, 0.03)
+                float inputs:metallic = 0
+                float inputs:roughness = 0.98
+                token outputs:surface
+            }
+        }
+    }
+
+    def "Assembly"
+    {
+        def Cube "SteelFrame" (
+            prepend apiSchemas = ["MaterialBindingAPI"]
+        )
+        {
+            rel material:binding = </World/Mats/Steel>
+            double size = 1
+            double3 xformOp:scale = (12.5, 12.5, 12.5)
+            double3 xformOp:translate = (0, 12.5, 0)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:scale"]
+        }
+
+        def Cylinder "AlumArm" (
+            prepend apiSchemas = ["MaterialBindingAPI"]
+        )
+        {
+            double height = 40
+            rel material:binding = </World/Mats/Alum>
+            double radius = 6
+            double3 xformOp:scale = (1, 1, 1)
+            double3 xformOp:translate = (30, 20, 0)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:scale"]
+        }
+
+        def Cylinder "RubberPad" (
+            prepend apiSchemas = ["MaterialBindingAPI"]
+        )
+        {
+            double height = 4
+            rel material:binding = </World/Mats/Rubber>
+            double radius = 5
+            double3 xformOp:scale = (1, 1, 1)
+            double3 xformOp:translate = (0, 2, 20)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:scale"]
+        }
+
+        def "Joints"
+        {
+            def PhysicsRevoluteJoint "BaseRevolute"
+            {
+                uniform token physics:axis = "Z"
+                rel physics:body0 = </World/Assembly/SteelFrame>
+                rel physics:body1 = </World/Assembly/AlumArm>
+                float physics:lowerLimit = -45
+                float physics:upperLimit = 45
+            }
+
+            def PhysicsRevoluteJoint "ElbowRevolute"
+            {
+                uniform token physics:axis = "Z"
+                rel physics:body0 = </World/Assembly/AlumArm>
+                rel physics:body1 = </World/Assembly/RubberPad>
+                float physics:lowerLimit = -10
+                float physics:upperLimit = 190
+            }
+
+            def PhysicsRevoluteJoint "WristRevolute"
+            {
+                uniform token physics:axis = "Z"
+                rel physics:body0 = </World/Assembly/RubberPad>
+                rel physics:body1 = </World/Assembly/SteelFrame>
+                float physics:lowerLimit = -70
+                float physics:upperLimit = 70
+            }
+        }
+    }
+}
+
