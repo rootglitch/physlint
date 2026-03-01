@@ -7,7 +7,7 @@ from dataclasses import dataclass, field, asdict
 from typing import Optional
 import json
 
-from pxr import Usd, UsdGeom, UsdPhysics, Gf, Sdf
+from pxr import Usd, UsdGeom, UsdPhysics, UsdShade, Gf, Sdf
 
 
 # Prim types that are candidates for physics authoring
@@ -69,6 +69,7 @@ class GeomPrimInfo:
     display_name: str = ""
     bbox: Optional[BBox] = None
     fill_factor: float = 1.0
+    material_type: str = ""    # extracted from USD material binding path, e.g. "steel", "aluminum"
     existing_physics: ExistingPhysics = field(default_factory=ExistingPhysics)
 
 
@@ -160,6 +161,38 @@ def _compute_link_bbox(prim: Usd.Prim, bbox_cache: UsdGeom.BBoxCache) -> Optiona
     if not found or any(mn[i] == float("inf") for i in range(3)):
         return None
     return _bbox_from_range(mn, mx)
+
+
+_MATERIAL_KEYWORDS: list[tuple[str, str]] = [
+    ("steel",    "steel"),
+    ("iron",     "steel"),
+    ("alum",     "aluminum"),
+    ("rubber",   "rubber"),
+    ("concrete", "concrete"),
+    ("plastic",  "plastic"),
+    ("wood",     "wood"),
+    ("glass",    "glass"),
+    ("carbon",   "carbon fiber"),
+]
+
+
+def _material_type_from_prim(prim: Usd.Prim) -> str:
+    """Return a material type string by inspecting the USD material bound to prim.
+
+    Checks (in order):
+    1. Bound material path (e.g. /World/Mats/Steel → "steel")
+    2. Bound material prim name
+    Returns "" if no material is bound or name is unrecognised.
+    """
+    binding = UsdShade.MaterialBindingAPI(prim)
+    mat, _ = binding.ComputeBoundMaterial()
+    if not mat:
+        return ""
+    mat_path = str(mat.GetPath()).lower()
+    for keyword, mat_type in _MATERIAL_KEYWORDS:
+        if keyword in mat_path:
+            return mat_type
+    return ""
 
 
 def _read_existing_physics(prim: Usd.Prim) -> ExistingPhysics:
@@ -281,12 +314,21 @@ def parse_usd(usd_path: str) -> SceneGraph:
             # Fallback: whole-prim world bbox
             bbox = _compute_bbox(prim, bbox_cache)
         ep = _read_existing_physics(prim)
+        # Try to get material from the Xform itself, then from its first mesh child
+        mat_type = _material_type_from_prim(prim)
+        if not mat_type:
+            for child in prim.GetChildren():
+                if child.GetTypeName() in GEOMETRY_TYPES:
+                    mat_type = _material_type_from_prim(child)
+                    if mat_type:
+                        break
         geom_prims.append(GeomPrimInfo(
             path=str(prim.GetPath()),
             type_name="Mesh",          # treat as complex mesh for fill_factor
             display_name=prim.GetName(),
             bbox=bbox,
             fill_factor=0.6,
+            material_type=mat_type,
             existing_physics=ep,
         ))
 
@@ -308,6 +350,7 @@ def parse_usd(usd_path: str) -> SceneGraph:
             display_name=prim.GetName(),
             bbox=bbox,
             fill_factor=FILL_FACTORS.get(type_name, 0.6),
+            material_type=_material_type_from_prim(prim),
             existing_physics=ep,
         ))
 

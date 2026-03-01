@@ -527,7 +527,10 @@ def _apply_mass_correction(raw: dict, scene_graph: dict) -> dict:
         if not size or len(size) < 3:
             continue
         fill = sg_prim.get("fill_factor", 1.0) or 1.0
-        density = _lookup_density(gp.get("material_type", ""))
+        # Prefer USD material (scene graph) over Cosmos visual guess
+        usd_mat = sg_prim.get("material_type", "")
+        cosmos_mat = gp.get("material_type", "")
+        density = _lookup_density(usd_mat) or _lookup_density(cosmos_mat)
         if density is None:
             continue
         xm, ym, zm = [v * mpu for v in size]
