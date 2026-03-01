@@ -87,6 +87,18 @@ SYSTEM_PROMPT = (
     "Always reason carefully about visual evidence before assigning numeric values."
 )
 
+PREPASS_SYSTEM_PROMPT = (
+    "You are a mechanical engineering expert. Identify the type of mechanism or robot "
+    "shown in USD scene renders and describe the physics validation context that applies. "
+    "Be concise and precise."
+)
+
+VERIFICATION_SYSTEM_PROMPT = (
+    "You are a physics simulation expert reviewing a USD scene analysis for correctness. "
+    "Carefully verify each joint validity assessment against the visual evidence and "
+    "mechanical constraints. Be critical — flag false positives and missed violations."
+)
+
 MATERIAL_REFERENCE = """
 MATERIAL CUES:
 - Silvery/grey = metal. Steel=darker grey (frames, vessels, heavy structural). Aluminium=lighter silver (robot arms, lightweight parts).
@@ -129,7 +141,7 @@ JOINT RULES:
 """
 
 
-def _build_prompt(scene_graph: dict) -> str:
+def _build_prompt(scene_graph: dict, context_str: str = "") -> str:
     import copy
     scene_graph = copy.deepcopy(scene_graph)
 
@@ -150,8 +162,13 @@ def _build_prompt(scene_graph: dict) -> str:
     joint_paths = [p["path"] for p in scene_graph.get("joint_prims", [])]
     meta = scene_graph.get("stage_metadata", {})
 
+    context_block = (
+        f"\nMECHANISM CONTEXT (from scene pre-analysis):\n{context_str}\n"
+        if context_str else ""
+    )
+
     return f"""
-{MATERIAL_REFERENCE}
+{context_block}{MATERIAL_REFERENCE}
 
 4 renders: top / front / right / isometric.
 Stage: up_axis={meta.get('up_axis', 'Y')}, meters_per_unit={meta.get('meters_per_unit', 1.0)}
@@ -211,6 +228,81 @@ STEP 2 — JSON OUTPUT (after ALL step 1 reasoning above):
 """.strip()
 
 
+def _build_prepass_prompt(scene_graph: dict) -> str:
+    """Minimal prompt for Pass 1: identify mechanism type and validation context."""
+    meta = scene_graph.get("stage_metadata", {})
+    joints = [
+        {"path": j["path"], "type": j.get("type_name", "Unknown"),
+         "lower": j.get("lower_limit"), "upper": j.get("upper_limit")}
+        for j in scene_graph.get("joint_prims", [])
+        if "Fixed" not in j.get("type_name", "")
+    ]
+    return f"""4 renders of a USD physics scene: top / front / side / isometric.
+Stage: up_axis={meta.get('up_axis', 'Y')}, meters_per_unit={meta.get('meters_per_unit', 1.0)}
+Joints present: {json.dumps(joints, separators=(',', ':'))}
+
+Identify the mechanism and describe the physics validation context that applies.
+
+```json
+{{
+  "mechanism_type": "<e.g. '6-DOF industrial robot arm', 'linear gantry crane', 'parallel gripper', 'humanoid arm'>",
+  "expected_joint_ranges": "<brief description: e.g. 'revolute joints -160° to +160° for industrial arms; elbow limited to 0-145° for human arms'>",
+  "validation_context": "<specific constraints guiding joint and mass validation for this mechanism>"
+}}
+```""".strip()
+
+
+def _build_verification_prompt(raw: dict, scene_graph: dict) -> str:
+    """Prompt for Pass 3: verify correctness of joint validity findings."""
+    meta = scene_graph.get("stage_metadata", {})
+    joint_by_path = {j["path"]: j for j in scene_graph.get("joint_prims", [])}
+
+    violations = []
+    valid_joints = []
+    for j in raw.get("joint_prims", []):
+        path = j.get("prim_path", "")
+        sg = joint_by_path.get(path, {})
+        entry = {
+            "path": path,
+            "type": sg.get("type_name", "Unknown"),
+            "original_lower": sg.get("lower_limit"),
+            "original_upper": sg.get("upper_limit"),
+            "reasoning": j.get("reasoning", ""),
+        }
+        if not j.get("joint_valid", True):
+            violations.append(entry)
+        else:
+            valid_joints.append(entry)
+
+    return f"""Review this USD physics analysis. 4 renders shown: top/front/side/isometric.
+Stage: up_axis={meta.get('up_axis', 'Y')}, meters_per_unit={meta.get('meters_per_unit', 1.0)}
+
+VIOLATIONS FOUND ({len(violations)}):
+{json.dumps(violations, indent=2)}
+
+VALID JOINTS ({len(valid_joints)}):
+{json.dumps(valid_joints, indent=2)}
+
+For each joint, verify the verdict against visual evidence:
+- VIOLATIONS: Is the reasoning sound? Does the visual evidence confirm the limits are physically impossible?
+- VALID JOINTS: Are there any that should actually be flagged as violated?
+
+Output ONLY the joints where the verdict should CHANGE. An empty corrections list means the analysis is confirmed correct.
+
+```json
+{{
+  "corrections": [
+    {{
+      "prim_path": "<exact path>",
+      "joint_valid": true,
+      "reasoning": "<why the original verdict was wrong>"
+    }}
+  ],
+  "global_notes": "<brief summary of verification>"
+}}
+```""".strip()
+
+
 # ---------------------------------------------------------------------------
 # Model loader (singleton to avoid reloading across calls)
 # ---------------------------------------------------------------------------
@@ -246,8 +338,83 @@ def _load_model(model_id: str, quantize: bool = False):
 
 
 # ---------------------------------------------------------------------------
-# Inference
+# Inference helpers
 # ---------------------------------------------------------------------------
+
+def _run_model(
+    model,
+    processor,
+    system_prompt: str,
+    render_paths: list[str],
+    user_prompt: str,
+    max_new_tokens: int = 512,
+    temperature: float = 0.1,
+) -> str:
+    """Single model.generate() call. Returns decoded response string."""
+    content = [
+        {"type": "image", "image": Image.open(p).convert("RGB")}
+        for p in render_paths
+    ]
+    content.append({"type": "text", "text": user_prompt})
+    messages = [
+        {"role": "system", "content": system_prompt},
+        {"role": "user",   "content": content},
+    ]
+    text = processor.apply_chat_template(
+        messages, tokenize=False, add_generation_prompt=True
+    )
+    image_inputs, video_inputs = process_vision_info(messages)
+    inputs = processor(
+        text=[text],
+        images=image_inputs,
+        videos=video_inputs,
+        padding=True,
+        return_tensors="pt",
+    ).to(model.device)
+    with torch.no_grad():
+        out_ids = model.generate(
+            **inputs,
+            max_new_tokens=max_new_tokens,
+            temperature=temperature,
+            do_sample=temperature > 0,
+        )
+    trimmed = out_ids[:, inputs.input_ids.shape[1]:]
+    return processor.batch_decode(trimmed, skip_special_tokens=True)[0]
+
+
+def _apply_verification(raw: dict, verification_response: str, scene_graph: dict) -> dict:
+    """Apply corrections from Pass 3 verification to the raw analysis dict.
+
+    Only joints explicitly listed in `corrections` have their joint_valid changed.
+    The deterministic prismatic rule is re-applied afterward so it can't be
+    overridden by a verification false-positive on prismatic joints.
+    """
+    try:
+        v = _extract_json(verification_response)
+    except Exception:
+        return raw  # verification parse failed — keep main analysis as-is
+
+    corrections = v.get("corrections", [])
+    if not corrections:
+        return raw
+
+    raw_by_path = {j["prim_path"]: j for j in raw.get("joint_prims", [])}
+    for c in corrections:
+        path = c.get("prim_path", "")
+        new_valid = c.get("joint_valid")
+        if path in raw_by_path and isinstance(new_valid, bool):
+            old = raw_by_path[path]["joint_valid"]
+            raw_by_path[path]["joint_valid"] = new_valid
+            direction = "false→true (cleared)" if (not old and new_valid) else "true→false (new violation)"
+            print(f"[cosmos_client] Verification correction: {path} {direction}")
+            # Append verification reasoning
+            existing = raw_by_path[path].get("reasoning", "")
+            raw_by_path[path]["reasoning"] = (
+                f"{existing} [Verification: {c.get('reasoning', '')}]"
+            )
+
+    return raw
+
 
 def _extract_json(text: str) -> dict:
     """Pull the first JSON code block out of model output.
@@ -335,15 +502,20 @@ def _lookup_density(material_type: str) -> Optional[float]:
 def _apply_mass_correction(raw: dict, scene_graph: dict) -> dict:
     """Recompute mass_kg from bbox × fill_factor × density.
 
-    The model's material classification (visual reasoning) is preserved;
-    only the arithmetic is re-done deterministically so floating-point
-    mistakes in the chain-of-thought don't corrupt the final value.
+    HIGH confidence: trust Cosmos mass_kg as-is — the model had clear visual
+    evidence and we defer to its full chain-of-thought calculation.
+    MEDIUM / LOW confidence: recompute deterministically from bbox × fill × density
+    to guard against arithmetic errors in the model's chain-of-thought.
     Skips prims where we can't find bbox or density.
     """
     mpu = scene_graph.get("stage_metadata", {}).get("meters_per_unit", 1.0)
     geom_by_path = {p["path"]: p for p in scene_graph.get("geom_prims", [])}
 
     for gp in raw.get("geom_prims", []):
+        # Defer to Cosmos when it was highly confident — clear visual evidence
+        if gp.get("confidence") == "high":
+            continue
+
         path = gp.get("prim_path", "")
         sg_prim = geom_by_path.get(path)
         if sg_prim is None:
@@ -438,64 +610,67 @@ def analyze_scene(
     quantize: bool = False,
 ) -> tuple[PhysicsAnalysis, str]:
     """
-    Run Cosmos Reason 2 on 4 scene renders + scene graph.
+    Run Cosmos Reason 2 on 4 scene renders + scene graph using a 3-pass pipeline.
+
+    Pass 1 (context pre-pass): lightweight call that identifies the mechanism type
+    and feeds structured context into the main analysis prompt.
+
+    Pass 2 (main analysis): full physics analysis with mechanism context prepended.
+    HIGH-confidence geom prims keep Cosmos mass_kg; medium/low are recomputed
+    deterministically.
+
+    Pass 3 (verification): focused review of joint validity findings; can flip
+    joint_valid in either direction based on visual re-examination.
 
     Args:
       quantize: If True, load model in 4-bit NF4 (requires bitsandbytes).
                 Reduces VRAM from ~16 GB to ~4 GB; suitable for <=8 GB GPUs.
 
     Returns:
-      (PhysicsAnalysis, chain_of_thought_str)
+      (PhysicsAnalysis, chain_of_thought_str)   # cot includes all 3 pass outputs
     """
     assert len(render_paths) == 4, "Expected exactly 4 render paths"
     model, processor = _load_model(model_id, quantize=quantize)
 
     # Remove FixedJoints — they have no limits and can never be violated.
-    # Filtering reduces output length for complex multi-joint robots.
     sg_filtered = dict(scene_graph)
     sg_filtered["joint_prims"] = [
         j for j in scene_graph.get("joint_prims", [])
         if "Fixed" not in j.get("type_name", "")
     ]
 
-    prompt = _build_prompt(sg_filtered)
-
-    # Build multimodal message
-    content = [
-        {"type": "image", "image": Image.open(p).convert("RGB")}
-        for p in render_paths
-    ]
-    content.append({"type": "text", "text": prompt})
-
-    messages = [
-        {"role": "system", "content": SYSTEM_PROMPT},
-        {"role": "user",   "content": content},
-    ]
-
-    # Apply chat template
-    text = processor.apply_chat_template(
-        messages, tokenize=False, add_generation_prompt=True
+    # ── Pass 1: Scene-context pre-pass ──────────────────────────────────────
+    print("[cosmos_client] Pass 1/3 — scene context pre-pass ...")
+    prepass_prompt = _build_prepass_prompt(sg_filtered)
+    prepass_response = _run_model(
+        model, processor, PREPASS_SYSTEM_PROMPT,
+        render_paths, prepass_prompt,
+        max_new_tokens=512, temperature=temperature,
     )
-    image_inputs, video_inputs = process_vision_info(messages)
+    print(f"[cosmos_client] Pre-pass output:\n{prepass_response}")
 
-    inputs = processor(
-        text=[text],
-        images=image_inputs,
-        videos=video_inputs,
-        padding=True,
-        return_tensors="pt",
-    ).to(model.device)
+    context_str = ""
+    try:
+        ctx = _extract_json(prepass_response)
+        parts = []
+        if ctx.get("mechanism_type"):
+            parts.append(f"Mechanism: {ctx['mechanism_type']}")
+        if ctx.get("expected_joint_ranges"):
+            parts.append(f"Expected ranges: {ctx['expected_joint_ranges']}")
+        if ctx.get("validation_context"):
+            parts.append(f"Validation notes: {ctx['validation_context']}")
+        context_str = "\n".join(parts)
+    except Exception:
+        pass  # pre-pass parse failure is non-fatal; main pass runs without context
 
-    with torch.no_grad():
-        out_ids = model.generate(
-            **inputs,
-            max_new_tokens=max_new_tokens,
-            temperature=temperature,
-            do_sample=temperature > 0,
-        )
-
-    trimmed = out_ids[:, inputs.input_ids.shape[1]:]
-    response = processor.batch_decode(trimmed, skip_special_tokens=True)[0]
+    # ── Pass 2: Main physics analysis ───────────────────────────────────────
+    print("[cosmos_client] Pass 2/3 — main physics analysis ...")
+    prompt = _build_prompt(sg_filtered, context_str=context_str)
+    response = _run_model(
+        model, processor, SYSTEM_PROMPT,
+        render_paths, prompt,
+        max_new_tokens=max_new_tokens, temperature=temperature,
+    )
 
     try:
         raw = _extract_json(response)
@@ -507,6 +682,26 @@ def analyze_scene(
     raw = _fix_cleared_joint_validity(raw, sg_filtered)
     raw = _apply_mass_correction(raw, scene_graph)
     raw = _apply_prismatic_rules(raw, scene_graph)
+
+    # ── Pass 3: Verification pass ────────────────────────────────────────────
+    print("[cosmos_client] Pass 3/3 — verification pass ...")
+    verification_prompt = _build_verification_prompt(raw, sg_filtered)
+    verification_response = _run_model(
+        model, processor, VERIFICATION_SYSTEM_PROMPT,
+        render_paths, verification_prompt,
+        max_new_tokens=2048, temperature=temperature,
+    )
+    print(f"[cosmos_client] Verification output:\n{verification_response}")
+
+    raw = _apply_verification(raw, verification_response, sg_filtered)
+    # Re-apply deterministic prismatic rule — verification cannot override physics
+    raw = _apply_prismatic_rules(raw, scene_graph)
+
     analysis = PhysicsAnalysis(**raw)
 
-    return analysis, response
+    cot = (
+        f"=== PASS 1: CONTEXT PRE-PASS ===\n{prepass_response}\n\n"
+        f"=== PASS 2: MAIN ANALYSIS ===\n{response}\n\n"
+        f"=== PASS 3: VERIFICATION ===\n{verification_response}"
+    )
+    return analysis, cot
