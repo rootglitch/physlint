@@ -502,20 +502,20 @@ def _lookup_density(material_type: str) -> Optional[float]:
 def _apply_mass_correction(raw: dict, scene_graph: dict) -> dict:
     """Recompute mass_kg from bbox × fill_factor × density.
 
-    HIGH confidence: trust Cosmos mass_kg as-is — the model had clear visual
-    evidence and we defer to its full chain-of-thought calculation.
-    MEDIUM / LOW confidence: recompute deterministically from bbox × fill × density
-    to guard against arithmetic errors in the model's chain-of-thought.
+    Mass is always recomputed deterministically because the main prompt
+    explicitly tells the model NOT to calculate mass (it outputs mass_kg=0.0).
+    The model's material classification (confidence, material_type) is preserved;
+    only the arithmetic is supplied here.
+
+    HIGH confidence prims: use Cosmos material_type + our arithmetic — the model
+    identified the material clearly, so we trust that and compute the correct mass.
+    MEDIUM / LOW confidence: same arithmetic, but the material guess may be wrong.
     Skips prims where we can't find bbox or density.
     """
     mpu = scene_graph.get("stage_metadata", {}).get("meters_per_unit", 1.0)
     geom_by_path = {p["path"]: p for p in scene_graph.get("geom_prims", [])}
 
     for gp in raw.get("geom_prims", []):
-        # Defer to Cosmos when it was highly confident — clear visual evidence
-        if gp.get("confidence") == "high":
-            continue
-
         path = gp.get("prim_path", "")
         sg_prim = geom_by_path.get(path)
         if sg_prim is None:
