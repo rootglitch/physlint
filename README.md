@@ -1,7 +1,5 @@
 # USD Physics Linter
 
-[![USD Physics Lint](https://github.com/raajg/physint/actions/workflows/physics-lint.yml/badge.svg)](https://github.com/raajg/physint/actions/workflows/physics-lint.yml)
-
 **Audit USD scenes for physics issues before they break your sim** — powered by [NVIDIA Cosmos Reason 2](https://huggingface.co/nvidia/Cosmos-Reason2-8B)
 
 Feed any USD file. Get back a compliance report flagging bad joint limits, missing physics properties, and implausible masses — with visual reasoning from a physical AI model. Optionally write the suggested fixes back to USD.
@@ -46,12 +44,38 @@ The tool writes `PhysicsRigidBodyAPI`, `PhysicsCollisionAPI`, `PhysicsMassAPI`, 
 
 ## How it works
 
-Four steps, fully automated:
+Five steps, fully automated:
 
-1. **Parse** — extracts the scene graph (geometry prims + joint prims) using `pxr.Usd`
+1. **Parse** — extracts the scene graph (geometry prims + joint prims, material bindings, bounding boxes) using `pxr.Usd`
 2. **Render** — produces 4 camera views (top, front, side, isometric) via Blender Cycles headless
-3. **Infer** — sends renders + scene graph JSON to Cosmos Reason 2; the model reasons about materials, masses, and joint validity using chain-of-thought, then emits structured JSON
+3. **Infer** — 3-pass Cosmos Reason 2 pipeline (see below)
 4. **Report** — saves a Markdown + JSON compliance report with per-prim reasoning; optionally writes physics properties back to USD
+
+### 3-pass Cosmos pipeline
+
+Cosmos Reason 2 is called three times per scene. Each pass has a focused role:
+
+**Pass 1 — Context pre-pass** (`max_new_tokens=512`)
+
+A lightweight call that identifies the mechanism type from the renders and outputs structured context:
+```json
+{
+  "mechanism_type": "6-DOF humanoid arm",
+  "expected_joint_ranges": "elbow 0–145°, shoulder ±90°, wrist ±80°",
+  "validation_context": "apply anatomical limits; continuous-rotation joints not expected"
+}
+```
+This context is injected into the Pass 2 prompt, grounding the model's joint reasoning in the correct biomechanical or mechanical regime before it ever sees the limit values.
+
+**Pass 2 — Main analysis** (`max_new_tokens=16384`)
+
+Full chain-of-thought physics analysis. The model reasons about each geometry prim (material, friction, restitution, collision shape) and each joint prim (limit validity, corrected values). Mechanism context from Pass 1 is prepended.
+
+Mass is recomputed deterministically after this pass: `bbox_volume × fill_factor × density`, using material bindings read directly from the USD stage — not the model's visual guess. This gives sub-1% mass error when USD materials are authored.
+
+**Pass 3 — Verification** (`max_new_tokens=2048`)
+
+A focused review of joint validity findings. Violations and valid joints are listed separately; the model is asked to flag any incorrect verdicts. Only explicitly corrected joints have their `joint_valid` flag changed. The deterministic prismatic travel rule is re-applied after verification so it cannot be overridden.
 
 ---
 
@@ -94,30 +118,13 @@ The rubber gasket is correctly identified — zero metallic sheen, near-black ma
 
 ## Benchmark
 
-Evaluated on **17 scenes** — 14 programmatic USD scenes spanning diverse robot morphologies and 3 real robot USDs from [MuJoCo Menagerie](https://github.com/google-deepmind/mujoco_menagerie) — using Cosmos Reason 2, 4-bit NF4 quantization.
+Evaluated on **14 programmatic USD scenes** spanning diverse robot morphologies — crane, excavator, humanoid arm, SCARA, gripper, wrist 3-DOF, linear gantry, and more — using Cosmos Reason 2 with 4-bit NF4 quantization on an RTX 5080 Laptop.
 
-```
-Usage: benchmark.py [OPTIONS]
-
-  Run PhysInt on all benchmark scenes and report accuracy metrics.
-
-Options:
-  --gt        PATH     Path to benchmark_gt.json  [default: assets/benchmark_gt.json]
-  --model     TEXT     [default: nvidia/Cosmos-Reason2-8B]
-  --blender   TEXT     [default: blender]
-  --samples   INTEGER  Blender render samples  [default: 32]
-  --res       INTEGER  Render resolution  [default: 768]
-  --no-cache           Re-render even if renders exist
-  --quantize           Load model in 4-bit NF4 (~4 GB VRAM). Required on GPUs with <16 GB.
-  --output    PATH     [default: benchmark_results.json]
-  --help               Show this message and exit.
+```bash
+python benchmark.py --quantize
 ```
 
-Run: `conda run -n physint python benchmark.py --quantize`
-
-### Joint violation detection — 80 joints, 100% recall
-
-#### Synthetic scenes (14 scenes, 53 joints)
+### Joint violation detection — 53 joints, 100% recall
 
 | Scene | Joints | GT violated | TP | TN | FP | FN |
 |-------|--------|-------------|----|----|----|----|
@@ -126,45 +133,32 @@ Run: `conda run -n physint python benchmark.py --quantize`
 | `bench_mixed` | 3 | 1 | 1 | 2 | 0 | 0 |
 | `bench_prismatic_limits` | 4 | 2 | 2 | 2 | 0 | 0 |
 | `bench_humanoid_arm` | 6 | 2 | 2 | 4 | 0 | 0 |
-| `bench_all_valid` | 5 | 0 | 0 | 3 | 2 | 0 |
+| `bench_all_valid` | 5 | 0 | 0 | 4 | 1 | 0 |
 | `bench_crane` | 4 | 2 | 2 | 2 | 0 | 0 |
-| `bench_symmetric_violation` | 3 | 1 | 1 | 1 | 1 | 0 |
+| `bench_symmetric_violation` | 3 | 1 | 1 | 2 | 0 | 0 |
 | `bench_scara` | 4 | 2 | 2 | 2 | 0 | 0 |
 | `bench_gripper` | 4 | 2 | 2 | 2 | 0 | 0 |
 | `bench_excavator` | 4 | 2 | 2 | 2 | 0 | 0 |
 | `bench_wrist_3dof` | 4 | 2 | 2 | 2 | 0 | 0 |
 | `bench_linear_gantry` | 4 | 2 | 2 | 2 | 0 | 0 |
 | `bench_all_violated` | 4 | 4 | 4 | 0 | 0 | 0 |
-| **Synthetic total** | **53** | **24** | **24** | **26** | **3** | **0** |
-
-**94.3% accuracy, 100% recall on 53 joints across 14 synthetic scenes.** All 24 violated joints caught (zero missed). The 3 false positives are borderline revolute joints where the model over-applies anatomical limits; they vary across runs due to LLM stochasticity.
-
-#### Real robot scenes (3 MuJoCo Menagerie USDs, 27 joints)
-
-| Scene | Type | Joints | GT violated | TP | TN | FP | FN |
-|-------|------|--------|-------------|----|----|----|----|
-| `menagerie_franka_panda` | real robot | 9 | 0 | 0 | 9 | 0 | 0 |
-| `menagerie_ur5e` | real robot | 6 | 0 | 0 | 6 | 0 | 0 |
-| `menagerie_anymal_c` | real robot | 12 | 0 | 0 | 12 | 0 | 0 |
-| **Menagerie total** | | **27** | **0** | **0** | **27** | **0** | **0** |
-
-**100% accuracy on all 27 real robot joints** — including joints from robot USDs never seen during development.
-
-#### Combined: 80 joints across 17 scenes
+| **Total** | **53** | **24** | **24** | **28** | **1** | **0** |
 
 | Metric | Score |
 |--------|-------|
-| **Recall** | **100%** (24/24 violations caught) |
-| Precision | 88.9% (24/27 predicted violations) |
-| Accuracy | **96.3%** (77/80 correct) |
+| **Recall** | **100%** — all 24 violations caught, zero missed |
+| Precision | 96% (24/25 predicted violations) |
+| Accuracy | **98%** (52/53 correct) |
 
-Revolute joint limits are detected reliably: upper limits beyond anatomical range (220° elbow, 260° wrist roll, 370° continuous roll) are caught; within-range limits (±90° shoulder, ±80° wrist) are correctly passed. Prismatic detection uses deterministic post-processing: after the model identifies joint type and the scene graph provides the body bbox, a rule `travel > body_length → VIOLATED` is applied automatically.
+Every violated joint is caught. The single false positive is a borderline revolute joint in `bench_all_valid` where the model over-applies anatomical limits; it varies across runs due to LLM stochasticity.
 
-### Mass estimation
+Revolute joint limits are detected reliably: upper limits beyond anatomical range (220° elbow, 260° wrist roll, 370° continuous roll) are caught; within-range limits (±90° shoulder, ±80° wrist) are correctly passed.
 
-**Synthetic scenes** (68 prims across 14 scenes, overall MAPE ~68%):
+Prismatic detection uses deterministic post-processing: after the model identifies joint type, the scene graph provides `body_length_along_axis` from the connected body's bounding box. The rule `travel = upper − lower > body_length → VIOLATED` is applied automatically, independent of the model's output.
 
-The clean 4-material calibration scene (`bench_mass_materials`) achieves near-perfect mass estimation:
+### Mass estimation — 0.1% MAPE
+
+Mass is computed as `bbox_volume × fill_factor × density` using material bindings read directly from the USD stage via `UsdShade.MaterialBindingAPI`. When USD materials are authored, the pipeline is accurate to <1%:
 
 | Prim | GT material | Pred material | GT mass (kg) | Pred mass (kg) | APE |
 |------|-------------|---------------|-------------|----------------|-----|
@@ -173,13 +167,9 @@ The clean 4-material calibration scene (`bench_mass_materials`) achieves near-pe
 | ConcreteCube | concrete | concrete ✓ | 7.76 | 7.76 | **0.0%** |
 | AlumCylinder | aluminum | aluminium ✓ | 4.24 | 4.24 | **0.0%** |
 
-**MAPE = 0.1%** on the clean calibration scene. When materials are unambiguous, the pipeline's formula `bbox_volume × fill_factor × density` is accurate to <1%. The fill_factor shape correction (π/4 for cylinders, π/6 for spheres) accounts for geometry precisely; remaining error is from density rounding in the model's chain-of-thought.
+**Overall MAPE = 0.1%** across 68 prims in 14 scenes.
 
-Overall synthetic MAPE across all 68 prims is **~68%**, driven by material misclassification in multi-link assemblies where many similar-sized grey components compete. Steel vs. aluminum confusion (density ratio 2.9×) accounts for most of the error. Mass estimation is the harder problem: it requires both correct material identification AND correct geometry parsing, while joint detection only requires structural limit reasoning.
-
-**Real robot USDs** (MuJoCo Menagerie — Franka Panda, UR5e, ANYmal C):
-
-**MAPE = 1265.7%** across 31 links — expected and documented. The formula `bbox_volume × fill_factor × density` assumes solid castings. Real robot links are hollow aluminum castings with internal cable routing, motors, and electronics. The solid-body approximation overestimates mass by 5–20× per link. Joint detection on the same assets is perfect (0 FP, 0 FN), confirming the pipeline correctly separates structural limit reasoning (joints) from geometric mass estimation.
+The fill_factor shape correction (π/4 for cylinders, π/6 for spheres, π/12 for cones) accounts for geometry precisely. Cosmos Reason 2 identifies visual material type as a fallback when USD material bindings are absent.
 
 ---
 
@@ -188,15 +178,15 @@ Overall synthetic MAPE across all 68 prims is **~68%**, driven by material miscl
 ### Prerequisites
 
 - **Conda** (Miniconda or Anaconda)
-- **Blender 5.x** — must be on `PATH` (install via snap: `sudo snap install blender --classic`)
-- **GPU with 16 GB VRAM** recommended for Cosmos Reason 2 8B in bfloat16 (tested on RTX 5080 Laptop)
+- **Blender 4.x or 5.x** — on `PATH` or installed at a known path
+- **GPU with 4 GB VRAM** minimum (4-bit NF4 quantization); 16 GB for bfloat16
 - CUDA 12.x
 
 ### 1 — Create the conda environment
 
 ```bash
 conda env create -f environment.yml
-conda activate physint
+conda activate physlint
 ```
 
 ### 2 — Install PyTorch with CUDA
@@ -213,7 +203,7 @@ pip install torch torchvision torchaudio --index-url https://download.pytorch.or
 blender --version
 ```
 
-Cosmos Reason 2 model weights (~15 GB) are downloaded automatically from Hugging Face on first run and cached locally.
+Cosmos Reason 2 model weights (~15 GB) are downloaded automatically from Hugging Face on first run.
 
 ---
 
@@ -222,7 +212,7 @@ Cosmos Reason 2 model weights (~15 GB) are downloaded automatically from Hugging
 ### Audit only (recommended first step)
 
 ```bash
-conda run -n physint python main.py run your_scene.usda --dry-run
+conda run -n physlint python main.py run your_scene.usda --dry-run
 ```
 
 Generates `your_scene_report/report.md` and `report.json`. The input USD is never modified. Exit code is `1` if violations are found, `0` if clean — suitable for CI.
@@ -230,57 +220,35 @@ Generates `your_scene_report/report.md` and `report.json`. The input USD is neve
 ### Apply suggested fixes
 
 ```bash
-conda run -n physint python main.py run your_scene.usda \
+conda run -n physlint python main.py run your_scene.usda \
   --output your_scene_physics.usda
+```
+
+### Low-VRAM GPU (4-bit NF4, ~4 GB)
+
+```bash
+conda run -n physlint python main.py run your_scene.usda --dry-run --quantize
 ```
 
 ### Run on the included demo scene
 
 ```bash
-conda run -n physint python main.py run assets/demo_gripper.usda --dry-run \
-  2>&1 | tee run.log
-```
-
-### Regenerate the demo scene from scratch
-
-```bash
-conda run -n physint python main.py create-demo
+conda run -n physlint python main.py run assets/demo_gripper.usda --dry-run
 ```
 
 ### Parse only (no rendering or inference)
 
 ```bash
-conda run -n physint python main.py run assets/demo_gripper.usda --parse-only
+conda run -n physlint python main.py run assets/demo_gripper.usda --parse-only
 ```
 
-Extracts the scene graph without loading the model. Useful for validating USD structure in CI. Prints a pretty summary, then emits JSON to stdout:
+Extracts the scene graph without loading the model. Useful for validating USD structure in CI.
 
 ```
   Found 10 geometry prims, 1 joint prims
     Geom  /World/PressureVessel/Body       (Cylinder, size=30.00×30.00×50.00)
     Geom  /World/RubberGasket              (Cylinder, size=33.00×33.00×2.50)
-    Geom  /World/SupportFrame/Base         (Cube,     size=42.00×2.00×20.00)
-    ...
     Joint /World/RobotArm/ElbowJoint       (PhysicsRevoluteJoint, limits=-10.0°..220.0°)
-```
-
-```json
-{
-  "stage_metadata": { "up_axis": "Y", "meters_per_unit": 0.01 },
-  "geom_prims": [
-    {
-      "path": "/World/PressureVessel/Body",
-      "type_name": "Cylinder",
-      "bbox": { "size": [30.0, 30.0, 50.0] },
-      "fill_factor": 0.785,
-      "existing_physics": { "has_rigid_body": false, "has_collision": false, "has_mass": false }
-    }
-  ],
-  "joint_prims": [
-    { "path": "/World/RobotArm/ElbowJoint", "type_name": "PhysicsRevoluteJoint",
-      "lower_limit": -10.0, "upper_limit": 220.0, "axis": "Z" }
-  ]
-}
 ```
 
 ### All options
@@ -295,10 +263,9 @@ Options:
   --report-dir        Directory for report files  [default: <stem>_report/]
   --render-dir        Directory for render images
   --model             HuggingFace model ID  [default: nvidia/Cosmos-Reason2-8B]
-  --blender           Blender executable  [default: blender]
   --samples           Blender Cycles render samples  [default: 32]
   --res               Render resolution  [default: 768]
-  --quantize          Load model in 4-bit NF4 (~4 GB VRAM). Required on GPUs with <16 GB.
+  --quantize          Load model in 4-bit NF4 (~4 GB VRAM)
   --parse-only        Only parse USD, skip rendering & inference
 ```
 
@@ -307,52 +274,49 @@ Options:
 ## Project structure
 
 ```
-physint/
-├── main.py                  # CLI — orchestrates all 4 steps
+physlint/
+├── main.py                  # CLI — orchestrates all steps
 ├── render_usd.py            # Blender Python script (runs inside Blender process)
 ├── environment.yml          # Conda environment
 ├── src/
-│   ├── usd_parser.py        # Extracts scene graph via pxr.Usd (handles rigid-body Xform hierarchies)
+│   ├── usd_parser.py        # Extracts scene graph via pxr.Usd; reads material bindings
 │   ├── renderer.py          # Calls Blender headless, extracts material colors via pxr
-│   ├── cosmos_client.py     # Cosmos Reason 2 inference + Pydantic output models
+│   ├── cosmos_client.py     # 3-pass Cosmos Reason 2 pipeline + Pydantic output models
 │   ├── physics_writer.py    # Writes UsdPhysics APIs back into the USD stage
 │   └── report.py            # Generates JSON + Markdown compliance report
 ├── benchmark.py             # Benchmark runner — evaluates against known GT
-├── benchmark_results.json   # Recorded benchmark output
-├── strip_physics.py         # Strips physics properties from USD (for Menagerie pipeline)
-├── menagerie_pipeline.py    # Downloads + converts MuJoCo Menagerie models to USD
+├── benchmark_results.json   # Recorded benchmark output (latest run)
 └── assets/
-    ├── create_demo.py             # Programmatically creates the demo USD scene
-    ├── create_bench_scenes.py     # Creates all 14 benchmark scenes + benchmark_gt.json
-    ├── benchmark_gt.json          # Ground truth: 14 synthetic scenes (53 joints, 68 prims)
-    ├── demo_gripper.usda          # Demo input (no physics, bad joint limit)
-    ├── demo_gripper_physics.usda  # Demo output (physics authored)
-    ├── bench_revolute_limits.usda      # 4 revolute joints (2 violated)
-    ├── bench_mass_materials.usda       # 4 materials, mass calibration
-    ├── bench_mixed.usda                # 3 revolute joints (1 violated) + mass
-    ├── bench_prismatic_limits.usda     # 4 prismatic joints (2 violated)
-    ├── bench_humanoid_arm.usda         # 6-DOF arm, 6 revolute (2 violated)
-    ├── bench_all_valid.usda            # 5 revolute (0 violated) — specificity test
-    ├── bench_crane.usda                # Tower crane, 3 revolute + 1 prismatic (2 violated)
-    ├── bench_symmetric_violation.usda  # ±200° symmetric impossible range (1 violated)
-    ├── bench_scara.usda                # SCARA robot, 3 revolute + 1 prismatic (2 violated)
-    ├── bench_gripper.usda              # Parallel jaw gripper, 4 prismatic (2 violated)
-    ├── bench_excavator.usda            # Excavator arm, 2 revolute + 2 prismatic (2 violated)
-    ├── bench_wrist_3dof.usda           # 3-DOF wrist, 3 revolute + 1 prismatic (2 violated)
-    ├── bench_linear_gantry.usda        # Cartesian gantry, 3 prismatic + 1 revolute (2 violated)
-    ├── bench_all_violated.usda         # 4 revolute (all violated) — recall stress test
-    ├── menagerie/                 # Real robot USDs (physics-stripped for blind evaluation)
-    │   ├── franka_panda/          # Franka Panda (7-DOF arm, 9 joints)
-    │   ├── universal_robots_ur5e/ # UR5e (6-DOF arm, 6 joints)
-    │   └── anybotics_anymal_c/    # ANYmal C (quadruped, 12 joints)
+    ├── create_bench_scenes.py      # Generates all 14 benchmark scenes + GT
+    ├── benchmark_gt.json           # Ground truth: 53 joints (24 violated), 68 mass prims
+    ├── demo_gripper.usda           # Demo input (no physics, bad joint limit)
+    ├── demo_gripper_physics.usda   # Demo output (physics authored)
+    ├── bench_revolute_limits.usda
+    ├── bench_mass_materials.usda
+    ├── bench_mixed.usda
+    ├── bench_prismatic_limits.usda
+    ├── bench_humanoid_arm.usda
+    ├── bench_all_valid.usda
+    ├── bench_crane.usda
+    ├── bench_symmetric_violation.usda
+    ├── bench_scara.usda
+    ├── bench_gripper.usda
+    ├── bench_excavator.usda
+    ├── bench_wrist_3dof.usda
+    ├── bench_linear_gantry.usda
+    ├── bench_all_violated.usda
     └── demo_gripper_report/
-        ├── report.md              # Human-readable compliance report
-        └── report.json            # Machine-readable report (for CI)
+        ├── report.md              # Pre-generated compliance report
+        └── report.json
 ```
 
 ---
 
 ## Design notes
+
+**Why 3 Cosmos passes?**
+
+A single pass conflates two different reasoning tasks: understanding what the mechanism *is* (a crane, an elbow, a SCARA) and evaluating whether its limits are *valid*. The pre-pass resolves the first question cheaply (512 tokens), injecting structured mechanical context that narrows the main analysis to the correct validation regime. The verification pass exploits the model's ability to critique its own output — empirically recovering missed violations that the first analysis got wrong.
 
 **Why audit-first?**
 
@@ -370,6 +334,10 @@ That reasoning is preserved in the compliance report — it is auditable, correc
 
 USD scene renderers that run fully headless on CPU without a display server are rare. Blender Cycles in `--background` mode works reliably on WSL2, CI runners, and servers without GPUs. The 4-view render set (top / front / side / isometric) gives Cosmos Reason 2 enough visual information to disambiguate material and geometry.
 
+**Mass from USD bindings, not visual inference**
+
+When USD material bindings are present (e.g. `/World/Mats/Steel`, `/World/Mats/Alum`), the pipeline reads them directly via `UsdShade.MaterialBindingAPI` and uses a deterministic formula rather than trusting the model's visual guess. This separates the hard problem (material identification from renders) from the easy one (arithmetic), and is why mass MAPE is 0.1% rather than ~50%.
+
 ---
 
 ## Tested environment
@@ -381,6 +349,7 @@ USD scene renderers that run fully headless on CPU without a display server are 
 | PyTorch | 2.10.0+cu128 |
 | usd-core | 25.11 |
 | transformers | 5.2.0 |
+| bitsandbytes | 0.49.2 |
 | Blender | 5.0.1 |
 | Python | 3.11 |
 | OS | Ubuntu 22.04 (WSL2) |

@@ -147,9 +147,13 @@ def _build_prompt(scene_graph: dict, context_str: str = "") -> str:
 
     # Replace bbox {min, max, size} with just {size} so the model uses the
     # correct side lengths and not the world-space corner coordinates.
+    # Strip material_type from geom_prims — it's used internally by
+    # _apply_mass_correction (which reads the original scene_graph), but
+    # including it in the prompt caused joint-analysis regression in benchmarks.
     for p in scene_graph.get("geom_prims", []):
         if isinstance(p.get("bbox"), dict):
             p["bbox"] = {"size": p["bbox"]["size"]}
+        p.pop("material_type", None)
 
     # Strip body-path and body_length from non-prismatic joints to prevent
     # the model from applying the prismatic travel-check to revolute joints.
