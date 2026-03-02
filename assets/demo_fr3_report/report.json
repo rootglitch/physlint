@@ -1,0 +1,233 @@
+{
+  "timestamp": "2026-03-01T22:29:04.323813Z",
+  "input_usd": "/mnt/c/Crypt/Projects/physlint/assets/demo_fr3.usda",
+  "output_usd": null,
+  "scene_graph_joints": [
+    {
+      "path": "/fr3/Geometry/base/fr3_link0/fr3_link1/fr3_link2/fr3_link3/fr3_link4/fr3_link5/fr3_link6/fr3_link7/fr3_joint7",
+      "lower_limit": -172.79833984375,
+      "upper_limit": 172.79833984375
+    },
+    {
+      "path": "/fr3/Geometry/base/fr3_link0/fr3_link1/fr3_link2/fr3_link3/fr3_link4/fr3_link5/fr3_link6/fr3_joint6",
+      "lower_limit": 31.197551727294922,
+      "upper_limit": 258.79931640625
+    },
+    {
+      "path": "/fr3/Geometry/base/fr3_link0/fr3_link1/fr3_link2/fr3_link3/fr3_link4/fr3_link5/fr3_joint5",
+      "lower_limit": -160.80059814453125,
+      "upper_limit": 160.80059814453125
+    },
+    {
+      "path": "/fr3/Geometry/base/fr3_link0/fr3_link1/fr3_link2/fr3_link3/fr3_link4/fr3_joint4",
+      "lower_limit": -174.2994842529297,
+      "upper_limit": -8.69749927520752
+    },
+    {
+      "path": "/fr3/Geometry/base/fr3_link0/fr3_link1/fr3_link2/fr3_link3/fr3_joint3",
+      "lower_limit": -166.19786071777344,
+      "upper_limit": 166.19786071777344
+    },
+    {
+      "path": "/fr3/Geometry/base/fr3_link0/fr3_link1/fr3_link2/fr3_joint2",
+      "lower_limit": -102.19847869873047,
+      "upper_limit": 220.0
+    },
+    {
+      "path": "/fr3/Geometry/base/fr3_link0/fr3_link1/fr3_joint1",
+      "lower_limit": -157.20242309570312,
+      "upper_limit": 157.20242309570312
+    },
+    {
+      "path": "/fr3/Geometry/base/fr3_link0/PhysicsFixedJoint",
+      "lower_limit": null,
+      "upper_limit": null
+    },
+    {
+      "path": "/fr3/Geometry/base/PhysicsFixedJoint",
+      "lower_limit": null,
+      "upper_limit": null
+    }
+  ],
+  "summary": {
+    "geometry_prims_processed": 9,
+    "joint_prims_processed": 7,
+    "joint_limit_corrections": 2,
+    "global_notes": "Two joints violated industrial robot constraints: fr3_joint6 and fr3_joint2. Both were corrected to upper limit 180\u00b0."
+  },
+  "geometry_findings": [
+    {
+      "prim_path": "/fr3/Geometry/base",
+      "material_type": "steel",
+      "confidence": "high",
+      "mass_kg": 440.333,
+      "static_friction": 0.0,
+      "dynamic_friction": 0.0,
+      "restitution": 0.0,
+      "collision_approximation": "convexHull",
+      "is_rigid": true,
+      "reasoning": "Prim /fr3/Geometry/base: material=steel because dark grey metallic appearance."
+    },
+    {
+      "prim_path": "/fr3/Geometry/base/fr3_link0",
+      "material_type": "aluminium",
+      "confidence": "high",
+      "mass_kg": 9.679,
+      "static_friction": 0.0,
+      "dynamic_friction": 0.0,
+      "restitution": 0.0,
+      "collision_approximation": "convexHull",
+      "is_rigid": true,
+      "reasoning": "Prim /fr3/Geometry/base/fr3_link0: material=aluminium because light silver metallic appearance."
+    },
+    {
+      "prim_path": "/fr3/Geometry/base/fr3_link0/fr3_link1",
+      "material_type": "steel",
+      "confidence": "high",
+      "mass_kg": 23.598,
+      "static_friction": 0.0,
+      "dynamic_friction": 0.0,
+      "restitution": 0.0,
+      "collision_approximation": "convexHull",
+      "is_rigid": true,
+      "reasoning": "Prim /fr3/Geometry/base/fr3_link0/fr3_link1: material=steel because dark grey metallic appearance."
+    },
+    {
+      "prim_path": "/fr3/Geometry/base/fr3_link0/fr3_link1/fr3_link2",
+      "material_type": "aluminium",
+      "confidence": "high",
+      "mass_kg": 8.116,
+      "static_friction": 0.0,
+      "dynamic_friction": 0.0,
+      "restitution": 0.0,
+      "collision_approximation": "convexHull",
+      "is_rigid": true,
+      "reasoning": "Prim /fr3/Geometry/base/fr3_link0/fr3_link1/fr3_link2: material=aluminium because light silver metallic appearance."
+    },
+    {
+      "prim_path": "/fr3/Geometry/base/fr3_link0/fr3_link1/fr3_link2/fr3_link3",
+      "material_type": "steel",
+      "confidence": "high",
+      "mass_kg": 26.774,
+      "static_friction": 0.0,
+      "dynamic_friction": 0.0,
+      "restitution": 0.0,
+      "collision_approximation": "convexHull",
+      "is_rigid": true,
+      "reasoning": "Prim /fr3/Geometry/base/fr3_link0/fr3_link1/fr3_link2/fr3_link3: material=steel because dark grey metallic appearance."
+    },
+    {
+      "prim_path": "/fr3/Geometry/base/fr3_link0/fr3_link1/fr3_link2/fr3_link3/fr3_link4",
+      "material_type": "aluminium",
+      "confidence": "high",
+      "mass_kg": 9.209,
+      "static_friction": 0.0,
+      "dynamic_friction": 0.0,
+      "restitution": 0.0,
+      "collision_approximation": "convexHull",
+      "is_rigid": true,
+      "reasoning": "Prim /fr3/Geometry/base/fr3_link0/fr3_link1/fr3_link2/fr3_link3/fr3_link4: material=aluminium because light silver metallic appearance."
+    },
+    {
+      "prim_path": "/fr3/Geometry/base/fr3_link0/fr3_link1/fr3_link2/fr3_link3/fr3_link4/fr3_link5",
+      "material_type": "steel",
+      "confidence": "high",
+      "mass_kg": 29.92,
+      "static_friction": 0.0,
+      "dynamic_friction": 0.0,
+      "restitution": 0.0,
+      "collision_approximation": "convexHull",
+      "is_rigid": true,
+      "reasoning": "Prim /fr3/Geometry/base/fr3_link0/fr3_link1/fr3_link2/fr3_link3/fr3_link4/fr3_link5: material=steel because dark grey metallic appearance."
+    },
+    {
+      "prim_path": "/fr3/Geometry/base/fr3_link0/fr3_link1/fr3_link2/fr3_link3/fr3_link4/fr3_link5/fr3_link6",
+      "material_type": "aluminium",
+      "confidence": "high",
+      "mass_kg": 3.915,
+      "static_friction": 0.0,
+      "dynamic_friction": 0.0,
+      "restitution": 0.0,
+      "collision_approximation": "convexHull",
+      "is_rigid": true,
+      "reasoning": "Prim /fr3/Geometry/base/fr3_link0/fr3_link1/fr3_link2/fr3_link3/fr3_link4/fr3_link5/fr3_link6: material=aluminium because light silver metallic appearance."
+    },
+    {
+      "prim_path": "/fr3/Geometry/base/fr3_link0/fr3_link1/fr3_link2/fr3_link3/fr3_link4/fr3_link5/fr3_link6/fr3_link7",
+      "material_type": "steel",
+      "confidence": "high",
+      "mass_kg": 4.051,
+      "static_friction": 0.0,
+      "dynamic_friction": 0.0,
+      "restitution": 0.0,
+      "collision_approximation": "convexHull",
+      "is_rigid": true,
+      "reasoning": "Prim /fr3/Geometry/base/fr3_link0/fr3_link1/fr3_link2/fr3_link3/fr3_link4/fr3_link5/fr3_link6/fr3_link7: material=steel because dark grey metallic appearance."
+    }
+  ],
+  "joint_findings": [
+    {
+      "prim_path": "/fr3/Geometry/base/fr3_link0/fr3_link1/fr3_link2/fr3_link3/fr3_link4/fr3_link5/fr3_link6/fr3_link7/fr3_joint7",
+      "lower_limit_deg": -172.79833984375,
+      "upper_limit_deg": 172.79833984375,
+      "joint_valid": true,
+      "confidence": "high",
+      "reasoning": "Joint /fr3/Geometry/base/fr3_link0/fr3_link1/fr3_link2/fr3_link3/fr3_link4/fr3_link5/fr3_link6/fr3_link7/fr3_joint7: lower=-172.79833984375\u00b0, upper=172.79833984375\u00b0. Within industrial robot range (-180\u00b0 to 180\u00b0). Valid."
+    },
+    {
+      "prim_path": "/fr3/Geometry/base/fr3_link0/fr3_link1/fr3_link2/fr3_link3/fr3_link4/fr3_link5/fr3_link6/fr3_joint6",
+      "lower_limit_deg": 31.197551727294922,
+      "upper_limit_deg": 180.0,
+      "joint_valid": false,
+      "confidence": "high",
+      "reasoning": "Joint /fr3/Geometry/base/fr3_link0/fr3_link1/fr3_link2/fr3_link3/fr3_link4/fr3_link5/fr3_link6/fr3_joint6: lower=31.197551727294922\u00b0, upper=258.79931640625\u00b0. Upper limit exceeds 180\u00b0, violating industrial robot joint constraints. VIOLATED. Corrected: lower=31.197551727294922\u00b0, upper=180\u00b0."
+    },
+    {
+      "prim_path": "/fr3/Geometry/base/fr3_link0/fr3_link1/fr3_link2/fr3_link3/fr3_link4/fr3_link5/fr3_joint5",
+      "lower_limit_deg": -160.80059814453125,
+      "upper_limit_deg": 160.80059814453125,
+      "joint_valid": true,
+      "confidence": "high",
+      "reasoning": "Joint /fr3/Geometry/base/fr3_link0/fr3_link1/fr3_link2/fr3_link3/fr3_link4/fr3_link5/fr3_joint5: lower=-160.80059814453125\u00b0, upper=160.80059814453125\u00b0. Within industrial robot range (-180\u00b0 to 180\u00b0). Valid."
+    },
+    {
+      "prim_path": "/fr3/Geometry/base/fr3_link0/fr3_link1/fr3_link2/fr3_link3/fr3_link4/fr3_joint4",
+      "lower_limit_deg": -174.2994842529297,
+      "upper_limit_deg": -8.69749927520752,
+      "joint_valid": true,
+      "confidence": "high",
+      "reasoning": "Joint /fr3/Geometry/base/fr3_link0/fr3_link1/fr3_link2/fr3_link3/fr3_link4/fr3_joint4: lower=-174.2994842529297\u00b0, upper=-8.69749927520752\u00b0. Within industrial robot range (-180\u00b0 to 180\u00b0). Valid."
+    },
+    {
+      "prim_path": "/fr3/Geometry/base/fr3_link0/fr3_link1/fr3_link2/fr3_link3/fr3_joint3",
+      "lower_limit_deg": -166.19786071777344,
+      "upper_limit_deg": 166.19786071777344,
+      "joint_valid": true,
+      "confidence": "high",
+      "reasoning": "Joint /fr3/Geometry/base/fr3_link0/fr3_link1/fr3_link2/fr3_link3/fr3_joint3: lower=-166.19786071777344\u00b0, upper=166.19786071777344\u00b0. Within industrial robot range (-180\u00b0 to 180\u00b0). Valid."
+    },
+    {
+      "prim_path": "/fr3/Geometry/base/fr3_link0/fr3_link1/fr3_link2/fr3_joint2",
+      "lower_limit_deg": -102.19847869873047,
+      "upper_limit_deg": 180.0,
+      "joint_valid": false,
+      "confidence": "high",
+      "reasoning": "Joint /fr3/Geometry/base/fr3_link0/fr3_link1/fr3_link2/fr3_joint2: lower=-102.19847869873047\u00b0, upper=220.0\u00b0. Upper limit exceeds 180\u00b0, violating industrial robot joint constraints. VIOLATED. Corrected: lower=-102.19847869873047\u00b0, upper=180\u00b0."
+    },
+    {
+      "prim_path": "/fr3/Geometry/base/fr3_link0/fr3_link1/fr3_joint1",
+      "lower_limit_deg": -157.20242309570312,
+      "upper_limit_deg": 157.20242309570312,
+      "joint_valid": true,
+      "confidence": "high",
+      "reasoning": "Joint /fr3/Geometry/base/fr3_link0/fr3_link1/fr3_joint1: lower=-157.20242309570312\u00b0, upper=157.20242309570312\u00b0. Within industrial robot range (-180\u00b0 to 180\u00b0). Valid."
+    }
+  ],
+  "render_paths": [
+    "/mnt/c/Crypt/Projects/physlint/assets/demo_fr3_renders/top.png",
+    "/mnt/c/Crypt/Projects/physlint/assets/demo_fr3_renders/front.png",
+    "/mnt/c/Crypt/Projects/physlint/assets/demo_fr3_renders/side.png",
+    "/mnt/c/Crypt/Projects/physlint/assets/demo_fr3_renders/isometric.png"
+  ],
+  "chain_of_thought": "=== PASS 1: CONTEXT PRE-PASS ===\n```json\n{\n  \"mechanism_type\": \"6-DOF industrial robot arm\",\n  \"expected_joint_ranges\": \"revolute joints with varying ranges: -174.3\u00b0 to -8.7\u00b0, -166.2\u00b0 to +166.2\u00b0, -160.8\u00b0 to +160.8\u00b0, -157.2\u00b0 to +157.2\u00b0, 31.2\u00b0 to 258.8\u00b0, and -172.8\u00b0 to +172.8\u00b0\",\n  \"validation_context\": \"Validate that all joints operate within their specified angular limits to ensure safe and precise movement of the robot arm.\"\n}\n```\n\n=== PASS 2: MAIN ANALYSIS ===\n STEP 1 \u2014 REASONING\n\nFor each geometry prim write ONE line:\n  \"Prim <path>: material=<X> because <1-2 word visual cue>. Confidence:<level>.\"\n  (Mass is computed automatically from bbox \u2014 you do NOT need to calculate it.)\nFor each joint prim write 2-3 sentences (full reasoning required for joint validation):\n  Revolute: \"Joint <name>: lower=<X>\u00b0, upper=<Y>\u00b0. <reason why valid/invalid>.\n   Corrected: lower=<A>\u00b0, upper=<B>\u00b0. Confidence:<level>.\"\n  Prismatic: \"Joint <name>: lower=<X>, upper=<Y>, body_length_along_axis=<B>.\n   travel=upper\u2212lower=<T>. <T> vs <B>: <exceeds\u2192VIOLATED, joint_valid=false|fits\u2192valid, joint_valid=true>.\n   Corrected if needed: lower=<A>, upper=<C>. Confidence:<level>.\"\n\nPrim /fr3/Geometry/base: material=steel because dark grey metallic appearance. Confidence:high.\nPrim /fr3/Geometry/base/fr3_link0: material=aluminium because light silver metallic appearance. Confidence:high.\nPrim /fr3/Geometry/base/fr3_link0/fr3_link1: material=steel because dark grey metallic appearance. Confidence:high.\nPrim /fr3/Geometry/base/fr3_link0/fr3_link1/fr3_link2: material=aluminium because light silver metallic appearance. Confidence:high.\nPrim /fr3/Geometry/base/fr3_link0/fr3_link1/fr3_link2/fr3_link3: material=steel because dark grey metallic appearance. Confidence:high.\nPrim /fr3/Geometry/base/fr3_link0/fr3_link1/fr3_link2/fr3_link3/fr3_link4: material=aluminium because light silver metallic appearance. Confidence:high.\nPrim /fr3/Geometry/base/fr3_link0/fr3_link1/fr3_link2/fr3_link3/fr3_link4/fr3_link5: material=steel because dark grey metallic appearance. Confidence:high.\nPrim /fr3/Geometry/base/fr3_link0/fr3_link1/fr3_link2/fr3_link3/fr3_link4/fr3_link5/fr3_link6: material=aluminium because light silver metallic appearance. Confidence:high.\nPrim /fr3/Geometry/base/fr3_link0/fr3_link1/fr3_link2/fr3_link3/fr3_link4/fr3_link5/fr3_link6/fr3_link7: material=steel because dark grey metallic appearance. Confidence:high.\n\nJoint /fr3/Geometry/base/fr3_link0/fr3_link1/fr3_link2/fr3_link3/fr3_link4/fr3_link5/fr3_link6/fr3_link7/fr3_joint7: lower=-172.79833984375\u00b0, upper=172.79833984375\u00b0. Within industrial robot range (-180\u00b0 to 180\u00b0). Valid. Confidence:high.\nJoint /fr3/Geometry/base/fr3_link0/fr3_link1/fr3_link2/fr3_link3/fr3_link4/fr3_link5/fr3_link6/fr3_joint6: lower=31.197551727294922\u00b0, upper=258.79931640625\u00b0. Upper limit exceeds 180\u00b0, violating industrial robot joint constraints. VIOLATED. Corrected: lower=31.197551727294922\u00b0, upper=180\u00b0. Confidence:high.\nJoint /fr3/Geometry/base/fr3_link0/fr3_link1/fr3_link2/fr3_link3/fr3_link4/fr3_link5/fr3_joint5: lower=-160.80059814453125\u00b0, upper=160.80059814453125\u00b0. Within industrial robot range (-180\u00b0 to 180\u00b0). Valid. Confidence:high.\nJoint /fr3/Geometry/base/fr3_link0/fr3_link1/fr3_link2/fr3_link3/fr3_link4/fr3_joint4: lower=-174.2994842529297\u00b0, upper=-8.69749927520752\u00b0. Within industrial robot range (-180\u00b0 to 180\u00b0). Valid. Confidence:high.\nJoint /fr3/Geometry/base/fr3_link0/fr3_link1/fr3_link2/fr3_link3/fr3_joint3: lower=-166.19786071777344\u00b0, upper=166.19786071777344\u00b0. Within industrial robot range (-180\u00b0 to 180\u00b0). Valid. Confidence:high.\nJoint /fr3/Geometry/base/fr3_link0/fr3_link1/fr3_link2/fr3_joint2: lower=-102.19847869873047\u00b0, upper=220.0\u00b0. Upper limit exceeds 180\u00b0, violating industrial robot joint constraints. VIOLATED. Corrected: lower=-102.19847869873047\u00b0, upper=180\u00b0. Confidence:high.\nJoint /fr3/Geometry/base/fr3_link0/fr3_link1/fr3_joint1: lower=-157.20242309570312\u00b0, upper=157.20242309570312\u00b0. Within industrial robot range (-180\u00b0 to 180\u00b0). Valid. Confidence:high.\n\n STEP 2 \u2014 JSON OUTPUT\n\n```json\n{\n  \"geom_prims\": [\n    {\n      \"prim_path\": \"/fr3/Geometry/base\",\n      \"material_type\": \"steel\",\n      \"mass_kg\": 0.0,\n      \"static_friction\": 0.0,\n      \"dynamic_friction\": 0.0,\n      \"restitution\": 0.0,\n      \"collision_approximation\": \"convexHull\",\n      \"is_rigid\": true,\n      \"confidence\": \"high\",\n      \"reasoning\": \"Prim /fr3/Geometry/base: material=steel because dark grey metallic appearance.\"\n    },\n    {\n      \"prim_path\": \"/fr3/Geometry/base/fr3_link0\",\n      \"material_type\": \"aluminium\",\n      \"mass_kg\": 0.0,\n      \"static_friction\": 0.0,\n      \"dynamic_friction\": 0.0,\n      \"restitution\": 0.0,\n      \"collision_approximation\": \"convexHull\",\n      \"is_rigid\": true,\n      \"confidence\": \"high\",\n      \"reasoning\": \"Prim /fr3/Geometry/base/fr3_link0: material=aluminium because light silver metallic appearance.\"\n    },\n    {\n      \"prim_path\": \"/fr3/Geometry/base/fr3_link0/fr3_link1\",\n      \"material_type\": \"steel\",\n      \"mass_kg\": 0.0,\n      \"static_friction\": 0.0,\n      \"dynamic_friction\": 0.0,\n      \"restitution\": 0.0,\n      \"collision_approximation\": \"convexHull\",\n      \"is_rigid\": true,\n      \"confidence\": \"high\",\n      \"reasoning\": \"Prim /fr3/Geometry/base/fr3_link0/fr3_link1: material=steel because dark grey metallic appearance.\"\n    },\n    {\n      \"prim_path\": \"/fr3/Geometry/base/fr3_link0/fr3_link1/fr3_link2\",\n      \"material_type\": \"aluminium\",\n      \"mass_kg\": 0.0,\n      \"static_friction\": 0.0,\n      \"dynamic_friction\": 0.0,\n      \"restitution\": 0.0,\n      \"collision_approximation\": \"convexHull\",\n      \"is_rigid\": true,\n      \"confidence\": \"high\",\n      \"reasoning\": \"Prim /fr3/Geometry/base/fr3_link0/fr3_link1/fr3_link2: material=aluminium because light silver metallic appearance.\"\n    },\n    {\n      \"prim_path\": \"/fr3/Geometry/base/fr3_link0/fr3_link1/fr3_link2/fr3_link3\",\n      \"material_type\": \"steel\",\n      \"mass_kg\": 0.0,\n      \"static_friction\": 0.0,\n      \"dynamic_friction\": 0.0,\n      \"restitution\": 0.0,\n      \"collision_approximation\": \"convexHull\",\n      \"is_rigid\": true,\n      \"confidence\": \"high\",\n      \"reasoning\": \"Prim /fr3/Geometry/base/fr3_link0/fr3_link1/fr3_link2/fr3_link3: material=steel because dark grey metallic appearance.\"\n    },\n    {\n      \"prim_path\": \"/fr3/Geometry/base/fr3_link0/fr3_link1/fr3_link2/fr3_link3/fr3_link4\",\n      \"material_type\": \"aluminium\",\n      \"mass_kg\": 0.0,\n      \"static_friction\": 0.0,\n      \"dynamic_friction\": 0.0,\n      \"restitution\": 0.0,\n      \"collision_approximation\": \"convexHull\",\n      \"is_rigid\": true,\n      \"confidence\": \"high\",\n      \"reasoning\": \"Prim /fr3/Geometry/base/fr3_link0/fr3_link1/fr3_link2/fr3_link3/fr3_link4: material=aluminium because light silver metallic appearance.\"\n    },\n    {\n      \"prim_path\": \"/fr3/Geometry/base/fr3_link0/fr3_link1/fr3_link2/fr3_link3/fr3_link4/fr3_link5\",\n      \"material_type\": \"steel\",\n      \"mass_kg\": 0.0,\n      \"static_friction\": 0.0,\n      \"dynamic_friction\": 0.0,\n      \"restitution\": 0.0,\n      \"collision_approximation\": \"convexHull\",\n      \"is_rigid\": true,\n      \"confidence\": \"high\",\n      \"reasoning\": \"Prim /fr3/Geometry/base/fr3_link0/fr3_link1/fr3_link2/fr3_link3/fr3_link4/fr3_link5: material=steel because dark grey metallic appearance.\"\n    },\n    {\n      \"prim_path\": \"/fr3/Geometry/base/fr3_link0/fr3_link1/fr3_link2/fr3_link3/fr3_link4/fr3_link5/fr3_link6\",\n      \"material_type\": \"aluminium\",\n      \"mass_kg\": 0.0,\n      \"static_friction\": 0.0,\n      \"dynamic_friction\": 0.0,\n      \"restitution\": 0.0,\n      \"collision_approximation\": \"convexHull\",\n      \"is_rigid\": true,\n      \"confidence\": \"high\",\n      \"reasoning\": \"Prim /fr3/Geometry/base/fr3_link0/fr3_link1/fr3_link2/fr3_link3/fr3_link4/fr3_link5/fr3_link6: material=aluminium because light silver metallic appearance.\"\n    },\n    {\n      \"prim_path\": \"/fr3/Geometry/base/fr3_link0/fr3_link1/fr3_link2/fr3_link3/fr3_link4/fr3_link5/fr3_link6/fr3_link7\",\n      \"material_type\": \"steel\",\n      \"mass_kg\": 0.0,\n      \"static_friction\": 0.0,\n      \"dynamic_friction\": 0.0,\n      \"restitution\": 0.0,\n      \"collision_approximation\": \"convexHull\",\n      \"is_rigid\": true,\n      \"confidence\": \"high\",\n      \"reasoning\": \"Prim /fr3/Geometry/base/fr3_link0/fr3_link1/fr3_link2/fr3_link3/fr3_link4/fr3_link5/fr3_link6/fr3_link7: material=steel because dark grey metallic appearance.\"\n    }\n  ],\n  \"joint_prims\": [\n    {\n      \"prim_path\": \"/fr3/Geometry/base/fr3_link0/fr3_link1/fr3_link2/fr3_link3/fr3_link4/fr3_link5/fr3_link6/fr3_link7/fr3_joint7\",\n      \"lower_limit_deg\": -172.79833984375,\n      \"upper_limit_deg\": 172.79833984375,\n      \"joint_valid\": true,\n      \"confidence\": \"high\",\n      \"reasoning\": \"Joint /fr3/Geometry/base/fr3_link0/fr3_link1/fr3_link2/fr3_link3/fr3_link4/fr3_link5/fr3_link6/fr3_link7/fr3_joint7: lower=-172.79833984375\u00b0, upper=172.79833984375\u00b0. Within industrial robot range (-180\u00b0 to 180\u00b0). Valid.\"\n    },\n    {\n      \"prim_path\": \"/fr3/Geometry/base/fr3_link0/fr3_link1/fr3_link2/fr3_link3/fr3_link4/fr3_link5/fr3_link6/fr3_joint6\",\n      \"lower_limit_deg\": 31.197551727294922,\n      \"upper_limit_deg\": 180.0,\n      \"joint_valid\": false,\n      \"confidence\": \"high\",\n      \"reasoning\": \"Joint /fr3/Geometry/base/fr3_link0/fr3_link1/fr3_link2/fr3_link3/fr3_link4/fr3_link5/fr3_link6/fr3_joint6: lower=31.197551727294922\u00b0, upper=258.79931640625\u00b0. Upper limit exceeds 180\u00b0, violating industrial robot joint constraints. VIOLATED. Corrected: lower=31.197551727294922\u00b0, upper=180\u00b0.\"\n    },\n    {\n      \"prim_path\": \"/fr3/Geometry/base/fr3_link0/fr3_link1/fr3_link2/fr3_link3/fr3_link4/fr3_link5/fr3_joint5\",\n      \"lower_limit_deg\": -160.80059814453125,\n      \"upper_limit_deg\": 160.80059814453125,\n      \"joint_valid\": true,\n      \"confidence\": \"high\",\n      \"reasoning\": \"Joint /fr3/Geometry/base/fr3_link0/fr3_link1/fr3_link2/fr3_link3/fr3_link4/fr3_link5/fr3_joint5: lower=-160.80059814453125\u00b0, upper=160.80059814453125\u00b0. Within industrial robot range (-180\u00b0 to 180\u00b0). Valid.\"\n    },\n    {\n      \"prim_path\": \"/fr3/Geometry/base/fr3_link0/fr3_link1/fr3_link2/fr3_link3/fr3_link4/fr3_joint4\",\n      \"lower_limit_deg\": -174.2994842529297,\n      \"upper_limit_deg\": -8.69749927520752,\n      \"joint_valid\": true,\n      \"confidence\": \"high\",\n      \"reasoning\": \"Joint /fr3/Geometry/base/fr3_link0/fr3_link1/fr3_link2/fr3_link3/fr3_link4/fr3_joint4: lower=-174.2994842529297\u00b0, upper=-8.69749927520752\u00b0. Within industrial robot range (-180\u00b0 to 180\u00b0). Valid.\"\n    },\n    {\n      \"prim_path\": \"/fr3/Geometry/base/fr3_link0/fr3_link1/fr3_link2/fr3_link3/fr3_joint3\",\n      \"lower_limit_deg\": -166.19786071777344,\n      \"upper_limit_deg\": 166.19786071777344,\n      \"joint_valid\": true,\n      \"confidence\": \"high\",\n      \"reasoning\": \"Joint /fr3/Geometry/base/fr3_link0/fr3_link1/fr3_link2/fr3_link3/fr3_joint3: lower=-166.19786071777344\u00b0, upper=166.19786071777344\u00b0. Within industrial robot range (-180\u00b0 to 180\u00b0). Valid.\"\n    },\n    {\n      \"prim_path\": \"/fr3/Geometry/base/fr3_link0/fr3_link1/fr3_link2/fr3_joint2\",\n      \"lower_limit_deg\": -102.19847869873047,\n      \"upper_limit_deg\": 180.0,\n      \"joint_valid\": false,\n      \"confidence\": \"high\",\n      \"reasoning\": \"Joint /fr3/Geometry/base/fr3_link0/fr3_link1/fr3_link2/fr3_joint2: lower=-102.19847869873047\u00b0, upper=220.0\u00b0. Upper limit exceeds 180\u00b0, violating industrial robot joint constraints. VIOLATED. Corrected: lower=-102.19847869873047\u00b0, upper=180\u00b0.\"\n    },\n    {\n      \"prim_path\": \"/fr3/Geometry/base/fr3_link0/fr3_link1/fr3_joint1\",\n      \"lower_limit_deg\": -157.20242309570312,\n      \"upper_limit_deg\": 157.20242309570312,\n      \"joint_valid\": true,\n      \"confidence\": \"high\",\n      \"reasoning\": \"Joint /fr3/Geometry/base/fr3_link0/fr3_link1/fr3_joint1: lower=-157.20242309570312\u00b0, upper=157.20242309570312\u00b0. Within industrial robot range (-180\u00b0 to 180\u00b0). Valid.\"\n    }\n  ],\n  \"global_notes\": \"Two joints violated industrial robot constraints: fr3_joint6 and fr3_joint2. Both were corrected to upper limit 180\u00b0.\"\n}\n```\n\n=== PASS 3: VERIFICATION ===\n```json\n{\n  \"corrections\": [],\n  \"global_notes\": \"The analysis correctly identifies two joints with upper limits exceeding 180\\u00b0, which violates industrial robot constraints. The remaining five joints are within the valid range of -180\\u00b0 to 180\\u00b0, confirming their compliance. No additional violations or corrections are necessary.\"\n}\n```"
+}

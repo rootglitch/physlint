@@ -129,9 +129,16 @@ def strip_physics(
     n_violations: int = 0,
     seed: int = 42,
     name_override: Optional[str] = None,
+    clear_limits: bool = True,
 ) -> dict:
     """
     Strip physics from `input_usd`, optionally inject violations.
+
+    Args:
+      clear_limits: If True, clear joint limits in the stripped USD (model must
+                    predict them from visuals). If False, preserve original limits
+                    so the model can validate them. Use False for real robot USDs
+                    where limits are known-valid and we want to test specificity.
 
     Returns a benchmark_gt.json–compatible scene entry dict.
     """
@@ -215,8 +222,8 @@ def strip_physics(
             "violated": violated,
         })
 
-        # Always clear the limits in the stripped copy (model must predict them)
-        _clear_joint_limits(prim)
+        if clear_limits:
+            _clear_joint_limits(prim)
 
     stage.GetRootLayer().Save()
 

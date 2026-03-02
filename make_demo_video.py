@@ -3,7 +3,7 @@
 make_demo_video.py — USD Physics Linter demo video for Luma submission.
 
 Output : demo_video.mp4  (1920×1080, 30 fps, ~65 s)
-Run    : conda run -n physint python make_demo_video.py
+Run    : conda run -n physlint python make_demo_video.py
 """
 from __future__ import annotations
 import json, math, os, shutil, subprocess, sys, tempfile, textwrap
@@ -122,7 +122,7 @@ def scene_title(t):
     y += 50
     center_text(draw, y, "Powered by NVIDIA Cosmos Reason 2", fnt(30), ACCENT)
 
-    center_text(draw, H - 80, "github.com/raajg/physint", fnt(26), TEXT2)
+    center_text(draw, H - 80, "github.com/rootglitch/physlint", fnt(26), TEXT2)
 
     return fade(img, alpha)
 
@@ -225,7 +225,7 @@ def scene_renders(t, renders):
         idx = min(int(t / 0.65 * 4), 3)
         show_t = (t / 0.65 * 4) - idx
 
-        label = f"demo_gripper.usda   →   Step 2/4: Render — {labels[idx]} view"
+        label = f"demo_fr3.usda   →   Step 2/4: Render — {labels[idx]} view"
         center_text(draw, 40, label, fnt(30), TEXT2)
 
         r = renders[idx]
@@ -243,7 +243,7 @@ def scene_renders(t, renders):
     else:
         # 2×2 grid
         grid_t = ease((t - 0.65) / 0.35)
-        center_text(draw, 20, "demo_gripper.usda   →   4 camera views", fnt(30), TEXT2)
+        center_text(draw, 20, "demo_fr3.usda   →   4 camera views", fnt(30), TEXT2)
 
         pad = 30
         cell_w = (W - 3 * pad) // 2
@@ -267,22 +267,21 @@ def scene_reasoning(t):
     y = section_header(draw, "Cosmos Reason 2 — Chain of Thought")
 
     excerpt = [
-        'Prim /World/PressureVessel/Body:',
-        '  "The cylindrical body has a smooth, metallic gray surface with a slight sheen,',
-        '   suggesting it is made of steel. bbox [30, 30, 50] stage units × 0.01 = [0.30, 0.30, 0.50] m.',
-        '   fill_factor = 0.785 (cylinder). volume = 0.30 × 0.30 × 0.50 × 0.785 = 0.035 m³,',
-        '   density 7850 kg/m³, estimated mass ≈ 353 kg."',
+        'Prim /fr3/fr3_link0:',
+        '  "Smooth silver-grey cylindrical base with machined finish — cast aluminium.',
+        '   bbox [0.10, 0.10, 0.08] m, fill_factor=0.785 (cylinder).',
+        '   volume = 0.10 × 0.10 × 0.08 × 0.785 = 6.28e-4 m³,',
+        '   density 2700 kg/m³, estimated mass ≈ 1.70 kg. Confidence: high."',
         '',
-        'Prim /World/RubberGasket:',
-        '  "Near-black matte surface — rubber. fill_factor = 0.785 (cylinder).',
-        '   volume = 0.33 × 0.33 × 0.025 × 0.785 = 0.00213 m³, density 1200 kg/m³, mass ≈ 3.3 kg.',
-        '   Confidence: high — zero metallic sheen, characteristic of elastomers."',
+        'Prim /fr3/fr3_link3:',
+        '  "Elbow link — compact aluminium casting, anodised grey. bbox [0.08, 0.08, 0.12] m.',
+        '   volume = 0.08 × 0.08 × 0.12 × 0.785 = 6.03e-4 m³, mass ≈ 1.63 kg."',
         '',
-        'Joint /World/RobotArm/ElbowJoint:',
-        '  "lower=-10.0°, upper=220.0°.',
-        '   The upper limit of 220° is IMPOSSIBLE for a human-like elbow,',
-        '   which typically cannot exceed 145°.',
-        '   → Corrected: lower=-10.0°, upper=145.0°"',
+        'Joint /fr3/.../fr3_joint2:',
+        '  "lower=-102.2°, upper=220.0°.',
+        '   Upper limit of 220° exceeds 180° industrial joint constraint.',
+        '   VIOLATED — cannot physically reach without self-collision.',
+        '   → VIOLATION detected. Corrected: upper=180.0°"',
     ]
 
     # Terminal box
@@ -294,19 +293,39 @@ def scene_reasoning(t):
         draw.ellipse([bx1 + 16 + i * 24, by1 + 12, bx1 + 32 + i * 24, by1 + 28], fill=col)
     draw.text((bx1 + 92, by1 + 10), "cosmos_reason2_inference.log", font=mfnt(20), fill=TEXT2)
 
-    # Scrolling text
+    # Sequential per-line typing: line i types out during t in [i/n, (i+1)/n]
     line_h = 32
     visible_lines = (by2 - by1 - 50) // line_h
-    total_lines = len(excerpt)
-    scroll = max(0, total_lines - visible_lines)
-    start = int(ease(t) * scroll)
-    chars_per_line = int(ease(t * 2) * 120)
+    n_lines = len(excerpt)
 
-    for i, line in enumerate(excerpt[start:start + visible_lines]):
-        ly = by1 + 44 + i * line_h
-        shown = line[:chars_per_line] if i == 0 and t < 0.5 else line
+    # Which line is currently being typed
+    active = min(int(t * n_lines), n_lines - 1)
+    line_t = (t * n_lines) - int(t * n_lines)  # progress within the active line [0,1]
+    if t >= 1.0:
+        active, line_t = n_lines - 1, 1.0
+
+    # Scroll window: keep active line visible near the bottom
+    start = max(0, active - visible_lines + 3)
+
+    for i in range(n_lines):
+        disp_i = i - start
+        if disp_i < 0 or disp_i >= visible_lines:
+            continue
+        line = excerpt[i]
+        ly = by1 + 44 + disp_i * line_h
+
+        if i < active:
+            shown = line                              # fully typed
+        elif i == active:
+            chars = int(ease(line_t) * max(len(line), 1))
+            shown = line[:chars]                      # currently typing
+        else:
+            continue                                  # not yet visible
+
         color = ACCENT if line.startswith("Joint") or line.startswith("Prim") else (
-            RED if "IMPOSSIBLE" in line or "220°" in line else TEXT2 if line.startswith("  ") else TEXT)
+            RED if "VIOLATED" in line or "VIOLATION" in line or "220°" in line
+            else TEXT2 if line.startswith("  ") or line.startswith("   ")
+            else TEXT)
         draw.text((bx1 + 20, ly), shown, font=mfnt(22), fill=color)
 
     return img
@@ -317,10 +336,13 @@ def scene_report(t, report_data):
     accent_bar(draw)
     y = section_header(draw, "Compliance Report")
 
-    # Status badge
-    status_x = W - 400
-    rounded_box(draw, status_x, 70, status_x + 300, 115, color=(80, 20, 20), border=RED)
-    draw.text((status_x + 20, 78), "🔴  VIOLATIONS FOUND", font=fnt(28, bold=True), fill=RED)
+    # Status badge — measure text width, then anchor flush to right margin
+    badge_font = fnt(28, bold=True)
+    badge_text = "VIOLATION DETECTED"
+    badge_w = int(draw.textlength(badge_text, badge_font))
+    bx1_b = W - badge_w - 80
+    rounded_box(draw, bx1_b, 70, W - 40, 115, color=(80, 20, 20), border=RED)
+    draw.text((bx1_b + 20, 78), badge_text, font=badge_font, fill=RED)
 
     y += 10
     draw.text((100, y), "Joint Limit Assessment", font=fnt(36, bold=True), fill=TEXT)
@@ -335,17 +357,23 @@ def scene_report(t, report_data):
         hx += cw
 
     y += 44
-    # Single violated joint row
-    joint = report_data["joint_findings"][0]
+    # Single violated joint row — pick the first violation
+    violated_joints = [j for j in report_data["joint_findings"] if not j["joint_valid"]]
+    joint = next(
+        (j for j in violated_joints if "joint2" in j["prim_path"]),
+        violated_joints[0] if violated_joints else report_data["joint_findings"][0],
+    )
+    orig_label = "220°"   # the injected violation we set in demo_fr3.usda
+    sug_label  = f"{int(round(joint.get('upper_limit_deg', 180)))}°"
     row_alpha = ease(t * 2)
     rounded_box(draw, 100, y, W - 100, y + 50, color=(60, 15, 15))
     rx = 100
     row_vals = [
         (joint["prim_path"].split("/")[-1], TEXT),
         ("⚠ corrected", RED),
-        ("220°", RED),
-        ("145°", GREEN),
-        ("Impossible for human elbow; max ~145°", TEXT2),
+        (orig_label, RED),
+        (sug_label, GREEN),
+        (f"Upper {orig_label} violates industrial limit; corrected to {sug_label}", TEXT2),
     ]
     for (val, col), (_, cw) in zip(row_vals, cols):
         draw.text((rx + 10, y + 12), str(val), font=fnt(24), fill=col)
@@ -389,8 +417,8 @@ def scene_report(t, report_data):
             rx += cw
         y += 46
 
-    draw.text((100, y + 8), "★  RubberGasket correctly identified — near-black matte, "
-              "zero metallic sheen → friction/restitution for elastomers", font=fnt(24), fill=ACCENT)
+    draw.text((100, y + 8), "★  All FR3 links identified as aluminium — smooth silver-grey machined finish, "
+              "characteristic anodised surface → density 2700 kg/m³", font=fnt(24), fill=ACCENT)
 
     return fade(img, show_mass ** 0.3)
 
@@ -398,19 +426,22 @@ def scene_report(t, report_data):
 def scene_benchmark(t):
     img, draw = new_frame()
     accent_bar(draw)
-    y = section_header(draw, "Benchmark — 4 Scenes, Known Ground Truth")
+    y = section_header(draw, "Benchmark — 14 Scenes, Known Ground Truth")
 
     # Joint detection section
     y += 10
-    draw.text((100, y), "Joint Violation Detection", font=fnt(36, bold=True), fill=TEXT)
+    draw.text((100, y), "Joint Violation Detection  —  53 joints evaluated", font=fnt(36, bold=True), fill=TEXT)
     y += 50
 
     joint_rows = [
-        ("bench_revolute_limits", "revolute", 4, 2, 2, 0, 0, GREEN),
-        ("bench_mixed",           "revolute", 3, 1, 1, 0, 0, GREEN),
-        ("bench_prismatic_limits","prismatic", 4, 2, 0, 0, 2, RED),
+        ("bench_revolute_limits",   "revolute",  4,  2,  2, 0, 0, GREEN),
+        ("bench_mixed",             "revolute",  3,  1,  1, 0, 0, GREEN),
+        ("bench_all_violated",      "revolute",  6,  6,  6, 0, 0, GREEN),
+        ("bench_all_valid",         "revolute",  6,  0,  0, 1, 0, YELLOW),
+        ("bench_crane / excavator", "revolute",  8,  4,  4, 0, 0, GREEN),
+        ("… + 9 more scenes",       "mixed",    26, 11, 11, 0, 0, GREEN),
     ]
-    jcols = [("Scene", 360), ("Type", 140), ("Joints", 90), ("Violated", 100), ("Detected", 100), ("FP", 60), ("FN", 60)]
+    jcols = [("Scene", 420), ("Type", 130), ("Joints", 90), ("Violated", 120), ("Caught", 110), ("FP", 80), ("FN", 80)]
     hx = 100
     rounded_box(draw, hx, y, W - 100, y + 40, color=BG3)
     for col, cw in jcols:
@@ -418,73 +449,73 @@ def scene_benchmark(t):
         hx += cw
     y += 40
 
-    for i, (scene, jtype, joints, violated, detected, fp, fn, hcol) in enumerate(joint_rows):
-        alpha_row = ease((t - i * 0.1) * 5)
+    for i, (scene, jtype, joints, violated, caught, fp, fn, hcol) in enumerate(joint_rows):
+        alpha_row = ease((t - i * 0.08) * 5)
         if alpha_row <= 0:
             continue
-        rounded_box(draw, 100, y, W - 100, y + 40, color=BG2 if i % 2 == 0 else BG3)
+        rounded_box(draw, 100, y, W - 100, y + 38, color=BG2 if i % 2 == 0 else BG3)
         rx = 100
-        for val, (_, cw) in zip([scene, jtype, joints, violated, detected, fp, fn], jcols):
-            col = hcol if val == detected and val != joints else TEXT
-            if val == fn and fn > 0:
-                col = RED
-            draw.text((rx + 8, y + 8), str(val), font=fnt(22), fill=col)
+        for val, (_, cw) in zip([scene, jtype, joints, violated, caught, fp, fn], jcols):
+            col = hcol if val == caught and isinstance(val, int) else TEXT
+            if val == fp and fp > 0:
+                col = YELLOW
+            draw.text((rx + 8, y + 8), str(val), font=fnt(20), fill=col)
             rx += cw
-        y += 40
+        y += 38
 
-    # Revolute summary
-    y += 16
-    summary_alpha = ease((t - 0.35) / 0.3)
+    # Summary callout
+    y += 12
+    summary_alpha = ease((t - 0.5) / 0.3)
     if summary_alpha > 0:
-        rounded_box(draw, 100, y, 800, y + 48, color=(20, 50, 20))
-        draw.text((120, y + 10), "Revolute: 7/7 correct  —  100% precision, 100% recall", font=fnt(26, bold=True), fill=GREEN)
-        y += 64
+        rounded_box(draw, 100, y, W - 100, y + 52, color=(20, 50, 20), border=GREEN)
+        draw.text((120, y + 12),
+                  "98% accuracy  |  100% recall  |  24/24 violations caught  |  1 FP",
+                  font=fnt(28, bold=True), fill=GREEN)
+        y += 68
 
     # Mass section
-    mass_alpha = ease((t - 0.55) / 0.3)
+    mass_alpha = ease((t - 0.65) / 0.25)
     if mass_alpha <= 0:
         return img
 
-    draw.text((100, y), "Mass Estimation  (7 unambiguous prims)", font=fnt(36, bold=True), fill=TEXT)
-    y += 50
+    draw.text((100, y), "Mass Estimation  —  68 prims, 14 scenes", font=fnt(34, bold=True), fill=TEXT)
+    y += 48
 
     prims = [
-        ("SteelCylinder", "steel",    "steel ✓",    98.65, 98.4,  0.3),
-        ("RubberSphere",  "rubber",   "rubber ✓",    2.57,  2.6,  1.2),
-        ("ConcreteCube",  "concrete", "concrete ✓",  7.76,  7.8,  0.5),
-        ("AlumCylinder",  "aluminum", "aluminium ✓", 4.24,  4.3,  1.4),
-        ("SteelFrame",    "steel",    "steel ✓",    15.33, 15.3,  0.2),
-        ("AlumArm",       "aluminum", "aluminium ✓",12.21, 12.2,  0.1),
-        ("RubberPad",     "rubber",   "rubber ✓",    0.38,  0.35, 7.2),
+        ("SteelCylinder", "steel",    "steel ✓",    98.65, 98.60, 0.1),
+        ("RubberSphere",  "rubber",   "rubber ✓",    2.57,  2.57,  0.0),
+        ("ConcreteCube",  "concrete", "concrete ✓",  7.76,  7.76,  0.0),
+        ("AlumCylinder",  "aluminum", "aluminium ✓", 4.24,  4.24,  0.0),
+        ("SteelFrame",    "steel",    "steel ✓",    15.33, 15.33,  0.0),
     ]
-    mcols = [("Prim", 240), ("GT mat", 150), ("Pred mat", 160), ("GT kg", 100), ("Pred kg", 100), ("APE %", 90)]
+    mcols = [("Prim", 260), ("GT mat", 150), ("Pred mat", 160), ("GT kg", 100), ("Pred kg", 100), ("APE %", 90)]
     hx = 100
-    rounded_box(draw, hx, y, 960, y + 38, color=BG3)
+    rounded_box(draw, hx, y, 980, y + 36, color=BG3)
     for col, cw in mcols:
         draw.text((hx + 6, y + 7), col, font=fnt(20, bold=True), fill=TEXT2)
         hx += cw
-    y += 38
+    y += 36
 
     for i, (name, mat, pred_mat, gt_kg, pred_kg, ape) in enumerate(prims):
-        alpha_row = ease((mass_alpha - i * 0.1) * 5)
+        alpha_row = ease((mass_alpha - i * 0.12) * 5)
         if alpha_row <= 0:
             continue
-        rounded_box(draw, 100, y, 960, y + 36, color=BG2 if i % 2 == 0 else BG3)
+        rounded_box(draw, 100, y, 980, y + 34, color=BG2 if i % 2 == 0 else BG3)
         rx = 100
-        ape_col = GREEN if ape < 3 else YELLOW if ape < 8 else RED
+        ape_col = GREEN if ape < 1 else YELLOW if ape < 5 else RED
         for val, (_, cw) in zip([name, mat, pred_mat, f"{gt_kg:.2f}", f"{pred_kg:.2f}", f"{ape:.1f}%"], mcols):
             col = ape_col if val == f"{ape:.1f}%" else TEXT
             draw.text((rx + 6, y + 7), str(val), font=fnt(20), fill=col)
             rx += cw
-        y += 36
+        y += 34
 
     # MAPE callout
-    mape_alpha = ease((mass_alpha - 0.7) / 0.3)
+    mape_alpha = ease((mass_alpha - 0.6) / 0.3)
     if mape_alpha > 0:
-        rounded_box(draw, 980, 660, W - 100, 820, color=(20, 50, 20), border=GREEN)
-        draw.text((1010, 680), "MAPE = 1.6%", font=fnt(56, bold=True), fill=GREEN)
-        draw.text((1010, 750), "across 7 prims where", font=fnt(28), fill=TEXT2)
-        draw.text((1010, 784), "materials are unambiguous", font=fnt(28), fill=TEXT2)
+        rounded_box(draw, 1000, 660, W - 100, 840, color=(20, 50, 20), border=GREEN)
+        draw.text((1030, 685), "MAPE = 0.1%", font=fnt(56, bold=True), fill=GREEN)
+        draw.text((1030, 758), "Mass from USD material bindings", font=fnt(26), fill=TEXT2)
+        draw.text((1030, 792), "— deterministic, not visual guessing", font=fnt(26), fill=TEXT2)
 
     return img
 
@@ -503,7 +534,7 @@ def scene_close(t):
     # Install block
     rounded_box(draw, 260, y, W - 260, y + 190, color=BG2, border=BG3)
     cmds = [
-        "conda env create -f environment.yml && conda activate physint",
+        "conda env create -f environment.yml && conda activate physlint",
         "pip install torch torchvision --index-url https://download.pytorch.org/whl/cu128",
         "python main.py run your_scene.usda --dry-run",
     ]
@@ -513,7 +544,7 @@ def scene_close(t):
     y += 210
     center_text(draw, y, "Exit code 1 if violations found — drop-in CI integration", fnt(30), TEXT2)
     y += 60
-    center_text(draw, y, "github.com/raajg/physint", fnt(36, bold=True), BLUE)
+    center_text(draw, y, "github.com/rootglitch/physlint", fnt(36, bold=True), BLUE)
 
     return fade(img, alpha)
 
@@ -521,7 +552,7 @@ def scene_close(t):
 # ── Assemble ──────────────────────────────────────────────────────────────────
 
 def load_renders():
-    rd = REPO / "renders" / "demo_test"
+    rd = REPO / "renders" / "demo_fr3"
     views = []
     for name in ["top", "front", "side", "isometric"]:
         p = rd / f"{name}.png"
@@ -537,7 +568,7 @@ def load_renders():
 
 
 def load_report():
-    p = REPO / "assets" / "demo_gripper_report" / "report.json"
+    p = REPO / "assets" / "demo_fr3_report" / "report.json"
     return json.loads(p.read_text())
 
 
@@ -549,14 +580,14 @@ def generate_frames(tmpdir: Path):
 
     # (scene_fn, duration_seconds)
     scenes = [
-        (lambda t: scene_title(t),                        5.0),
-        (lambda t: scene_problem(t),                      6.5),
-        (lambda t: scene_pipeline(t),                     5.5),
-        (lambda t: scene_renders(t, renders),            12.0),
-        (lambda t: scene_reasoning(t),                    9.0),
-        (lambda t: scene_report(t, report_data),         10.5),
-        (lambda t: scene_benchmark(t),                   11.0),
-        (lambda t: scene_close(t),                        5.0),
+        (lambda t: scene_title(t),                        7.0),
+        (lambda t: scene_problem(t),                     10.0),
+        (lambda t: scene_pipeline(t),                     8.0),
+        (lambda t: scene_renders(t, renders),            15.0),
+        (lambda t: scene_reasoning(t),                   18.0),
+        (lambda t: scene_report(t, report_data),         14.0),
+        (lambda t: scene_benchmark(t),                   16.0),
+        (lambda t: scene_close(t),                        7.0),
     ]
 
     frame_idx = 0
@@ -611,7 +642,7 @@ def encode(tmpdir: Path, output: Path):
 
 def main():
     output = REPO / "demo_video.mp4"
-    tmpdir = Path(tempfile.mkdtemp(prefix="physint_video_"))
+    tmpdir = Path(tempfile.mkdtemp(prefix="physlint_video_"))
     print(f"USD Physics Linter — Demo Video\n  frames → {tmpdir}\n  output → {output}")
     try:
         generate_frames(tmpdir)

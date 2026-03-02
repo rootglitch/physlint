@@ -547,11 +547,19 @@ def _apply_mass_correction(raw: dict, scene_graph: dict) -> dict:
 def _apply_prismatic_rules(raw: dict, scene_graph: dict) -> dict:
     """Deterministically enforce the prismatic travel rule.
 
-    For each Prismatic joint: if travel = upper − lower > body_length_along_axis
-    → override joint_valid=False, regardless of what the model said.
+    For each Prismatic joint with a known body_length_along_axis, the rule is
+    fully authoritative in both directions:
+      travel = upper − lower > body_length_along_axis  →  joint_valid = False
+      travel ≤ body_length_along_axis                  →  joint_valid = True
+
+    This overrides the model in both directions — preventing both false
+    violations (model says violated but travel fits) and missed violations
+    (model says valid but travel exceeds housing length).
+
     The model's limits (lower/upper) are taken from the ORIGINAL scene graph
     so that corrected-limit outputs don't mask the original violation.
     """
+    import math
     joint_by_path = {j["path"]: j for j in scene_graph.get("joint_prims", [])}
 
     for jp in raw.get("joint_prims", []):
@@ -571,12 +579,10 @@ def _apply_prismatic_rules(raw: dict, scene_graph: dict) -> dict:
             continue
         # Skip joints whose limits are non-finite (cleared to ±inf) — cannot
         # evaluate travel vs body_length when limits are unconstrained.
-        import math
         if not math.isfinite(orig_lower) or not math.isfinite(orig_upper):
             continue
         travel = orig_upper - orig_lower
-        if travel > body_len:
-            jp["joint_valid"] = False
+        jp["joint_valid"] = (travel <= body_len)
 
     return raw
 

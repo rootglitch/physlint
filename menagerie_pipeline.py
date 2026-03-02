@@ -83,6 +83,81 @@ ROBOTS: dict[str, dict] = {
             "foot": "rubber",
         },
     },
+    "fr3": {
+        "mj_description": "fr3_mj_description",
+        "xml_name": "fr3.xml",
+        "menagerie_subdir": "franka_fr3",
+        "scene_name": "menagerie_fr3",
+        "n_violations": 0,
+        # Franka Research 3: cast aluminium links, hard plastic finger pads
+        "material_hints_by_name": {
+            "link": "aluminum",
+            "hand": "aluminum",
+            "finger": "hard plastic",
+        },
+    },
+    "iiwa14": {
+        "mj_description": "iiwa14_mj_description",
+        "xml_name": "iiwa14.xml",
+        "menagerie_subdir": "kuka_iiwa_14",
+        "scene_name": "menagerie_iiwa14",
+        "n_violations": 0,
+        # KUKA iiwa14: precision-cast aluminium links throughout
+        "material_hints_by_name": {
+            "link": "aluminum",
+            "flange": "aluminum",
+        },
+    },
+    "spot": {
+        "mj_description": "spot_mj_description",
+        "xml_name": "spot.xml",
+        "menagerie_subdir": "boston_dynamics_spot",
+        "scene_name": "menagerie_spot",
+        "n_violations": 0,
+        # Spot: aluminium structural frame, hard plastic covers, rubber foot pads
+        "material_hints_by_name": {
+            "base": "aluminum",
+            "hip": "aluminum",
+            "upper": "aluminum",
+            "lower": "aluminum",
+            "foot": "rubber",
+            "body": "hard plastic",
+        },
+    },
+    "go2": {
+        "mj_description": "go2_mj_description",
+        "xml_name": "go2.xml",
+        "menagerie_subdir": "unitree_go2",
+        "scene_name": "menagerie_go2",
+        "n_violations": 0,
+        # Unitree Go2: aluminium links, rubber feet
+        "material_hints_by_name": {
+            "trunk": "aluminum",
+            "hip": "aluminum",
+            "thigh": "aluminum",
+            "calf": "aluminum",
+            "foot": "rubber",
+        },
+    },
+    "h1": {
+        "mj_description": "h1_mj_description",
+        "xml_name": "h1.xml",
+        "menagerie_subdir": "unitree_h1",
+        "scene_name": "menagerie_h1",
+        "n_violations": 0,
+        # Unitree H1: aluminium structural frame, hard plastic covers
+        "material_hints_by_name": {
+            "pelvis": "aluminum",
+            "torso": "aluminum",
+            "hip": "aluminum",
+            "thigh": "aluminum",
+            "calf": "aluminum",
+            "ankle": "aluminum",
+            "shoulder": "aluminum",
+            "elbow": "aluminum",
+            "wrist": "aluminum",
+        },
+    },
 }
 
 CACHE_DIR = pathlib.Path("~/.cache/robot_descriptions/mujoco_menagerie").expanduser()
@@ -184,6 +259,7 @@ def process_robot(key: str, cfg: dict, dry_run: bool = False) -> dict | None:
             n_violations=cfg["n_violations"],
             seed=42,
             name_override=scene_name,
+            clear_limits=False,  # preserve limits for real robots — test specificity
         )
         return entry
     else:
