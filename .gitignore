@@ -9,3 +9,4 @@ build/
 renders/*/prim_colors.json
 run.log
 *.log
+assets/menagerie/

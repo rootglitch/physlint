@@ -789,6 +789,3458 @@
           "mass_kg": 0.628
         }
       ]
+    },
+    {
+      "name": "menagerie_franka_panda",
+      "usd": "assets/menagerie/menagerie_franka_panda/menagerie_franka_panda_stripped.usda",
+      "description": "Stripped from menagerie_franka_panda.usda \u2014 11 bodies, 9 joints (0 violated)",
+      "joints": [
+        {
+          "path": "/panda/Geometry/link0/link1/link2/link3/link4/link5/link6/link7/hand/left_finger/finger_joint1",
+          "type": "prismatic",
+          "lower": 0.0,
+          "upper": 0.04,
+          "violated": false
+        },
+        {
+          "path": "/panda/Geometry/link0/link1/link2/link3/link4/link5/link6/link7/hand/right_finger/finger_joint2",
+          "type": "prismatic",
+          "lower": 0.0,
+          "upper": 0.04,
+          "violated": false
+        },
+        {
+          "path": "/panda/Geometry/link0/link1/link2/link3/link4/link5/link6/link7/joint7",
+          "type": "revolute",
+          "lower": -166.0,
+          "upper": 166.0,
+          "violated": false
+        },
+        {
+          "path": "/panda/Geometry/link0/link1/link2/link3/link4/link5/link6/joint6",
+          "type": "revolute",
+          "lower": -1.0,
+          "upper": 215.0,
+          "violated": false
+        },
+        {
+          "path": "/panda/Geometry/link0/link1/link2/link3/link4/link5/joint5",
+          "type": "revolute",
+          "lower": -166.0,
+          "upper": 166.0,
+          "violated": false
+        },
+        {
+          "path": "/panda/Geometry/link0/link1/link2/link3/link4/joint4",
+          "type": "revolute",
+          "lower": -176.0,
+          "upper": -4.0,
+          "violated": false
+        },
+        {
+          "path": "/panda/Geometry/link0/link1/link2/link3/joint3",
+          "type": "revolute",
+          "lower": -166.0,
+          "upper": 166.0,
+          "violated": false
+        },
+        {
+          "path": "/panda/Geometry/link0/link1/link2/joint2",
+          "type": "revolute",
+          "lower": -101.0,
+          "upper": 101.0,
+          "violated": false
+        },
+        {
+          "path": "/panda/Geometry/link0/link1/joint1",
+          "type": "revolute",
+          "lower": -166.0,
+          "upper": 166.0,
+          "violated": false
+        }
+      ],
+      "masses": [
+        {
+          "path": "/panda/Geometry/link0",
+          "material": "aluminum",
+          "mass_kg": 0.6298
+        },
+        {
+          "path": "/panda/Geometry/link0/link1",
+          "material": "aluminum",
+          "mass_kg": 4.9707
+        },
+        {
+          "path": "/panda/Geometry/link0/link1/link2",
+          "material": "aluminum",
+          "mass_kg": 0.6469
+        },
+        {
+          "path": "/panda/Geometry/link0/link1/link2/link3",
+          "material": "aluminum",
+          "mass_kg": 3.2286
+        },
+        {
+          "path": "/panda/Geometry/link0/link1/link2/link3/link4",
+          "material": "aluminum",
+          "mass_kg": 3.5879
+        },
+        {
+          "path": "/panda/Geometry/link0/link1/link2/link3/link4/link5",
+          "material": "aluminum",
+          "mass_kg": 1.2259
+        },
+        {
+          "path": "/panda/Geometry/link0/link1/link2/link3/link4/link5/link6",
+          "material": "aluminum",
+          "mass_kg": 1.6666
+        },
+        {
+          "path": "/panda/Geometry/link0/link1/link2/link3/link4/link5/link6/link7",
+          "material": "aluminum",
+          "mass_kg": 0.7355
+        },
+        {
+          "path": "/panda/Geometry/link0/link1/link2/link3/link4/link5/link6/link7/hand",
+          "material": "aluminum",
+          "mass_kg": 0.73
+        },
+        {
+          "path": "/panda/Geometry/link0/link1/link2/link3/link4/link5/link6/link7/hand/left_finger",
+          "material": "hard plastic",
+          "mass_kg": 0.015
+        },
+        {
+          "path": "/panda/Geometry/link0/link1/link2/link3/link4/link5/link6/link7/hand/right_finger",
+          "material": "hard plastic",
+          "mass_kg": 0.015
+        }
+      ]
+    },
+    {
+      "name": "menagerie_franka_panda_violated",
+      "usd": "assets/menagerie/menagerie_franka_panda_violated/menagerie_franka_panda_violated_stripped.usda",
+      "description": "Stripped from menagerie_franka_panda.usda \u2014 11 bodies, 9 joints (1 violated)",
+      "joints": [
+        {
+          "path": "/panda/Geometry/link0/link1/link2/link3/link4/link5/link6/link7/hand/left_finger/finger_joint1",
+          "type": "prismatic",
+          "lower": 0.0,
+          "upper": 0.04,
+          "violated": false
+        },
+        {
+          "path": "/panda/Geometry/link0/link1/link2/link3/link4/link5/link6/link7/hand/right_finger/finger_joint2",
+          "type": "prismatic",
+          "lower": 0.0,
+          "upper": 0.04,
+          "violated": false
+        },
+        {
+          "path": "/panda/Geometry/link0/link1/link2/link3/link4/link5/link6/link7/joint7",
+          "type": "revolute",
+          "lower": -166.0,
+          "upper": 166.0,
+          "violated": false
+        },
+        {
+          "path": "/panda/Geometry/link0/link1/link2/link3/link4/link5/link6/joint6",
+          "type": "revolute",
+          "lower": -1.0,
+          "upper": 215.0,
+          "violated": false
+        },
+        {
+          "path": "/panda/Geometry/link0/link1/link2/link3/link4/link5/joint5",
+          "type": "revolute",
+          "lower": -166.0,
+          "upper": 166.0,
+          "violated": false
+        },
+        {
+          "path": "/panda/Geometry/link0/link1/link2/link3/link4/joint4",
+          "type": "revolute",
+          "lower": -176.0,
+          "upper": -4.0,
+          "violated": false
+        },
+        {
+          "path": "/panda/Geometry/link0/link1/link2/link3/joint3",
+          "type": "revolute",
+          "lower": -166.0,
+          "upper": 166.0,
+          "violated": false
+        },
+        {
+          "path": "/panda/Geometry/link0/link1/link2/joint2",
+          "type": "revolute",
+          "lower": -101.0,
+          "upper": 209.9,
+          "violated": true
+        },
+        {
+          "path": "/panda/Geometry/link0/link1/joint1",
+          "type": "revolute",
+          "lower": -166.0,
+          "upper": 166.0,
+          "violated": false
+        }
+      ],
+      "masses": [
+        {
+          "path": "/panda/Geometry/link0",
+          "material": "aluminum",
+          "mass_kg": 0.6298
+        },
+        {
+          "path": "/panda/Geometry/link0/link1",
+          "material": "aluminum",
+          "mass_kg": 4.9707
+        },
+        {
+          "path": "/panda/Geometry/link0/link1/link2",
+          "material": "aluminum",
+          "mass_kg": 0.6469
+        },
+        {
+          "path": "/panda/Geometry/link0/link1/link2/link3",
+          "material": "aluminum",
+          "mass_kg": 3.2286
+        },
+        {
+          "path": "/panda/Geometry/link0/link1/link2/link3/link4",
+          "material": "aluminum",
+          "mass_kg": 3.5879
+        },
+        {
+          "path": "/panda/Geometry/link0/link1/link2/link3/link4/link5",
+          "material": "aluminum",
+          "mass_kg": 1.2259
+        },
+        {
+          "path": "/panda/Geometry/link0/link1/link2/link3/link4/link5/link6",
+          "material": "aluminum",
+          "mass_kg": 1.6666
+        },
+        {
+          "path": "/panda/Geometry/link0/link1/link2/link3/link4/link5/link6/link7",
+          "material": "aluminum",
+          "mass_kg": 0.7355
+        },
+        {
+          "path": "/panda/Geometry/link0/link1/link2/link3/link4/link5/link6/link7/hand",
+          "material": "aluminum",
+          "mass_kg": 0.73
+        },
+        {
+          "path": "/panda/Geometry/link0/link1/link2/link3/link4/link5/link6/link7/hand/left_finger",
+          "material": "hard plastic",
+          "mass_kg": 0.015
+        },
+        {
+          "path": "/panda/Geometry/link0/link1/link2/link3/link4/link5/link6/link7/hand/right_finger",
+          "material": "hard plastic",
+          "mass_kg": 0.015
+        }
+      ]
+    },
+    {
+      "name": "menagerie_ur5e",
+      "usd": "assets/menagerie/menagerie_ur5e/menagerie_ur5e_stripped.usda",
+      "description": "Stripped from menagerie_ur5e.usda \u2014 7 bodies, 6 joints (0 violated)",
+      "joints": [
+        {
+          "path": "/ur5e/Geometry/base/shoulder_link/upper_arm_link/forearm_link/wrist_1_link/wrist_2_link/wrist_3_link/wrist_3_joint",
+          "type": "revolute",
+          "lower": -360.0,
+          "upper": 360.0,
+          "violated": false
+        },
+        {
+          "path": "/ur5e/Geometry/base/shoulder_link/upper_arm_link/forearm_link/wrist_1_link/wrist_2_link/wrist_2_joint",
+          "type": "revolute",
+          "lower": -360.0,
+          "upper": 360.0,
+          "violated": false
+        },
+        {
+          "path": "/ur5e/Geometry/base/shoulder_link/upper_arm_link/forearm_link/wrist_1_link/wrist_1_joint",
+          "type": "revolute",
+          "lower": -360.0,
+          "upper": 360.0,
+          "violated": false
+        },
+        {
+          "path": "/ur5e/Geometry/base/shoulder_link/upper_arm_link/forearm_link/elbow_joint",
+          "type": "revolute",
+          "lower": -179.99,
+          "upper": 179.99,
+          "violated": false
+        },
+        {
+          "path": "/ur5e/Geometry/base/shoulder_link/upper_arm_link/shoulder_lift_joint",
+          "type": "revolute",
+          "lower": -360.0,
+          "upper": 360.0,
+          "violated": false
+        },
+        {
+          "path": "/ur5e/Geometry/base/shoulder_link/shoulder_pan_joint",
+          "type": "revolute",
+          "lower": -360.0,
+          "upper": 360.0,
+          "violated": false
+        }
+      ],
+      "masses": [
+        {
+          "path": "/ur5e/Geometry/base",
+          "material": "aluminum",
+          "mass_kg": 4.0
+        },
+        {
+          "path": "/ur5e/Geometry/base/shoulder_link",
+          "material": "aluminum",
+          "mass_kg": 3.7
+        },
+        {
+          "path": "/ur5e/Geometry/base/shoulder_link/upper_arm_link",
+          "material": "aluminum",
+          "mass_kg": 8.393
+        },
+        {
+          "path": "/ur5e/Geometry/base/shoulder_link/upper_arm_link/forearm_link",
+          "material": "aluminum",
+          "mass_kg": 2.275
+        },
+        {
+          "path": "/ur5e/Geometry/base/shoulder_link/upper_arm_link/forearm_link/wrist_1_link",
+          "material": "aluminum",
+          "mass_kg": 1.219
+        },
+        {
+          "path": "/ur5e/Geometry/base/shoulder_link/upper_arm_link/forearm_link/wrist_1_link/wrist_2_link",
+          "material": "aluminum",
+          "mass_kg": 1.219
+        },
+        {
+          "path": "/ur5e/Geometry/base/shoulder_link/upper_arm_link/forearm_link/wrist_1_link/wrist_2_link/wrist_3_link",
+          "material": "aluminum",
+          "mass_kg": 0.1889
+        }
+      ]
+    },
+    {
+      "name": "menagerie_ur5e_violated",
+      "usd": "assets/menagerie/menagerie_ur5e_violated/menagerie_ur5e_violated_stripped.usda",
+      "description": "Stripped from menagerie_ur5e.usda \u2014 7 bodies, 6 joints (1 violated)",
+      "joints": [
+        {
+          "path": "/ur5e/Geometry/base/shoulder_link/upper_arm_link/forearm_link/wrist_1_link/wrist_2_link/wrist_3_link/wrist_3_joint",
+          "type": "revolute",
+          "lower": -360.0,
+          "upper": 360.0,
+          "violated": false
+        },
+        {
+          "path": "/ur5e/Geometry/base/shoulder_link/upper_arm_link/forearm_link/wrist_1_link/wrist_2_link/wrist_2_joint",
+          "type": "revolute",
+          "lower": -360.0,
+          "upper": 360.0,
+          "violated": false
+        },
+        {
+          "path": "/ur5e/Geometry/base/shoulder_link/upper_arm_link/forearm_link/wrist_1_link/wrist_1_joint",
+          "type": "revolute",
+          "lower": -360.0,
+          "upper": 360.0,
+          "violated": false
+        },
+        {
+          "path": "/ur5e/Geometry/base/shoulder_link/upper_arm_link/forearm_link/elbow_joint",
+          "type": "revolute",
+          "lower": -179.99,
+          "upper": 179.99,
+          "violated": false
+        },
+        {
+          "path": "/ur5e/Geometry/base/shoulder_link/upper_arm_link/shoulder_lift_joint",
+          "type": "revolute",
+          "lower": -360.0,
+          "upper": 360.0,
+          "violated": false
+        },
+        {
+          "path": "/ur5e/Geometry/base/shoulder_link/shoulder_pan_joint",
+          "type": "revolute",
+          "lower": -360.0,
+          "upper": 468.9,
+          "violated": true
+        }
+      ],
+      "masses": [
+        {
+          "path": "/ur5e/Geometry/base",
+          "material": "aluminum",
+          "mass_kg": 4.0
+        },
+        {
+          "path": "/ur5e/Geometry/base/shoulder_link",
+          "material": "aluminum",
+          "mass_kg": 3.7
+        },
+        {
+          "path": "/ur5e/Geometry/base/shoulder_link/upper_arm_link",
+          "material": "aluminum",
+          "mass_kg": 8.393
+        },
+        {
+          "path": "/ur5e/Geometry/base/shoulder_link/upper_arm_link/forearm_link",
+          "material": "aluminum",
+          "mass_kg": 2.275
+        },
+        {
+          "path": "/ur5e/Geometry/base/shoulder_link/upper_arm_link/forearm_link/wrist_1_link",
+          "material": "aluminum",
+          "mass_kg": 1.219
+        },
+        {
+          "path": "/ur5e/Geometry/base/shoulder_link/upper_arm_link/forearm_link/wrist_1_link/wrist_2_link",
+          "material": "aluminum",
+          "mass_kg": 1.219
+        },
+        {
+          "path": "/ur5e/Geometry/base/shoulder_link/upper_arm_link/forearm_link/wrist_1_link/wrist_2_link/wrist_3_link",
+          "material": "aluminum",
+          "mass_kg": 0.1889
+        }
+      ]
+    },
+    {
+      "name": "menagerie_anymal_c",
+      "usd": "assets/menagerie/menagerie_anymal_c/menagerie_anymal_c_stripped.usda",
+      "description": "Stripped from menagerie_anymal_c.usda \u2014 13 bodies, 12 joints (0 violated)",
+      "joints": [
+        {
+          "path": "/anymal_c/Geometry/base/LF_HIP/LF_THIGH/LF_SHANK/LF_KFE",
+          "type": "revolute",
+          "lower": -540.0,
+          "upper": 540.0,
+          "violated": false
+        },
+        {
+          "path": "/anymal_c/Geometry/base/LF_HIP/LF_THIGH/LF_HFE",
+          "type": "revolute",
+          "lower": -540.0,
+          "upper": 540.0,
+          "violated": false
+        },
+        {
+          "path": "/anymal_c/Geometry/base/LF_HIP/LF_HAA",
+          "type": "revolute",
+          "lower": -41.25,
+          "upper": 28.07,
+          "violated": false
+        },
+        {
+          "path": "/anymal_c/Geometry/base/RF_HIP/RF_THIGH/RF_SHANK/RF_KFE",
+          "type": "revolute",
+          "lower": -540.0,
+          "upper": 540.0,
+          "violated": false
+        },
+        {
+          "path": "/anymal_c/Geometry/base/RF_HIP/RF_THIGH/RF_HFE",
+          "type": "revolute",
+          "lower": -540.0,
+          "upper": 540.0,
+          "violated": false
+        },
+        {
+          "path": "/anymal_c/Geometry/base/RF_HIP/RF_HAA",
+          "type": "revolute",
+          "lower": -28.07,
+          "upper": 41.25,
+          "violated": false
+        },
+        {
+          "path": "/anymal_c/Geometry/base/LH_HIP/LH_THIGH/LH_SHANK/LH_KFE",
+          "type": "revolute",
+          "lower": -540.0,
+          "upper": 540.0,
+          "violated": false
+        },
+        {
+          "path": "/anymal_c/Geometry/base/LH_HIP/LH_THIGH/LH_HFE",
+          "type": "revolute",
+          "lower": -540.0,
+          "upper": 540.0,
+          "violated": false
+        },
+        {
+          "path": "/anymal_c/Geometry/base/LH_HIP/LH_HAA",
+          "type": "revolute",
+          "lower": -41.25,
+          "upper": 28.07,
+          "violated": false
+        },
+        {
+          "path": "/anymal_c/Geometry/base/RH_HIP/RH_THIGH/RH_SHANK/RH_KFE",
+          "type": "revolute",
+          "lower": -540.0,
+          "upper": 540.0,
+          "violated": false
+        },
+        {
+          "path": "/anymal_c/Geometry/base/RH_HIP/RH_THIGH/RH_HFE",
+          "type": "revolute",
+          "lower": -540.0,
+          "upper": 540.0,
+          "violated": false
+        },
+        {
+          "path": "/anymal_c/Geometry/base/RH_HIP/RH_HAA",
+          "type": "revolute",
+          "lower": -28.07,
+          "upper": 41.25,
+          "violated": false
+        }
+      ],
+      "masses": [
+        {
+          "path": "/anymal_c/Geometry/base",
+          "material": "aluminum",
+          "mass_kg": 19.2035
+        },
+        {
+          "path": "/anymal_c/Geometry/base/LF_HIP",
+          "material": "aluminum",
+          "mass_kg": 2.781
+        },
+        {
+          "path": "/anymal_c/Geometry/base/LF_HIP/LF_THIGH",
+          "material": "carbon fiber",
+          "mass_kg": 3.071
+        },
+        {
+          "path": "/anymal_c/Geometry/base/LF_HIP/LF_THIGH/LF_SHANK",
+          "material": "carbon fiber",
+          "mass_kg": 0.5884
+        },
+        {
+          "path": "/anymal_c/Geometry/base/RF_HIP",
+          "material": "aluminum",
+          "mass_kg": 2.781
+        },
+        {
+          "path": "/anymal_c/Geometry/base/RF_HIP/RF_THIGH",
+          "material": "carbon fiber",
+          "mass_kg": 3.071
+        },
+        {
+          "path": "/anymal_c/Geometry/base/RF_HIP/RF_THIGH/RF_SHANK",
+          "material": "carbon fiber",
+          "mass_kg": 0.5884
+        },
+        {
+          "path": "/anymal_c/Geometry/base/LH_HIP",
+          "material": "aluminum",
+          "mass_kg": 2.781
+        },
+        {
+          "path": "/anymal_c/Geometry/base/LH_HIP/LH_THIGH",
+          "material": "carbon fiber",
+          "mass_kg": 3.071
+        },
+        {
+          "path": "/anymal_c/Geometry/base/LH_HIP/LH_THIGH/LH_SHANK",
+          "material": "carbon fiber",
+          "mass_kg": 0.5884
+        },
+        {
+          "path": "/anymal_c/Geometry/base/RH_HIP",
+          "material": "aluminum",
+          "mass_kg": 2.781
+        },
+        {
+          "path": "/anymal_c/Geometry/base/RH_HIP/RH_THIGH",
+          "material": "carbon fiber",
+          "mass_kg": 3.071
+        },
+        {
+          "path": "/anymal_c/Geometry/base/RH_HIP/RH_THIGH/RH_SHANK",
+          "material": "carbon fiber",
+          "mass_kg": 0.5884
+        }
+      ]
+    },
+    {
+      "name": "menagerie_anymal_c_violated",
+      "usd": "assets/menagerie/menagerie_anymal_c_violated/menagerie_anymal_c_violated_stripped.usda",
+      "description": "Stripped from menagerie_anymal_c.usda \u2014 13 bodies, 12 joints (1 violated)",
+      "joints": [
+        {
+          "path": "/anymal_c/Geometry/base/LF_HIP/LF_THIGH/LF_SHANK/LF_KFE",
+          "type": "revolute",
+          "lower": -540.0,
+          "upper": 540.0,
+          "violated": false
+        },
+        {
+          "path": "/anymal_c/Geometry/base/LF_HIP/LF_THIGH/LF_HFE",
+          "type": "revolute",
+          "lower": -540.0,
+          "upper": 540.0,
+          "violated": false
+        },
+        {
+          "path": "/anymal_c/Geometry/base/LF_HIP/LF_HAA",
+          "type": "revolute",
+          "lower": -41.25,
+          "upper": 28.07,
+          "violated": false
+        },
+        {
+          "path": "/anymal_c/Geometry/base/RF_HIP/RF_THIGH/RF_SHANK/RF_KFE",
+          "type": "revolute",
+          "lower": -540.0,
+          "upper": 540.0,
+          "violated": false
+        },
+        {
+          "path": "/anymal_c/Geometry/base/RF_HIP/RF_THIGH/RF_HFE",
+          "type": "revolute",
+          "lower": -540.0,
+          "upper": 540.0,
+          "violated": false
+        },
+        {
+          "path": "/anymal_c/Geometry/base/RF_HIP/RF_HAA",
+          "type": "revolute",
+          "lower": -28.07,
+          "upper": 41.25,
+          "violated": false
+        },
+        {
+          "path": "/anymal_c/Geometry/base/LH_HIP/LH_THIGH/LH_SHANK/LH_KFE",
+          "type": "revolute",
+          "lower": -540.0,
+          "upper": 540.0,
+          "violated": false
+        },
+        {
+          "path": "/anymal_c/Geometry/base/LH_HIP/LH_THIGH/LH_HFE",
+          "type": "revolute",
+          "lower": -540.0,
+          "upper": 540.0,
+          "violated": false
+        },
+        {
+          "path": "/anymal_c/Geometry/base/LH_HIP/LH_HAA",
+          "type": "revolute",
+          "lower": -41.25,
+          "upper": 28.07,
+          "violated": false
+        },
+        {
+          "path": "/anymal_c/Geometry/base/RH_HIP/RH_THIGH/RH_SHANK/RH_KFE",
+          "type": "revolute",
+          "lower": -540.0,
+          "upper": 540.0,
+          "violated": false
+        },
+        {
+          "path": "/anymal_c/Geometry/base/RH_HIP/RH_THIGH/RH_HFE",
+          "type": "revolute",
+          "lower": -540.0,
+          "upper": 648.9,
+          "violated": true
+        },
+        {
+          "path": "/anymal_c/Geometry/base/RH_HIP/RH_HAA",
+          "type": "revolute",
+          "lower": -28.07,
+          "upper": 41.25,
+          "violated": false
+        }
+      ],
+      "masses": [
+        {
+          "path": "/anymal_c/Geometry/base",
+          "material": "aluminum",
+          "mass_kg": 19.2035
+        },
+        {
+          "path": "/anymal_c/Geometry/base/LF_HIP",
+          "material": "aluminum",
+          "mass_kg": 2.781
+        },
+        {
+          "path": "/anymal_c/Geometry/base/LF_HIP/LF_THIGH",
+          "material": "carbon fiber",
+          "mass_kg": 3.071
+        },
+        {
+          "path": "/anymal_c/Geometry/base/LF_HIP/LF_THIGH/LF_SHANK",
+          "material": "carbon fiber",
+          "mass_kg": 0.5884
+        },
+        {
+          "path": "/anymal_c/Geometry/base/RF_HIP",
+          "material": "aluminum",
+          "mass_kg": 2.781
+        },
+        {
+          "path": "/anymal_c/Geometry/base/RF_HIP/RF_THIGH",
+          "material": "carbon fiber",
+          "mass_kg": 3.071
+        },
+        {
+          "path": "/anymal_c/Geometry/base/RF_HIP/RF_THIGH/RF_SHANK",
+          "material": "carbon fiber",
+          "mass_kg": 0.5884
+        },
+        {
+          "path": "/anymal_c/Geometry/base/LH_HIP",
+          "material": "aluminum",
+          "mass_kg": 2.781
+        },
+        {
+          "path": "/anymal_c/Geometry/base/LH_HIP/LH_THIGH",
+          "material": "carbon fiber",
+          "mass_kg": 3.071
+        },
+        {
+          "path": "/anymal_c/Geometry/base/LH_HIP/LH_THIGH/LH_SHANK",
+          "material": "carbon fiber",
+          "mass_kg": 0.5884
+        },
+        {
+          "path": "/anymal_c/Geometry/base/RH_HIP",
+          "material": "aluminum",
+          "mass_kg": 2.781
+        },
+        {
+          "path": "/anymal_c/Geometry/base/RH_HIP/RH_THIGH",
+          "material": "carbon fiber",
+          "mass_kg": 3.071
+        },
+        {
+          "path": "/anymal_c/Geometry/base/RH_HIP/RH_THIGH/RH_SHANK",
+          "material": "carbon fiber",
+          "mass_kg": 0.5884
+        }
+      ]
+    },
+    {
+      "name": "menagerie_fr3",
+      "usd": "assets/menagerie/menagerie_fr3/menagerie_fr3_stripped.usda",
+      "description": "Stripped from menagerie_fr3.usda \u2014 7 bodies, 7 joints (0 violated)",
+      "joints": [
+        {
+          "path": "/fr3/Geometry/base/fr3_link0/fr3_link1/fr3_link2/fr3_link3/fr3_link4/fr3_link5/fr3_link6/fr3_link7/fr3_joint7",
+          "type": "revolute",
+          "lower": -172.8,
+          "upper": 172.8,
+          "violated": false
+        },
+        {
+          "path": "/fr3/Geometry/base/fr3_link0/fr3_link1/fr3_link2/fr3_link3/fr3_link4/fr3_link5/fr3_link6/fr3_joint6",
+          "type": "revolute",
+          "lower": 31.2,
+          "upper": 258.8,
+          "violated": false
+        },
+        {
+          "path": "/fr3/Geometry/base/fr3_link0/fr3_link1/fr3_link2/fr3_link3/fr3_link4/fr3_link5/fr3_joint5",
+          "type": "revolute",
+          "lower": -160.8,
+          "upper": 160.8,
+          "violated": false
+        },
+        {
+          "path": "/fr3/Geometry/base/fr3_link0/fr3_link1/fr3_link2/fr3_link3/fr3_link4/fr3_joint4",
+          "type": "revolute",
+          "lower": -174.3,
+          "upper": -8.7,
+          "violated": false
+        },
+        {
+          "path": "/fr3/Geometry/base/fr3_link0/fr3_link1/fr3_link2/fr3_link3/fr3_joint3",
+          "type": "revolute",
+          "lower": -166.2,
+          "upper": 166.2,
+          "violated": false
+        },
+        {
+          "path": "/fr3/Geometry/base/fr3_link0/fr3_link1/fr3_link2/fr3_joint2",
+          "type": "revolute",
+          "lower": -102.2,
+          "upper": 102.2,
+          "violated": false
+        },
+        {
+          "path": "/fr3/Geometry/base/fr3_link0/fr3_link1/fr3_joint1",
+          "type": "revolute",
+          "lower": -157.2,
+          "upper": 157.2,
+          "violated": false
+        }
+      ],
+      "masses": [
+        {
+          "path": "/fr3/Geometry/base/fr3_link0/fr3_link1",
+          "material": "aluminum",
+          "mass_kg": 2.9275
+        },
+        {
+          "path": "/fr3/Geometry/base/fr3_link0/fr3_link1/fr3_link2",
+          "material": "aluminum",
+          "mass_kg": 2.9355
+        },
+        {
+          "path": "/fr3/Geometry/base/fr3_link0/fr3_link1/fr3_link2/fr3_link3",
+          "material": "aluminum",
+          "mass_kg": 2.2449
+        },
+        {
+          "path": "/fr3/Geometry/base/fr3_link0/fr3_link1/fr3_link2/fr3_link3/fr3_link4",
+          "material": "aluminum",
+          "mass_kg": 2.6156
+        },
+        {
+          "path": "/fr3/Geometry/base/fr3_link0/fr3_link1/fr3_link2/fr3_link3/fr3_link4/fr3_link5",
+          "material": "aluminum",
+          "mass_kg": 2.3271
+        },
+        {
+          "path": "/fr3/Geometry/base/fr3_link0/fr3_link1/fr3_link2/fr3_link3/fr3_link4/fr3_link5/fr3_link6",
+          "material": "aluminum",
+          "mass_kg": 1.817
+        },
+        {
+          "path": "/fr3/Geometry/base/fr3_link0/fr3_link1/fr3_link2/fr3_link3/fr3_link4/fr3_link5/fr3_link6/fr3_link7",
+          "material": "aluminum",
+          "mass_kg": 0.6271
+        }
+      ]
+    },
+    {
+      "name": "menagerie_fr3_violated",
+      "usd": "assets/menagerie/menagerie_fr3_violated/menagerie_fr3_violated_stripped.usda",
+      "description": "Stripped from menagerie_fr3.usda \u2014 7 bodies, 7 joints (1 violated)",
+      "joints": [
+        {
+          "path": "/fr3/Geometry/base/fr3_link0/fr3_link1/fr3_link2/fr3_link3/fr3_link4/fr3_link5/fr3_link6/fr3_link7/fr3_joint7",
+          "type": "revolute",
+          "lower": -172.8,
+          "upper": 172.8,
+          "violated": false
+        },
+        {
+          "path": "/fr3/Geometry/base/fr3_link0/fr3_link1/fr3_link2/fr3_link3/fr3_link4/fr3_link5/fr3_link6/fr3_joint6",
+          "type": "revolute",
+          "lower": 31.2,
+          "upper": 258.8,
+          "violated": false
+        },
+        {
+          "path": "/fr3/Geometry/base/fr3_link0/fr3_link1/fr3_link2/fr3_link3/fr3_link4/fr3_link5/fr3_joint5",
+          "type": "revolute",
+          "lower": -160.8,
+          "upper": 160.8,
+          "violated": false
+        },
+        {
+          "path": "/fr3/Geometry/base/fr3_link0/fr3_link1/fr3_link2/fr3_link3/fr3_link4/fr3_joint4",
+          "type": "revolute",
+          "lower": -174.3,
+          "upper": -8.7,
+          "violated": false
+        },
+        {
+          "path": "/fr3/Geometry/base/fr3_link0/fr3_link1/fr3_link2/fr3_link3/fr3_joint3",
+          "type": "revolute",
+          "lower": -166.2,
+          "upper": 166.2,
+          "violated": false
+        },
+        {
+          "path": "/fr3/Geometry/base/fr3_link0/fr3_link1/fr3_link2/fr3_joint2",
+          "type": "revolute",
+          "lower": -102.2,
+          "upper": 211.1,
+          "violated": true
+        },
+        {
+          "path": "/fr3/Geometry/base/fr3_link0/fr3_link1/fr3_joint1",
+          "type": "revolute",
+          "lower": -157.2,
+          "upper": 157.2,
+          "violated": false
+        }
+      ],
+      "masses": [
+        {
+          "path": "/fr3/Geometry/base/fr3_link0/fr3_link1",
+          "material": "aluminum",
+          "mass_kg": 2.9275
+        },
+        {
+          "path": "/fr3/Geometry/base/fr3_link0/fr3_link1/fr3_link2",
+          "material": "aluminum",
+          "mass_kg": 2.9355
+        },
+        {
+          "path": "/fr3/Geometry/base/fr3_link0/fr3_link1/fr3_link2/fr3_link3",
+          "material": "aluminum",
+          "mass_kg": 2.2449
+        },
+        {
+          "path": "/fr3/Geometry/base/fr3_link0/fr3_link1/fr3_link2/fr3_link3/fr3_link4",
+          "material": "aluminum",
+          "mass_kg": 2.6156
+        },
+        {
+          "path": "/fr3/Geometry/base/fr3_link0/fr3_link1/fr3_link2/fr3_link3/fr3_link4/fr3_link5",
+          "material": "aluminum",
+          "mass_kg": 2.3271
+        },
+        {
+          "path": "/fr3/Geometry/base/fr3_link0/fr3_link1/fr3_link2/fr3_link3/fr3_link4/fr3_link5/fr3_link6",
+          "material": "aluminum",
+          "mass_kg": 1.817
+        },
+        {
+          "path": "/fr3/Geometry/base/fr3_link0/fr3_link1/fr3_link2/fr3_link3/fr3_link4/fr3_link5/fr3_link6/fr3_link7",
+          "material": "aluminum",
+          "mass_kg": 0.6271
+        }
+      ]
+    },
+    {
+      "name": "menagerie_iiwa14",
+      "usd": "assets/menagerie/menagerie_iiwa14/menagerie_iiwa14_stripped.usda",
+      "description": "Stripped from menagerie_iiwa14.usda \u2014 8 bodies, 7 joints (0 violated)",
+      "joints": [
+        {
+          "path": "/iiwa14/Geometry/base/link1/link2/link3/link4/link5/link6/link7/joint7",
+          "type": "revolute",
+          "lower": -175.0,
+          "upper": 175.0,
+          "violated": false
+        },
+        {
+          "path": "/iiwa14/Geometry/base/link1/link2/link3/link4/link5/link6/joint6",
+          "type": "revolute",
+          "lower": -120.0,
+          "upper": 120.0,
+          "violated": false
+        },
+        {
+          "path": "/iiwa14/Geometry/base/link1/link2/link3/link4/link5/joint5",
+          "type": "revolute",
+          "lower": -170.0,
+          "upper": 170.0,
+          "violated": false
+        },
+        {
+          "path": "/iiwa14/Geometry/base/link1/link2/link3/link4/joint4",
+          "type": "revolute",
+          "lower": -120.0,
+          "upper": 120.0,
+          "violated": false
+        },
+        {
+          "path": "/iiwa14/Geometry/base/link1/link2/link3/joint3",
+          "type": "revolute",
+          "lower": -170.0,
+          "upper": 170.0,
+          "violated": false
+        },
+        {
+          "path": "/iiwa14/Geometry/base/link1/link2/joint2",
+          "type": "revolute",
+          "lower": -120.0,
+          "upper": 120.0,
+          "violated": false
+        },
+        {
+          "path": "/iiwa14/Geometry/base/link1/joint1",
+          "type": "revolute",
+          "lower": -170.0,
+          "upper": 170.0,
+          "violated": false
+        }
+      ],
+      "masses": [
+        {
+          "path": "/iiwa14/Geometry/base",
+          "material": "unknown",
+          "mass_kg": 5.0
+        },
+        {
+          "path": "/iiwa14/Geometry/base/link1",
+          "material": "aluminum",
+          "mass_kg": 5.76
+        },
+        {
+          "path": "/iiwa14/Geometry/base/link1/link2",
+          "material": "aluminum",
+          "mass_kg": 6.35
+        },
+        {
+          "path": "/iiwa14/Geometry/base/link1/link2/link3",
+          "material": "aluminum",
+          "mass_kg": 3.5
+        },
+        {
+          "path": "/iiwa14/Geometry/base/link1/link2/link3/link4",
+          "material": "aluminum",
+          "mass_kg": 3.5
+        },
+        {
+          "path": "/iiwa14/Geometry/base/link1/link2/link3/link4/link5",
+          "material": "aluminum",
+          "mass_kg": 3.5
+        },
+        {
+          "path": "/iiwa14/Geometry/base/link1/link2/link3/link4/link5/link6",
+          "material": "aluminum",
+          "mass_kg": 1.8
+        },
+        {
+          "path": "/iiwa14/Geometry/base/link1/link2/link3/link4/link5/link6/link7",
+          "material": "aluminum",
+          "mass_kg": 1.2
+        }
+      ]
+    },
+    {
+      "name": "menagerie_iiwa14_violated",
+      "usd": "assets/menagerie/menagerie_iiwa14_violated/menagerie_iiwa14_violated_stripped.usda",
+      "description": "Stripped from menagerie_iiwa14.usda \u2014 8 bodies, 7 joints (1 violated)",
+      "joints": [
+        {
+          "path": "/iiwa14/Geometry/base/link1/link2/link3/link4/link5/link6/link7/joint7",
+          "type": "revolute",
+          "lower": -175.0,
+          "upper": 175.0,
+          "violated": false
+        },
+        {
+          "path": "/iiwa14/Geometry/base/link1/link2/link3/link4/link5/link6/joint6",
+          "type": "revolute",
+          "lower": -120.0,
+          "upper": 120.0,
+          "violated": false
+        },
+        {
+          "path": "/iiwa14/Geometry/base/link1/link2/link3/link4/link5/joint5",
+          "type": "revolute",
+          "lower": -170.0,
+          "upper": 170.0,
+          "violated": false
+        },
+        {
+          "path": "/iiwa14/Geometry/base/link1/link2/link3/link4/joint4",
+          "type": "revolute",
+          "lower": -120.0,
+          "upper": 120.0,
+          "violated": false
+        },
+        {
+          "path": "/iiwa14/Geometry/base/link1/link2/link3/joint3",
+          "type": "revolute",
+          "lower": -170.0,
+          "upper": 170.0,
+          "violated": false
+        },
+        {
+          "path": "/iiwa14/Geometry/base/link1/link2/joint2",
+          "type": "revolute",
+          "lower": -120.0,
+          "upper": 228.9,
+          "violated": true
+        },
+        {
+          "path": "/iiwa14/Geometry/base/link1/joint1",
+          "type": "revolute",
+          "lower": -170.0,
+          "upper": 170.0,
+          "violated": false
+        }
+      ],
+      "masses": [
+        {
+          "path": "/iiwa14/Geometry/base",
+          "material": "unknown",
+          "mass_kg": 5.0
+        },
+        {
+          "path": "/iiwa14/Geometry/base/link1",
+          "material": "aluminum",
+          "mass_kg": 5.76
+        },
+        {
+          "path": "/iiwa14/Geometry/base/link1/link2",
+          "material": "aluminum",
+          "mass_kg": 6.35
+        },
+        {
+          "path": "/iiwa14/Geometry/base/link1/link2/link3",
+          "material": "aluminum",
+          "mass_kg": 3.5
+        },
+        {
+          "path": "/iiwa14/Geometry/base/link1/link2/link3/link4",
+          "material": "aluminum",
+          "mass_kg": 3.5
+        },
+        {
+          "path": "/iiwa14/Geometry/base/link1/link2/link3/link4/link5",
+          "material": "aluminum",
+          "mass_kg": 3.5
+        },
+        {
+          "path": "/iiwa14/Geometry/base/link1/link2/link3/link4/link5/link6",
+          "material": "aluminum",
+          "mass_kg": 1.8
+        },
+        {
+          "path": "/iiwa14/Geometry/base/link1/link2/link3/link4/link5/link6/link7",
+          "material": "aluminum",
+          "mass_kg": 1.2
+        }
+      ]
+    },
+    {
+      "name": "menagerie_spot",
+      "usd": "assets/menagerie/menagerie_spot/menagerie_spot_stripped.usda",
+      "description": "Stripped from menagerie_spot.usda \u2014 13 bodies, 12 joints (0 violated)",
+      "joints": [
+        {
+          "path": "/spot/Geometry/body/fl_hip/fl_uleg/fl_lleg/fl_kn",
+          "type": "revolute",
+          "lower": -160.02,
+          "upper": -14.58,
+          "violated": false
+        },
+        {
+          "path": "/spot/Geometry/body/fl_hip/fl_uleg/fl_hy",
+          "type": "revolute",
+          "lower": -51.5,
+          "upper": 131.5,
+          "violated": false
+        },
+        {
+          "path": "/spot/Geometry/body/fl_hip/fl_hx",
+          "type": "revolute",
+          "lower": -45.0,
+          "upper": 45.0,
+          "violated": false
+        },
+        {
+          "path": "/spot/Geometry/body/fr_hip/fr_uleg/fr_lleg/fr_kn",
+          "type": "revolute",
+          "lower": -160.02,
+          "upper": -14.65,
+          "violated": false
+        },
+        {
+          "path": "/spot/Geometry/body/fr_hip/fr_uleg/fr_hy",
+          "type": "revolute",
+          "lower": -51.5,
+          "upper": 128.55,
+          "violated": false
+        },
+        {
+          "path": "/spot/Geometry/body/fr_hip/fr_hx",
+          "type": "revolute",
+          "lower": -45.0,
+          "upper": 45.0,
+          "violated": false
+        },
+        {
+          "path": "/spot/Geometry/body/hl_hip/hl_uleg/hl_lleg/hl_kn",
+          "type": "revolute",
+          "lower": -160.02,
+          "upper": -14.16,
+          "violated": false
+        },
+        {
+          "path": "/spot/Geometry/body/hl_hip/hl_uleg/hl_hy",
+          "type": "revolute",
+          "lower": -51.5,
+          "upper": 131.5,
+          "violated": false
+        },
+        {
+          "path": "/spot/Geometry/body/hl_hip/hl_hx",
+          "type": "revolute",
+          "lower": -45.0,
+          "upper": 45.0,
+          "violated": false
+        },
+        {
+          "path": "/spot/Geometry/body/hr_hip/hr_uleg/hr_lleg/hr_kn",
+          "type": "revolute",
+          "lower": -160.02,
+          "upper": -14.23,
+          "violated": false
+        },
+        {
+          "path": "/spot/Geometry/body/hr_hip/hr_uleg/hr_hy",
+          "type": "revolute",
+          "lower": -51.5,
+          "upper": 131.5,
+          "violated": false
+        },
+        {
+          "path": "/spot/Geometry/body/hr_hip/hr_hx",
+          "type": "revolute",
+          "lower": -45.0,
+          "upper": 45.0,
+          "violated": false
+        }
+      ],
+      "masses": [
+        {
+          "path": "/spot/Geometry/body",
+          "material": "hard plastic",
+          "mass_kg": 32.86
+        },
+        {
+          "path": "/spot/Geometry/body/fl_hip",
+          "material": "aluminum",
+          "mass_kg": 1.68
+        },
+        {
+          "path": "/spot/Geometry/body/fl_hip/fl_uleg",
+          "material": "unknown",
+          "mass_kg": 2.34
+        },
+        {
+          "path": "/spot/Geometry/body/fl_hip/fl_uleg/fl_lleg",
+          "material": "unknown",
+          "mass_kg": 0.35
+        },
+        {
+          "path": "/spot/Geometry/body/fr_hip",
+          "material": "aluminum",
+          "mass_kg": 1.68
+        },
+        {
+          "path": "/spot/Geometry/body/fr_hip/fr_uleg",
+          "material": "unknown",
+          "mass_kg": 2.34
+        },
+        {
+          "path": "/spot/Geometry/body/fr_hip/fr_uleg/fr_lleg",
+          "material": "unknown",
+          "mass_kg": 0.35
+        },
+        {
+          "path": "/spot/Geometry/body/hl_hip",
+          "material": "aluminum",
+          "mass_kg": 1.68
+        },
+        {
+          "path": "/spot/Geometry/body/hl_hip/hl_uleg",
+          "material": "unknown",
+          "mass_kg": 2.34
+        },
+        {
+          "path": "/spot/Geometry/body/hl_hip/hl_uleg/hl_lleg",
+          "material": "unknown",
+          "mass_kg": 0.35
+        },
+        {
+          "path": "/spot/Geometry/body/hr_hip",
+          "material": "aluminum",
+          "mass_kg": 1.68
+        },
+        {
+          "path": "/spot/Geometry/body/hr_hip/hr_uleg",
+          "material": "unknown",
+          "mass_kg": 2.34
+        },
+        {
+          "path": "/spot/Geometry/body/hr_hip/hr_uleg/hr_lleg",
+          "material": "unknown",
+          "mass_kg": 0.35
+        }
+      ]
+    },
+    {
+      "name": "menagerie_spot_violated",
+      "usd": "assets/menagerie/menagerie_spot_violated/menagerie_spot_violated_stripped.usda",
+      "description": "Stripped from menagerie_spot.usda \u2014 13 bodies, 12 joints (1 violated)",
+      "joints": [
+        {
+          "path": "/spot/Geometry/body/fl_hip/fl_uleg/fl_lleg/fl_kn",
+          "type": "revolute",
+          "lower": -160.02,
+          "upper": -14.58,
+          "violated": false
+        },
+        {
+          "path": "/spot/Geometry/body/fl_hip/fl_uleg/fl_hy",
+          "type": "revolute",
+          "lower": -51.5,
+          "upper": 131.5,
+          "violated": false
+        },
+        {
+          "path": "/spot/Geometry/body/fl_hip/fl_hx",
+          "type": "revolute",
+          "lower": -45.0,
+          "upper": 45.0,
+          "violated": false
+        },
+        {
+          "path": "/spot/Geometry/body/fr_hip/fr_uleg/fr_lleg/fr_kn",
+          "type": "revolute",
+          "lower": -160.02,
+          "upper": -14.65,
+          "violated": false
+        },
+        {
+          "path": "/spot/Geometry/body/fr_hip/fr_uleg/fr_hy",
+          "type": "revolute",
+          "lower": -51.5,
+          "upper": 128.55,
+          "violated": false
+        },
+        {
+          "path": "/spot/Geometry/body/fr_hip/fr_hx",
+          "type": "revolute",
+          "lower": -45.0,
+          "upper": 45.0,
+          "violated": false
+        },
+        {
+          "path": "/spot/Geometry/body/hl_hip/hl_uleg/hl_lleg/hl_kn",
+          "type": "revolute",
+          "lower": -160.02,
+          "upper": -14.16,
+          "violated": false
+        },
+        {
+          "path": "/spot/Geometry/body/hl_hip/hl_uleg/hl_hy",
+          "type": "revolute",
+          "lower": -51.5,
+          "upper": 131.5,
+          "violated": false
+        },
+        {
+          "path": "/spot/Geometry/body/hl_hip/hl_hx",
+          "type": "revolute",
+          "lower": -45.0,
+          "upper": 45.0,
+          "violated": false
+        },
+        {
+          "path": "/spot/Geometry/body/hr_hip/hr_uleg/hr_lleg/hr_kn",
+          "type": "revolute",
+          "lower": -160.02,
+          "upper": -14.23,
+          "violated": false
+        },
+        {
+          "path": "/spot/Geometry/body/hr_hip/hr_uleg/hr_hy",
+          "type": "revolute",
+          "lower": -51.5,
+          "upper": 240.4,
+          "violated": true
+        },
+        {
+          "path": "/spot/Geometry/body/hr_hip/hr_hx",
+          "type": "revolute",
+          "lower": -45.0,
+          "upper": 45.0,
+          "violated": false
+        }
+      ],
+      "masses": [
+        {
+          "path": "/spot/Geometry/body",
+          "material": "hard plastic",
+          "mass_kg": 32.86
+        },
+        {
+          "path": "/spot/Geometry/body/fl_hip",
+          "material": "aluminum",
+          "mass_kg": 1.68
+        },
+        {
+          "path": "/spot/Geometry/body/fl_hip/fl_uleg",
+          "material": "unknown",
+          "mass_kg": 2.34
+        },
+        {
+          "path": "/spot/Geometry/body/fl_hip/fl_uleg/fl_lleg",
+          "material": "unknown",
+          "mass_kg": 0.35
+        },
+        {
+          "path": "/spot/Geometry/body/fr_hip",
+          "material": "aluminum",
+          "mass_kg": 1.68
+        },
+        {
+          "path": "/spot/Geometry/body/fr_hip/fr_uleg",
+          "material": "unknown",
+          "mass_kg": 2.34
+        },
+        {
+          "path": "/spot/Geometry/body/fr_hip/fr_uleg/fr_lleg",
+          "material": "unknown",
+          "mass_kg": 0.35
+        },
+        {
+          "path": "/spot/Geometry/body/hl_hip",
+          "material": "aluminum",
+          "mass_kg": 1.68
+        },
+        {
+          "path": "/spot/Geometry/body/hl_hip/hl_uleg",
+          "material": "unknown",
+          "mass_kg": 2.34
+        },
+        {
+          "path": "/spot/Geometry/body/hl_hip/hl_uleg/hl_lleg",
+          "material": "unknown",
+          "mass_kg": 0.35
+        },
+        {
+          "path": "/spot/Geometry/body/hr_hip",
+          "material": "aluminum",
+          "mass_kg": 1.68
+        },
+        {
+          "path": "/spot/Geometry/body/hr_hip/hr_uleg",
+          "material": "unknown",
+          "mass_kg": 2.34
+        },
+        {
+          "path": "/spot/Geometry/body/hr_hip/hr_uleg/hr_lleg",
+          "material": "unknown",
+          "mass_kg": 0.35
+        }
+      ]
+    },
+    {
+      "name": "menagerie_go2",
+      "usd": "assets/menagerie/menagerie_go2/menagerie_go2_stripped.usda",
+      "description": "Stripped from menagerie_go2.usda \u2014 13 bodies, 12 joints (0 violated)",
+      "joints": [
+        {
+          "path": "/go2/Geometry/base/FL_hip/FL_thigh/FL_calf/FL_calf_joint",
+          "type": "revolute",
+          "lower": -156.0,
+          "upper": -48.0,
+          "violated": false
+        },
+        {
+          "path": "/go2/Geometry/base/FL_hip/FL_thigh/FL_thigh_joint",
+          "type": "revolute",
+          "lower": -90.0,
+          "upper": 200.0,
+          "violated": false
+        },
+        {
+          "path": "/go2/Geometry/base/FL_hip/FL_hip_joint",
+          "type": "revolute",
+          "lower": -60.0,
+          "upper": 60.0,
+          "violated": false
+        },
+        {
+          "path": "/go2/Geometry/base/FR_hip/FR_thigh/FR_calf/FR_calf_joint",
+          "type": "revolute",
+          "lower": -156.0,
+          "upper": -48.0,
+          "violated": false
+        },
+        {
+          "path": "/go2/Geometry/base/FR_hip/FR_thigh/FR_thigh_joint",
+          "type": "revolute",
+          "lower": -90.0,
+          "upper": 200.0,
+          "violated": false
+        },
+        {
+          "path": "/go2/Geometry/base/FR_hip/FR_hip_joint",
+          "type": "revolute",
+          "lower": -60.0,
+          "upper": 60.0,
+          "violated": false
+        },
+        {
+          "path": "/go2/Geometry/base/RL_hip/RL_thigh/RL_calf/RL_calf_joint",
+          "type": "revolute",
+          "lower": -156.0,
+          "upper": -48.0,
+          "violated": false
+        },
+        {
+          "path": "/go2/Geometry/base/RL_hip/RL_thigh/RL_thigh_joint",
+          "type": "revolute",
+          "lower": -30.0,
+          "upper": 260.0,
+          "violated": false
+        },
+        {
+          "path": "/go2/Geometry/base/RL_hip/RL_hip_joint",
+          "type": "revolute",
+          "lower": -60.0,
+          "upper": 60.0,
+          "violated": false
+        },
+        {
+          "path": "/go2/Geometry/base/RR_hip/RR_thigh/RR_calf/RR_calf_joint",
+          "type": "revolute",
+          "lower": -156.0,
+          "upper": -48.0,
+          "violated": false
+        },
+        {
+          "path": "/go2/Geometry/base/RR_hip/RR_thigh/RR_thigh_joint",
+          "type": "revolute",
+          "lower": -30.0,
+          "upper": 260.0,
+          "violated": false
+        },
+        {
+          "path": "/go2/Geometry/base/RR_hip/RR_hip_joint",
+          "type": "revolute",
+          "lower": -60.0,
+          "upper": 60.0,
+          "violated": false
+        }
+      ],
+      "masses": [
+        {
+          "path": "/go2/Geometry/base",
+          "material": "unknown",
+          "mass_kg": 6.921
+        },
+        {
+          "path": "/go2/Geometry/base/FL_hip",
+          "material": "aluminum",
+          "mass_kg": 0.678
+        },
+        {
+          "path": "/go2/Geometry/base/FL_hip/FL_thigh",
+          "material": "aluminum",
+          "mass_kg": 1.152
+        },
+        {
+          "path": "/go2/Geometry/base/FL_hip/FL_thigh/FL_calf",
+          "material": "aluminum",
+          "mass_kg": 0.2414
+        },
+        {
+          "path": "/go2/Geometry/base/FR_hip",
+          "material": "aluminum",
+          "mass_kg": 0.678
+        },
+        {
+          "path": "/go2/Geometry/base/FR_hip/FR_thigh",
+          "material": "aluminum",
+          "mass_kg": 1.152
+        },
+        {
+          "path": "/go2/Geometry/base/FR_hip/FR_thigh/FR_calf",
+          "material": "aluminum",
+          "mass_kg": 0.2414
+        },
+        {
+          "path": "/go2/Geometry/base/RL_hip",
+          "material": "aluminum",
+          "mass_kg": 0.678
+        },
+        {
+          "path": "/go2/Geometry/base/RL_hip/RL_thigh",
+          "material": "aluminum",
+          "mass_kg": 1.152
+        },
+        {
+          "path": "/go2/Geometry/base/RL_hip/RL_thigh/RL_calf",
+          "material": "aluminum",
+          "mass_kg": 0.2414
+        },
+        {
+          "path": "/go2/Geometry/base/RR_hip",
+          "material": "aluminum",
+          "mass_kg": 0.678
+        },
+        {
+          "path": "/go2/Geometry/base/RR_hip/RR_thigh",
+          "material": "aluminum",
+          "mass_kg": 1.152
+        },
+        {
+          "path": "/go2/Geometry/base/RR_hip/RR_thigh/RR_calf",
+          "material": "aluminum",
+          "mass_kg": 0.2414
+        }
+      ]
+    },
+    {
+      "name": "menagerie_go2_violated",
+      "usd": "assets/menagerie/menagerie_go2_violated/menagerie_go2_violated_stripped.usda",
+      "description": "Stripped from menagerie_go2.usda \u2014 13 bodies, 12 joints (1 violated)",
+      "joints": [
+        {
+          "path": "/go2/Geometry/base/FL_hip/FL_thigh/FL_calf/FL_calf_joint",
+          "type": "revolute",
+          "lower": -156.0,
+          "upper": -48.0,
+          "violated": false
+        },
+        {
+          "path": "/go2/Geometry/base/FL_hip/FL_thigh/FL_thigh_joint",
+          "type": "revolute",
+          "lower": -90.0,
+          "upper": 200.0,
+          "violated": false
+        },
+        {
+          "path": "/go2/Geometry/base/FL_hip/FL_hip_joint",
+          "type": "revolute",
+          "lower": -60.0,
+          "upper": 60.0,
+          "violated": false
+        },
+        {
+          "path": "/go2/Geometry/base/FR_hip/FR_thigh/FR_calf/FR_calf_joint",
+          "type": "revolute",
+          "lower": -156.0,
+          "upper": -48.0,
+          "violated": false
+        },
+        {
+          "path": "/go2/Geometry/base/FR_hip/FR_thigh/FR_thigh_joint",
+          "type": "revolute",
+          "lower": -90.0,
+          "upper": 200.0,
+          "violated": false
+        },
+        {
+          "path": "/go2/Geometry/base/FR_hip/FR_hip_joint",
+          "type": "revolute",
+          "lower": -60.0,
+          "upper": 60.0,
+          "violated": false
+        },
+        {
+          "path": "/go2/Geometry/base/RL_hip/RL_thigh/RL_calf/RL_calf_joint",
+          "type": "revolute",
+          "lower": -156.0,
+          "upper": -48.0,
+          "violated": false
+        },
+        {
+          "path": "/go2/Geometry/base/RL_hip/RL_thigh/RL_thigh_joint",
+          "type": "revolute",
+          "lower": -30.0,
+          "upper": 260.0,
+          "violated": false
+        },
+        {
+          "path": "/go2/Geometry/base/RL_hip/RL_hip_joint",
+          "type": "revolute",
+          "lower": -60.0,
+          "upper": 60.0,
+          "violated": false
+        },
+        {
+          "path": "/go2/Geometry/base/RR_hip/RR_thigh/RR_calf/RR_calf_joint",
+          "type": "revolute",
+          "lower": -156.0,
+          "upper": -48.0,
+          "violated": false
+        },
+        {
+          "path": "/go2/Geometry/base/RR_hip/RR_thigh/RR_thigh_joint",
+          "type": "revolute",
+          "lower": -30.0,
+          "upper": 368.9,
+          "violated": true
+        },
+        {
+          "path": "/go2/Geometry/base/RR_hip/RR_hip_joint",
+          "type": "revolute",
+          "lower": -60.0,
+          "upper": 60.0,
+          "violated": false
+        }
+      ],
+      "masses": [
+        {
+          "path": "/go2/Geometry/base",
+          "material": "unknown",
+          "mass_kg": 6.921
+        },
+        {
+          "path": "/go2/Geometry/base/FL_hip",
+          "material": "aluminum",
+          "mass_kg": 0.678
+        },
+        {
+          "path": "/go2/Geometry/base/FL_hip/FL_thigh",
+          "material": "aluminum",
+          "mass_kg": 1.152
+        },
+        {
+          "path": "/go2/Geometry/base/FL_hip/FL_thigh/FL_calf",
+          "material": "aluminum",
+          "mass_kg": 0.2414
+        },
+        {
+          "path": "/go2/Geometry/base/FR_hip",
+          "material": "aluminum",
+          "mass_kg": 0.678
+        },
+        {
+          "path": "/go2/Geometry/base/FR_hip/FR_thigh",
+          "material": "aluminum",
+          "mass_kg": 1.152
+        },
+        {
+          "path": "/go2/Geometry/base/FR_hip/FR_thigh/FR_calf",
+          "material": "aluminum",
+          "mass_kg": 0.2414
+        },
+        {
+          "path": "/go2/Geometry/base/RL_hip",
+          "material": "aluminum",
+          "mass_kg": 0.678
+        },
+        {
+          "path": "/go2/Geometry/base/RL_hip/RL_thigh",
+          "material": "aluminum",
+          "mass_kg": 1.152
+        },
+        {
+          "path": "/go2/Geometry/base/RL_hip/RL_thigh/RL_calf",
+          "material": "aluminum",
+          "mass_kg": 0.2414
+        },
+        {
+          "path": "/go2/Geometry/base/RR_hip",
+          "material": "aluminum",
+          "mass_kg": 0.678
+        },
+        {
+          "path": "/go2/Geometry/base/RR_hip/RR_thigh",
+          "material": "aluminum",
+          "mass_kg": 1.152
+        },
+        {
+          "path": "/go2/Geometry/base/RR_hip/RR_thigh/RR_calf",
+          "material": "aluminum",
+          "mass_kg": 0.2414
+        }
+      ]
+    },
+    {
+      "name": "menagerie_h1",
+      "usd": "assets/menagerie/menagerie_h1/menagerie_h1_stripped.usda",
+      "description": "Stripped from menagerie_h1.usda \u2014 20 bodies, 19 joints (0 violated)",
+      "joints": [
+        {
+          "path": "/h1/Geometry/pelvis/left_hip_yaw_link/left_hip_roll_link/left_hip_pitch_link/left_knee_link/left_ankle_link/left_ankle",
+          "type": "revolute",
+          "lower": -49.85,
+          "upper": 29.79,
+          "violated": false
+        },
+        {
+          "path": "/h1/Geometry/pelvis/left_hip_yaw_link/left_hip_roll_link/left_hip_pitch_link/left_knee_link/left_knee",
+          "type": "revolute",
+          "lower": -14.9,
+          "upper": 117.46,
+          "violated": false
+        },
+        {
+          "path": "/h1/Geometry/pelvis/left_hip_yaw_link/left_hip_roll_link/left_hip_pitch_link/left_hip_pitch",
+          "type": "revolute",
+          "lower": -89.95,
+          "upper": 89.95,
+          "violated": false
+        },
+        {
+          "path": "/h1/Geometry/pelvis/left_hip_yaw_link/left_hip_roll_link/left_hip_roll",
+          "type": "revolute",
+          "lower": -24.64,
+          "upper": 24.64,
+          "violated": false
+        },
+        {
+          "path": "/h1/Geometry/pelvis/left_hip_yaw_link/left_hip_yaw",
+          "type": "revolute",
+          "lower": -24.64,
+          "upper": 24.64,
+          "violated": false
+        },
+        {
+          "path": "/h1/Geometry/pelvis/right_hip_yaw_link/right_hip_roll_link/right_hip_pitch_link/right_knee_link/right_ankle_link/right_ankle",
+          "type": "revolute",
+          "lower": -49.85,
+          "upper": 29.79,
+          "violated": false
+        },
+        {
+          "path": "/h1/Geometry/pelvis/right_hip_yaw_link/right_hip_roll_link/right_hip_pitch_link/right_knee_link/right_knee",
+          "type": "revolute",
+          "lower": -14.9,
+          "upper": 117.46,
+          "violated": false
+        },
+        {
+          "path": "/h1/Geometry/pelvis/right_hip_yaw_link/right_hip_roll_link/right_hip_pitch_link/right_hip_pitch",
+          "type": "revolute",
+          "lower": -89.95,
+          "upper": 89.95,
+          "violated": false
+        },
+        {
+          "path": "/h1/Geometry/pelvis/right_hip_yaw_link/right_hip_roll_link/right_hip_roll",
+          "type": "revolute",
+          "lower": -24.64,
+          "upper": 24.64,
+          "violated": false
+        },
+        {
+          "path": "/h1/Geometry/pelvis/right_hip_yaw_link/right_hip_yaw",
+          "type": "revolute",
+          "lower": -24.64,
+          "upper": 24.64,
+          "violated": false
+        },
+        {
+          "path": "/h1/Geometry/pelvis/torso_link/left_shoulder_pitch_link/left_shoulder_roll_link/left_shoulder_yaw_link/left_elbow_link/left_elbow",
+          "type": "revolute",
+          "lower": -71.62,
+          "upper": 149.54,
+          "violated": false
+        },
+        {
+          "path": "/h1/Geometry/pelvis/torso_link/left_shoulder_pitch_link/left_shoulder_roll_link/left_shoulder_yaw_link/left_shoulder_yaw",
+          "type": "revolute",
+          "lower": -74.48,
+          "upper": 254.97,
+          "violated": false
+        },
+        {
+          "path": "/h1/Geometry/pelvis/torso_link/left_shoulder_pitch_link/left_shoulder_roll_link/left_shoulder_roll",
+          "type": "revolute",
+          "lower": -19.48,
+          "upper": 178.19,
+          "violated": false
+        },
+        {
+          "path": "/h1/Geometry/pelvis/torso_link/left_shoulder_pitch_link/left_shoulder_pitch",
+          "type": "revolute",
+          "lower": -164.44,
+          "upper": 164.44,
+          "violated": false
+        },
+        {
+          "path": "/h1/Geometry/pelvis/torso_link/right_shoulder_pitch_link/right_shoulder_roll_link/right_shoulder_yaw_link/right_elbow_link/right_elbow",
+          "type": "revolute",
+          "lower": -71.62,
+          "upper": 149.54,
+          "violated": false
+        },
+        {
+          "path": "/h1/Geometry/pelvis/torso_link/right_shoulder_pitch_link/right_shoulder_roll_link/right_shoulder_yaw_link/right_shoulder_yaw",
+          "type": "revolute",
+          "lower": -254.97,
+          "upper": 74.48,
+          "violated": false
+        },
+        {
+          "path": "/h1/Geometry/pelvis/torso_link/right_shoulder_pitch_link/right_shoulder_roll_link/right_shoulder_roll",
+          "type": "revolute",
+          "lower": -178.19,
+          "upper": 19.48,
+          "violated": false
+        },
+        {
+          "path": "/h1/Geometry/pelvis/torso_link/right_shoulder_pitch_link/right_shoulder_pitch",
+          "type": "revolute",
+          "lower": -164.44,
+          "upper": 164.44,
+          "violated": false
+        },
+        {
+          "path": "/h1/Geometry/pelvis/torso_link/torso_1",
+          "type": "revolute",
+          "lower": -134.65,
+          "upper": 134.65,
+          "violated": false
+        }
+      ],
+      "masses": [
+        {
+          "path": "/h1/Geometry/pelvis",
+          "material": "aluminum",
+          "mass_kg": 5.39
+        },
+        {
+          "path": "/h1/Geometry/pelvis/left_hip_yaw_link",
+          "material": "aluminum",
+          "mass_kg": 2.244
+        },
+        {
+          "path": "/h1/Geometry/pelvis/left_hip_yaw_link/left_hip_roll_link",
+          "material": "aluminum",
+          "mass_kg": 2.232
+        },
+        {
+          "path": "/h1/Geometry/pelvis/left_hip_yaw_link/left_hip_roll_link/left_hip_pitch_link",
+          "material": "aluminum",
+          "mass_kg": 4.152
+        },
+        {
+          "path": "/h1/Geometry/pelvis/left_hip_yaw_link/left_hip_roll_link/left_hip_pitch_link/left_knee_link",
+          "material": "unknown",
+          "mass_kg": 1.721
+        },
+        {
+          "path": "/h1/Geometry/pelvis/left_hip_yaw_link/left_hip_roll_link/left_hip_pitch_link/left_knee_link/left_ankle_link",
+          "material": "aluminum",
+          "mass_kg": 0.446
+        },
+        {
+          "path": "/h1/Geometry/pelvis/right_hip_yaw_link",
+          "material": "aluminum",
+          "mass_kg": 2.244
+        },
+        {
+          "path": "/h1/Geometry/pelvis/right_hip_yaw_link/right_hip_roll_link",
+          "material": "aluminum",
+          "mass_kg": 2.232
+        },
+        {
+          "path": "/h1/Geometry/pelvis/right_hip_yaw_link/right_hip_roll_link/right_hip_pitch_link",
+          "material": "aluminum",
+          "mass_kg": 4.152
+        },
+        {
+          "path": "/h1/Geometry/pelvis/right_hip_yaw_link/right_hip_roll_link/right_hip_pitch_link/right_knee_link",
+          "material": "unknown",
+          "mass_kg": 1.721
+        },
+        {
+          "path": "/h1/Geometry/pelvis/right_hip_yaw_link/right_hip_roll_link/right_hip_pitch_link/right_knee_link/right_ankle_link",
+          "material": "aluminum",
+          "mass_kg": 0.446
+        },
+        {
+          "path": "/h1/Geometry/pelvis/torso_link",
+          "material": "aluminum",
+          "mass_kg": 17.789
+        },
+        {
+          "path": "/h1/Geometry/pelvis/torso_link/left_shoulder_pitch_link",
+          "material": "aluminum",
+          "mass_kg": 1.033
+        },
+        {
+          "path": "/h1/Geometry/pelvis/torso_link/left_shoulder_pitch_link/left_shoulder_roll_link",
+          "material": "aluminum",
+          "mass_kg": 0.793
+        },
+        {
+          "path": "/h1/Geometry/pelvis/torso_link/left_shoulder_pitch_link/left_shoulder_roll_link/left_shoulder_yaw_link",
+          "material": "aluminum",
+          "mass_kg": 0.839
+        },
+        {
+          "path": "/h1/Geometry/pelvis/torso_link/left_shoulder_pitch_link/left_shoulder_roll_link/left_shoulder_yaw_link/left_elbow_link",
+          "material": "aluminum",
+          "mass_kg": 0.669
+        },
+        {
+          "path": "/h1/Geometry/pelvis/torso_link/right_shoulder_pitch_link",
+          "material": "aluminum",
+          "mass_kg": 1.033
+        },
+        {
+          "path": "/h1/Geometry/pelvis/torso_link/right_shoulder_pitch_link/right_shoulder_roll_link",
+          "material": "aluminum",
+          "mass_kg": 0.793
+        },
+        {
+          "path": "/h1/Geometry/pelvis/torso_link/right_shoulder_pitch_link/right_shoulder_roll_link/right_shoulder_yaw_link",
+          "material": "aluminum",
+          "mass_kg": 0.839
+        },
+        {
+          "path": "/h1/Geometry/pelvis/torso_link/right_shoulder_pitch_link/right_shoulder_roll_link/right_shoulder_yaw_link/right_elbow_link",
+          "material": "aluminum",
+          "mass_kg": 0.669
+        }
+      ]
+    },
+    {
+      "name": "menagerie_h1_violated",
+      "usd": "assets/menagerie/menagerie_h1_violated/menagerie_h1_violated_stripped.usda",
+      "description": "Stripped from menagerie_h1.usda \u2014 20 bodies, 19 joints (1 violated)",
+      "joints": [
+        {
+          "path": "/h1/Geometry/pelvis/left_hip_yaw_link/left_hip_roll_link/left_hip_pitch_link/left_knee_link/left_ankle_link/left_ankle",
+          "type": "revolute",
+          "lower": -49.85,
+          "upper": 29.79,
+          "violated": false
+        },
+        {
+          "path": "/h1/Geometry/pelvis/left_hip_yaw_link/left_hip_roll_link/left_hip_pitch_link/left_knee_link/left_knee",
+          "type": "revolute",
+          "lower": -14.9,
+          "upper": 117.46,
+          "violated": false
+        },
+        {
+          "path": "/h1/Geometry/pelvis/left_hip_yaw_link/left_hip_roll_link/left_hip_pitch_link/left_hip_pitch",
+          "type": "revolute",
+          "lower": -89.95,
+          "upper": 89.95,
+          "violated": false
+        },
+        {
+          "path": "/h1/Geometry/pelvis/left_hip_yaw_link/left_hip_roll_link/left_hip_roll",
+          "type": "revolute",
+          "lower": -24.64,
+          "upper": 126.6,
+          "violated": true
+        },
+        {
+          "path": "/h1/Geometry/pelvis/left_hip_yaw_link/left_hip_yaw",
+          "type": "revolute",
+          "lower": -24.64,
+          "upper": 24.64,
+          "violated": false
+        },
+        {
+          "path": "/h1/Geometry/pelvis/right_hip_yaw_link/right_hip_roll_link/right_hip_pitch_link/right_knee_link/right_ankle_link/right_ankle",
+          "type": "revolute",
+          "lower": -49.85,
+          "upper": 29.79,
+          "violated": false
+        },
+        {
+          "path": "/h1/Geometry/pelvis/right_hip_yaw_link/right_hip_roll_link/right_hip_pitch_link/right_knee_link/right_knee",
+          "type": "revolute",
+          "lower": -14.9,
+          "upper": 117.46,
+          "violated": false
+        },
+        {
+          "path": "/h1/Geometry/pelvis/right_hip_yaw_link/right_hip_roll_link/right_hip_pitch_link/right_hip_pitch",
+          "type": "revolute",
+          "lower": -89.95,
+          "upper": 89.95,
+          "violated": false
+        },
+        {
+          "path": "/h1/Geometry/pelvis/right_hip_yaw_link/right_hip_roll_link/right_hip_roll",
+          "type": "revolute",
+          "lower": -24.64,
+          "upper": 24.64,
+          "violated": false
+        },
+        {
+          "path": "/h1/Geometry/pelvis/right_hip_yaw_link/right_hip_yaw",
+          "type": "revolute",
+          "lower": -24.64,
+          "upper": 24.64,
+          "violated": false
+        },
+        {
+          "path": "/h1/Geometry/pelvis/torso_link/left_shoulder_pitch_link/left_shoulder_roll_link/left_shoulder_yaw_link/left_elbow_link/left_elbow",
+          "type": "revolute",
+          "lower": -71.62,
+          "upper": 149.54,
+          "violated": false
+        },
+        {
+          "path": "/h1/Geometry/pelvis/torso_link/left_shoulder_pitch_link/left_shoulder_roll_link/left_shoulder_yaw_link/left_shoulder_yaw",
+          "type": "revolute",
+          "lower": -74.48,
+          "upper": 254.97,
+          "violated": false
+        },
+        {
+          "path": "/h1/Geometry/pelvis/torso_link/left_shoulder_pitch_link/left_shoulder_roll_link/left_shoulder_roll",
+          "type": "revolute",
+          "lower": -19.48,
+          "upper": 178.19,
+          "violated": false
+        },
+        {
+          "path": "/h1/Geometry/pelvis/torso_link/left_shoulder_pitch_link/left_shoulder_pitch",
+          "type": "revolute",
+          "lower": -164.44,
+          "upper": 164.44,
+          "violated": false
+        },
+        {
+          "path": "/h1/Geometry/pelvis/torso_link/right_shoulder_pitch_link/right_shoulder_roll_link/right_shoulder_yaw_link/right_elbow_link/right_elbow",
+          "type": "revolute",
+          "lower": -71.62,
+          "upper": 149.54,
+          "violated": false
+        },
+        {
+          "path": "/h1/Geometry/pelvis/torso_link/right_shoulder_pitch_link/right_shoulder_roll_link/right_shoulder_yaw_link/right_shoulder_yaw",
+          "type": "revolute",
+          "lower": -254.97,
+          "upper": 74.48,
+          "violated": false
+        },
+        {
+          "path": "/h1/Geometry/pelvis/torso_link/right_shoulder_pitch_link/right_shoulder_roll_link/right_shoulder_roll",
+          "type": "revolute",
+          "lower": -178.19,
+          "upper": 19.48,
+          "violated": false
+        },
+        {
+          "path": "/h1/Geometry/pelvis/torso_link/right_shoulder_pitch_link/right_shoulder_pitch",
+          "type": "revolute",
+          "lower": -164.44,
+          "upper": 164.44,
+          "violated": false
+        },
+        {
+          "path": "/h1/Geometry/pelvis/torso_link/torso_1",
+          "type": "revolute",
+          "lower": -134.65,
+          "upper": 134.65,
+          "violated": false
+        }
+      ],
+      "masses": [
+        {
+          "path": "/h1/Geometry/pelvis",
+          "material": "aluminum",
+          "mass_kg": 5.39
+        },
+        {
+          "path": "/h1/Geometry/pelvis/left_hip_yaw_link",
+          "material": "aluminum",
+          "mass_kg": 2.244
+        },
+        {
+          "path": "/h1/Geometry/pelvis/left_hip_yaw_link/left_hip_roll_link",
+          "material": "aluminum",
+          "mass_kg": 2.232
+        },
+        {
+          "path": "/h1/Geometry/pelvis/left_hip_yaw_link/left_hip_roll_link/left_hip_pitch_link",
+          "material": "aluminum",
+          "mass_kg": 4.152
+        },
+        {
+          "path": "/h1/Geometry/pelvis/left_hip_yaw_link/left_hip_roll_link/left_hip_pitch_link/left_knee_link",
+          "material": "unknown",
+          "mass_kg": 1.721
+        },
+        {
+          "path": "/h1/Geometry/pelvis/left_hip_yaw_link/left_hip_roll_link/left_hip_pitch_link/left_knee_link/left_ankle_link",
+          "material": "aluminum",
+          "mass_kg": 0.446
+        },
+        {
+          "path": "/h1/Geometry/pelvis/right_hip_yaw_link",
+          "material": "aluminum",
+          "mass_kg": 2.244
+        },
+        {
+          "path": "/h1/Geometry/pelvis/right_hip_yaw_link/right_hip_roll_link",
+          "material": "aluminum",
+          "mass_kg": 2.232
+        },
+        {
+          "path": "/h1/Geometry/pelvis/right_hip_yaw_link/right_hip_roll_link/right_hip_pitch_link",
+          "material": "aluminum",
+          "mass_kg": 4.152
+        },
+        {
+          "path": "/h1/Geometry/pelvis/right_hip_yaw_link/right_hip_roll_link/right_hip_pitch_link/right_knee_link",
+          "material": "unknown",
+          "mass_kg": 1.721
+        },
+        {
+          "path": "/h1/Geometry/pelvis/right_hip_yaw_link/right_hip_roll_link/right_hip_pitch_link/right_knee_link/right_ankle_link",
+          "material": "aluminum",
+          "mass_kg": 0.446
+        },
+        {
+          "path": "/h1/Geometry/pelvis/torso_link",
+          "material": "aluminum",
+          "mass_kg": 17.789
+        },
+        {
+          "path": "/h1/Geometry/pelvis/torso_link/left_shoulder_pitch_link",
+          "material": "aluminum",
+          "mass_kg": 1.033
+        },
+        {
+          "path": "/h1/Geometry/pelvis/torso_link/left_shoulder_pitch_link/left_shoulder_roll_link",
+          "material": "aluminum",
+          "mass_kg": 0.793
+        },
+        {
+          "path": "/h1/Geometry/pelvis/torso_link/left_shoulder_pitch_link/left_shoulder_roll_link/left_shoulder_yaw_link",
+          "material": "aluminum",
+          "mass_kg": 0.839
+        },
+        {
+          "path": "/h1/Geometry/pelvis/torso_link/left_shoulder_pitch_link/left_shoulder_roll_link/left_shoulder_yaw_link/left_elbow_link",
+          "material": "aluminum",
+          "mass_kg": 0.669
+        },
+        {
+          "path": "/h1/Geometry/pelvis/torso_link/right_shoulder_pitch_link",
+          "material": "aluminum",
+          "mass_kg": 1.033
+        },
+        {
+          "path": "/h1/Geometry/pelvis/torso_link/right_shoulder_pitch_link/right_shoulder_roll_link",
+          "material": "aluminum",
+          "mass_kg": 0.793
+        },
+        {
+          "path": "/h1/Geometry/pelvis/torso_link/right_shoulder_pitch_link/right_shoulder_roll_link/right_shoulder_yaw_link",
+          "material": "aluminum",
+          "mass_kg": 0.839
+        },
+        {
+          "path": "/h1/Geometry/pelvis/torso_link/right_shoulder_pitch_link/right_shoulder_roll_link/right_shoulder_yaw_link/right_elbow_link",
+          "material": "aluminum",
+          "mass_kg": 0.669
+        }
+      ]
+    },
+    {
+      "name": "menagerie_go1",
+      "usd": "assets/menagerie/menagerie_go1/menagerie_go1_stripped.usda",
+      "description": "Stripped from menagerie_go1.usda \u2014 13 bodies, 12 joints (0 violated)",
+      "joints": [
+        {
+          "path": "/go1/Geometry/trunk/FR_hip/FR_thigh/FR_calf/FR_calf_joint",
+          "type": "revolute",
+          "lower": -161.46,
+          "upper": -50.88,
+          "violated": false
+        },
+        {
+          "path": "/go1/Geometry/trunk/FR_hip/FR_thigh/FR_thigh_joint",
+          "type": "revolute",
+          "lower": -39.3,
+          "upper": 257.89,
+          "violated": false
+        },
+        {
+          "path": "/go1/Geometry/trunk/FR_hip/FR_hip_joint",
+          "type": "revolute",
+          "lower": -49.45,
+          "upper": 49.45,
+          "violated": false
+        },
+        {
+          "path": "/go1/Geometry/trunk/FL_hip/FL_thigh/FL_calf/FL_calf_joint",
+          "type": "revolute",
+          "lower": -161.46,
+          "upper": -50.88,
+          "violated": false
+        },
+        {
+          "path": "/go1/Geometry/trunk/FL_hip/FL_thigh/FL_thigh_joint",
+          "type": "revolute",
+          "lower": -39.3,
+          "upper": 257.89,
+          "violated": false
+        },
+        {
+          "path": "/go1/Geometry/trunk/FL_hip/FL_hip_joint",
+          "type": "revolute",
+          "lower": -49.45,
+          "upper": 49.45,
+          "violated": false
+        },
+        {
+          "path": "/go1/Geometry/trunk/RR_hip/RR_thigh/RR_calf/RR_calf_joint",
+          "type": "revolute",
+          "lower": -161.46,
+          "upper": -50.88,
+          "violated": false
+        },
+        {
+          "path": "/go1/Geometry/trunk/RR_hip/RR_thigh/RR_thigh_joint",
+          "type": "revolute",
+          "lower": -39.3,
+          "upper": 257.89,
+          "violated": false
+        },
+        {
+          "path": "/go1/Geometry/trunk/RR_hip/RR_hip_joint",
+          "type": "revolute",
+          "lower": -49.45,
+          "upper": 49.45,
+          "violated": false
+        },
+        {
+          "path": "/go1/Geometry/trunk/RL_hip/RL_thigh/RL_calf/RL_calf_joint",
+          "type": "revolute",
+          "lower": -161.46,
+          "upper": -50.88,
+          "violated": false
+        },
+        {
+          "path": "/go1/Geometry/trunk/RL_hip/RL_thigh/RL_thigh_joint",
+          "type": "revolute",
+          "lower": -39.3,
+          "upper": 257.89,
+          "violated": false
+        },
+        {
+          "path": "/go1/Geometry/trunk/RL_hip/RL_hip_joint",
+          "type": "revolute",
+          "lower": -49.45,
+          "upper": 49.45,
+          "violated": false
+        }
+      ],
+      "masses": [
+        {
+          "path": "/go1/Geometry/trunk",
+          "material": "aluminum",
+          "mass_kg": 5.204
+        },
+        {
+          "path": "/go1/Geometry/trunk/FR_hip",
+          "material": "aluminum",
+          "mass_kg": 0.68
+        },
+        {
+          "path": "/go1/Geometry/trunk/FR_hip/FR_thigh",
+          "material": "aluminum",
+          "mass_kg": 1.009
+        },
+        {
+          "path": "/go1/Geometry/trunk/FR_hip/FR_thigh/FR_calf",
+          "material": "aluminum",
+          "mass_kg": 0.1959
+        },
+        {
+          "path": "/go1/Geometry/trunk/FL_hip",
+          "material": "aluminum",
+          "mass_kg": 0.68
+        },
+        {
+          "path": "/go1/Geometry/trunk/FL_hip/FL_thigh",
+          "material": "aluminum",
+          "mass_kg": 1.009
+        },
+        {
+          "path": "/go1/Geometry/trunk/FL_hip/FL_thigh/FL_calf",
+          "material": "aluminum",
+          "mass_kg": 0.1959
+        },
+        {
+          "path": "/go1/Geometry/trunk/RR_hip",
+          "material": "aluminum",
+          "mass_kg": 0.68
+        },
+        {
+          "path": "/go1/Geometry/trunk/RR_hip/RR_thigh",
+          "material": "aluminum",
+          "mass_kg": 1.009
+        },
+        {
+          "path": "/go1/Geometry/trunk/RR_hip/RR_thigh/RR_calf",
+          "material": "aluminum",
+          "mass_kg": 0.1959
+        },
+        {
+          "path": "/go1/Geometry/trunk/RL_hip",
+          "material": "aluminum",
+          "mass_kg": 0.68
+        },
+        {
+          "path": "/go1/Geometry/trunk/RL_hip/RL_thigh",
+          "material": "aluminum",
+          "mass_kg": 1.009
+        },
+        {
+          "path": "/go1/Geometry/trunk/RL_hip/RL_thigh/RL_calf",
+          "material": "aluminum",
+          "mass_kg": 0.1959
+        }
+      ]
+    },
+    {
+      "name": "menagerie_go1_violated",
+      "usd": "assets/menagerie/menagerie_go1_violated/menagerie_go1_violated_stripped.usda",
+      "description": "Stripped from menagerie_go1.usda \u2014 13 bodies, 12 joints (1 violated)",
+      "joints": [
+        {
+          "path": "/go1/Geometry/trunk/FR_hip/FR_thigh/FR_calf/FR_calf_joint",
+          "type": "revolute",
+          "lower": -161.46,
+          "upper": -50.88,
+          "violated": false
+        },
+        {
+          "path": "/go1/Geometry/trunk/FR_hip/FR_thigh/FR_thigh_joint",
+          "type": "revolute",
+          "lower": -39.3,
+          "upper": 257.89,
+          "violated": false
+        },
+        {
+          "path": "/go1/Geometry/trunk/FR_hip/FR_hip_joint",
+          "type": "revolute",
+          "lower": -49.45,
+          "upper": 49.45,
+          "violated": false
+        },
+        {
+          "path": "/go1/Geometry/trunk/FL_hip/FL_thigh/FL_calf/FL_calf_joint",
+          "type": "revolute",
+          "lower": -161.46,
+          "upper": -50.88,
+          "violated": false
+        },
+        {
+          "path": "/go1/Geometry/trunk/FL_hip/FL_thigh/FL_thigh_joint",
+          "type": "revolute",
+          "lower": -39.3,
+          "upper": 257.89,
+          "violated": false
+        },
+        {
+          "path": "/go1/Geometry/trunk/FL_hip/FL_hip_joint",
+          "type": "revolute",
+          "lower": -49.45,
+          "upper": 49.45,
+          "violated": false
+        },
+        {
+          "path": "/go1/Geometry/trunk/RR_hip/RR_thigh/RR_calf/RR_calf_joint",
+          "type": "revolute",
+          "lower": -161.46,
+          "upper": -50.88,
+          "violated": false
+        },
+        {
+          "path": "/go1/Geometry/trunk/RR_hip/RR_thigh/RR_thigh_joint",
+          "type": "revolute",
+          "lower": -39.3,
+          "upper": 257.89,
+          "violated": false
+        },
+        {
+          "path": "/go1/Geometry/trunk/RR_hip/RR_hip_joint",
+          "type": "revolute",
+          "lower": -49.45,
+          "upper": 49.45,
+          "violated": false
+        },
+        {
+          "path": "/go1/Geometry/trunk/RL_hip/RL_thigh/RL_calf/RL_calf_joint",
+          "type": "revolute",
+          "lower": -161.46,
+          "upper": -50.88,
+          "violated": false
+        },
+        {
+          "path": "/go1/Geometry/trunk/RL_hip/RL_thigh/RL_thigh_joint",
+          "type": "revolute",
+          "lower": -39.3,
+          "upper": 366.8,
+          "violated": true
+        },
+        {
+          "path": "/go1/Geometry/trunk/RL_hip/RL_hip_joint",
+          "type": "revolute",
+          "lower": -49.45,
+          "upper": 49.45,
+          "violated": false
+        }
+      ],
+      "masses": [
+        {
+          "path": "/go1/Geometry/trunk",
+          "material": "aluminum",
+          "mass_kg": 5.204
+        },
+        {
+          "path": "/go1/Geometry/trunk/FR_hip",
+          "material": "aluminum",
+          "mass_kg": 0.68
+        },
+        {
+          "path": "/go1/Geometry/trunk/FR_hip/FR_thigh",
+          "material": "aluminum",
+          "mass_kg": 1.009
+        },
+        {
+          "path": "/go1/Geometry/trunk/FR_hip/FR_thigh/FR_calf",
+          "material": "aluminum",
+          "mass_kg": 0.1959
+        },
+        {
+          "path": "/go1/Geometry/trunk/FL_hip",
+          "material": "aluminum",
+          "mass_kg": 0.68
+        },
+        {
+          "path": "/go1/Geometry/trunk/FL_hip/FL_thigh",
+          "material": "aluminum",
+          "mass_kg": 1.009
+        },
+        {
+          "path": "/go1/Geometry/trunk/FL_hip/FL_thigh/FL_calf",
+          "material": "aluminum",
+          "mass_kg": 0.1959
+        },
+        {
+          "path": "/go1/Geometry/trunk/RR_hip",
+          "material": "aluminum",
+          "mass_kg": 0.68
+        },
+        {
+          "path": "/go1/Geometry/trunk/RR_hip/RR_thigh",
+          "material": "aluminum",
+          "mass_kg": 1.009
+        },
+        {
+          "path": "/go1/Geometry/trunk/RR_hip/RR_thigh/RR_calf",
+          "material": "aluminum",
+          "mass_kg": 0.1959
+        },
+        {
+          "path": "/go1/Geometry/trunk/RL_hip",
+          "material": "aluminum",
+          "mass_kg": 0.68
+        },
+        {
+          "path": "/go1/Geometry/trunk/RL_hip/RL_thigh",
+          "material": "aluminum",
+          "mass_kg": 1.009
+        },
+        {
+          "path": "/go1/Geometry/trunk/RL_hip/RL_thigh/RL_calf",
+          "material": "aluminum",
+          "mass_kg": 0.1959
+        }
+      ]
+    },
+    {
+      "name": "menagerie_g1",
+      "usd": "assets/menagerie/menagerie_g1/menagerie_g1_stripped.usda",
+      "description": "Stripped from menagerie_g1.usda \u2014 30 bodies, 29 joints (0 violated)",
+      "joints": [
+        {
+          "path": "/g1_29dof_rev_1_0/Geometry/pelvis/left_hip_pitch_link/left_hip_roll_link/left_hip_yaw_link/left_knee_link/left_ankle_pitch_link/left_ankle_roll_link/left_ankle_roll_joint",
+          "type": "revolute",
+          "lower": -15.0,
+          "upper": 15.0,
+          "violated": false
+        },
+        {
+          "path": "/g1_29dof_rev_1_0/Geometry/pelvis/left_hip_pitch_link/left_hip_roll_link/left_hip_yaw_link/left_knee_link/left_ankle_pitch_link/left_ankle_pitch_joint",
+          "type": "revolute",
+          "lower": -50.0,
+          "upper": 30.0,
+          "violated": false
+        },
+        {
+          "path": "/g1_29dof_rev_1_0/Geometry/pelvis/left_hip_pitch_link/left_hip_roll_link/left_hip_yaw_link/left_knee_link/left_knee_joint",
+          "type": "revolute",
+          "lower": -5.0,
+          "upper": 165.0,
+          "violated": false
+        },
+        {
+          "path": "/g1_29dof_rev_1_0/Geometry/pelvis/left_hip_pitch_link/left_hip_roll_link/left_hip_yaw_link/left_hip_yaw_joint",
+          "type": "revolute",
+          "lower": -158.0,
+          "upper": 158.0,
+          "violated": false
+        },
+        {
+          "path": "/g1_29dof_rev_1_0/Geometry/pelvis/left_hip_pitch_link/left_hip_roll_link/left_hip_roll_joint",
+          "type": "revolute",
+          "lower": -30.0,
+          "upper": 170.0,
+          "violated": false
+        },
+        {
+          "path": "/g1_29dof_rev_1_0/Geometry/pelvis/left_hip_pitch_link/left_hip_pitch_joint",
+          "type": "revolute",
+          "lower": -145.0,
+          "upper": 165.0,
+          "violated": false
+        },
+        {
+          "path": "/g1_29dof_rev_1_0/Geometry/pelvis/right_hip_pitch_link/right_hip_roll_link/right_hip_yaw_link/right_knee_link/right_ankle_pitch_link/right_ankle_roll_link/right_ankle_roll_joint",
+          "type": "revolute",
+          "lower": -15.0,
+          "upper": 15.0,
+          "violated": false
+        },
+        {
+          "path": "/g1_29dof_rev_1_0/Geometry/pelvis/right_hip_pitch_link/right_hip_roll_link/right_hip_yaw_link/right_knee_link/right_ankle_pitch_link/right_ankle_pitch_joint",
+          "type": "revolute",
+          "lower": -50.0,
+          "upper": 30.0,
+          "violated": false
+        },
+        {
+          "path": "/g1_29dof_rev_1_0/Geometry/pelvis/right_hip_pitch_link/right_hip_roll_link/right_hip_yaw_link/right_knee_link/right_knee_joint",
+          "type": "revolute",
+          "lower": -5.0,
+          "upper": 165.0,
+          "violated": false
+        },
+        {
+          "path": "/g1_29dof_rev_1_0/Geometry/pelvis/right_hip_pitch_link/right_hip_roll_link/right_hip_yaw_link/right_hip_yaw_joint",
+          "type": "revolute",
+          "lower": -158.0,
+          "upper": 158.0,
+          "violated": false
+        },
+        {
+          "path": "/g1_29dof_rev_1_0/Geometry/pelvis/right_hip_pitch_link/right_hip_roll_link/right_hip_roll_joint",
+          "type": "revolute",
+          "lower": -170.0,
+          "upper": 30.0,
+          "violated": false
+        },
+        {
+          "path": "/g1_29dof_rev_1_0/Geometry/pelvis/right_hip_pitch_link/right_hip_pitch_joint",
+          "type": "revolute",
+          "lower": -145.0,
+          "upper": 165.0,
+          "violated": false
+        },
+        {
+          "path": "/g1_29dof_rev_1_0/Geometry/pelvis/waist_yaw_link/waist_roll_link/torso_link/left_shoulder_pitch_link/left_shoulder_roll_link/left_shoulder_yaw_link/left_elbow_link/left_wrist_roll_link/left_wrist_pitch_link/left_wrist_yaw_link/left_wrist_yaw_joint",
+          "type": "revolute",
+          "lower": -92.5,
+          "upper": 92.5,
+          "violated": false
+        },
+        {
+          "path": "/g1_29dof_rev_1_0/Geometry/pelvis/waist_yaw_link/waist_roll_link/torso_link/left_shoulder_pitch_link/left_shoulder_roll_link/left_shoulder_yaw_link/left_elbow_link/left_wrist_roll_link/left_wrist_pitch_link/left_wrist_pitch_joint",
+          "type": "revolute",
+          "lower": -92.5,
+          "upper": 92.5,
+          "violated": false
+        },
+        {
+          "path": "/g1_29dof_rev_1_0/Geometry/pelvis/waist_yaw_link/waist_roll_link/torso_link/left_shoulder_pitch_link/left_shoulder_roll_link/left_shoulder_yaw_link/left_elbow_link/left_wrist_roll_link/left_wrist_roll_joint",
+          "type": "revolute",
+          "lower": -113.0,
+          "upper": 113.0,
+          "violated": false
+        },
+        {
+          "path": "/g1_29dof_rev_1_0/Geometry/pelvis/waist_yaw_link/waist_roll_link/torso_link/left_shoulder_pitch_link/left_shoulder_roll_link/left_shoulder_yaw_link/left_elbow_link/left_elbow_joint",
+          "type": "revolute",
+          "lower": -60.0,
+          "upper": 120.0,
+          "violated": false
+        },
+        {
+          "path": "/g1_29dof_rev_1_0/Geometry/pelvis/waist_yaw_link/waist_roll_link/torso_link/left_shoulder_pitch_link/left_shoulder_roll_link/left_shoulder_yaw_link/left_shoulder_yaw_joint",
+          "type": "revolute",
+          "lower": -150.0,
+          "upper": 150.0,
+          "violated": false
+        },
+        {
+          "path": "/g1_29dof_rev_1_0/Geometry/pelvis/waist_yaw_link/waist_roll_link/torso_link/left_shoulder_pitch_link/left_shoulder_roll_link/left_shoulder_roll_joint",
+          "type": "revolute",
+          "lower": -91.0,
+          "upper": 129.0,
+          "violated": false
+        },
+        {
+          "path": "/g1_29dof_rev_1_0/Geometry/pelvis/waist_yaw_link/waist_roll_link/torso_link/left_shoulder_pitch_link/left_shoulder_pitch_joint",
+          "type": "revolute",
+          "lower": -177.0,
+          "upper": 153.0,
+          "violated": false
+        },
+        {
+          "path": "/g1_29dof_rev_1_0/Geometry/pelvis/waist_yaw_link/waist_roll_link/torso_link/right_shoulder_pitch_link/right_shoulder_roll_link/right_shoulder_yaw_link/right_elbow_link/right_wrist_roll_link/right_wrist_pitch_link/right_wrist_yaw_link/right_wrist_yaw_joint",
+          "type": "revolute",
+          "lower": -92.5,
+          "upper": 92.5,
+          "violated": false
+        },
+        {
+          "path": "/g1_29dof_rev_1_0/Geometry/pelvis/waist_yaw_link/waist_roll_link/torso_link/right_shoulder_pitch_link/right_shoulder_roll_link/right_shoulder_yaw_link/right_elbow_link/right_wrist_roll_link/right_wrist_pitch_link/right_wrist_pitch_joint",
+          "type": "revolute",
+          "lower": -92.5,
+          "upper": 92.5,
+          "violated": false
+        },
+        {
+          "path": "/g1_29dof_rev_1_0/Geometry/pelvis/waist_yaw_link/waist_roll_link/torso_link/right_shoulder_pitch_link/right_shoulder_roll_link/right_shoulder_yaw_link/right_elbow_link/right_wrist_roll_link/right_wrist_roll_joint",
+          "type": "revolute",
+          "lower": -113.0,
+          "upper": 113.0,
+          "violated": false
+        },
+        {
+          "path": "/g1_29dof_rev_1_0/Geometry/pelvis/waist_yaw_link/waist_roll_link/torso_link/right_shoulder_pitch_link/right_shoulder_roll_link/right_shoulder_yaw_link/right_elbow_link/right_elbow_joint",
+          "type": "revolute",
+          "lower": -60.0,
+          "upper": 120.0,
+          "violated": false
+        },
+        {
+          "path": "/g1_29dof_rev_1_0/Geometry/pelvis/waist_yaw_link/waist_roll_link/torso_link/right_shoulder_pitch_link/right_shoulder_roll_link/right_shoulder_yaw_link/right_shoulder_yaw_joint",
+          "type": "revolute",
+          "lower": -150.0,
+          "upper": 150.0,
+          "violated": false
+        },
+        {
+          "path": "/g1_29dof_rev_1_0/Geometry/pelvis/waist_yaw_link/waist_roll_link/torso_link/right_shoulder_pitch_link/right_shoulder_roll_link/right_shoulder_roll_joint",
+          "type": "revolute",
+          "lower": -129.0,
+          "upper": 91.0,
+          "violated": false
+        },
+        {
+          "path": "/g1_29dof_rev_1_0/Geometry/pelvis/waist_yaw_link/waist_roll_link/torso_link/right_shoulder_pitch_link/right_shoulder_pitch_joint",
+          "type": "revolute",
+          "lower": -177.0,
+          "upper": 153.0,
+          "violated": false
+        },
+        {
+          "path": "/g1_29dof_rev_1_0/Geometry/pelvis/waist_yaw_link/waist_roll_link/torso_link/waist_pitch_joint",
+          "type": "revolute",
+          "lower": -29.79,
+          "upper": 29.79,
+          "violated": false
+        },
+        {
+          "path": "/g1_29dof_rev_1_0/Geometry/pelvis/waist_yaw_link/waist_roll_link/waist_roll_joint",
+          "type": "revolute",
+          "lower": -29.79,
+          "upper": 29.79,
+          "violated": false
+        },
+        {
+          "path": "/g1_29dof_rev_1_0/Geometry/pelvis/waist_yaw_link/waist_yaw_joint",
+          "type": "revolute",
+          "lower": -150.0,
+          "upper": 150.0,
+          "violated": false
+        }
+      ],
+      "masses": [
+        {
+          "path": "/g1_29dof_rev_1_0/Geometry/pelvis",
+          "material": "aluminum",
+          "mass_kg": 3.813
+        },
+        {
+          "path": "/g1_29dof_rev_1_0/Geometry/pelvis/left_hip_pitch_link",
+          "material": "aluminum",
+          "mass_kg": 1.35
+        },
+        {
+          "path": "/g1_29dof_rev_1_0/Geometry/pelvis/left_hip_pitch_link/left_hip_roll_link",
+          "material": "aluminum",
+          "mass_kg": 1.52
+        },
+        {
+          "path": "/g1_29dof_rev_1_0/Geometry/pelvis/left_hip_pitch_link/left_hip_roll_link/left_hip_yaw_link",
+          "material": "aluminum",
+          "mass_kg": 1.702
+        },
+        {
+          "path": "/g1_29dof_rev_1_0/Geometry/pelvis/left_hip_pitch_link/left_hip_roll_link/left_hip_yaw_link/left_knee_link",
+          "material": "aluminum",
+          "mass_kg": 1.932
+        },
+        {
+          "path": "/g1_29dof_rev_1_0/Geometry/pelvis/left_hip_pitch_link/left_hip_roll_link/left_hip_yaw_link/left_knee_link/left_ankle_pitch_link",
+          "material": "aluminum",
+          "mass_kg": 0.074
+        },
+        {
+          "path": "/g1_29dof_rev_1_0/Geometry/pelvis/left_hip_pitch_link/left_hip_roll_link/left_hip_yaw_link/left_knee_link/left_ankle_pitch_link/left_ankle_roll_link",
+          "material": "aluminum",
+          "mass_kg": 0.608
+        },
+        {
+          "path": "/g1_29dof_rev_1_0/Geometry/pelvis/right_hip_pitch_link",
+          "material": "aluminum",
+          "mass_kg": 1.35
+        },
+        {
+          "path": "/g1_29dof_rev_1_0/Geometry/pelvis/right_hip_pitch_link/right_hip_roll_link",
+          "material": "aluminum",
+          "mass_kg": 1.52
+        },
+        {
+          "path": "/g1_29dof_rev_1_0/Geometry/pelvis/right_hip_pitch_link/right_hip_roll_link/right_hip_yaw_link",
+          "material": "aluminum",
+          "mass_kg": 1.702
+        },
+        {
+          "path": "/g1_29dof_rev_1_0/Geometry/pelvis/right_hip_pitch_link/right_hip_roll_link/right_hip_yaw_link/right_knee_link",
+          "material": "aluminum",
+          "mass_kg": 1.932
+        },
+        {
+          "path": "/g1_29dof_rev_1_0/Geometry/pelvis/right_hip_pitch_link/right_hip_roll_link/right_hip_yaw_link/right_knee_link/right_ankle_pitch_link",
+          "material": "aluminum",
+          "mass_kg": 0.074
+        },
+        {
+          "path": "/g1_29dof_rev_1_0/Geometry/pelvis/right_hip_pitch_link/right_hip_roll_link/right_hip_yaw_link/right_knee_link/right_ankle_pitch_link/right_ankle_roll_link",
+          "material": "aluminum",
+          "mass_kg": 0.608
+        },
+        {
+          "path": "/g1_29dof_rev_1_0/Geometry/pelvis/waist_yaw_link",
+          "material": "unknown",
+          "mass_kg": 0.214
+        },
+        {
+          "path": "/g1_29dof_rev_1_0/Geometry/pelvis/waist_yaw_link/waist_roll_link",
+          "material": "unknown",
+          "mass_kg": 0.086
+        },
+        {
+          "path": "/g1_29dof_rev_1_0/Geometry/pelvis/waist_yaw_link/waist_roll_link/torso_link",
+          "material": "aluminum",
+          "mass_kg": 7.818
+        },
+        {
+          "path": "/g1_29dof_rev_1_0/Geometry/pelvis/waist_yaw_link/waist_roll_link/torso_link/left_shoulder_pitch_link",
+          "material": "aluminum",
+          "mass_kg": 0.718
+        },
+        {
+          "path": "/g1_29dof_rev_1_0/Geometry/pelvis/waist_yaw_link/waist_roll_link/torso_link/left_shoulder_pitch_link/left_shoulder_roll_link",
+          "material": "aluminum",
+          "mass_kg": 0.643
+        },
+        {
+          "path": "/g1_29dof_rev_1_0/Geometry/pelvis/waist_yaw_link/waist_roll_link/torso_link/left_shoulder_pitch_link/left_shoulder_roll_link/left_shoulder_yaw_link",
+          "material": "aluminum",
+          "mass_kg": 0.734
+        },
+        {
+          "path": "/g1_29dof_rev_1_0/Geometry/pelvis/waist_yaw_link/waist_roll_link/torso_link/left_shoulder_pitch_link/left_shoulder_roll_link/left_shoulder_yaw_link/left_elbow_link",
+          "material": "aluminum",
+          "mass_kg": 0.6
+        },
+        {
+          "path": "/g1_29dof_rev_1_0/Geometry/pelvis/waist_yaw_link/waist_roll_link/torso_link/left_shoulder_pitch_link/left_shoulder_roll_link/left_shoulder_yaw_link/left_elbow_link/left_wrist_roll_link",
+          "material": "aluminum",
+          "mass_kg": 0.0854
+        },
+        {
+          "path": "/g1_29dof_rev_1_0/Geometry/pelvis/waist_yaw_link/waist_roll_link/torso_link/left_shoulder_pitch_link/left_shoulder_roll_link/left_shoulder_yaw_link/left_elbow_link/left_wrist_roll_link/left_wrist_pitch_link",
+          "material": "aluminum",
+          "mass_kg": 0.4841
+        },
+        {
+          "path": "/g1_29dof_rev_1_0/Geometry/pelvis/waist_yaw_link/waist_roll_link/torso_link/left_shoulder_pitch_link/left_shoulder_roll_link/left_shoulder_yaw_link/left_elbow_link/left_wrist_roll_link/left_wrist_pitch_link/left_wrist_yaw_link",
+          "material": "aluminum",
+          "mass_kg": 0.2546
+        },
+        {
+          "path": "/g1_29dof_rev_1_0/Geometry/pelvis/waist_yaw_link/waist_roll_link/torso_link/right_shoulder_pitch_link",
+          "material": "aluminum",
+          "mass_kg": 0.718
+        },
+        {
+          "path": "/g1_29dof_rev_1_0/Geometry/pelvis/waist_yaw_link/waist_roll_link/torso_link/right_shoulder_pitch_link/right_shoulder_roll_link",
+          "material": "aluminum",
+          "mass_kg": 0.643
+        },
+        {
+          "path": "/g1_29dof_rev_1_0/Geometry/pelvis/waist_yaw_link/waist_roll_link/torso_link/right_shoulder_pitch_link/right_shoulder_roll_link/right_shoulder_yaw_link",
+          "material": "aluminum",
+          "mass_kg": 0.734
+        },
+        {
+          "path": "/g1_29dof_rev_1_0/Geometry/pelvis/waist_yaw_link/waist_roll_link/torso_link/right_shoulder_pitch_link/right_shoulder_roll_link/right_shoulder_yaw_link/right_elbow_link",
+          "material": "aluminum",
+          "mass_kg": 0.6
+        },
+        {
+          "path": "/g1_29dof_rev_1_0/Geometry/pelvis/waist_yaw_link/waist_roll_link/torso_link/right_shoulder_pitch_link/right_shoulder_roll_link/right_shoulder_yaw_link/right_elbow_link/right_wrist_roll_link",
+          "material": "aluminum",
+          "mass_kg": 0.0854
+        },
+        {
+          "path": "/g1_29dof_rev_1_0/Geometry/pelvis/waist_yaw_link/waist_roll_link/torso_link/right_shoulder_pitch_link/right_shoulder_roll_link/right_shoulder_yaw_link/right_elbow_link/right_wrist_roll_link/right_wrist_pitch_link",
+          "material": "aluminum",
+          "mass_kg": 0.4841
+        },
+        {
+          "path": "/g1_29dof_rev_1_0/Geometry/pelvis/waist_yaw_link/waist_roll_link/torso_link/right_shoulder_pitch_link/right_shoulder_roll_link/right_shoulder_yaw_link/right_elbow_link/right_wrist_roll_link/right_wrist_pitch_link/right_wrist_yaw_link",
+          "material": "aluminum",
+          "mass_kg": 0.2546
+        }
+      ]
+    },
+    {
+      "name": "menagerie_g1_violated",
+      "usd": "assets/menagerie/menagerie_g1_violated/menagerie_g1_violated_stripped.usda",
+      "description": "Stripped from menagerie_g1.usda \u2014 30 bodies, 29 joints (1 violated)",
+      "joints": [
+        {
+          "path": "/g1_29dof_rev_1_0/Geometry/pelvis/left_hip_pitch_link/left_hip_roll_link/left_hip_yaw_link/left_knee_link/left_ankle_pitch_link/left_ankle_roll_link/left_ankle_roll_joint",
+          "type": "revolute",
+          "lower": -15.0,
+          "upper": 15.0,
+          "violated": false
+        },
+        {
+          "path": "/g1_29dof_rev_1_0/Geometry/pelvis/left_hip_pitch_link/left_hip_roll_link/left_hip_yaw_link/left_knee_link/left_ankle_pitch_link/left_ankle_pitch_joint",
+          "type": "revolute",
+          "lower": -50.0,
+          "upper": 30.0,
+          "violated": false
+        },
+        {
+          "path": "/g1_29dof_rev_1_0/Geometry/pelvis/left_hip_pitch_link/left_hip_roll_link/left_hip_yaw_link/left_knee_link/left_knee_joint",
+          "type": "revolute",
+          "lower": -5.0,
+          "upper": 165.0,
+          "violated": false
+        },
+        {
+          "path": "/g1_29dof_rev_1_0/Geometry/pelvis/left_hip_pitch_link/left_hip_roll_link/left_hip_yaw_link/left_hip_yaw_joint",
+          "type": "revolute",
+          "lower": -158.0,
+          "upper": 158.0,
+          "violated": false
+        },
+        {
+          "path": "/g1_29dof_rev_1_0/Geometry/pelvis/left_hip_pitch_link/left_hip_roll_link/left_hip_roll_joint",
+          "type": "revolute",
+          "lower": -30.0,
+          "upper": 170.0,
+          "violated": false
+        },
+        {
+          "path": "/g1_29dof_rev_1_0/Geometry/pelvis/left_hip_pitch_link/left_hip_pitch_joint",
+          "type": "revolute",
+          "lower": -145.0,
+          "upper": 165.0,
+          "violated": false
+        },
+        {
+          "path": "/g1_29dof_rev_1_0/Geometry/pelvis/right_hip_pitch_link/right_hip_roll_link/right_hip_yaw_link/right_knee_link/right_ankle_pitch_link/right_ankle_roll_link/right_ankle_roll_joint",
+          "type": "revolute",
+          "lower": -15.0,
+          "upper": 15.0,
+          "violated": false
+        },
+        {
+          "path": "/g1_29dof_rev_1_0/Geometry/pelvis/right_hip_pitch_link/right_hip_roll_link/right_hip_yaw_link/right_knee_link/right_ankle_pitch_link/right_ankle_pitch_joint",
+          "type": "revolute",
+          "lower": -50.0,
+          "upper": 30.0,
+          "violated": false
+        },
+        {
+          "path": "/g1_29dof_rev_1_0/Geometry/pelvis/right_hip_pitch_link/right_hip_roll_link/right_hip_yaw_link/right_knee_link/right_knee_joint",
+          "type": "revolute",
+          "lower": -5.0,
+          "upper": 165.0,
+          "violated": false
+        },
+        {
+          "path": "/g1_29dof_rev_1_0/Geometry/pelvis/right_hip_pitch_link/right_hip_roll_link/right_hip_yaw_link/right_hip_yaw_joint",
+          "type": "revolute",
+          "lower": -158.0,
+          "upper": 158.0,
+          "violated": false
+        },
+        {
+          "path": "/g1_29dof_rev_1_0/Geometry/pelvis/right_hip_pitch_link/right_hip_roll_link/right_hip_roll_joint",
+          "type": "revolute",
+          "lower": -170.0,
+          "upper": 30.0,
+          "violated": false
+        },
+        {
+          "path": "/g1_29dof_rev_1_0/Geometry/pelvis/right_hip_pitch_link/right_hip_pitch_joint",
+          "type": "revolute",
+          "lower": -145.0,
+          "upper": 165.0,
+          "violated": false
+        },
+        {
+          "path": "/g1_29dof_rev_1_0/Geometry/pelvis/waist_yaw_link/waist_roll_link/torso_link/left_shoulder_pitch_link/left_shoulder_roll_link/left_shoulder_yaw_link/left_elbow_link/left_wrist_roll_link/left_wrist_pitch_link/left_wrist_yaw_link/left_wrist_yaw_joint",
+          "type": "revolute",
+          "lower": -92.5,
+          "upper": 92.5,
+          "violated": false
+        },
+        {
+          "path": "/g1_29dof_rev_1_0/Geometry/pelvis/waist_yaw_link/waist_roll_link/torso_link/left_shoulder_pitch_link/left_shoulder_roll_link/left_shoulder_yaw_link/left_elbow_link/left_wrist_roll_link/left_wrist_pitch_link/left_wrist_pitch_joint",
+          "type": "revolute",
+          "lower": -92.5,
+          "upper": 92.5,
+          "violated": false
+        },
+        {
+          "path": "/g1_29dof_rev_1_0/Geometry/pelvis/waist_yaw_link/waist_roll_link/torso_link/left_shoulder_pitch_link/left_shoulder_roll_link/left_shoulder_yaw_link/left_elbow_link/left_wrist_roll_link/left_wrist_roll_joint",
+          "type": "revolute",
+          "lower": -113.0,
+          "upper": 113.0,
+          "violated": false
+        },
+        {
+          "path": "/g1_29dof_rev_1_0/Geometry/pelvis/waist_yaw_link/waist_roll_link/torso_link/left_shoulder_pitch_link/left_shoulder_roll_link/left_shoulder_yaw_link/left_elbow_link/left_elbow_joint",
+          "type": "revolute",
+          "lower": -60.0,
+          "upper": 120.0,
+          "violated": false
+        },
+        {
+          "path": "/g1_29dof_rev_1_0/Geometry/pelvis/waist_yaw_link/waist_roll_link/torso_link/left_shoulder_pitch_link/left_shoulder_roll_link/left_shoulder_yaw_link/left_shoulder_yaw_joint",
+          "type": "revolute",
+          "lower": -150.0,
+          "upper": 150.0,
+          "violated": false
+        },
+        {
+          "path": "/g1_29dof_rev_1_0/Geometry/pelvis/waist_yaw_link/waist_roll_link/torso_link/left_shoulder_pitch_link/left_shoulder_roll_link/left_shoulder_roll_joint",
+          "type": "revolute",
+          "lower": -91.0,
+          "upper": 129.0,
+          "violated": false
+        },
+        {
+          "path": "/g1_29dof_rev_1_0/Geometry/pelvis/waist_yaw_link/waist_roll_link/torso_link/left_shoulder_pitch_link/left_shoulder_pitch_joint",
+          "type": "revolute",
+          "lower": -177.0,
+          "upper": 153.0,
+          "violated": false
+        },
+        {
+          "path": "/g1_29dof_rev_1_0/Geometry/pelvis/waist_yaw_link/waist_roll_link/torso_link/right_shoulder_pitch_link/right_shoulder_roll_link/right_shoulder_yaw_link/right_elbow_link/right_wrist_roll_link/right_wrist_pitch_link/right_wrist_yaw_link/right_wrist_yaw_joint",
+          "type": "revolute",
+          "lower": -92.5,
+          "upper": 92.5,
+          "violated": false
+        },
+        {
+          "path": "/g1_29dof_rev_1_0/Geometry/pelvis/waist_yaw_link/waist_roll_link/torso_link/right_shoulder_pitch_link/right_shoulder_roll_link/right_shoulder_yaw_link/right_elbow_link/right_wrist_roll_link/right_wrist_pitch_link/right_wrist_pitch_joint",
+          "type": "revolute",
+          "lower": -92.5,
+          "upper": 201.4,
+          "violated": true
+        },
+        {
+          "path": "/g1_29dof_rev_1_0/Geometry/pelvis/waist_yaw_link/waist_roll_link/torso_link/right_shoulder_pitch_link/right_shoulder_roll_link/right_shoulder_yaw_link/right_elbow_link/right_wrist_roll_link/right_wrist_roll_joint",
+          "type": "revolute",
+          "lower": -113.0,
+          "upper": 113.0,
+          "violated": false
+        },
+        {
+          "path": "/g1_29dof_rev_1_0/Geometry/pelvis/waist_yaw_link/waist_roll_link/torso_link/right_shoulder_pitch_link/right_shoulder_roll_link/right_shoulder_yaw_link/right_elbow_link/right_elbow_joint",
+          "type": "revolute",
+          "lower": -60.0,
+          "upper": 120.0,
+          "violated": false
+        },
+        {
+          "path": "/g1_29dof_rev_1_0/Geometry/pelvis/waist_yaw_link/waist_roll_link/torso_link/right_shoulder_pitch_link/right_shoulder_roll_link/right_shoulder_yaw_link/right_shoulder_yaw_joint",
+          "type": "revolute",
+          "lower": -150.0,
+          "upper": 150.0,
+          "violated": false
+        },
+        {
+          "path": "/g1_29dof_rev_1_0/Geometry/pelvis/waist_yaw_link/waist_roll_link/torso_link/right_shoulder_pitch_link/right_shoulder_roll_link/right_shoulder_roll_joint",
+          "type": "revolute",
+          "lower": -129.0,
+          "upper": 91.0,
+          "violated": false
+        },
+        {
+          "path": "/g1_29dof_rev_1_0/Geometry/pelvis/waist_yaw_link/waist_roll_link/torso_link/right_shoulder_pitch_link/right_shoulder_pitch_joint",
+          "type": "revolute",
+          "lower": -177.0,
+          "upper": 153.0,
+          "violated": false
+        },
+        {
+          "path": "/g1_29dof_rev_1_0/Geometry/pelvis/waist_yaw_link/waist_roll_link/torso_link/waist_pitch_joint",
+          "type": "revolute",
+          "lower": -29.79,
+          "upper": 29.79,
+          "violated": false
+        },
+        {
+          "path": "/g1_29dof_rev_1_0/Geometry/pelvis/waist_yaw_link/waist_roll_link/waist_roll_joint",
+          "type": "revolute",
+          "lower": -29.79,
+          "upper": 29.79,
+          "violated": false
+        },
+        {
+          "path": "/g1_29dof_rev_1_0/Geometry/pelvis/waist_yaw_link/waist_yaw_joint",
+          "type": "revolute",
+          "lower": -150.0,
+          "upper": 150.0,
+          "violated": false
+        }
+      ],
+      "masses": [
+        {
+          "path": "/g1_29dof_rev_1_0/Geometry/pelvis",
+          "material": "aluminum",
+          "mass_kg": 3.813
+        },
+        {
+          "path": "/g1_29dof_rev_1_0/Geometry/pelvis/left_hip_pitch_link",
+          "material": "aluminum",
+          "mass_kg": 1.35
+        },
+        {
+          "path": "/g1_29dof_rev_1_0/Geometry/pelvis/left_hip_pitch_link/left_hip_roll_link",
+          "material": "aluminum",
+          "mass_kg": 1.52
+        },
+        {
+          "path": "/g1_29dof_rev_1_0/Geometry/pelvis/left_hip_pitch_link/left_hip_roll_link/left_hip_yaw_link",
+          "material": "aluminum",
+          "mass_kg": 1.702
+        },
+        {
+          "path": "/g1_29dof_rev_1_0/Geometry/pelvis/left_hip_pitch_link/left_hip_roll_link/left_hip_yaw_link/left_knee_link",
+          "material": "aluminum",
+          "mass_kg": 1.932
+        },
+        {
+          "path": "/g1_29dof_rev_1_0/Geometry/pelvis/left_hip_pitch_link/left_hip_roll_link/left_hip_yaw_link/left_knee_link/left_ankle_pitch_link",
+          "material": "aluminum",
+          "mass_kg": 0.074
+        },
+        {
+          "path": "/g1_29dof_rev_1_0/Geometry/pelvis/left_hip_pitch_link/left_hip_roll_link/left_hip_yaw_link/left_knee_link/left_ankle_pitch_link/left_ankle_roll_link",
+          "material": "aluminum",
+          "mass_kg": 0.608
+        },
+        {
+          "path": "/g1_29dof_rev_1_0/Geometry/pelvis/right_hip_pitch_link",
+          "material": "aluminum",
+          "mass_kg": 1.35
+        },
+        {
+          "path": "/g1_29dof_rev_1_0/Geometry/pelvis/right_hip_pitch_link/right_hip_roll_link",
+          "material": "aluminum",
+          "mass_kg": 1.52
+        },
+        {
+          "path": "/g1_29dof_rev_1_0/Geometry/pelvis/right_hip_pitch_link/right_hip_roll_link/right_hip_yaw_link",
+          "material": "aluminum",
+          "mass_kg": 1.702
+        },
+        {
+          "path": "/g1_29dof_rev_1_0/Geometry/pelvis/right_hip_pitch_link/right_hip_roll_link/right_hip_yaw_link/right_knee_link",
+          "material": "aluminum",
+          "mass_kg": 1.932
+        },
+        {
+          "path": "/g1_29dof_rev_1_0/Geometry/pelvis/right_hip_pitch_link/right_hip_roll_link/right_hip_yaw_link/right_knee_link/right_ankle_pitch_link",
+          "material": "aluminum",
+          "mass_kg": 0.074
+        },
+        {
+          "path": "/g1_29dof_rev_1_0/Geometry/pelvis/right_hip_pitch_link/right_hip_roll_link/right_hip_yaw_link/right_knee_link/right_ankle_pitch_link/right_ankle_roll_link",
+          "material": "aluminum",
+          "mass_kg": 0.608
+        },
+        {
+          "path": "/g1_29dof_rev_1_0/Geometry/pelvis/waist_yaw_link",
+          "material": "unknown",
+          "mass_kg": 0.214
+        },
+        {
+          "path": "/g1_29dof_rev_1_0/Geometry/pelvis/waist_yaw_link/waist_roll_link",
+          "material": "unknown",
+          "mass_kg": 0.086
+        },
+        {
+          "path": "/g1_29dof_rev_1_0/Geometry/pelvis/waist_yaw_link/waist_roll_link/torso_link",
+          "material": "aluminum",
+          "mass_kg": 7.818
+        },
+        {
+          "path": "/g1_29dof_rev_1_0/Geometry/pelvis/waist_yaw_link/waist_roll_link/torso_link/left_shoulder_pitch_link",
+          "material": "aluminum",
+          "mass_kg": 0.718
+        },
+        {
+          "path": "/g1_29dof_rev_1_0/Geometry/pelvis/waist_yaw_link/waist_roll_link/torso_link/left_shoulder_pitch_link/left_shoulder_roll_link",
+          "material": "aluminum",
+          "mass_kg": 0.643
+        },
+        {
+          "path": "/g1_29dof_rev_1_0/Geometry/pelvis/waist_yaw_link/waist_roll_link/torso_link/left_shoulder_pitch_link/left_shoulder_roll_link/left_shoulder_yaw_link",
+          "material": "aluminum",
+          "mass_kg": 0.734
+        },
+        {
+          "path": "/g1_29dof_rev_1_0/Geometry/pelvis/waist_yaw_link/waist_roll_link/torso_link/left_shoulder_pitch_link/left_shoulder_roll_link/left_shoulder_yaw_link/left_elbow_link",
+          "material": "aluminum",
+          "mass_kg": 0.6
+        },
+        {
+          "path": "/g1_29dof_rev_1_0/Geometry/pelvis/waist_yaw_link/waist_roll_link/torso_link/left_shoulder_pitch_link/left_shoulder_roll_link/left_shoulder_yaw_link/left_elbow_link/left_wrist_roll_link",
+          "material": "aluminum",
+          "mass_kg": 0.0854
+        },
+        {
+          "path": "/g1_29dof_rev_1_0/Geometry/pelvis/waist_yaw_link/waist_roll_link/torso_link/left_shoulder_pitch_link/left_shoulder_roll_link/left_shoulder_yaw_link/left_elbow_link/left_wrist_roll_link/left_wrist_pitch_link",
+          "material": "aluminum",
+          "mass_kg": 0.4841
+        },
+        {
+          "path": "/g1_29dof_rev_1_0/Geometry/pelvis/waist_yaw_link/waist_roll_link/torso_link/left_shoulder_pitch_link/left_shoulder_roll_link/left_shoulder_yaw_link/left_elbow_link/left_wrist_roll_link/left_wrist_pitch_link/left_wrist_yaw_link",
+          "material": "aluminum",
+          "mass_kg": 0.2546
+        },
+        {
+          "path": "/g1_29dof_rev_1_0/Geometry/pelvis/waist_yaw_link/waist_roll_link/torso_link/right_shoulder_pitch_link",
+          "material": "aluminum",
+          "mass_kg": 0.718
+        },
+        {
+          "path": "/g1_29dof_rev_1_0/Geometry/pelvis/waist_yaw_link/waist_roll_link/torso_link/right_shoulder_pitch_link/right_shoulder_roll_link",
+          "material": "aluminum",
+          "mass_kg": 0.643
+        },
+        {
+          "path": "/g1_29dof_rev_1_0/Geometry/pelvis/waist_yaw_link/waist_roll_link/torso_link/right_shoulder_pitch_link/right_shoulder_roll_link/right_shoulder_yaw_link",
+          "material": "aluminum",
+          "mass_kg": 0.734
+        },
+        {
+          "path": "/g1_29dof_rev_1_0/Geometry/pelvis/waist_yaw_link/waist_roll_link/torso_link/right_shoulder_pitch_link/right_shoulder_roll_link/right_shoulder_yaw_link/right_elbow_link",
+          "material": "aluminum",
+          "mass_kg": 0.6
+        },
+        {
+          "path": "/g1_29dof_rev_1_0/Geometry/pelvis/waist_yaw_link/waist_roll_link/torso_link/right_shoulder_pitch_link/right_shoulder_roll_link/right_shoulder_yaw_link/right_elbow_link/right_wrist_roll_link",
+          "material": "aluminum",
+          "mass_kg": 0.0854
+        },
+        {
+          "path": "/g1_29dof_rev_1_0/Geometry/pelvis/waist_yaw_link/waist_roll_link/torso_link/right_shoulder_pitch_link/right_shoulder_roll_link/right_shoulder_yaw_link/right_elbow_link/right_wrist_roll_link/right_wrist_pitch_link",
+          "material": "aluminum",
+          "mass_kg": 0.4841
+        },
+        {
+          "path": "/g1_29dof_rev_1_0/Geometry/pelvis/waist_yaw_link/waist_roll_link/torso_link/right_shoulder_pitch_link/right_shoulder_roll_link/right_shoulder_yaw_link/right_elbow_link/right_wrist_roll_link/right_wrist_pitch_link/right_wrist_yaw_link",
+          "material": "aluminum",
+          "mass_kg": 0.2546
+        }
+      ]
+    },
+    {
+      "name": "menagerie_ur10e",
+      "usd": "assets/menagerie/menagerie_ur10e/menagerie_ur10e_stripped.usda",
+      "description": "Stripped from menagerie_ur10e.usda \u2014 7 bodies, 6 joints (0 violated)",
+      "joints": [
+        {
+          "path": "/ur10e/Geometry/base/shoulder_link/upper_arm_link/forearm_link/wrist_1_link/wrist_2_link/wrist_3_link/wrist_3_joint",
+          "type": "revolute",
+          "lower": -360.0,
+          "upper": 360.0,
+          "violated": false
+        },
+        {
+          "path": "/ur10e/Geometry/base/shoulder_link/upper_arm_link/forearm_link/wrist_1_link/wrist_2_link/wrist_2_joint",
+          "type": "revolute",
+          "lower": -360.0,
+          "upper": 360.0,
+          "violated": false
+        },
+        {
+          "path": "/ur10e/Geometry/base/shoulder_link/upper_arm_link/forearm_link/wrist_1_link/wrist_1_joint",
+          "type": "revolute",
+          "lower": -360.0,
+          "upper": 360.0,
+          "violated": false
+        },
+        {
+          "path": "/ur10e/Geometry/base/shoulder_link/upper_arm_link/forearm_link/elbow_joint",
+          "type": "revolute",
+          "lower": -179.99,
+          "upper": 179.99,
+          "violated": false
+        },
+        {
+          "path": "/ur10e/Geometry/base/shoulder_link/upper_arm_link/shoulder_lift_joint",
+          "type": "revolute",
+          "lower": -360.0,
+          "upper": 360.0,
+          "violated": false
+        },
+        {
+          "path": "/ur10e/Geometry/base/shoulder_link/shoulder_pan_joint",
+          "type": "revolute",
+          "lower": -360.0,
+          "upper": 360.0,
+          "violated": false
+        }
+      ],
+      "masses": [
+        {
+          "path": "/ur10e/Geometry/base",
+          "material": "aluminum",
+          "mass_kg": 4.0
+        },
+        {
+          "path": "/ur10e/Geometry/base/shoulder_link",
+          "material": "aluminum",
+          "mass_kg": 7.778
+        },
+        {
+          "path": "/ur10e/Geometry/base/shoulder_link/upper_arm_link",
+          "material": "aluminum",
+          "mass_kg": 12.93
+        },
+        {
+          "path": "/ur10e/Geometry/base/shoulder_link/upper_arm_link/forearm_link",
+          "material": "aluminum",
+          "mass_kg": 3.87
+        },
+        {
+          "path": "/ur10e/Geometry/base/shoulder_link/upper_arm_link/forearm_link/wrist_1_link",
+          "material": "aluminum",
+          "mass_kg": 1.96
+        },
+        {
+          "path": "/ur10e/Geometry/base/shoulder_link/upper_arm_link/forearm_link/wrist_1_link/wrist_2_link",
+          "material": "aluminum",
+          "mass_kg": 1.96
+        },
+        {
+          "path": "/ur10e/Geometry/base/shoulder_link/upper_arm_link/forearm_link/wrist_1_link/wrist_2_link/wrist_3_link",
+          "material": "aluminum",
+          "mass_kg": 0.202
+        }
+      ]
+    },
+    {
+      "name": "menagerie_ur10e_violated",
+      "usd": "assets/menagerie/menagerie_ur10e_violated/menagerie_ur10e_violated_stripped.usda",
+      "description": "Stripped from menagerie_ur10e.usda \u2014 7 bodies, 6 joints (1 violated)",
+      "joints": [
+        {
+          "path": "/ur10e/Geometry/base/shoulder_link/upper_arm_link/forearm_link/wrist_1_link/wrist_2_link/wrist_3_link/wrist_3_joint",
+          "type": "revolute",
+          "lower": -360.0,
+          "upper": 360.0,
+          "violated": false
+        },
+        {
+          "path": "/ur10e/Geometry/base/shoulder_link/upper_arm_link/forearm_link/wrist_1_link/wrist_2_link/wrist_2_joint",
+          "type": "revolute",
+          "lower": -360.0,
+          "upper": 360.0,
+          "violated": false
+        },
+        {
+          "path": "/ur10e/Geometry/base/shoulder_link/upper_arm_link/forearm_link/wrist_1_link/wrist_1_joint",
+          "type": "revolute",
+          "lower": -360.0,
+          "upper": 360.0,
+          "violated": false
+        },
+        {
+          "path": "/ur10e/Geometry/base/shoulder_link/upper_arm_link/forearm_link/elbow_joint",
+          "type": "revolute",
+          "lower": -179.99,
+          "upper": 179.99,
+          "violated": false
+        },
+        {
+          "path": "/ur10e/Geometry/base/shoulder_link/upper_arm_link/shoulder_lift_joint",
+          "type": "revolute",
+          "lower": -360.0,
+          "upper": 360.0,
+          "violated": false
+        },
+        {
+          "path": "/ur10e/Geometry/base/shoulder_link/shoulder_pan_joint",
+          "type": "revolute",
+          "lower": -360.0,
+          "upper": 468.9,
+          "violated": true
+        }
+      ],
+      "masses": [
+        {
+          "path": "/ur10e/Geometry/base",
+          "material": "aluminum",
+          "mass_kg": 4.0
+        },
+        {
+          "path": "/ur10e/Geometry/base/shoulder_link",
+          "material": "aluminum",
+          "mass_kg": 7.778
+        },
+        {
+          "path": "/ur10e/Geometry/base/shoulder_link/upper_arm_link",
+          "material": "aluminum",
+          "mass_kg": 12.93
+        },
+        {
+          "path": "/ur10e/Geometry/base/shoulder_link/upper_arm_link/forearm_link",
+          "material": "aluminum",
+          "mass_kg": 3.87
+        },
+        {
+          "path": "/ur10e/Geometry/base/shoulder_link/upper_arm_link/forearm_link/wrist_1_link",
+          "material": "aluminum",
+          "mass_kg": 1.96
+        },
+        {
+          "path": "/ur10e/Geometry/base/shoulder_link/upper_arm_link/forearm_link/wrist_1_link/wrist_2_link",
+          "material": "aluminum",
+          "mass_kg": 1.96
+        },
+        {
+          "path": "/ur10e/Geometry/base/shoulder_link/upper_arm_link/forearm_link/wrist_1_link/wrist_2_link/wrist_3_link",
+          "material": "aluminum",
+          "mass_kg": 0.202
+        }
+      ]
     }
   ]
 }

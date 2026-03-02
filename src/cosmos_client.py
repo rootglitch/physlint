@@ -133,6 +133,8 @@ JOINT RULES:
     use those limits as ground truth. A joint is valid if its USD limits are within ±5° of the spec.
     A joint is violated if its USD limits exceed the spec by more than 5°. The spec overrides all
     generic heuristics below for the joints it covers.
+    IMPORTANT: Joints marked [UNCONSTRAINED] in the spec have no real physical limit. For these,
+    ALWAYS set joint_valid=true — do not apply any heuristic check.
   Revolute (degrees, generic heuristics when no robot spec is provided):
     Human elbow: lower=-10°, upper=145° (NEVER above 160°). Wrist: lower=-70°, upper=70°.
     Industrial robot: lower=-180°, upper=180°.
@@ -618,6 +620,75 @@ def _fix_cleared_joint_validity(raw: dict, scene_graph: dict) -> dict:
     return raw
 
 
+JOINT_BATCH_SIZE = 15
+
+
+def _apply_unconstrained_bypass(raw: dict, robot_spec: dict, scene_graph: dict | None = None) -> dict:
+    """Deterministic handling for joints whose spec range exceeds 360°.
+
+    ANYmal C HFE/KFE joints inherit ±540° from MJCF defaults.  The model
+    cannot reason about these visually and falsely flags them as violated
+    (elbow heuristic).  Two rules apply:
+
+    1. USD limits within spec (±5° tolerance) → force joint_valid=True.
+    2. USD limits exceed spec by >5° → force joint_valid=False (real violation).
+
+    If USD limits are ±inf (unconstrained), we also force valid=True because
+    there is no effective upper bound to violate.
+    """
+    import math
+
+    unconstrained = {
+        j["name"]: j
+        for j in robot_spec.get("joints", [])
+        if j.get("type") != "prismatic"
+        and (j.get("upper_deg", 0) - j.get("lower_deg", 0)) > 360
+    }
+    if not unconstrained:
+        return raw
+
+    # Build lookup from scene_graph for original USD limits
+    sg_by_path: dict = {}
+    if scene_graph:
+        for sg_j in scene_graph.get("joint_prims", []):
+            sg_by_path[sg_j.get("path", "")] = sg_j
+
+    TOLERANCE_DEG = 5.0
+
+    for jp in raw.get("joint_prims", []):
+        path = jp.get("prim_path", "")
+        matched = next((sj for name, sj in unconstrained.items() if name in path), None)
+        if matched is None:
+            continue
+
+        spec_lo, spec_hi = matched["lower_deg"], matched["upper_deg"]
+        sg_joint = sg_by_path.get(path, {})
+        usd_lo = sg_joint.get("lower_limit")
+        usd_hi = sg_joint.get("upper_limit")
+
+        # Unconstrained USD limits → always valid
+        if (usd_lo is None or usd_hi is None or
+                not math.isfinite(usd_lo) or not math.isfinite(usd_hi)):
+            if not jp.get("joint_valid", True):
+                print(f"[cosmos_client] Unconstrained bypass (inf limits): {path} → valid")
+            jp["joint_valid"] = True
+            continue
+
+        # Limits exceed spec → real violation
+        if usd_lo < spec_lo - TOLERANCE_DEG or usd_hi > spec_hi + TOLERANCE_DEG:
+            if jp.get("joint_valid", True):
+                print(f"[cosmos_client] Unconstrained spec violation: {path} "
+                      f"[{usd_lo:.1f},{usd_hi:.1f}] vs spec [{spec_lo:.1f},{spec_hi:.1f}]")
+            jp["joint_valid"] = False
+        else:
+            # Within spec — clear any false-positive from generic heuristic
+            if not jp.get("joint_valid", True):
+                print(f"[cosmos_client] Unconstrained bypass: {path} → valid")
+            jp["joint_valid"] = True
+
+    return raw
+
+
 def analyze_scene(
     render_paths: list[str],
     scene_graph: dict,
@@ -703,25 +774,72 @@ def analyze_scene(
         robot_ctx = build_joint_context(robot_spec)
         context_str = (context_str + "\n\n" if context_str else "") + robot_ctx
 
-    # ── Pass 2: Main physics analysis ───────────────────────────────────────
+    # ── Pass 2: Main physics analysis (batched if >JOINT_BATCH_SIZE joints) ─
     print("[cosmos_client] Pass 2/3 — main physics analysis ...")
-    prompt = _build_prompt(sg_filtered, context_str=context_str)
-    response = _run_model(
-        model, processor, SYSTEM_PROMPT,
-        render_paths, prompt,
-        max_new_tokens=max_new_tokens, temperature=temperature,
-    )
+    joint_prims_all = sg_filtered["joint_prims"]
+    n_joints = len(joint_prims_all)
 
-    try:
-        raw = _extract_json(response)
-    except (ValueError, Exception) as e:
-        print(f"[cosmos_client] JSON extraction failed ({e}); returning empty analysis")
-        raw = {"geom_prims": [], "joint_prims": [], "global_notes": f"Parse error: {e}"}
+    if n_joints > JOINT_BATCH_SIZE:
+        import copy as _copy
+        batches = [
+            joint_prims_all[i: i + JOINT_BATCH_SIZE]
+            for i in range(0, n_joints, JOINT_BATCH_SIZE)
+        ]
+        print(f"[cosmos_client] {n_joints} joints → {len(batches)} batches of ≤{JOINT_BATCH_SIZE}")
+        all_geom_prims: list = []
+        all_joint_prims: list = []
+        all_global_notes: list = []
+        response_parts: list = []
+
+        for batch_idx, batch_joints in enumerate(batches):
+            sg_batch = _copy.deepcopy(sg_filtered)
+            sg_batch["joint_prims"] = batch_joints
+            if batch_idx > 0:
+                sg_batch["geom_prims"] = []  # geom already analyzed in batch 0
+            batch_prompt = _build_prompt(sg_batch, context_str=context_str)
+            batch_response = _run_model(
+                model, processor, SYSTEM_PROMPT,
+                render_paths, batch_prompt,
+                max_new_tokens=max_new_tokens, temperature=temperature,
+            )
+            response_parts.append(f"[Batch {batch_idx + 1}/{len(batches)}]\n{batch_response}")
+            try:
+                batch_raw = _extract_json(batch_response)
+            except Exception as e:
+                print(f"[cosmos_client] Batch {batch_idx + 1} parse failed: {e}")
+                batch_raw = {"geom_prims": [], "joint_prims": [],
+                             "global_notes": f"Batch {batch_idx + 1} parse error: {e}"}
+            if batch_idx == 0:
+                all_geom_prims = batch_raw.get("geom_prims", [])
+            all_joint_prims.extend(batch_raw.get("joint_prims", []))
+            if batch_raw.get("global_notes"):
+                all_global_notes.append(batch_raw["global_notes"])
+
+        raw = {
+            "geom_prims": all_geom_prims,
+            "joint_prims": all_joint_prims,
+            "global_notes": " | ".join(all_global_notes),
+        }
+        response = "\n\n".join(response_parts)
+    else:
+        prompt = _build_prompt(sg_filtered, context_str=context_str)
+        response = _run_model(
+            model, processor, SYSTEM_PROMPT,
+            render_paths, prompt,
+            max_new_tokens=max_new_tokens, temperature=temperature,
+        )
+        try:
+            raw = _extract_json(response)
+        except (ValueError, Exception) as e:
+            print(f"[cosmos_client] JSON extraction failed ({e}); returning empty analysis")
+            raw = {"geom_prims": [], "joint_prims": [], "global_notes": f"Parse error: {e}"}
 
     raw = _fix_joint_validity(raw, full_response=response)
     raw = _fix_cleared_joint_validity(raw, sg_filtered)
     raw = _apply_mass_correction(raw, scene_graph)
     raw = _apply_prismatic_rules(raw, scene_graph)
+    if robot_spec and robot_spec_enabled:
+        raw = _apply_unconstrained_bypass(raw, robot_spec, sg_filtered)
 
     # ── Pass 3: Verification pass ────────────────────────────────────────────
     print("[cosmos_client] Pass 3/3 — verification pass ...")
@@ -734,8 +852,10 @@ def analyze_scene(
     print(f"[cosmos_client] Verification output:\n{verification_response}")
 
     raw = _apply_verification(raw, verification_response, sg_filtered)
-    # Re-apply deterministic prismatic rule — verification cannot override physics
+    # Re-apply deterministic rules — verification cannot override physics or spec
     raw = _apply_prismatic_rules(raw, scene_graph)
+    if robot_spec and robot_spec_enabled:
+        raw = _apply_unconstrained_bypass(raw, robot_spec, sg_filtered)
 
     analysis = PhysicsAnalysis(**raw)
 

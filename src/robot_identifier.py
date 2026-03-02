@@ -58,6 +58,7 @@ def build_joint_context(spec: dict) -> str:
     """
     lines = [f"Robot: {spec['display_name']}", "Joint limits (degrees):"]
     joint_pairs: list[str] = []
+    has_unconstrained = False
     for j in spec["joints"]:
         if j["type"] == "prismatic":
             # prismatic: show in metres, not degrees
@@ -65,12 +66,22 @@ def build_joint_context(spec: dict) -> str:
             joint_pairs.append(f"  {j['name']}: [{lo:.4f}, {hi:.4f}] m (prismatic)")
         else:
             lo, hi = j["lower_deg"], j["upper_deg"]
-            note = ""
-            # Flag obviously asymmetric wide-range joints so model doesn't flag them
-            if lo > 0 or hi < 0:
+            range_deg = hi - lo
+            if range_deg > 360:
+                # Effectively unconstrained — spec defines no real upper limit
+                note = " [UNCONSTRAINED — always mark valid]"
+                has_unconstrained = True
+            elif lo > 0 or hi < 0:
                 note = " [asymmetric by design]"
             elif abs(hi) > 180 or abs(lo) > 180:
                 note = " [wide-range by design]"
+            else:
+                note = ""
             joint_pairs.append(f"  {j['name']}: [{lo:.1f}, {hi:.1f}]°{note}")
     lines.extend(joint_pairs)
+    if has_unconstrained:
+        lines.append(
+            "NOTE: Joints marked [UNCONSTRAINED] have no effective limit — "
+            "always set joint_valid=true for these joints regardless of USD limits."
+        )
     return "\n".join(lines)
