@@ -1,0 +1,1910 @@
+{
+  "franka_fr3": {
+    "display_name": "Franka FR3",
+    "identifier_keys": [
+      "fr3",
+      "franka_fr3"
+    ],
+    "source_xml": "mujoco_menagerie/franka_fr3/fr3.xml",
+    "joints": [
+      {
+        "name": "fr3_joint1",
+        "type": "revolute",
+        "lower_deg": -157.2,
+        "upper_deg": 157.2,
+        "lower_rad": -2.7437,
+        "upper_rad": 2.7437
+      },
+      {
+        "name": "fr3_joint2",
+        "type": "revolute",
+        "lower_deg": -102.2,
+        "upper_deg": 102.2,
+        "lower_rad": -1.7837,
+        "upper_rad": 1.7837
+      },
+      {
+        "name": "fr3_joint3",
+        "type": "revolute",
+        "lower_deg": -166.2,
+        "upper_deg": 166.2,
+        "lower_rad": -2.9007,
+        "upper_rad": 2.9007
+      },
+      {
+        "name": "fr3_joint4",
+        "type": "revolute",
+        "lower_deg": -174.3,
+        "upper_deg": -8.7,
+        "lower_rad": -3.0421,
+        "upper_rad": -0.1518
+      },
+      {
+        "name": "fr3_joint5",
+        "type": "revolute",
+        "lower_deg": -160.8,
+        "upper_deg": 160.8,
+        "lower_rad": -2.8065,
+        "upper_rad": 2.8065
+      },
+      {
+        "name": "fr3_joint6",
+        "type": "revolute",
+        "lower_deg": 31.2,
+        "upper_deg": 258.8,
+        "lower_rad": 0.5445,
+        "upper_rad": 4.5169
+      },
+      {
+        "name": "fr3_joint7",
+        "type": "revolute",
+        "lower_deg": -172.8,
+        "upper_deg": 172.8,
+        "lower_rad": -3.0159,
+        "upper_rad": 3.0159
+      }
+    ],
+    "links": [
+      {
+        "name": "fr3_link1",
+        "mass_kg": 2.9275
+      },
+      {
+        "name": "fr3_link2",
+        "mass_kg": 2.9355
+      },
+      {
+        "name": "fr3_link3",
+        "mass_kg": 2.2449
+      },
+      {
+        "name": "fr3_link4",
+        "mass_kg": 2.6156
+      },
+      {
+        "name": "fr3_link5",
+        "mass_kg": 2.3271
+      },
+      {
+        "name": "fr3_link6",
+        "mass_kg": 1.817
+      },
+      {
+        "name": "fr3_link7",
+        "mass_kg": 0.6271
+      }
+    ]
+  },
+  "franka_fr3_v2": {
+    "display_name": "Franka FR3 v2",
+    "identifier_keys": [
+      "fr3_v2"
+    ],
+    "source_xml": "mujoco_menagerie/franka_fr3_v2/fr3v2.xml",
+    "joints": [
+      {
+        "name": "fr3v2_joint1",
+        "type": "revolute",
+        "lower_deg": -157.2,
+        "upper_deg": 157.2,
+        "lower_rad": -2.7437,
+        "upper_rad": 2.7437
+      },
+      {
+        "name": "fr3v2_joint2",
+        "type": "revolute",
+        "lower_deg": -102.2,
+        "upper_deg": 102.2,
+        "lower_rad": -1.7837,
+        "upper_rad": 1.7837
+      },
+      {
+        "name": "fr3v2_joint3",
+        "type": "revolute",
+        "lower_deg": -166.2,
+        "upper_deg": 166.2,
+        "lower_rad": -2.9007,
+        "upper_rad": 2.9007
+      },
+      {
+        "name": "fr3v2_joint4",
+        "type": "revolute",
+        "lower_deg": -174.3,
+        "upper_deg": -8.7,
+        "lower_rad": -3.0421,
+        "upper_rad": -0.1518
+      },
+      {
+        "name": "fr3v2_joint5",
+        "type": "revolute",
+        "lower_deg": -160.8,
+        "upper_deg": 160.8,
+        "lower_rad": -2.8065,
+        "upper_rad": 2.8065
+      },
+      {
+        "name": "fr3v2_joint6",
+        "type": "revolute",
+        "lower_deg": 31.2,
+        "upper_deg": 258.8,
+        "lower_rad": 0.5445,
+        "upper_rad": 4.5169
+      },
+      {
+        "name": "fr3v2_joint7",
+        "type": "revolute",
+        "lower_deg": -172.8,
+        "upper_deg": 172.8,
+        "lower_rad": -3.0159,
+        "upper_rad": 3.0159
+      }
+    ],
+    "links": [
+      {
+        "name": "fr3v2_link0",
+        "mass_kg": 3.85
+      },
+      {
+        "name": "fr3v2_link1",
+        "mass_kg": 2.4377
+      },
+      {
+        "name": "fr3v2_link2",
+        "mass_kg": 2.2375
+      },
+      {
+        "name": "fr3v2_link3",
+        "mass_kg": 2.1858
+      },
+      {
+        "name": "fr3v2_link4",
+        "mass_kg": 2.1759
+      },
+      {
+        "name": "fr3v2_link5",
+        "mass_kg": 2.1748
+      },
+      {
+        "name": "fr3v2_link6",
+        "mass_kg": 1.5676
+      },
+      {
+        "name": "fr3v2_link7",
+        "mass_kg": 0.6829
+      }
+    ]
+  },
+  "franka_emika_panda": {
+    "display_name": "Franka Panda",
+    "identifier_keys": [
+      "panda",
+      "franka_panda",
+      "franka_emika"
+    ],
+    "source_xml": "mujoco_menagerie/franka_emika_panda/panda.xml",
+    "joints": [
+      {
+        "name": "joint1",
+        "type": "revolute",
+        "lower_deg": -166.0,
+        "upper_deg": 166.0,
+        "lower_rad": -2.8973,
+        "upper_rad": 2.8973
+      },
+      {
+        "name": "joint2",
+        "type": "revolute",
+        "lower_deg": -101.0,
+        "upper_deg": 101.0,
+        "lower_rad": -1.7628,
+        "upper_rad": 1.7628
+      },
+      {
+        "name": "joint3",
+        "type": "revolute",
+        "lower_deg": -166.0,
+        "upper_deg": 166.0,
+        "lower_rad": -2.8973,
+        "upper_rad": 2.8973
+      },
+      {
+        "name": "joint4",
+        "type": "revolute",
+        "lower_deg": -176.0,
+        "upper_deg": -4.0,
+        "lower_rad": -3.0718,
+        "upper_rad": -0.0698
+      },
+      {
+        "name": "joint5",
+        "type": "revolute",
+        "lower_deg": -166.0,
+        "upper_deg": 166.0,
+        "lower_rad": -2.8973,
+        "upper_rad": 2.8973
+      },
+      {
+        "name": "joint6",
+        "type": "revolute",
+        "lower_deg": -1.0,
+        "upper_deg": 215.0,
+        "lower_rad": -0.0175,
+        "upper_rad": 3.7525
+      },
+      {
+        "name": "joint7",
+        "type": "revolute",
+        "lower_deg": -166.0,
+        "upper_deg": 166.0,
+        "lower_rad": -2.8973,
+        "upper_rad": 2.8973
+      },
+      {
+        "name": "finger_joint1",
+        "type": "prismatic",
+        "lower_deg": 0.0,
+        "upper_deg": 0.04,
+        "lower_rad": 0.0,
+        "upper_rad": 0.04
+      },
+      {
+        "name": "finger_joint2",
+        "type": "prismatic",
+        "lower_deg": 0.0,
+        "upper_deg": 0.04,
+        "lower_rad": 0.0,
+        "upper_rad": 0.04
+      }
+    ],
+    "links": [
+      {
+        "name": "link0",
+        "mass_kg": 0.6298
+      },
+      {
+        "name": "link1",
+        "mass_kg": 4.9707
+      },
+      {
+        "name": "link2",
+        "mass_kg": 0.6469
+      },
+      {
+        "name": "link3",
+        "mass_kg": 3.2286
+      },
+      {
+        "name": "link4",
+        "mass_kg": 3.5879
+      },
+      {
+        "name": "link5",
+        "mass_kg": 1.2259
+      },
+      {
+        "name": "link6",
+        "mass_kg": 1.6666
+      },
+      {
+        "name": "link7",
+        "mass_kg": 0.7355
+      },
+      {
+        "name": "hand",
+        "mass_kg": 0.73
+      },
+      {
+        "name": "left_finger",
+        "mass_kg": 0.015
+      },
+      {
+        "name": "right_finger",
+        "mass_kg": 0.015
+      }
+    ]
+  },
+  "kuka_iiwa_14": {
+    "display_name": "KUKA iiwa 14",
+    "identifier_keys": [
+      "iiwa",
+      "iiwa14",
+      "kuka"
+    ],
+    "source_xml": "mujoco_menagerie/kuka_iiwa_14/iiwa14.xml",
+    "joints": [
+      {
+        "name": "joint1",
+        "type": "revolute",
+        "lower_deg": -170.0,
+        "upper_deg": 170.0,
+        "lower_rad": -2.96706,
+        "upper_rad": 2.96706
+      },
+      {
+        "name": "joint2",
+        "type": "revolute",
+        "lower_deg": -120.0,
+        "upper_deg": 120.0,
+        "lower_rad": -2.0944,
+        "upper_rad": 2.0944
+      },
+      {
+        "name": "joint3",
+        "type": "revolute",
+        "lower_deg": -170.0,
+        "upper_deg": 170.0,
+        "lower_rad": -2.96706,
+        "upper_rad": 2.96706
+      },
+      {
+        "name": "joint4",
+        "type": "revolute",
+        "lower_deg": -120.0,
+        "upper_deg": 120.0,
+        "lower_rad": -2.0944,
+        "upper_rad": 2.0944
+      },
+      {
+        "name": "joint5",
+        "type": "revolute",
+        "lower_deg": -170.0,
+        "upper_deg": 170.0,
+        "lower_rad": -2.96706,
+        "upper_rad": 2.96706
+      },
+      {
+        "name": "joint6",
+        "type": "revolute",
+        "lower_deg": -120.0,
+        "upper_deg": 120.0,
+        "lower_rad": -2.0944,
+        "upper_rad": 2.0944
+      },
+      {
+        "name": "joint7",
+        "type": "revolute",
+        "lower_deg": -175.0,
+        "upper_deg": 175.0,
+        "lower_rad": -3.05433,
+        "upper_rad": 3.05433
+      }
+    ],
+    "links": [
+      {
+        "name": "base",
+        "mass_kg": 5.0
+      },
+      {
+        "name": "link1",
+        "mass_kg": 5.76
+      },
+      {
+        "name": "link2",
+        "mass_kg": 6.35
+      },
+      {
+        "name": "link3",
+        "mass_kg": 3.5
+      },
+      {
+        "name": "link4",
+        "mass_kg": 3.5
+      },
+      {
+        "name": "link5",
+        "mass_kg": 3.5
+      },
+      {
+        "name": "link6",
+        "mass_kg": 1.8
+      },
+      {
+        "name": "link7",
+        "mass_kg": 1.2
+      }
+    ]
+  },
+  "boston_dynamics_spot": {
+    "display_name": "Boston Dynamics Spot",
+    "identifier_keys": [
+      "spot"
+    ],
+    "source_xml": "mujoco_menagerie/boston_dynamics_spot/spot.xml",
+    "joints": [
+      {
+        "name": "fl_hx",
+        "type": "revolute",
+        "lower_deg": -45.0,
+        "upper_deg": 45.0,
+        "lower_rad": -0.785398,
+        "upper_rad": 0.785398
+      },
+      {
+        "name": "fl_hy",
+        "type": "revolute",
+        "lower_deg": -51.5,
+        "upper_deg": 131.5,
+        "lower_rad": -0.898845,
+        "upper_rad": 2.29511
+      },
+      {
+        "name": "fl_kn",
+        "type": "revolute",
+        "lower_deg": -160.02,
+        "upper_deg": -14.58,
+        "lower_rad": -2.7929,
+        "upper_rad": -0.254402
+      },
+      {
+        "name": "fr_hx",
+        "type": "revolute",
+        "lower_deg": -45.0,
+        "upper_deg": 45.0,
+        "lower_rad": -0.785398,
+        "upper_rad": 0.785398
+      },
+      {
+        "name": "fr_hy",
+        "type": "revolute",
+        "lower_deg": -51.5,
+        "upper_deg": 128.55,
+        "lower_rad": -0.898845,
+        "upper_rad": 2.24363
+      },
+      {
+        "name": "fr_kn",
+        "type": "revolute",
+        "lower_deg": -160.02,
+        "upper_deg": -14.65,
+        "lower_rad": -2.7929,
+        "upper_rad": -0.255648
+      },
+      {
+        "name": "hl_hx",
+        "type": "revolute",
+        "lower_deg": -45.0,
+        "upper_deg": 45.0,
+        "lower_rad": -0.785398,
+        "upper_rad": 0.785398
+      },
+      {
+        "name": "hl_hy",
+        "type": "revolute",
+        "lower_deg": -51.5,
+        "upper_deg": 131.5,
+        "lower_rad": -0.898845,
+        "upper_rad": 2.29511
+      },
+      {
+        "name": "hl_kn",
+        "type": "revolute",
+        "lower_deg": -160.02,
+        "upper_deg": -14.16,
+        "lower_rad": -2.7929,
+        "upper_rad": -0.247067
+      },
+      {
+        "name": "hr_hx",
+        "type": "revolute",
+        "lower_deg": -45.0,
+        "upper_deg": 45.0,
+        "lower_rad": -0.785398,
+        "upper_rad": 0.785398
+      },
+      {
+        "name": "hr_hy",
+        "type": "revolute",
+        "lower_deg": -51.5,
+        "upper_deg": 131.5,
+        "lower_rad": -0.898845,
+        "upper_rad": 2.29511
+      },
+      {
+        "name": "hr_kn",
+        "type": "revolute",
+        "lower_deg": -160.02,
+        "upper_deg": -14.23,
+        "lower_rad": -2.7929,
+        "upper_rad": -0.248282
+      }
+    ],
+    "links": [
+      {
+        "name": "body",
+        "mass_kg": 32.86
+      },
+      {
+        "name": "fl_hip",
+        "mass_kg": 1.68
+      },
+      {
+        "name": "fl_uleg",
+        "mass_kg": 2.34
+      },
+      {
+        "name": "fl_lleg",
+        "mass_kg": 0.35
+      },
+      {
+        "name": "fr_hip",
+        "mass_kg": 1.68
+      },
+      {
+        "name": "fr_uleg",
+        "mass_kg": 2.34
+      },
+      {
+        "name": "fr_lleg",
+        "mass_kg": 0.35
+      },
+      {
+        "name": "hl_hip",
+        "mass_kg": 1.68
+      },
+      {
+        "name": "hl_uleg",
+        "mass_kg": 2.34
+      },
+      {
+        "name": "hl_lleg",
+        "mass_kg": 0.35
+      },
+      {
+        "name": "hr_hip",
+        "mass_kg": 1.68
+      },
+      {
+        "name": "hr_uleg",
+        "mass_kg": 2.34
+      },
+      {
+        "name": "hr_lleg",
+        "mass_kg": 0.35
+      }
+    ]
+  },
+  "unitree_go2": {
+    "display_name": "Unitree Go2",
+    "identifier_keys": [
+      "go2",
+      "unitree_go2"
+    ],
+    "source_xml": "mujoco_menagerie/unitree_go2/go2.xml",
+    "joints": [
+      {
+        "name": "FL_hip_joint",
+        "type": "revolute",
+        "lower_deg": -60.0,
+        "upper_deg": 60.0,
+        "lower_rad": -1.0472,
+        "upper_rad": 1.0472
+      },
+      {
+        "name": "FL_thigh_joint",
+        "type": "revolute",
+        "lower_deg": -90.0,
+        "upper_deg": 200.0,
+        "lower_rad": -1.5708,
+        "upper_rad": 3.4907
+      },
+      {
+        "name": "FL_calf_joint",
+        "type": "revolute",
+        "lower_deg": -156.0,
+        "upper_deg": -48.0,
+        "lower_rad": -2.7227,
+        "upper_rad": -0.83776
+      },
+      {
+        "name": "FR_hip_joint",
+        "type": "revolute",
+        "lower_deg": -60.0,
+        "upper_deg": 60.0,
+        "lower_rad": -1.0472,
+        "upper_rad": 1.0472
+      },
+      {
+        "name": "FR_thigh_joint",
+        "type": "revolute",
+        "lower_deg": -90.0,
+        "upper_deg": 200.0,
+        "lower_rad": -1.5708,
+        "upper_rad": 3.4907
+      },
+      {
+        "name": "FR_calf_joint",
+        "type": "revolute",
+        "lower_deg": -156.0,
+        "upper_deg": -48.0,
+        "lower_rad": -2.7227,
+        "upper_rad": -0.83776
+      },
+      {
+        "name": "RL_hip_joint",
+        "type": "revolute",
+        "lower_deg": -60.0,
+        "upper_deg": 60.0,
+        "lower_rad": -1.0472,
+        "upper_rad": 1.0472
+      },
+      {
+        "name": "RL_thigh_joint",
+        "type": "revolute",
+        "lower_deg": -30.0,
+        "upper_deg": 260.0,
+        "lower_rad": -0.5236,
+        "upper_rad": 4.5379
+      },
+      {
+        "name": "RL_calf_joint",
+        "type": "revolute",
+        "lower_deg": -156.0,
+        "upper_deg": -48.0,
+        "lower_rad": -2.7227,
+        "upper_rad": -0.83776
+      },
+      {
+        "name": "RR_hip_joint",
+        "type": "revolute",
+        "lower_deg": -60.0,
+        "upper_deg": 60.0,
+        "lower_rad": -1.0472,
+        "upper_rad": 1.0472
+      },
+      {
+        "name": "RR_thigh_joint",
+        "type": "revolute",
+        "lower_deg": -30.0,
+        "upper_deg": 260.0,
+        "lower_rad": -0.5236,
+        "upper_rad": 4.5379
+      },
+      {
+        "name": "RR_calf_joint",
+        "type": "revolute",
+        "lower_deg": -156.0,
+        "upper_deg": -48.0,
+        "lower_rad": -2.7227,
+        "upper_rad": -0.83776
+      }
+    ],
+    "links": [
+      {
+        "name": "base",
+        "mass_kg": 6.921
+      },
+      {
+        "name": "FL_hip",
+        "mass_kg": 0.678
+      },
+      {
+        "name": "FL_thigh",
+        "mass_kg": 1.152
+      },
+      {
+        "name": "FL_calf",
+        "mass_kg": 0.2414
+      },
+      {
+        "name": "FR_hip",
+        "mass_kg": 0.678
+      },
+      {
+        "name": "FR_thigh",
+        "mass_kg": 1.152
+      },
+      {
+        "name": "FR_calf",
+        "mass_kg": 0.2414
+      },
+      {
+        "name": "RL_hip",
+        "mass_kg": 0.678
+      },
+      {
+        "name": "RL_thigh",
+        "mass_kg": 1.152
+      },
+      {
+        "name": "RL_calf",
+        "mass_kg": 0.2414
+      },
+      {
+        "name": "RR_hip",
+        "mass_kg": 0.678
+      },
+      {
+        "name": "RR_thigh",
+        "mass_kg": 1.152
+      },
+      {
+        "name": "RR_calf",
+        "mass_kg": 0.2414
+      }
+    ]
+  },
+  "unitree_go1": {
+    "display_name": "Unitree Go1",
+    "identifier_keys": [
+      "go1",
+      "unitree_go1"
+    ],
+    "source_xml": "mujoco_menagerie/unitree_go1/go1.xml",
+    "joints": [
+      {
+        "name": "FR_hip_joint",
+        "type": "revolute",
+        "lower_deg": -49.45,
+        "upper_deg": 49.45,
+        "lower_rad": -0.863,
+        "upper_rad": 0.863
+      },
+      {
+        "name": "FR_thigh_joint",
+        "type": "revolute",
+        "lower_deg": -39.3,
+        "upper_deg": 257.89,
+        "lower_rad": -0.686,
+        "upper_rad": 4.501
+      },
+      {
+        "name": "FR_calf_joint",
+        "type": "revolute",
+        "lower_deg": -161.46,
+        "upper_deg": -50.88,
+        "lower_rad": -2.818,
+        "upper_rad": -0.888
+      },
+      {
+        "name": "FL_hip_joint",
+        "type": "revolute",
+        "lower_deg": -49.45,
+        "upper_deg": 49.45,
+        "lower_rad": -0.863,
+        "upper_rad": 0.863
+      },
+      {
+        "name": "FL_thigh_joint",
+        "type": "revolute",
+        "lower_deg": -39.3,
+        "upper_deg": 257.89,
+        "lower_rad": -0.686,
+        "upper_rad": 4.501
+      },
+      {
+        "name": "FL_calf_joint",
+        "type": "revolute",
+        "lower_deg": -161.46,
+        "upper_deg": -50.88,
+        "lower_rad": -2.818,
+        "upper_rad": -0.888
+      },
+      {
+        "name": "RR_hip_joint",
+        "type": "revolute",
+        "lower_deg": -49.45,
+        "upper_deg": 49.45,
+        "lower_rad": -0.863,
+        "upper_rad": 0.863
+      },
+      {
+        "name": "RR_thigh_joint",
+        "type": "revolute",
+        "lower_deg": -39.3,
+        "upper_deg": 257.89,
+        "lower_rad": -0.686,
+        "upper_rad": 4.501
+      },
+      {
+        "name": "RR_calf_joint",
+        "type": "revolute",
+        "lower_deg": -161.46,
+        "upper_deg": -50.88,
+        "lower_rad": -2.818,
+        "upper_rad": -0.888
+      },
+      {
+        "name": "RL_hip_joint",
+        "type": "revolute",
+        "lower_deg": -49.45,
+        "upper_deg": 49.45,
+        "lower_rad": -0.863,
+        "upper_rad": 0.863
+      },
+      {
+        "name": "RL_thigh_joint",
+        "type": "revolute",
+        "lower_deg": -39.3,
+        "upper_deg": 257.89,
+        "lower_rad": -0.686,
+        "upper_rad": 4.501
+      },
+      {
+        "name": "RL_calf_joint",
+        "type": "revolute",
+        "lower_deg": -161.46,
+        "upper_deg": -50.88,
+        "lower_rad": -2.818,
+        "upper_rad": -0.888
+      }
+    ],
+    "links": [
+      {
+        "name": "trunk",
+        "mass_kg": 5.204
+      },
+      {
+        "name": "FR_hip",
+        "mass_kg": 0.68
+      },
+      {
+        "name": "FR_thigh",
+        "mass_kg": 1.009
+      },
+      {
+        "name": "FR_calf",
+        "mass_kg": 0.1959
+      },
+      {
+        "name": "FL_hip",
+        "mass_kg": 0.68
+      },
+      {
+        "name": "FL_thigh",
+        "mass_kg": 1.009
+      },
+      {
+        "name": "FL_calf",
+        "mass_kg": 0.1959
+      },
+      {
+        "name": "RR_hip",
+        "mass_kg": 0.68
+      },
+      {
+        "name": "RR_thigh",
+        "mass_kg": 1.009
+      },
+      {
+        "name": "RR_calf",
+        "mass_kg": 0.1959
+      },
+      {
+        "name": "RL_hip",
+        "mass_kg": 0.68
+      },
+      {
+        "name": "RL_thigh",
+        "mass_kg": 1.009
+      },
+      {
+        "name": "RL_calf",
+        "mass_kg": 0.1959
+      }
+    ]
+  },
+  "unitree_h1": {
+    "display_name": "Unitree H1",
+    "identifier_keys": [
+      "h1",
+      "unitree_h1"
+    ],
+    "source_xml": "mujoco_menagerie/unitree_h1/h1.xml",
+    "joints": [
+      {
+        "name": "left_hip_yaw",
+        "type": "revolute",
+        "lower_deg": -24.64,
+        "upper_deg": 24.64,
+        "lower_rad": -0.43,
+        "upper_rad": 0.43
+      },
+      {
+        "name": "left_hip_roll",
+        "type": "revolute",
+        "lower_deg": -24.64,
+        "upper_deg": 24.64,
+        "lower_rad": -0.43,
+        "upper_rad": 0.43
+      },
+      {
+        "name": "left_hip_pitch",
+        "type": "revolute",
+        "lower_deg": -89.95,
+        "upper_deg": 89.95,
+        "lower_rad": -1.57,
+        "upper_rad": 1.57
+      },
+      {
+        "name": "left_knee",
+        "type": "revolute",
+        "lower_deg": -14.9,
+        "upper_deg": 117.46,
+        "lower_rad": -0.26,
+        "upper_rad": 2.05
+      },
+      {
+        "name": "left_ankle",
+        "type": "revolute",
+        "lower_deg": -49.85,
+        "upper_deg": 29.79,
+        "lower_rad": -0.87,
+        "upper_rad": 0.52
+      },
+      {
+        "name": "right_hip_yaw",
+        "type": "revolute",
+        "lower_deg": -24.64,
+        "upper_deg": 24.64,
+        "lower_rad": -0.43,
+        "upper_rad": 0.43
+      },
+      {
+        "name": "right_hip_roll",
+        "type": "revolute",
+        "lower_deg": -24.64,
+        "upper_deg": 24.64,
+        "lower_rad": -0.43,
+        "upper_rad": 0.43
+      },
+      {
+        "name": "right_hip_pitch",
+        "type": "revolute",
+        "lower_deg": -89.95,
+        "upper_deg": 89.95,
+        "lower_rad": -1.57,
+        "upper_rad": 1.57
+      },
+      {
+        "name": "right_knee",
+        "type": "revolute",
+        "lower_deg": -14.9,
+        "upper_deg": 117.46,
+        "lower_rad": -0.26,
+        "upper_rad": 2.05
+      },
+      {
+        "name": "right_ankle",
+        "type": "revolute",
+        "lower_deg": -49.85,
+        "upper_deg": 29.79,
+        "lower_rad": -0.87,
+        "upper_rad": 0.52
+      },
+      {
+        "name": "torso",
+        "type": "revolute",
+        "lower_deg": -134.65,
+        "upper_deg": 134.65,
+        "lower_rad": -2.35,
+        "upper_rad": 2.35
+      },
+      {
+        "name": "left_shoulder_pitch",
+        "type": "revolute",
+        "lower_deg": -164.44,
+        "upper_deg": 164.44,
+        "lower_rad": -2.87,
+        "upper_rad": 2.87
+      },
+      {
+        "name": "left_shoulder_roll",
+        "type": "revolute",
+        "lower_deg": -19.48,
+        "upper_deg": 178.19,
+        "lower_rad": -0.34,
+        "upper_rad": 3.11
+      },
+      {
+        "name": "left_shoulder_yaw",
+        "type": "revolute",
+        "lower_deg": -74.48,
+        "upper_deg": 254.97,
+        "lower_rad": -1.3,
+        "upper_rad": 4.45
+      },
+      {
+        "name": "left_elbow",
+        "type": "revolute",
+        "lower_deg": -71.62,
+        "upper_deg": 149.54,
+        "lower_rad": -1.25,
+        "upper_rad": 2.61
+      },
+      {
+        "name": "right_shoulder_pitch",
+        "type": "revolute",
+        "lower_deg": -164.44,
+        "upper_deg": 164.44,
+        "lower_rad": -2.87,
+        "upper_rad": 2.87
+      },
+      {
+        "name": "right_shoulder_roll",
+        "type": "revolute",
+        "lower_deg": -178.19,
+        "upper_deg": 19.48,
+        "lower_rad": -3.11,
+        "upper_rad": 0.34
+      },
+      {
+        "name": "right_shoulder_yaw",
+        "type": "revolute",
+        "lower_deg": -254.97,
+        "upper_deg": 74.48,
+        "lower_rad": -4.45,
+        "upper_rad": 1.3
+      },
+      {
+        "name": "right_elbow",
+        "type": "revolute",
+        "lower_deg": -71.62,
+        "upper_deg": 149.54,
+        "lower_rad": -1.25,
+        "upper_rad": 2.61
+      }
+    ],
+    "links": [
+      {
+        "name": "pelvis",
+        "mass_kg": 5.39
+      },
+      {
+        "name": "left_hip_yaw_link",
+        "mass_kg": 2.244
+      },
+      {
+        "name": "left_hip_roll_link",
+        "mass_kg": 2.232
+      },
+      {
+        "name": "left_hip_pitch_link",
+        "mass_kg": 4.152
+      },
+      {
+        "name": "left_knee_link",
+        "mass_kg": 1.721
+      },
+      {
+        "name": "left_ankle_link",
+        "mass_kg": 0.446
+      },
+      {
+        "name": "right_hip_yaw_link",
+        "mass_kg": 2.244
+      },
+      {
+        "name": "right_hip_roll_link",
+        "mass_kg": 2.232
+      },
+      {
+        "name": "right_hip_pitch_link",
+        "mass_kg": 4.152
+      },
+      {
+        "name": "right_knee_link",
+        "mass_kg": 1.721
+      },
+      {
+        "name": "right_ankle_link",
+        "mass_kg": 0.446
+      },
+      {
+        "name": "torso_link",
+        "mass_kg": 17.789
+      },
+      {
+        "name": "left_shoulder_pitch_link",
+        "mass_kg": 1.033
+      },
+      {
+        "name": "left_shoulder_roll_link",
+        "mass_kg": 0.793
+      },
+      {
+        "name": "left_shoulder_yaw_link",
+        "mass_kg": 0.839
+      },
+      {
+        "name": "left_elbow_link",
+        "mass_kg": 0.669
+      },
+      {
+        "name": "right_shoulder_pitch_link",
+        "mass_kg": 1.033
+      },
+      {
+        "name": "right_shoulder_roll_link",
+        "mass_kg": 0.793
+      },
+      {
+        "name": "right_shoulder_yaw_link",
+        "mass_kg": 0.839
+      },
+      {
+        "name": "right_elbow_link",
+        "mass_kg": 0.669
+      }
+    ]
+  },
+  "unitree_g1": {
+    "display_name": "Unitree G1",
+    "identifier_keys": [
+      "g1",
+      "unitree_g1"
+    ],
+    "source_xml": "mujoco_menagerie/unitree_g1/g1.xml",
+    "joints": [
+      {
+        "name": "left_hip_pitch_joint",
+        "type": "revolute",
+        "lower_deg": -145.0,
+        "upper_deg": 165.0,
+        "lower_rad": -2.5307,
+        "upper_rad": 2.8798
+      },
+      {
+        "name": "left_hip_roll_joint",
+        "type": "revolute",
+        "lower_deg": -30.0,
+        "upper_deg": 170.0,
+        "lower_rad": -0.5236,
+        "upper_rad": 2.9671
+      },
+      {
+        "name": "left_hip_yaw_joint",
+        "type": "revolute",
+        "lower_deg": -158.0,
+        "upper_deg": 158.0,
+        "lower_rad": -2.7576,
+        "upper_rad": 2.7576
+      },
+      {
+        "name": "left_knee_joint",
+        "type": "revolute",
+        "lower_deg": -5.0,
+        "upper_deg": 165.0,
+        "lower_rad": -0.087267,
+        "upper_rad": 2.8798
+      },
+      {
+        "name": "left_ankle_pitch_joint",
+        "type": "revolute",
+        "lower_deg": -50.0,
+        "upper_deg": 30.0,
+        "lower_rad": -0.87267,
+        "upper_rad": 0.5236
+      },
+      {
+        "name": "left_ankle_roll_joint",
+        "type": "revolute",
+        "lower_deg": -15.0,
+        "upper_deg": 15.0,
+        "lower_rad": -0.2618,
+        "upper_rad": 0.2618
+      },
+      {
+        "name": "right_hip_pitch_joint",
+        "type": "revolute",
+        "lower_deg": -145.0,
+        "upper_deg": 165.0,
+        "lower_rad": -2.5307,
+        "upper_rad": 2.8798
+      },
+      {
+        "name": "right_hip_roll_joint",
+        "type": "revolute",
+        "lower_deg": -170.0,
+        "upper_deg": 30.0,
+        "lower_rad": -2.9671,
+        "upper_rad": 0.5236
+      },
+      {
+        "name": "right_hip_yaw_joint",
+        "type": "revolute",
+        "lower_deg": -158.0,
+        "upper_deg": 158.0,
+        "lower_rad": -2.7576,
+        "upper_rad": 2.7576
+      },
+      {
+        "name": "right_knee_joint",
+        "type": "revolute",
+        "lower_deg": -5.0,
+        "upper_deg": 165.0,
+        "lower_rad": -0.087267,
+        "upper_rad": 2.8798
+      },
+      {
+        "name": "right_ankle_pitch_joint",
+        "type": "revolute",
+        "lower_deg": -50.0,
+        "upper_deg": 30.0,
+        "lower_rad": -0.87267,
+        "upper_rad": 0.5236
+      },
+      {
+        "name": "right_ankle_roll_joint",
+        "type": "revolute",
+        "lower_deg": -15.0,
+        "upper_deg": 15.0,
+        "lower_rad": -0.2618,
+        "upper_rad": 0.2618
+      },
+      {
+        "name": "waist_yaw_joint",
+        "type": "revolute",
+        "lower_deg": -150.0,
+        "upper_deg": 150.0,
+        "lower_rad": -2.618,
+        "upper_rad": 2.618
+      },
+      {
+        "name": "waist_roll_joint",
+        "type": "revolute",
+        "lower_deg": -29.79,
+        "upper_deg": 29.79,
+        "lower_rad": -0.52,
+        "upper_rad": 0.52
+      },
+      {
+        "name": "waist_pitch_joint",
+        "type": "revolute",
+        "lower_deg": -29.79,
+        "upper_deg": 29.79,
+        "lower_rad": -0.52,
+        "upper_rad": 0.52
+      },
+      {
+        "name": "left_shoulder_pitch_joint",
+        "type": "revolute",
+        "lower_deg": -177.0,
+        "upper_deg": 153.0,
+        "lower_rad": -3.0892,
+        "upper_rad": 2.6704
+      },
+      {
+        "name": "left_shoulder_roll_joint",
+        "type": "revolute",
+        "lower_deg": -91.0,
+        "upper_deg": 129.0,
+        "lower_rad": -1.5882,
+        "upper_rad": 2.2515
+      },
+      {
+        "name": "left_shoulder_yaw_joint",
+        "type": "revolute",
+        "lower_deg": -150.0,
+        "upper_deg": 150.0,
+        "lower_rad": -2.618,
+        "upper_rad": 2.618
+      },
+      {
+        "name": "left_elbow_joint",
+        "type": "revolute",
+        "lower_deg": -60.0,
+        "upper_deg": 120.0,
+        "lower_rad": -1.0472,
+        "upper_rad": 2.0944
+      },
+      {
+        "name": "left_wrist_roll_joint",
+        "type": "revolute",
+        "lower_deg": -113.0,
+        "upper_deg": 113.0,
+        "lower_rad": -1.97222,
+        "upper_rad": 1.97222
+      },
+      {
+        "name": "left_wrist_pitch_joint",
+        "type": "revolute",
+        "lower_deg": -92.5,
+        "upper_deg": 92.5,
+        "lower_rad": -1.61443,
+        "upper_rad": 1.61443
+      },
+      {
+        "name": "left_wrist_yaw_joint",
+        "type": "revolute",
+        "lower_deg": -92.5,
+        "upper_deg": 92.5,
+        "lower_rad": -1.61443,
+        "upper_rad": 1.61443
+      },
+      {
+        "name": "right_shoulder_pitch_joint",
+        "type": "revolute",
+        "lower_deg": -177.0,
+        "upper_deg": 153.0,
+        "lower_rad": -3.0892,
+        "upper_rad": 2.6704
+      },
+      {
+        "name": "right_shoulder_roll_joint",
+        "type": "revolute",
+        "lower_deg": -129.0,
+        "upper_deg": 91.0,
+        "lower_rad": -2.2515,
+        "upper_rad": 1.5882
+      },
+      {
+        "name": "right_shoulder_yaw_joint",
+        "type": "revolute",
+        "lower_deg": -150.0,
+        "upper_deg": 150.0,
+        "lower_rad": -2.618,
+        "upper_rad": 2.618
+      },
+      {
+        "name": "right_elbow_joint",
+        "type": "revolute",
+        "lower_deg": -60.0,
+        "upper_deg": 120.0,
+        "lower_rad": -1.0472,
+        "upper_rad": 2.0944
+      },
+      {
+        "name": "right_wrist_roll_joint",
+        "type": "revolute",
+        "lower_deg": -113.0,
+        "upper_deg": 113.0,
+        "lower_rad": -1.97222,
+        "upper_rad": 1.97222
+      },
+      {
+        "name": "right_wrist_pitch_joint",
+        "type": "revolute",
+        "lower_deg": -92.5,
+        "upper_deg": 92.5,
+        "lower_rad": -1.61443,
+        "upper_rad": 1.61443
+      },
+      {
+        "name": "right_wrist_yaw_joint",
+        "type": "revolute",
+        "lower_deg": -92.5,
+        "upper_deg": 92.5,
+        "lower_rad": -1.61443,
+        "upper_rad": 1.61443
+      }
+    ],
+    "links": [
+      {
+        "name": "pelvis",
+        "mass_kg": 3.813
+      },
+      {
+        "name": "left_hip_pitch_link",
+        "mass_kg": 1.35
+      },
+      {
+        "name": "left_hip_roll_link",
+        "mass_kg": 1.52
+      },
+      {
+        "name": "left_hip_yaw_link",
+        "mass_kg": 1.702
+      },
+      {
+        "name": "left_knee_link",
+        "mass_kg": 1.932
+      },
+      {
+        "name": "left_ankle_pitch_link",
+        "mass_kg": 0.074
+      },
+      {
+        "name": "left_ankle_roll_link",
+        "mass_kg": 0.608
+      },
+      {
+        "name": "right_hip_pitch_link",
+        "mass_kg": 1.35
+      },
+      {
+        "name": "right_hip_roll_link",
+        "mass_kg": 1.52
+      },
+      {
+        "name": "right_hip_yaw_link",
+        "mass_kg": 1.702
+      },
+      {
+        "name": "right_knee_link",
+        "mass_kg": 1.932
+      },
+      {
+        "name": "right_ankle_pitch_link",
+        "mass_kg": 0.074
+      },
+      {
+        "name": "right_ankle_roll_link",
+        "mass_kg": 0.608
+      },
+      {
+        "name": "waist_yaw_link",
+        "mass_kg": 0.214
+      },
+      {
+        "name": "waist_roll_link",
+        "mass_kg": 0.086
+      },
+      {
+        "name": "torso_link",
+        "mass_kg": 7.818
+      },
+      {
+        "name": "left_shoulder_pitch_link",
+        "mass_kg": 0.718
+      },
+      {
+        "name": "left_shoulder_roll_link",
+        "mass_kg": 0.643
+      },
+      {
+        "name": "left_shoulder_yaw_link",
+        "mass_kg": 0.734
+      },
+      {
+        "name": "left_elbow_link",
+        "mass_kg": 0.6
+      },
+      {
+        "name": "left_wrist_roll_link",
+        "mass_kg": 0.0854
+      },
+      {
+        "name": "left_wrist_pitch_link",
+        "mass_kg": 0.484
+      },
+      {
+        "name": "left_wrist_yaw_link",
+        "mass_kg": 0.2546
+      },
+      {
+        "name": "right_shoulder_pitch_link",
+        "mass_kg": 0.718
+      },
+      {
+        "name": "right_shoulder_roll_link",
+        "mass_kg": 0.643
+      },
+      {
+        "name": "right_shoulder_yaw_link",
+        "mass_kg": 0.734
+      },
+      {
+        "name": "right_elbow_link",
+        "mass_kg": 0.6
+      },
+      {
+        "name": "right_wrist_roll_link",
+        "mass_kg": 0.0854
+      },
+      {
+        "name": "right_wrist_pitch_link",
+        "mass_kg": 0.484
+      },
+      {
+        "name": "right_wrist_yaw_link",
+        "mass_kg": 0.2546
+      }
+    ]
+  },
+  "anybotics_anymal_c": {
+    "display_name": "ANYbotics ANYmal C",
+    "identifier_keys": [
+      "anymal_c",
+      "anybotics"
+    ],
+    "source_xml": "mujoco_menagerie/anybotics_anymal_c/anymal_c.xml",
+    "joints": [
+      {
+        "name": "LF_HAA",
+        "type": "revolute",
+        "lower_deg": -41.25,
+        "upper_deg": 28.07,
+        "lower_rad": -0.72,
+        "upper_rad": 0.49
+      },
+      {
+        "name": "LF_HFE",
+        "type": "revolute",
+        "lower_deg": -540.0,
+        "upper_deg": 540.0,
+        "lower_rad": -9.42478,
+        "upper_rad": 9.42478
+      },
+      {
+        "name": "LF_KFE",
+        "type": "revolute",
+        "lower_deg": -540.0,
+        "upper_deg": 540.0,
+        "lower_rad": -9.42478,
+        "upper_rad": 9.42478
+      },
+      {
+        "name": "RF_HAA",
+        "type": "revolute",
+        "lower_deg": -28.07,
+        "upper_deg": 41.25,
+        "lower_rad": -0.49,
+        "upper_rad": 0.72
+      },
+      {
+        "name": "RF_HFE",
+        "type": "revolute",
+        "lower_deg": -540.0,
+        "upper_deg": 540.0,
+        "lower_rad": -9.42478,
+        "upper_rad": 9.42478
+      },
+      {
+        "name": "RF_KFE",
+        "type": "revolute",
+        "lower_deg": -540.0,
+        "upper_deg": 540.0,
+        "lower_rad": -9.42478,
+        "upper_rad": 9.42478
+      },
+      {
+        "name": "LH_HAA",
+        "type": "revolute",
+        "lower_deg": -41.25,
+        "upper_deg": 28.07,
+        "lower_rad": -0.72,
+        "upper_rad": 0.49
+      },
+      {
+        "name": "LH_HFE",
+        "type": "revolute",
+        "lower_deg": -540.0,
+        "upper_deg": 540.0,
+        "lower_rad": -9.42478,
+        "upper_rad": 9.42478
+      },
+      {
+        "name": "LH_KFE",
+        "type": "revolute",
+        "lower_deg": -540.0,
+        "upper_deg": 540.0,
+        "lower_rad": -9.42478,
+        "upper_rad": 9.42478
+      },
+      {
+        "name": "RH_HAA",
+        "type": "revolute",
+        "lower_deg": -28.07,
+        "upper_deg": 41.25,
+        "lower_rad": -0.49,
+        "upper_rad": 0.72
+      },
+      {
+        "name": "RH_HFE",
+        "type": "revolute",
+        "lower_deg": -540.0,
+        "upper_deg": 540.0,
+        "lower_rad": -9.42478,
+        "upper_rad": 9.42478
+      },
+      {
+        "name": "RH_KFE",
+        "type": "revolute",
+        "lower_deg": -540.0,
+        "upper_deg": 540.0,
+        "lower_rad": -9.42478,
+        "upper_rad": 9.42478
+      }
+    ],
+    "links": [
+      {
+        "name": "base",
+        "mass_kg": 19.2035
+      },
+      {
+        "name": "LF_HIP",
+        "mass_kg": 2.781
+      },
+      {
+        "name": "LF_THIGH",
+        "mass_kg": 3.071
+      },
+      {
+        "name": "LF_SHANK",
+        "mass_kg": 0.5884
+      },
+      {
+        "name": "RF_HIP",
+        "mass_kg": 2.781
+      },
+      {
+        "name": "RF_THIGH",
+        "mass_kg": 3.071
+      },
+      {
+        "name": "RF_SHANK",
+        "mass_kg": 0.5884
+      },
+      {
+        "name": "LH_HIP",
+        "mass_kg": 2.781
+      },
+      {
+        "name": "LH_THIGH",
+        "mass_kg": 3.071
+      },
+      {
+        "name": "LH_SHANK",
+        "mass_kg": 0.5884
+      },
+      {
+        "name": "RH_HIP",
+        "mass_kg": 2.781
+      },
+      {
+        "name": "RH_THIGH",
+        "mass_kg": 3.071
+      },
+      {
+        "name": "RH_SHANK",
+        "mass_kg": 0.5884
+      }
+    ]
+  },
+  "anybotics_anymal_b": {
+    "display_name": "ANYbotics ANYmal B",
+    "identifier_keys": [
+      "anymal_b"
+    ],
+    "source_xml": "mujoco_menagerie/anybotics_anymal_b/anymal_b.xml",
+    "joints": [],
+    "links": [
+      {
+        "name": "base",
+        "mass_kg": 19.2035
+      },
+      {
+        "name": "LF_HIP",
+        "mass_kg": 1.4246
+      },
+      {
+        "name": "LF_THIGH",
+        "mass_kg": 1.635
+      },
+      {
+        "name": "LF_SHANK",
+        "mass_kg": 0.4722
+      },
+      {
+        "name": "RF_HIP",
+        "mass_kg": 1.4246
+      },
+      {
+        "name": "RF_THIGH",
+        "mass_kg": 1.635
+      },
+      {
+        "name": "RF_SHANK",
+        "mass_kg": 0.4722
+      },
+      {
+        "name": "LH_HIP",
+        "mass_kg": 1.4246
+      },
+      {
+        "name": "LH_THIGH",
+        "mass_kg": 1.635
+      },
+      {
+        "name": "LH_SHANK",
+        "mass_kg": 0.4722
+      },
+      {
+        "name": "RH_HIP",
+        "mass_kg": 1.4246
+      },
+      {
+        "name": "RH_THIGH",
+        "mass_kg": 1.635
+      },
+      {
+        "name": "RH_SHANK",
+        "mass_kg": 0.4722
+      }
+    ]
+  },
+  "universal_robots_ur5e": {
+    "display_name": "Universal Robots UR5e",
+    "identifier_keys": [
+      "ur5e"
+    ],
+    "source_xml": "mujoco_menagerie/universal_robots_ur5e/ur5e.xml",
+    "joints": [
+      {
+        "name": "shoulder_pan_joint",
+        "type": "revolute",
+        "lower_deg": -360.0,
+        "upper_deg": 360.0,
+        "lower_rad": -6.28319,
+        "upper_rad": 6.28319
+      },
+      {
+        "name": "shoulder_lift_joint",
+        "type": "revolute",
+        "lower_deg": -360.0,
+        "upper_deg": 360.0,
+        "lower_rad": -6.28319,
+        "upper_rad": 6.28319
+      },
+      {
+        "name": "elbow_joint",
+        "type": "revolute",
+        "lower_deg": -179.99,
+        "upper_deg": 179.99,
+        "lower_rad": -3.1415,
+        "upper_rad": 3.1415
+      },
+      {
+        "name": "wrist_1_joint",
+        "type": "revolute",
+        "lower_deg": -360.0,
+        "upper_deg": 360.0,
+        "lower_rad": -6.28319,
+        "upper_rad": 6.28319
+      },
+      {
+        "name": "wrist_2_joint",
+        "type": "revolute",
+        "lower_deg": -360.0,
+        "upper_deg": 360.0,
+        "lower_rad": -6.28319,
+        "upper_rad": 6.28319
+      },
+      {
+        "name": "wrist_3_joint",
+        "type": "revolute",
+        "lower_deg": -360.0,
+        "upper_deg": 360.0,
+        "lower_rad": -6.28319,
+        "upper_rad": 6.28319
+      }
+    ],
+    "links": [
+      {
+        "name": "base",
+        "mass_kg": 4.0
+      },
+      {
+        "name": "shoulder_link",
+        "mass_kg": 3.7
+      },
+      {
+        "name": "upper_arm_link",
+        "mass_kg": 8.393
+      },
+      {
+        "name": "forearm_link",
+        "mass_kg": 2.275
+      },
+      {
+        "name": "wrist_1_link",
+        "mass_kg": 1.219
+      },
+      {
+        "name": "wrist_2_link",
+        "mass_kg": 1.219
+      },
+      {
+        "name": "wrist_3_link",
+        "mass_kg": 0.1889
+      }
+    ]
+  },
+  "universal_robots_ur10e": {
+    "display_name": "Universal Robots UR10e",
+    "identifier_keys": [
+      "ur10e"
+    ],
+    "source_xml": "mujoco_menagerie/universal_robots_ur10e/ur10e.xml",
+    "joints": [
+      {
+        "name": "shoulder_pan_joint",
+        "type": "revolute",
+        "lower_deg": -360.0,
+        "upper_deg": 360.0,
+        "lower_rad": -6.28319,
+        "upper_rad": 6.28319
+      },
+      {
+        "name": "shoulder_lift_joint",
+        "type": "revolute",
+        "lower_deg": -360.0,
+        "upper_deg": 360.0,
+        "lower_rad": -6.28319,
+        "upper_rad": 6.28319
+      },
+      {
+        "name": "elbow_joint",
+        "type": "revolute",
+        "lower_deg": -179.99,
+        "upper_deg": 179.99,
+        "lower_rad": -3.1415,
+        "upper_rad": 3.1415
+      },
+      {
+        "name": "wrist_1_joint",
+        "type": "revolute",
+        "lower_deg": -360.0,
+        "upper_deg": 360.0,
+        "lower_rad": -6.28319,
+        "upper_rad": 6.28319
+      },
+      {
+        "name": "wrist_2_joint",
+        "type": "revolute",
+        "lower_deg": -360.0,
+        "upper_deg": 360.0,
+        "lower_rad": -6.28319,
+        "upper_rad": 6.28319
+      },
+      {
+        "name": "wrist_3_joint",
+        "type": "revolute",
+        "lower_deg": -360.0,
+        "upper_deg": 360.0,
+        "lower_rad": -6.28319,
+        "upper_rad": 6.28319
+      }
+    ],
+    "links": [
+      {
+        "name": "base",
+        "mass_kg": 4.0
+      },
+      {
+        "name": "shoulder_link",
+        "mass_kg": 7.778
+      },
+      {
+        "name": "upper_arm_link",
+        "mass_kg": 12.93
+      },
+      {
+        "name": "forearm_link",
+        "mass_kg": 3.87
+      },
+      {
+        "name": "wrist_1_link",
+        "mass_kg": 1.96
+      },
+      {
+        "name": "wrist_2_link",
+        "mass_kg": 1.96
+      },
+      {
+        "name": "wrist_3_link",
+        "mass_kg": 0.202
+      }
+    ]
+  }
+}

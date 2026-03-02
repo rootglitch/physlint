@@ -386,3 +386,44 @@ class TestPhysicsWriter:
             assert joint.IsValid()
             upper = joint.GetAttribute("physics:upperLimit").Get()
             assert upper == pytest.approx(145.0)
+
+
+# ---------------------------------------------------------------------------
+# robot_identifier
+# ---------------------------------------------------------------------------
+
+class TestRobotIdentifier:
+    def test_identifies_fr3(self):
+        from src.robot_identifier import identify_robot
+        key, spec = identify_robot(["/fr3_link0", "/fr3_joint1", "/fr3_link7"])
+        assert key == "franka_fr3"
+        assert spec["display_name"] == "Franka FR3"
+
+    def test_identifies_spot(self):
+        from src.robot_identifier import identify_robot
+        key, spec = identify_robot(["/spot_base", "/fl_hx", "/fl_hy"])
+        assert key == "boston_dynamics_spot"
+
+    def test_identifies_iiwa(self):
+        from src.robot_identifier import identify_robot
+        key, spec = identify_robot(["/iiwa14_link1", "/joint1"])
+        assert key == "kuka_iiwa_14"
+
+    def test_returns_none_for_generic(self):
+        from src.robot_identifier import identify_robot
+        key, spec = identify_robot(["/RobotArm", "/UpperArm", "/rev_joint1"])
+        assert key is None
+        assert spec is None
+
+    def test_fr3_joint6_asymmetric(self):
+        from src.robot_identifier import identify_robot, build_joint_context
+        _, spec = identify_robot(["/fr3_joint6"])
+        ctx = build_joint_context(spec)
+        assert "fr3_joint6" in ctx
+        assert "asymmetric by design" in ctx
+
+    def test_prefers_longer_match(self):
+        # "fr3_v2" should beat "fr3" for a v2 scene
+        from src.robot_identifier import identify_robot
+        key, _ = identify_robot(["/fr3_v2_link0", "/fr3_v2_joint1"])
+        assert key == "franka_fr3_v2"

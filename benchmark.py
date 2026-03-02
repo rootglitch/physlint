@@ -247,10 +247,11 @@ def run(
     blender:    str  = typer.Option("blender", "--blender"),
     samples:    int  = typer.Option(32,  "--samples", help="Blender render samples"),
     res:        int  = typer.Option(768, "--res",     help="Render resolution"),
-    no_cache:   bool = typer.Option(False, "--no-cache",   help="Re-render even if renders exist"),
-    quantize:   bool = typer.Option(False, "--quantize",   help="Load model in 4-bit NF4 (~4 GB VRAM). Required on GPUs with <16 GB."),
-    output:     Path = typer.Option(REPO_ROOT / "benchmark_results.json", "--output"),
-    scene:      str  = typer.Option(None,  "--scene",      help="Run only this scene (by name). Omit to run all."),
+    no_cache:        bool = typer.Option(False, "--no-cache",        help="Re-render even if renders exist"),
+    quantize:        bool = typer.Option(False, "--quantize",        help="Load model in 4-bit NF4 (~4 GB VRAM). Required on GPUs with <16 GB."),
+    output:          Path = typer.Option(REPO_ROOT / "benchmark_results.json", "--output"),
+    scene:           str  = typer.Option(None,  "--scene",           help="Run scenes whose name starts with this prefix (or exact match)."),
+    no_robot_spec:   bool = typer.Option(False, "--no-robot-spec",   help="Disable robot spec injection (V1 mode for comparison)."),
 ):
     """
     Run PhysInt on all benchmark scenes and report accuracy metrics.
@@ -263,9 +264,10 @@ def run(
     gt = json.loads(gt_path.read_text())
 
     if scene:
-        gt["scenes"] = [s for s in gt["scenes"] if s["name"] == scene]
+        # Support prefix match (e.g. --scene menagerie_ matches all menagerie scenes)
+        gt["scenes"] = [s for s in gt["scenes"] if s["name"].startswith(scene) or s["name"] == scene]
         if not gt["scenes"]:
-            console.print(f"[red]Scene '{scene}' not found in GT manifest.[/red]")
+            console.print(f"[red]No scene matching '{scene}' found in GT manifest.[/red]")
             raise typer.Exit(1)
 
     # Lazy imports — keep startup fast
@@ -318,7 +320,7 @@ def run(
         console.print(f"  Running Cosmos inference...")
         t0 = time.time()
         analysis, cot = analyze_scene(render_paths, sg.to_dict(), model_id=model_id,
-                                      quantize=quantize)
+                                      quantize=quantize, robot_spec_enabled=not no_robot_spec)
         elapsed = time.time() - t0
         console.print(f"  Inference done in [bold]{elapsed:.0f}s[/bold]")
 

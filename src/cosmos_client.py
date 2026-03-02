@@ -129,7 +129,11 @@ MASS CALCULATION — follow exactly:
     density=7850 (steel) → mass = 0.01256×7850 = 98.6 kg
 
 JOINT RULES:
-  Revolute (degrees):
+  ROBOT SPEC OVERRIDE: If a robot spec is provided in MECHANISM CONTEXT with exact joint limits,
+    use those limits as ground truth. A joint is valid if its USD limits are within ±5° of the spec.
+    A joint is violated if its USD limits exceed the spec by more than 5°. The spec overrides all
+    generic heuristics below for the joints it covers.
+  Revolute (degrees, generic heuristics when no robot spec is provided):
     Human elbow: lower=-10°, upper=145° (NEVER above 160°). Wrist: lower=-70°, upper=70°.
     Industrial robot: lower=-180°, upper=180°.
     If upper_limit > 180° for a human-like joint → VIOLATED, set joint_valid=false, cap at 145°.
@@ -621,6 +625,7 @@ def analyze_scene(
     max_new_tokens: int = 16384,
     temperature: float = 0.1,
     quantize: bool = False,
+    robot_spec_enabled: bool = True,
 ) -> tuple[PhysicsAnalysis, str]:
     """
     Run Cosmos Reason 2 on 4 scene renders + scene graph using a 3-pass pipeline.
@@ -652,6 +657,22 @@ def analyze_scene(
         if "Fixed" not in j.get("type_name", "")
     ]
 
+    # ── Robot identification (before Pass 1) ────────────────────────────────
+    robot_key, robot_spec = None, None
+    if robot_spec_enabled:
+        from .robot_identifier import identify_robot, build_joint_context
+        all_prim_names = (
+            [p["path"] for p in scene_graph.get("geom_prims", [])]
+            + [j["path"] for j in scene_graph.get("joint_prims", [])]
+        )
+        robot_key, robot_spec = identify_robot(all_prim_names)
+        if robot_key:
+            print(f"[cosmos_client] Identified robot: {robot_spec['display_name']} ({robot_key})")
+        else:
+            print("[cosmos_client] No robot spec matched — using generic heuristics")
+    else:
+        print("[cosmos_client] Robot spec injection disabled (V1 mode)")
+
     # ── Pass 1: Scene-context pre-pass ──────────────────────────────────────
     print("[cosmos_client] Pass 1/3 — scene context pre-pass ...")
     prepass_prompt = _build_prepass_prompt(sg_filtered)
@@ -675,6 +696,12 @@ def analyze_scene(
         context_str = "\n".join(parts)
     except Exception:
         pass  # pre-pass parse failure is non-fatal; main pass runs without context
+
+    # Append robot spec context (overrides generic heuristics)
+    if robot_spec and robot_spec_enabled:
+        from .robot_identifier import build_joint_context
+        robot_ctx = build_joint_context(robot_spec)
+        context_str = (context_str + "\n\n" if context_str else "") + robot_ctx
 
     # ── Pass 2: Main physics analysis ───────────────────────────────────────
     print("[cosmos_client] Pass 2/3 — main physics analysis ...")

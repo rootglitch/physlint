@@ -158,6 +158,55 @@ ROBOTS: dict[str, dict] = {
             "wrist": "aluminum",
         },
     },
+    "go1": {
+        "mj_description": "go1_mj_description",
+        "xml_name": "go1.xml",
+        "menagerie_subdir": "unitree_go1",
+        "scene_name": "menagerie_go1",
+        "n_violations": 0,
+        "material_hints_by_name": {
+            "trunk": "aluminum",
+            "hip": "aluminum",
+            "thigh": "aluminum",
+            "calf": "aluminum",
+            "foot": "rubber",
+        },
+    },
+    "g1": {
+        "mj_description": "g1_mj_description",
+        "xml_name": "g1.xml",
+        "menagerie_subdir": "unitree_g1",
+        "scene_name": "menagerie_g1",
+        "n_violations": 0,
+        # Unitree G1: aluminium links throughout, rubber soles
+        "material_hints_by_name": {
+            "pelvis": "aluminum",
+            "torso": "aluminum",
+            "head": "hard plastic",
+            "hip": "aluminum",
+            "knee": "aluminum",
+            "ankle": "aluminum",
+            "foot": "rubber",
+            "shoulder": "aluminum",
+            "elbow": "aluminum",
+            "wrist": "aluminum",
+            "hand": "hard plastic",
+        },
+    },
+    "ur10e": {
+        "mj_description": "ur10e_mj_description",
+        "xml_name": "ur10e.xml",
+        "menagerie_subdir": "universal_robots_ur10e",
+        "scene_name": "menagerie_ur10e",
+        "n_violations": 0,
+        "material_hints_by_name": {
+            "base": "aluminum",
+            "shoulder": "aluminum",
+            "upper_arm": "aluminum",
+            "forearm": "aluminum",
+            "wrist": "aluminum",
+        },
+    },
 }
 
 CACHE_DIR = pathlib.Path("~/.cache/robot_descriptions/mujoco_menagerie").expanduser()
@@ -202,7 +251,13 @@ def _find_mjcf(subdir: str, xml_name: str) -> pathlib.Path:
 # Pipeline for a single robot
 # ---------------------------------------------------------------------------
 
-def process_robot(key: str, cfg: dict, dry_run: bool = False) -> dict | None:
+def process_robot(
+    key: str,
+    cfg: dict,
+    dry_run: bool = False,
+    also_violated: bool = False,
+) -> list[dict]:
+    """Returns a list of scene entry dicts (clean, and optionally violated)."""
     scene_name = cfg["scene_name"]
     print(f"\n{'='*60}")
     print(f" Processing: {key}  →  {scene_name}")
@@ -215,14 +270,14 @@ def process_robot(key: str, cfg: dict, dry_run: bool = False) -> dict | None:
         load_robot_description(cfg["mj_description"])
     except Exception as e:
         print(f"  ERROR: {e}")
-        return None
+        return []
 
     # 2. Locate MJCF
     try:
         mjcf_path = _find_mjcf(cfg["menagerie_subdir"], cfg["xml_name"])
     except FileNotFoundError as e:
         print(f"  ERROR: {e}")
-        return None
+        return []
     print(f"[2/4] MJCF found: {mjcf_path}")
 
     # 3. Convert MJCF → USD
@@ -236,35 +291,62 @@ def process_robot(key: str, cfg: dict, dry_run: bool = False) -> dict | None:
         print(f"[3/4] Converting MJCF → USD ...")
         if not dry_run:
             c = Converter()
-            result = c.convert(str(mjcf_path), str(usd_out_dir))
-            # Converter names the file after the MJCF stem; rename to scene_name
-            converted = usd_out_dir / (pathlib.Path(cfg["xml_name"]).stem + ".usda")
-            if converted.exists() and converted != usd_main:
-                converted.rename(usd_main)
+            c.convert(str(mjcf_path), str(usd_out_dir))
+            # Converter may name the file after the model (not the MJCF stem).
+            # Find any top-level .usda in the output dir that isn't the target name.
+            candidates = [
+                p for p in usd_out_dir.glob("*.usda")
+                if p.name != usd_main.name
+            ]
+            if candidates and not usd_main.exists():
+                candidates[0].rename(usd_main)
+            if not usd_main.exists():
+                raise FileNotFoundError(
+                    f"Converter did not produce a USDA file in {usd_out_dir}"
+                )
             print(f"     → {usd_main}")
         else:
             print("     [dry-run, skipping]")
-            return None
+            return []
 
-    # 4. Strip physics
-    print(f"[4/4] Stripping physics + injecting {cfg['n_violations']} violation(s)...")
+    # 4. Strip physics (clean variant)
+    print(f"[4/4] Stripping physics (clean) ...")
+    entries: list[dict] = []
     if not dry_run:
         stage = Usd.Stage.Open(str(usd_main))
         hints = _resolve_material_hints(stage, cfg["material_hints_by_name"])
 
-        entry = strip_physics(
+        clean_entry = strip_physics(
             input_usd=str(usd_main),
             output_dir=str(usd_out_dir),
             material_hints=hints,
-            n_violations=cfg["n_violations"],
+            n_violations=0,
             seed=42,
             name_override=scene_name,
-            clear_limits=False,  # preserve limits for real robots — test specificity
+            clear_limits=False,
         )
-        return entry
+        entries.append(clean_entry)
+
+        # Optional violated variant
+        if also_violated:
+            print(f"     Generating violated variant ({scene_name}_violated) ...")
+            viol_dir = ASSET_DIR / (scene_name + "_violated")
+            viol_dir.mkdir(parents=True, exist_ok=True)
+            viol_entry = strip_physics(
+                input_usd=str(usd_main),
+                output_dir=str(viol_dir),
+                material_hints=hints,
+                n_violations=1,
+                seed=42,
+                name_override=scene_name + "_violated",
+                clear_limits=False,
+            )
+            entries.append(viol_entry)
     else:
         print("     [dry-run, skipping]")
-        return None
+        return []
+
+    return entries
 
 
 # ---------------------------------------------------------------------------
@@ -282,6 +364,8 @@ def main():
     )
     parser.add_argument("--dry-run", action="store_true",
                         help="Show what would be done without running conversion.")
+    parser.add_argument("--violated", action="store_true",
+                        help="Also generate a violated variant for each robot (n_violations=1).")
     parser.add_argument("--gt", default=str(GT_JSON),
                         help=f"benchmark_gt.json to update (default: {GT_JSON})")
     args = parser.parse_args()
@@ -294,9 +378,9 @@ def main():
 
     new_entries: list[dict] = []
     for key in keys:
-        entry = process_robot(key, ROBOTS[key], dry_run=args.dry_run)
-        if entry:
-            new_entries.append(entry)
+        entries = process_robot(key, ROBOTS[key], dry_run=args.dry_run,
+                                also_violated=args.violated)
+        new_entries.extend(entries)
 
     if not new_entries:
         print("\nNo entries to add.")
