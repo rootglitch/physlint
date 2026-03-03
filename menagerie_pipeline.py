@@ -207,6 +207,49 @@ ROBOTS: dict[str, dict] = {
             "wrist": "aluminum",
         },
     },
+    # --- Unknown robots (not in robot_specs.json) ---
+    "sawyer": {
+        "mj_description": "sawyer_mj_description",
+        "xml_name": "sawyer.xml",
+        "menagerie_subdir": "rethink_robotics_sawyer",
+        "scene_name": "menagerie_sawyer",
+        "n_violations": 0,
+        # Rethink Robotics Sawyer: machined aluminium links, hard plastic covers/head
+        "material_hints_by_name": {
+            "right_l": "aluminum",
+            "base":    "steel",
+            "head":    "hard plastic",
+        },
+    },
+    "cassie": {
+        "mj_description": "cassie_mj_description",
+        "xml_name": "cassie.xml",
+        "menagerie_subdir": "agility_cassie",
+        "scene_name": "menagerie_cassie",
+        "n_violations": 0,
+        # Agility Robotics Cassie: aluminium hips/pelvis, carbon fibre legs, rubber feet
+        "material_hints_by_name": {
+            "pelvis":   "aluminum",
+            "hip":      "aluminum",
+            "knee":     "carbon fiber",
+            "shin":     "carbon fiber",
+            "tarsus":   "carbon fiber",
+            "achilles": "carbon fiber",
+            "plantar":  "carbon fiber",
+            "foot":     "rubber",
+        },
+    },
+    "gen3": {
+        "mj_description": "gen3_mj_description",
+        "xml_name": "gen3.xml",
+        "menagerie_subdir": "kinova_gen3",
+        "scene_name": "menagerie_gen3",
+        "n_violations": 0,
+        # Kinova Gen3: hard-anodized aluminium links throughout
+        "material_hints_by_name": {
+            "link": "aluminum",
+        },
+    },
 }
 
 CACHE_DIR = pathlib.Path("~/.cache/robot_descriptions/mujoco_menagerie").expanduser()

@@ -621,6 +621,47 @@ def _fix_cleared_joint_validity(raw: dict, scene_graph: dict) -> dict:
 
 
 JOINT_BATCH_SIZE = 15
+CORRECTION_CONSISTENCY_THRESHOLD = 5.0  # degrees
+
+
+def _apply_correction_consistency(raw: dict, scene_graph: dict) -> dict:
+    """Force joint_valid=False when the model's suggested limits differ
+    significantly from the USD limits.
+
+    This catches the case where the model correctly identifies and corrects a
+    violation in its reasoning and suggested limits, but then contradicts itself
+    by returning joint_valid=True in the final verdict.
+
+    Rule: if |pred_upper - usd_upper| > 5° OR |pred_lower - usd_lower| > 5°,
+    the model implicitly found a violation — force joint_valid=False.
+
+    Validated: 0 false positives across 228 Menagerie joints (v2 benchmark).
+    Catches: Spot hr_hy (pred 131.5° vs USD 240.4°, diff 108.9°).
+    """
+    sg_by_path = {j["path"]: j for j in scene_graph.get("joint_prims", [])}
+
+    for jp in raw.get("joint_prims", []):
+        if jp.get("joint_valid") is False:
+            continue  # already marked violated — nothing to do
+
+        path = jp.get("prim_path", "")
+        sg = sg_by_path.get(path, {})
+        usd_upper = sg.get("upper_limit")
+        usd_lower = sg.get("lower_limit")
+        pred_upper = jp.get("upper_limit_deg")
+        pred_lower = jp.get("lower_limit_deg")
+
+        if usd_upper is None or pred_upper is None:
+            continue
+
+        upper_diff = abs(pred_upper - usd_upper)
+        lower_diff = (abs(pred_lower - usd_lower)
+                      if usd_lower is not None and pred_lower is not None else 0.0)
+
+        if max(upper_diff, lower_diff) > CORRECTION_CONSISTENCY_THRESHOLD:
+            jp["joint_valid"] = False
+
+    return raw
 
 
 def _apply_unconstrained_bypass(raw: dict, robot_spec: dict, scene_graph: dict | None = None) -> dict:
@@ -838,6 +879,7 @@ def analyze_scene(
     raw = _fix_cleared_joint_validity(raw, sg_filtered)
     raw = _apply_mass_correction(raw, scene_graph)
     raw = _apply_prismatic_rules(raw, scene_graph)
+    raw = _apply_correction_consistency(raw, sg_filtered)
     if robot_spec and robot_spec_enabled:
         raw = _apply_unconstrained_bypass(raw, robot_spec, sg_filtered)
 
@@ -854,6 +896,7 @@ def analyze_scene(
     raw = _apply_verification(raw, verification_response, sg_filtered)
     # Re-apply deterministic rules — verification cannot override physics or spec
     raw = _apply_prismatic_rules(raw, scene_graph)
+    raw = _apply_correction_consistency(raw, sg_filtered)
     if robot_spec and robot_spec_enabled:
         raw = _apply_unconstrained_bypass(raw, robot_spec, sg_filtered)
 

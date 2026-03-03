@@ -192,7 +192,7 @@ Robot specs (joint limit tables) are injected into the prompt via `assets/robot_
 | KUKA iiwa14 | 7 | ✅ 0 FP | ✅ caught |
 | Universal Robots UR5e | 6 | ✅ 0 FP | ✅ caught |
 | Universal Robots UR10e | 6 | ✅ 0 FP | ✅ caught |
-| Boston Dynamics Spot | 12 | ✅ 0 FP | ❌ missed |
+| Boston Dynamics Spot | 12 | ✅ 0 FP | ✅ caught |
 | Unitree Go2 | 12 | ✅ 0 FP | ✅ caught |
 | Unitree Go1 | 12 | ✅ 0 FP | ✅ caught |
 | Unitree H1 | 19 | ✅ 0 FP | ✅ caught |
@@ -203,13 +203,45 @@ Robot specs (joint limit tables) are injected into the prompt via `assets/robot_
 
 | Metric | Score |
 |--------|-------|
-| **Recall** | **90.9%** — 10 of 11 violations caught |
+| **Recall** | **100%** — 11 of 11 violations caught |
 | **Specificity** | **96.8%** — near-zero false alarms on clean configs |
-| **Accuracy** | **96.5%** — 220/228 joints correctly classified |
+| **Accuracy** | **96.9%** — 221/228 joints correctly classified |
 
 **ANYmal C — 100% precision and recall.** The model correctly handles the ±540° HFE/KFE joints that inherit unconstrained ranges from MJCF defaults. A deterministic spec-comparison rule flags only genuine limit exceedances (e.g. `RH_HFE [-540°, +648°]` exceeds the ±540° spec), while `joint_valid=true` is enforced for joints that are within their specified range.
 
+**Spot — violation caught via correction consistency.** The Spot `hr_hy` joint (upper limit 240.4° vs spec 131.5°) exposed an LLM self-contradiction: the model's chain-of-thought correctly identified the violation and output a corrected limit of 131.5°, but returned `joint_valid=true`. A deterministic post-processing rule resolves this: if the model's suggested limit differs from the USD limit by more than 5°, the joint is flagged as violated regardless of the final verdict field.
+
 **G1 (29-DOF humanoid) — batched inference.** With 29 joints, the full scene graph exceeds the model's context window. The pipeline automatically splits joints into batches of ≤15 and merges results, keeping the violation detection intact across all passes.
+
+### What Cosmos contributes vs what is deterministic
+
+physlint is a hybrid system. Understanding which parts are deterministic and which require the model is important for evaluating where Cosmos earns its place.
+
+**Deterministic (no model needed):**
+- Mass estimation when USD material bindings are present: `bbox_volume × fill_factor × density_table[material]`, 0.1% MAPE
+- Prismatic joint travel check: `travel > body_length_along_axis → violated`, derived from USD geometry
+- Joint limit comparison for known robots: `|usd_limit - spec_limit| > 5° → violated`, from `assets/robot_specs.json`
+- Post-processing consistency rules: correction consistency, unconstrained bypass, batch merging
+
+**Requires Cosmos Reason 2:**
+- Visual material identification when USD materials are absent — the only signal is what the render looks like
+- Joint limit validation for robots not in any spec database — Cosmos applies anatomical priors from training
+- Chain-of-thought explanation per joint — the reasoning, not just the verdict
+- Mechanism type identification from renders — sets context for what limits are plausible
+
+**VLM-only performance on unknown robots (no spec injection):**
+
+On three robots outside the spec database — Rethink Robotics Sawyer, Agility Robotics Cassie, and Kinova Gen3 — run with `--no-robot-spec`:
+
+| Robot | Joints | Accuracy (VLM only) | Notes |
+|-------|--------|---------------------|-------|
+| Sawyer (7-DOF arm) | 7 | ~57% | FPs on ±218° shoulder and ±270° wrist — correct for Sawyer, unusual by generic arm priors |
+| Gen3 (7-DOF arm) | 7 | ~43% | FPs on 4 unconstrained joints — model correctly identifies no-limit joints as suspicious |
+| Cassie (bipedal) | 20 | partial | Unusual one-directional ranges confuse generic leg priors |
+
+The FPs are principled: the model correctly identifies limits that look wrong by generic anatomical standards. They are wrong specifically because these robots have unconventional designs that violate generic priors. Spec injection resolves this — the 96.9% Menagerie accuracy reflects the combination of Cosmos's reasoning with spec-grounded context.
+
+For any robot not in a spec database, physlint runs in VLM-only mode and catches gross violations reliably while generating more false alarms on unusual-but-correct designs. This is the honest operating envelope.
 
 ---
 

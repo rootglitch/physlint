@@ -4241,6 +4241,956 @@
           "mass_kg": 0.202
         }
       ]
+    },
+    {
+      "name": "menagerie_sawyer",
+      "usd": "assets/menagerie/menagerie_sawyer/menagerie_sawyer_stripped.usda",
+      "description": "Stripped from menagerie_sawyer.usda \u2014 9 bodies, 7 joints (0 violated)",
+      "joints": [
+        {
+          "path": "/sawyer/Geometry/base/right_l0/right_l1/right_l2/right_l3/right_l4/right_l5/right_l6/right_j6",
+          "type": "revolute",
+          "lower": -270.0,
+          "upper": 270.0,
+          "violated": false
+        },
+        {
+          "path": "/sawyer/Geometry/base/right_l0/right_l1/right_l2/right_l3/right_l4/right_l5/right_j5",
+          "type": "revolute",
+          "lower": -170.52,
+          "upper": 170.52,
+          "violated": false
+        },
+        {
+          "path": "/sawyer/Geometry/base/right_l0/right_l1/right_l2/right_l3/right_l4/right_j4",
+          "type": "revolute",
+          "lower": -170.52,
+          "upper": 170.52,
+          "violated": false
+        },
+        {
+          "path": "/sawyer/Geometry/base/right_l0/right_l1/right_l2/right_l3/right_j3",
+          "type": "revolute",
+          "lower": -174.4,
+          "upper": 174.4,
+          "violated": false
+        },
+        {
+          "path": "/sawyer/Geometry/base/right_l0/right_l1/right_l2/right_j2",
+          "type": "revolute",
+          "lower": -174.33,
+          "upper": 174.33,
+          "violated": false
+        },
+        {
+          "path": "/sawyer/Geometry/base/right_l0/right_l1/right_j1",
+          "type": "revolute",
+          "lower": -218.27,
+          "upper": 130.27,
+          "violated": false
+        },
+        {
+          "path": "/sawyer/Geometry/base/right_l0/right_j0",
+          "type": "revolute",
+          "lower": -174.77,
+          "upper": 174.77,
+          "violated": false
+        }
+      ],
+      "masses": [
+        {
+          "path": "/sawyer/Geometry/base",
+          "material": "steel",
+          "mass_kg": 2.0687
+        },
+        {
+          "path": "/sawyer/Geometry/base/right_l0",
+          "material": "aluminum",
+          "mass_kg": 5.3213
+        },
+        {
+          "path": "/sawyer/Geometry/base/right_l0/head",
+          "material": "hard plastic",
+          "mass_kg": 1.5795
+        },
+        {
+          "path": "/sawyer/Geometry/base/right_l0/right_l1",
+          "material": "aluminum",
+          "mass_kg": 4.505
+        },
+        {
+          "path": "/sawyer/Geometry/base/right_l0/right_l1/right_l2",
+          "material": "aluminum",
+          "mass_kg": 1.745
+        },
+        {
+          "path": "/sawyer/Geometry/base/right_l0/right_l1/right_l2/right_l3",
+          "material": "aluminum",
+          "mass_kg": 2.5097
+        },
+        {
+          "path": "/sawyer/Geometry/base/right_l0/right_l1/right_l2/right_l3/right_l4",
+          "material": "aluminum",
+          "mass_kg": 1.1136
+        },
+        {
+          "path": "/sawyer/Geometry/base/right_l0/right_l1/right_l2/right_l3/right_l4/right_l5",
+          "material": "aluminum",
+          "mass_kg": 1.5625
+        },
+        {
+          "path": "/sawyer/Geometry/base/right_l0/right_l1/right_l2/right_l3/right_l4/right_l5/right_l6",
+          "material": "aluminum",
+          "mass_kg": 0.3292
+        }
+      ]
+    },
+    {
+      "name": "menagerie_sawyer_violated",
+      "usd": "assets/menagerie/menagerie_sawyer_violated/menagerie_sawyer_violated_stripped.usda",
+      "description": "Stripped from menagerie_sawyer.usda \u2014 9 bodies, 7 joints (1 violated)",
+      "joints": [
+        {
+          "path": "/sawyer/Geometry/base/right_l0/right_l1/right_l2/right_l3/right_l4/right_l5/right_l6/right_j6",
+          "type": "revolute",
+          "lower": -270.0,
+          "upper": 270.0,
+          "violated": false
+        },
+        {
+          "path": "/sawyer/Geometry/base/right_l0/right_l1/right_l2/right_l3/right_l4/right_l5/right_j5",
+          "type": "revolute",
+          "lower": -170.52,
+          "upper": 170.52,
+          "violated": false
+        },
+        {
+          "path": "/sawyer/Geometry/base/right_l0/right_l1/right_l2/right_l3/right_l4/right_j4",
+          "type": "revolute",
+          "lower": -170.52,
+          "upper": 170.52,
+          "violated": false
+        },
+        {
+          "path": "/sawyer/Geometry/base/right_l0/right_l1/right_l2/right_l3/right_j3",
+          "type": "revolute",
+          "lower": -174.4,
+          "upper": 174.4,
+          "violated": false
+        },
+        {
+          "path": "/sawyer/Geometry/base/right_l0/right_l1/right_l2/right_j2",
+          "type": "revolute",
+          "lower": -174.33,
+          "upper": 174.33,
+          "violated": false
+        },
+        {
+          "path": "/sawyer/Geometry/base/right_l0/right_l1/right_j1",
+          "type": "revolute",
+          "lower": -218.27,
+          "upper": 239.2,
+          "violated": true
+        },
+        {
+          "path": "/sawyer/Geometry/base/right_l0/right_j0",
+          "type": "revolute",
+          "lower": -174.77,
+          "upper": 174.77,
+          "violated": false
+        }
+      ],
+      "masses": [
+        {
+          "path": "/sawyer/Geometry/base",
+          "material": "steel",
+          "mass_kg": 2.0687
+        },
+        {
+          "path": "/sawyer/Geometry/base/right_l0",
+          "material": "aluminum",
+          "mass_kg": 5.3213
+        },
+        {
+          "path": "/sawyer/Geometry/base/right_l0/head",
+          "material": "hard plastic",
+          "mass_kg": 1.5795
+        },
+        {
+          "path": "/sawyer/Geometry/base/right_l0/right_l1",
+          "material": "aluminum",
+          "mass_kg": 4.505
+        },
+        {
+          "path": "/sawyer/Geometry/base/right_l0/right_l1/right_l2",
+          "material": "aluminum",
+          "mass_kg": 1.745
+        },
+        {
+          "path": "/sawyer/Geometry/base/right_l0/right_l1/right_l2/right_l3",
+          "material": "aluminum",
+          "mass_kg": 2.5097
+        },
+        {
+          "path": "/sawyer/Geometry/base/right_l0/right_l1/right_l2/right_l3/right_l4",
+          "material": "aluminum",
+          "mass_kg": 1.1136
+        },
+        {
+          "path": "/sawyer/Geometry/base/right_l0/right_l1/right_l2/right_l3/right_l4/right_l5",
+          "material": "aluminum",
+          "mass_kg": 1.5625
+        },
+        {
+          "path": "/sawyer/Geometry/base/right_l0/right_l1/right_l2/right_l3/right_l4/right_l5/right_l6",
+          "material": "aluminum",
+          "mass_kg": 0.3292
+        }
+      ]
+    },
+    {
+      "name": "menagerie_cassie",
+      "usd": "assets/menagerie/menagerie_cassie/menagerie_cassie_stripped.usda",
+      "description": "Stripped from menagerie_cassie.usda \u2014 25 bodies, 20 joints (0 violated)",
+      "joints": [
+        {
+          "path": "/cassie/Geometry/tn__cassiepelvis_XI/tn__lefthiproll_mG8/tn__lefthipyaw_YF8/tn__lefthippitch_VI8/tn__leftknee_bC/tn__leftshin_bC/tn__lefttarsus_YF/tn__leftheelspring_xK9/tn__leftheelspring_1_uN9",
+          "type": "revolute",
+          "lower": -Infinity,
+          "upper": Infinity,
+          "violated": false
+        },
+        {
+          "path": "/cassie/Geometry/tn__cassiepelvis_XI/tn__lefthiproll_mG8/tn__lefthipyaw_YF8/tn__lefthippitch_VI8/tn__leftknee_bC/tn__leftshin_bC/tn__lefttarsus_YF/tn__leftfootcrank_jJ9/tn__leftplantarrod_xKC/tn__leftplantarrod_1_uNC",
+          "type": "revolute",
+          "lower": -Infinity,
+          "upper": Infinity,
+          "violated": false
+        },
+        {
+          "path": "/cassie/Geometry/tn__cassiepelvis_XI/tn__lefthiproll_mG8/tn__lefthipyaw_YF8/tn__lefthippitch_VI8/tn__leftknee_bC/tn__leftshin_bC/tn__lefttarsus_YF/tn__leftfootcrank_jJ9/tn__leftfootcrank_1_gM9",
+          "type": "revolute",
+          "lower": -140.0,
+          "upper": -30.0,
+          "violated": false
+        },
+        {
+          "path": "/cassie/Geometry/tn__cassiepelvis_XI/tn__lefthiproll_mG8/tn__lefthipyaw_YF8/tn__lefthippitch_VI8/tn__leftknee_bC/tn__leftshin_bC/tn__lefttarsus_YF/tn__leftfoot_bC/tn__leftfoot_1_YF",
+          "type": "revolute",
+          "lower": -140.0,
+          "upper": -30.0,
+          "violated": false
+        },
+        {
+          "path": "/cassie/Geometry/tn__cassiepelvis_XI/tn__lefthiproll_mG8/tn__lefthipyaw_YF8/tn__lefthippitch_VI8/tn__leftknee_bC/tn__leftshin_bC/tn__lefttarsus_YF/tn__lefttarsus_1_VI",
+          "type": "revolute",
+          "lower": 50.0,
+          "upper": 170.0,
+          "violated": false
+        },
+        {
+          "path": "/cassie/Geometry/tn__cassiepelvis_XI/tn__lefthiproll_mG8/tn__lefthipyaw_YF8/tn__lefthippitch_VI8/tn__leftknee_bC/tn__leftshin_bC/tn__leftshin_1_YF",
+          "type": "revolute",
+          "lower": -20.0,
+          "upper": 20.0,
+          "violated": false
+        },
+        {
+          "path": "/cassie/Geometry/tn__cassiepelvis_XI/tn__lefthiproll_mG8/tn__lefthipyaw_YF8/tn__lefthippitch_VI8/tn__leftknee_bC/tn__leftknee_1_YF",
+          "type": "revolute",
+          "lower": -164.0,
+          "upper": -37.0,
+          "violated": false
+        },
+        {
+          "path": "/cassie/Geometry/tn__cassiepelvis_XI/tn__lefthiproll_mG8/tn__lefthipyaw_YF8/tn__lefthippitch_VI8/tn__lefthippitch_1_xK8",
+          "type": "revolute",
+          "lower": -50.0,
+          "upper": 80.0,
+          "violated": false
+        },
+        {
+          "path": "/cassie/Geometry/tn__cassiepelvis_XI/tn__lefthiproll_mG8/tn__lefthipyaw_YF8/tn__lefthipyaw_1_VI8",
+          "type": "revolute",
+          "lower": -22.5,
+          "upper": 22.5,
+          "violated": false
+        },
+        {
+          "path": "/cassie/Geometry/tn__cassiepelvis_XI/tn__lefthiproll_mG8/tn__lefthiproll_1_jJ8",
+          "type": "revolute",
+          "lower": -15.0,
+          "upper": 22.5,
+          "violated": false
+        },
+        {
+          "path": "/cassie/Geometry/tn__cassiepelvis_XI/tn__righthiproll_WI9/tn__righthipyaw_nG9/tn__righthippitch_kJ9/tn__rightknee_qD/tn__rightshin_qD/tn__righttarsus_nG/tn__rightheelspring_hMA/tn__rightheelspring_1_ePA",
+          "type": "revolute",
+          "lower": -Infinity,
+          "upper": Infinity,
+          "violated": false
+        },
+        {
+          "path": "/cassie/Geometry/tn__cassiepelvis_XI/tn__righthiproll_WI9/tn__righthipyaw_nG9/tn__righthippitch_kJ9/tn__rightknee_qD/tn__rightshin_qD/tn__righttarsus_nG/tn__rightfootcrank_yKA/tn__rightplantarrod_hMD/tn__rightplantarrod_1_ePD",
+          "type": "revolute",
+          "lower": -Infinity,
+          "upper": Infinity,
+          "violated": false
+        },
+        {
+          "path": "/cassie/Geometry/tn__cassiepelvis_XI/tn__righthiproll_WI9/tn__righthipyaw_nG9/tn__righthippitch_kJ9/tn__rightknee_qD/tn__rightshin_qD/tn__righttarsus_nG/tn__rightfootcrank_yKA/tn__rightfootcrank_1_vNA",
+          "type": "revolute",
+          "lower": -140.0,
+          "upper": -30.0,
+          "violated": false
+        },
+        {
+          "path": "/cassie/Geometry/tn__cassiepelvis_XI/tn__righthiproll_WI9/tn__righthipyaw_nG9/tn__righthippitch_kJ9/tn__rightknee_qD/tn__rightshin_qD/tn__righttarsus_nG/tn__rightfoot_qD/tn__rightfoot_1_nG",
+          "type": "revolute",
+          "lower": -140.0,
+          "upper": -30.0,
+          "violated": false
+        },
+        {
+          "path": "/cassie/Geometry/tn__cassiepelvis_XI/tn__righthiproll_WI9/tn__righthipyaw_nG9/tn__righthippitch_kJ9/tn__rightknee_qD/tn__rightshin_qD/tn__righttarsus_nG/tn__righttarsus_1_kJ",
+          "type": "revolute",
+          "lower": 50.0,
+          "upper": 170.0,
+          "violated": false
+        },
+        {
+          "path": "/cassie/Geometry/tn__cassiepelvis_XI/tn__righthiproll_WI9/tn__righthipyaw_nG9/tn__righthippitch_kJ9/tn__rightknee_qD/tn__rightshin_qD/tn__rightshin_1_nG",
+          "type": "revolute",
+          "lower": -20.0,
+          "upper": 20.0,
+          "violated": false
+        },
+        {
+          "path": "/cassie/Geometry/tn__cassiepelvis_XI/tn__righthiproll_WI9/tn__righthipyaw_nG9/tn__righthippitch_kJ9/tn__rightknee_qD/tn__rightknee_1_nG",
+          "type": "revolute",
+          "lower": -164.0,
+          "upper": -37.0,
+          "violated": false
+        },
+        {
+          "path": "/cassie/Geometry/tn__cassiepelvis_XI/tn__righthiproll_WI9/tn__righthipyaw_nG9/tn__righthippitch_kJ9/tn__righthippitch_1_hM9",
+          "type": "revolute",
+          "lower": -50.0,
+          "upper": 80.0,
+          "violated": false
+        },
+        {
+          "path": "/cassie/Geometry/tn__cassiepelvis_XI/tn__righthiproll_WI9/tn__righthipyaw_nG9/tn__righthipyaw_1_kJ9",
+          "type": "revolute",
+          "lower": -22.5,
+          "upper": 22.5,
+          "violated": false
+        },
+        {
+          "path": "/cassie/Geometry/tn__cassiepelvis_XI/tn__righthiproll_WI9/tn__righthiproll_1_yK9",
+          "type": "revolute",
+          "lower": -22.5,
+          "upper": 15.0,
+          "violated": false
+        }
+      ],
+      "masses": [
+        {
+          "path": "/cassie/Geometry/tn__cassiepelvis_XI",
+          "material": "aluminum",
+          "mass_kg": 10.33
+        },
+        {
+          "path": "/cassie/Geometry/tn__cassiepelvis_XI/tn__lefthiproll_mG8",
+          "material": "aluminum",
+          "mass_kg": 1.82
+        },
+        {
+          "path": "/cassie/Geometry/tn__cassiepelvis_XI/tn__lefthiproll_mG8/tn__lefthipyaw_YF8",
+          "material": "aluminum",
+          "mass_kg": 1.171
+        },
+        {
+          "path": "/cassie/Geometry/tn__cassiepelvis_XI/tn__lefthiproll_mG8/tn__lefthipyaw_YF8/tn__lefthippitch_VI8",
+          "material": "aluminum",
+          "mass_kg": 5.52
+        },
+        {
+          "path": "/cassie/Geometry/tn__cassiepelvis_XI/tn__lefthiproll_mG8/tn__lefthipyaw_YF8/tn__lefthippitch_VI8/tn__leftachillesrod_gMD",
+          "material": "carbon fiber",
+          "mass_kg": 0.1567
+        },
+        {
+          "path": "/cassie/Geometry/tn__cassiepelvis_XI/tn__lefthiproll_mG8/tn__lefthipyaw_YF8/tn__lefthippitch_VI8/tn__leftknee_bC",
+          "material": "carbon fiber",
+          "mass_kg": 0.7578
+        },
+        {
+          "path": "/cassie/Geometry/tn__cassiepelvis_XI/tn__lefthiproll_mG8/tn__lefthipyaw_YF8/tn__lefthippitch_VI8/tn__leftknee_bC/tn__leftkneespring_xK9",
+          "material": "carbon fiber",
+          "mass_kg": 0.186
+        },
+        {
+          "path": "/cassie/Geometry/tn__cassiepelvis_XI/tn__lefthiproll_mG8/tn__lefthipyaw_YF8/tn__lefthippitch_VI8/tn__leftknee_bC/tn__leftshin_bC",
+          "material": "carbon fiber",
+          "mass_kg": 0.577
+        },
+        {
+          "path": "/cassie/Geometry/tn__cassiepelvis_XI/tn__lefthiproll_mG8/tn__lefthipyaw_YF8/tn__lefthippitch_VI8/tn__leftknee_bC/tn__leftshin_bC/tn__lefttarsus_YF",
+          "material": "carbon fiber",
+          "mass_kg": 0.782
+        },
+        {
+          "path": "/cassie/Geometry/tn__cassiepelvis_XI/tn__lefthiproll_mG8/tn__lefthipyaw_YF8/tn__lefthippitch_VI8/tn__leftknee_bC/tn__leftshin_bC/tn__lefttarsus_YF/tn__leftheelspring_xK9",
+          "material": "unknown",
+          "mass_kg": 0.126
+        },
+        {
+          "path": "/cassie/Geometry/tn__cassiepelvis_XI/tn__lefthiproll_mG8/tn__lefthipyaw_YF8/tn__lefthippitch_VI8/tn__leftknee_bC/tn__leftshin_bC/tn__lefttarsus_YF/tn__leftfootcrank_jJ9",
+          "material": "rubber",
+          "mass_kg": 0.1261
+        },
+        {
+          "path": "/cassie/Geometry/tn__cassiepelvis_XI/tn__lefthiproll_mG8/tn__lefthipyaw_YF8/tn__lefthippitch_VI8/tn__leftknee_bC/tn__leftshin_bC/tn__lefttarsus_YF/tn__leftfootcrank_jJ9/tn__leftplantarrod_xKC",
+          "material": "carbon fiber",
+          "mass_kg": 0.1186
+        },
+        {
+          "path": "/cassie/Geometry/tn__cassiepelvis_XI/tn__lefthiproll_mG8/tn__lefthipyaw_YF8/tn__lefthippitch_VI8/tn__leftknee_bC/tn__leftshin_bC/tn__lefttarsus_YF/tn__leftfoot_bC",
+          "material": "rubber",
+          "mass_kg": 0.1498
+        },
+        {
+          "path": "/cassie/Geometry/tn__cassiepelvis_XI/tn__righthiproll_WI9",
+          "material": "aluminum",
+          "mass_kg": 1.82
+        },
+        {
+          "path": "/cassie/Geometry/tn__cassiepelvis_XI/tn__righthiproll_WI9/tn__righthipyaw_nG9",
+          "material": "aluminum",
+          "mass_kg": 1.171
+        },
+        {
+          "path": "/cassie/Geometry/tn__cassiepelvis_XI/tn__righthiproll_WI9/tn__righthipyaw_nG9/tn__righthippitch_kJ9",
+          "material": "aluminum",
+          "mass_kg": 5.52
+        },
+        {
+          "path": "/cassie/Geometry/tn__cassiepelvis_XI/tn__righthiproll_WI9/tn__righthipyaw_nG9/tn__righthippitch_kJ9/tn__rightachillesrod_vNE",
+          "material": "carbon fiber",
+          "mass_kg": 0.1567
+        },
+        {
+          "path": "/cassie/Geometry/tn__cassiepelvis_XI/tn__righthiproll_WI9/tn__righthipyaw_nG9/tn__righthippitch_kJ9/tn__rightknee_qD",
+          "material": "carbon fiber",
+          "mass_kg": 0.7578
+        },
+        {
+          "path": "/cassie/Geometry/tn__cassiepelvis_XI/tn__righthiproll_WI9/tn__righthipyaw_nG9/tn__righthippitch_kJ9/tn__rightknee_qD/tn__rightkneespring_hMA",
+          "material": "carbon fiber",
+          "mass_kg": 0.186
+        },
+        {
+          "path": "/cassie/Geometry/tn__cassiepelvis_XI/tn__righthiproll_WI9/tn__righthipyaw_nG9/tn__righthippitch_kJ9/tn__rightknee_qD/tn__rightshin_qD",
+          "material": "carbon fiber",
+          "mass_kg": 0.577
+        },
+        {
+          "path": "/cassie/Geometry/tn__cassiepelvis_XI/tn__righthiproll_WI9/tn__righthipyaw_nG9/tn__righthippitch_kJ9/tn__rightknee_qD/tn__rightshin_qD/tn__righttarsus_nG",
+          "material": "carbon fiber",
+          "mass_kg": 0.782
+        },
+        {
+          "path": "/cassie/Geometry/tn__cassiepelvis_XI/tn__righthiproll_WI9/tn__righthipyaw_nG9/tn__righthippitch_kJ9/tn__rightknee_qD/tn__rightshin_qD/tn__righttarsus_nG/tn__rightheelspring_hMA",
+          "material": "unknown",
+          "mass_kg": 0.126
+        },
+        {
+          "path": "/cassie/Geometry/tn__cassiepelvis_XI/tn__righthiproll_WI9/tn__righthipyaw_nG9/tn__righthippitch_kJ9/tn__rightknee_qD/tn__rightshin_qD/tn__righttarsus_nG/tn__rightfootcrank_yKA",
+          "material": "rubber",
+          "mass_kg": 0.1261
+        },
+        {
+          "path": "/cassie/Geometry/tn__cassiepelvis_XI/tn__righthiproll_WI9/tn__righthipyaw_nG9/tn__righthippitch_kJ9/tn__rightknee_qD/tn__rightshin_qD/tn__righttarsus_nG/tn__rightfootcrank_yKA/tn__rightplantarrod_hMD",
+          "material": "carbon fiber",
+          "mass_kg": 0.1186
+        },
+        {
+          "path": "/cassie/Geometry/tn__cassiepelvis_XI/tn__righthiproll_WI9/tn__righthipyaw_nG9/tn__righthippitch_kJ9/tn__rightknee_qD/tn__rightshin_qD/tn__righttarsus_nG/tn__rightfoot_qD",
+          "material": "rubber",
+          "mass_kg": 0.1498
+        }
+      ]
+    },
+    {
+      "name": "menagerie_cassie_violated",
+      "usd": "assets/menagerie/menagerie_cassie_violated/menagerie_cassie_violated_stripped.usda",
+      "description": "Stripped from menagerie_cassie.usda \u2014 25 bodies, 20 joints (1 violated)",
+      "joints": [
+        {
+          "path": "/cassie/Geometry/tn__cassiepelvis_XI/tn__lefthiproll_mG8/tn__lefthipyaw_YF8/tn__lefthippitch_VI8/tn__leftknee_bC/tn__leftshin_bC/tn__lefttarsus_YF/tn__leftheelspring_xK9/tn__leftheelspring_1_uN9",
+          "type": "revolute",
+          "lower": -Infinity,
+          "upper": Infinity,
+          "violated": false
+        },
+        {
+          "path": "/cassie/Geometry/tn__cassiepelvis_XI/tn__lefthiproll_mG8/tn__lefthipyaw_YF8/tn__lefthippitch_VI8/tn__leftknee_bC/tn__leftshin_bC/tn__lefttarsus_YF/tn__leftfootcrank_jJ9/tn__leftplantarrod_xKC/tn__leftplantarrod_1_uNC",
+          "type": "revolute",
+          "lower": -Infinity,
+          "upper": Infinity,
+          "violated": false
+        },
+        {
+          "path": "/cassie/Geometry/tn__cassiepelvis_XI/tn__lefthiproll_mG8/tn__lefthipyaw_YF8/tn__lefthippitch_VI8/tn__leftknee_bC/tn__leftshin_bC/tn__lefttarsus_YF/tn__leftfootcrank_jJ9/tn__leftfootcrank_1_gM9",
+          "type": "revolute",
+          "lower": -140.0,
+          "upper": -30.0,
+          "violated": false
+        },
+        {
+          "path": "/cassie/Geometry/tn__cassiepelvis_XI/tn__lefthiproll_mG8/tn__lefthipyaw_YF8/tn__lefthippitch_VI8/tn__leftknee_bC/tn__leftshin_bC/tn__lefttarsus_YF/tn__leftfoot_bC/tn__leftfoot_1_YF",
+          "type": "revolute",
+          "lower": -140.0,
+          "upper": 102.0,
+          "violated": true
+        },
+        {
+          "path": "/cassie/Geometry/tn__cassiepelvis_XI/tn__lefthiproll_mG8/tn__lefthipyaw_YF8/tn__lefthippitch_VI8/tn__leftknee_bC/tn__leftshin_bC/tn__lefttarsus_YF/tn__lefttarsus_1_VI",
+          "type": "revolute",
+          "lower": 50.0,
+          "upper": 170.0,
+          "violated": false
+        },
+        {
+          "path": "/cassie/Geometry/tn__cassiepelvis_XI/tn__lefthiproll_mG8/tn__lefthipyaw_YF8/tn__lefthippitch_VI8/tn__leftknee_bC/tn__leftshin_bC/tn__leftshin_1_YF",
+          "type": "revolute",
+          "lower": -20.0,
+          "upper": 20.0,
+          "violated": false
+        },
+        {
+          "path": "/cassie/Geometry/tn__cassiepelvis_XI/tn__lefthiproll_mG8/tn__lefthipyaw_YF8/tn__lefthippitch_VI8/tn__leftknee_bC/tn__leftknee_1_YF",
+          "type": "revolute",
+          "lower": -164.0,
+          "upper": -37.0,
+          "violated": false
+        },
+        {
+          "path": "/cassie/Geometry/tn__cassiepelvis_XI/tn__lefthiproll_mG8/tn__lefthipyaw_YF8/tn__lefthippitch_VI8/tn__lefthippitch_1_xK8",
+          "type": "revolute",
+          "lower": -50.0,
+          "upper": 80.0,
+          "violated": false
+        },
+        {
+          "path": "/cassie/Geometry/tn__cassiepelvis_XI/tn__lefthiproll_mG8/tn__lefthipyaw_YF8/tn__lefthipyaw_1_VI8",
+          "type": "revolute",
+          "lower": -22.5,
+          "upper": 22.5,
+          "violated": false
+        },
+        {
+          "path": "/cassie/Geometry/tn__cassiepelvis_XI/tn__lefthiproll_mG8/tn__lefthiproll_1_jJ8",
+          "type": "revolute",
+          "lower": -15.0,
+          "upper": 22.5,
+          "violated": false
+        },
+        {
+          "path": "/cassie/Geometry/tn__cassiepelvis_XI/tn__righthiproll_WI9/tn__righthipyaw_nG9/tn__righthippitch_kJ9/tn__rightknee_qD/tn__rightshin_qD/tn__righttarsus_nG/tn__rightheelspring_hMA/tn__rightheelspring_1_ePA",
+          "type": "revolute",
+          "lower": -Infinity,
+          "upper": Infinity,
+          "violated": false
+        },
+        {
+          "path": "/cassie/Geometry/tn__cassiepelvis_XI/tn__righthiproll_WI9/tn__righthipyaw_nG9/tn__righthippitch_kJ9/tn__rightknee_qD/tn__rightshin_qD/tn__righttarsus_nG/tn__rightfootcrank_yKA/tn__rightplantarrod_hMD/tn__rightplantarrod_1_ePD",
+          "type": "revolute",
+          "lower": -Infinity,
+          "upper": Infinity,
+          "violated": false
+        },
+        {
+          "path": "/cassie/Geometry/tn__cassiepelvis_XI/tn__righthiproll_WI9/tn__righthipyaw_nG9/tn__righthippitch_kJ9/tn__rightknee_qD/tn__rightshin_qD/tn__righttarsus_nG/tn__rightfootcrank_yKA/tn__rightfootcrank_1_vNA",
+          "type": "revolute",
+          "lower": -140.0,
+          "upper": -30.0,
+          "violated": false
+        },
+        {
+          "path": "/cassie/Geometry/tn__cassiepelvis_XI/tn__righthiproll_WI9/tn__righthipyaw_nG9/tn__righthippitch_kJ9/tn__rightknee_qD/tn__rightshin_qD/tn__righttarsus_nG/tn__rightfoot_qD/tn__rightfoot_1_nG",
+          "type": "revolute",
+          "lower": -140.0,
+          "upper": -30.0,
+          "violated": false
+        },
+        {
+          "path": "/cassie/Geometry/tn__cassiepelvis_XI/tn__righthiproll_WI9/tn__righthipyaw_nG9/tn__righthippitch_kJ9/tn__rightknee_qD/tn__rightshin_qD/tn__righttarsus_nG/tn__righttarsus_1_kJ",
+          "type": "revolute",
+          "lower": 50.0,
+          "upper": 170.0,
+          "violated": false
+        },
+        {
+          "path": "/cassie/Geometry/tn__cassiepelvis_XI/tn__righthiproll_WI9/tn__righthipyaw_nG9/tn__righthippitch_kJ9/tn__rightknee_qD/tn__rightshin_qD/tn__rightshin_1_nG",
+          "type": "revolute",
+          "lower": -20.0,
+          "upper": 20.0,
+          "violated": false
+        },
+        {
+          "path": "/cassie/Geometry/tn__cassiepelvis_XI/tn__righthiproll_WI9/tn__righthipyaw_nG9/tn__righthippitch_kJ9/tn__rightknee_qD/tn__rightknee_1_nG",
+          "type": "revolute",
+          "lower": -164.0,
+          "upper": -37.0,
+          "violated": false
+        },
+        {
+          "path": "/cassie/Geometry/tn__cassiepelvis_XI/tn__righthiproll_WI9/tn__righthipyaw_nG9/tn__righthippitch_kJ9/tn__righthippitch_1_hM9",
+          "type": "revolute",
+          "lower": -50.0,
+          "upper": 80.0,
+          "violated": false
+        },
+        {
+          "path": "/cassie/Geometry/tn__cassiepelvis_XI/tn__righthiproll_WI9/tn__righthipyaw_nG9/tn__righthipyaw_1_kJ9",
+          "type": "revolute",
+          "lower": -22.5,
+          "upper": 22.5,
+          "violated": false
+        },
+        {
+          "path": "/cassie/Geometry/tn__cassiepelvis_XI/tn__righthiproll_WI9/tn__righthiproll_1_yK9",
+          "type": "revolute",
+          "lower": -22.5,
+          "upper": 15.0,
+          "violated": false
+        }
+      ],
+      "masses": [
+        {
+          "path": "/cassie/Geometry/tn__cassiepelvis_XI",
+          "material": "aluminum",
+          "mass_kg": 10.33
+        },
+        {
+          "path": "/cassie/Geometry/tn__cassiepelvis_XI/tn__lefthiproll_mG8",
+          "material": "aluminum",
+          "mass_kg": 1.82
+        },
+        {
+          "path": "/cassie/Geometry/tn__cassiepelvis_XI/tn__lefthiproll_mG8/tn__lefthipyaw_YF8",
+          "material": "aluminum",
+          "mass_kg": 1.171
+        },
+        {
+          "path": "/cassie/Geometry/tn__cassiepelvis_XI/tn__lefthiproll_mG8/tn__lefthipyaw_YF8/tn__lefthippitch_VI8",
+          "material": "aluminum",
+          "mass_kg": 5.52
+        },
+        {
+          "path": "/cassie/Geometry/tn__cassiepelvis_XI/tn__lefthiproll_mG8/tn__lefthipyaw_YF8/tn__lefthippitch_VI8/tn__leftachillesrod_gMD",
+          "material": "carbon fiber",
+          "mass_kg": 0.1567
+        },
+        {
+          "path": "/cassie/Geometry/tn__cassiepelvis_XI/tn__lefthiproll_mG8/tn__lefthipyaw_YF8/tn__lefthippitch_VI8/tn__leftknee_bC",
+          "material": "carbon fiber",
+          "mass_kg": 0.7578
+        },
+        {
+          "path": "/cassie/Geometry/tn__cassiepelvis_XI/tn__lefthiproll_mG8/tn__lefthipyaw_YF8/tn__lefthippitch_VI8/tn__leftknee_bC/tn__leftkneespring_xK9",
+          "material": "carbon fiber",
+          "mass_kg": 0.186
+        },
+        {
+          "path": "/cassie/Geometry/tn__cassiepelvis_XI/tn__lefthiproll_mG8/tn__lefthipyaw_YF8/tn__lefthippitch_VI8/tn__leftknee_bC/tn__leftshin_bC",
+          "material": "carbon fiber",
+          "mass_kg": 0.577
+        },
+        {
+          "path": "/cassie/Geometry/tn__cassiepelvis_XI/tn__lefthiproll_mG8/tn__lefthipyaw_YF8/tn__lefthippitch_VI8/tn__leftknee_bC/tn__leftshin_bC/tn__lefttarsus_YF",
+          "material": "carbon fiber",
+          "mass_kg": 0.782
+        },
+        {
+          "path": "/cassie/Geometry/tn__cassiepelvis_XI/tn__lefthiproll_mG8/tn__lefthipyaw_YF8/tn__lefthippitch_VI8/tn__leftknee_bC/tn__leftshin_bC/tn__lefttarsus_YF/tn__leftheelspring_xK9",
+          "material": "unknown",
+          "mass_kg": 0.126
+        },
+        {
+          "path": "/cassie/Geometry/tn__cassiepelvis_XI/tn__lefthiproll_mG8/tn__lefthipyaw_YF8/tn__lefthippitch_VI8/tn__leftknee_bC/tn__leftshin_bC/tn__lefttarsus_YF/tn__leftfootcrank_jJ9",
+          "material": "rubber",
+          "mass_kg": 0.1261
+        },
+        {
+          "path": "/cassie/Geometry/tn__cassiepelvis_XI/tn__lefthiproll_mG8/tn__lefthipyaw_YF8/tn__lefthippitch_VI8/tn__leftknee_bC/tn__leftshin_bC/tn__lefttarsus_YF/tn__leftfootcrank_jJ9/tn__leftplantarrod_xKC",
+          "material": "carbon fiber",
+          "mass_kg": 0.1186
+        },
+        {
+          "path": "/cassie/Geometry/tn__cassiepelvis_XI/tn__lefthiproll_mG8/tn__lefthipyaw_YF8/tn__lefthippitch_VI8/tn__leftknee_bC/tn__leftshin_bC/tn__lefttarsus_YF/tn__leftfoot_bC",
+          "material": "rubber",
+          "mass_kg": 0.1498
+        },
+        {
+          "path": "/cassie/Geometry/tn__cassiepelvis_XI/tn__righthiproll_WI9",
+          "material": "aluminum",
+          "mass_kg": 1.82
+        },
+        {
+          "path": "/cassie/Geometry/tn__cassiepelvis_XI/tn__righthiproll_WI9/tn__righthipyaw_nG9",
+          "material": "aluminum",
+          "mass_kg": 1.171
+        },
+        {
+          "path": "/cassie/Geometry/tn__cassiepelvis_XI/tn__righthiproll_WI9/tn__righthipyaw_nG9/tn__righthippitch_kJ9",
+          "material": "aluminum",
+          "mass_kg": 5.52
+        },
+        {
+          "path": "/cassie/Geometry/tn__cassiepelvis_XI/tn__righthiproll_WI9/tn__righthipyaw_nG9/tn__righthippitch_kJ9/tn__rightachillesrod_vNE",
+          "material": "carbon fiber",
+          "mass_kg": 0.1567
+        },
+        {
+          "path": "/cassie/Geometry/tn__cassiepelvis_XI/tn__righthiproll_WI9/tn__righthipyaw_nG9/tn__righthippitch_kJ9/tn__rightknee_qD",
+          "material": "carbon fiber",
+          "mass_kg": 0.7578
+        },
+        {
+          "path": "/cassie/Geometry/tn__cassiepelvis_XI/tn__righthiproll_WI9/tn__righthipyaw_nG9/tn__righthippitch_kJ9/tn__rightknee_qD/tn__rightkneespring_hMA",
+          "material": "carbon fiber",
+          "mass_kg": 0.186
+        },
+        {
+          "path": "/cassie/Geometry/tn__cassiepelvis_XI/tn__righthiproll_WI9/tn__righthipyaw_nG9/tn__righthippitch_kJ9/tn__rightknee_qD/tn__rightshin_qD",
+          "material": "carbon fiber",
+          "mass_kg": 0.577
+        },
+        {
+          "path": "/cassie/Geometry/tn__cassiepelvis_XI/tn__righthiproll_WI9/tn__righthipyaw_nG9/tn__righthippitch_kJ9/tn__rightknee_qD/tn__rightshin_qD/tn__righttarsus_nG",
+          "material": "carbon fiber",
+          "mass_kg": 0.782
+        },
+        {
+          "path": "/cassie/Geometry/tn__cassiepelvis_XI/tn__righthiproll_WI9/tn__righthipyaw_nG9/tn__righthippitch_kJ9/tn__rightknee_qD/tn__rightshin_qD/tn__righttarsus_nG/tn__rightheelspring_hMA",
+          "material": "unknown",
+          "mass_kg": 0.126
+        },
+        {
+          "path": "/cassie/Geometry/tn__cassiepelvis_XI/tn__righthiproll_WI9/tn__righthipyaw_nG9/tn__righthippitch_kJ9/tn__rightknee_qD/tn__rightshin_qD/tn__righttarsus_nG/tn__rightfootcrank_yKA",
+          "material": "rubber",
+          "mass_kg": 0.1261
+        },
+        {
+          "path": "/cassie/Geometry/tn__cassiepelvis_XI/tn__righthiproll_WI9/tn__righthipyaw_nG9/tn__righthippitch_kJ9/tn__rightknee_qD/tn__rightshin_qD/tn__righttarsus_nG/tn__rightfootcrank_yKA/tn__rightplantarrod_hMD",
+          "material": "carbon fiber",
+          "mass_kg": 0.1186
+        },
+        {
+          "path": "/cassie/Geometry/tn__cassiepelvis_XI/tn__righthiproll_WI9/tn__righthipyaw_nG9/tn__righthippitch_kJ9/tn__rightknee_qD/tn__rightshin_qD/tn__righttarsus_nG/tn__rightfoot_qD",
+          "material": "rubber",
+          "mass_kg": 0.1498
+        }
+      ]
+    },
+    {
+      "name": "menagerie_gen3",
+      "usd": "assets/menagerie/menagerie_gen3/menagerie_gen3_stripped.usda",
+      "description": "Stripped from menagerie_gen3.usda \u2014 8 bodies, 7 joints (0 violated)",
+      "joints": [
+        {
+          "path": "/gen3/Geometry/base_link/shoulder_link/half_arm_1_link/half_arm_2_link/forearm_link/spherical_wrist_1_link/spherical_wrist_2_link/bracelet_link/joint_7",
+          "type": "revolute",
+          "lower": -Infinity,
+          "upper": Infinity,
+          "violated": false
+        },
+        {
+          "path": "/gen3/Geometry/base_link/shoulder_link/half_arm_1_link/half_arm_2_link/forearm_link/spherical_wrist_1_link/spherical_wrist_2_link/joint_6",
+          "type": "revolute",
+          "lower": -119.75,
+          "upper": 119.75,
+          "violated": false
+        },
+        {
+          "path": "/gen3/Geometry/base_link/shoulder_link/half_arm_1_link/half_arm_2_link/forearm_link/spherical_wrist_1_link/joint_5",
+          "type": "revolute",
+          "lower": -Infinity,
+          "upper": Infinity,
+          "violated": false
+        },
+        {
+          "path": "/gen3/Geometry/base_link/shoulder_link/half_arm_1_link/half_arm_2_link/forearm_link/joint_4",
+          "type": "revolute",
+          "lower": -147.25,
+          "upper": 147.25,
+          "violated": false
+        },
+        {
+          "path": "/gen3/Geometry/base_link/shoulder_link/half_arm_1_link/half_arm_2_link/joint_3",
+          "type": "revolute",
+          "lower": -Infinity,
+          "upper": Infinity,
+          "violated": false
+        },
+        {
+          "path": "/gen3/Geometry/base_link/shoulder_link/half_arm_1_link/joint_2",
+          "type": "revolute",
+          "lower": -128.34,
+          "upper": 128.34,
+          "violated": false
+        },
+        {
+          "path": "/gen3/Geometry/base_link/shoulder_link/joint_1",
+          "type": "revolute",
+          "lower": -Infinity,
+          "upper": Infinity,
+          "violated": false
+        }
+      ],
+      "masses": [
+        {
+          "path": "/gen3/Geometry/base_link",
+          "material": "aluminum",
+          "mass_kg": 1.697
+        },
+        {
+          "path": "/gen3/Geometry/base_link/shoulder_link",
+          "material": "aluminum",
+          "mass_kg": 1.3773
+        },
+        {
+          "path": "/gen3/Geometry/base_link/shoulder_link/half_arm_1_link",
+          "material": "aluminum",
+          "mass_kg": 1.1636
+        },
+        {
+          "path": "/gen3/Geometry/base_link/shoulder_link/half_arm_1_link/half_arm_2_link",
+          "material": "aluminum",
+          "mass_kg": 1.1636
+        },
+        {
+          "path": "/gen3/Geometry/base_link/shoulder_link/half_arm_1_link/half_arm_2_link/forearm_link",
+          "material": "aluminum",
+          "mass_kg": 0.9302
+        },
+        {
+          "path": "/gen3/Geometry/base_link/shoulder_link/half_arm_1_link/half_arm_2_link/forearm_link/spherical_wrist_1_link",
+          "material": "aluminum",
+          "mass_kg": 0.6781
+        },
+        {
+          "path": "/gen3/Geometry/base_link/shoulder_link/half_arm_1_link/half_arm_2_link/forearm_link/spherical_wrist_1_link/spherical_wrist_2_link",
+          "material": "aluminum",
+          "mass_kg": 0.6781
+        },
+        {
+          "path": "/gen3/Geometry/base_link/shoulder_link/half_arm_1_link/half_arm_2_link/forearm_link/spherical_wrist_1_link/spherical_wrist_2_link/bracelet_link",
+          "material": "aluminum",
+          "mass_kg": 0.5
+        }
+      ]
+    },
+    {
+      "name": "menagerie_gen3_violated",
+      "usd": "assets/menagerie/menagerie_gen3_violated/menagerie_gen3_violated_stripped.usda",
+      "description": "Stripped from menagerie_gen3.usda \u2014 8 bodies, 7 joints (1 violated)",
+      "joints": [
+        {
+          "path": "/gen3/Geometry/base_link/shoulder_link/half_arm_1_link/half_arm_2_link/forearm_link/spherical_wrist_1_link/spherical_wrist_2_link/bracelet_link/joint_7",
+          "type": "revolute",
+          "lower": -Infinity,
+          "upper": Infinity,
+          "violated": false
+        },
+        {
+          "path": "/gen3/Geometry/base_link/shoulder_link/half_arm_1_link/half_arm_2_link/forearm_link/spherical_wrist_1_link/spherical_wrist_2_link/joint_6",
+          "type": "revolute",
+          "lower": -119.75,
+          "upper": 119.75,
+          "violated": false
+        },
+        {
+          "path": "/gen3/Geometry/base_link/shoulder_link/half_arm_1_link/half_arm_2_link/forearm_link/spherical_wrist_1_link/joint_5",
+          "type": "revolute",
+          "lower": -Infinity,
+          "upper": Infinity,
+          "violated": false
+        },
+        {
+          "path": "/gen3/Geometry/base_link/shoulder_link/half_arm_1_link/half_arm_2_link/forearm_link/joint_4",
+          "type": "revolute",
+          "lower": -147.25,
+          "upper": 147.25,
+          "violated": false
+        },
+        {
+          "path": "/gen3/Geometry/base_link/shoulder_link/half_arm_1_link/half_arm_2_link/joint_3",
+          "type": "revolute",
+          "lower": -Infinity,
+          "upper": Infinity,
+          "violated": false
+        },
+        {
+          "path": "/gen3/Geometry/base_link/shoulder_link/half_arm_1_link/joint_2",
+          "type": "revolute",
+          "lower": -128.34,
+          "upper": 237.2,
+          "violated": true
+        },
+        {
+          "path": "/gen3/Geometry/base_link/shoulder_link/joint_1",
+          "type": "revolute",
+          "lower": -Infinity,
+          "upper": Infinity,
+          "violated": false
+        }
+      ],
+      "masses": [
+        {
+          "path": "/gen3/Geometry/base_link",
+          "material": "aluminum",
+          "mass_kg": 1.697
+        },
+        {
+          "path": "/gen3/Geometry/base_link/shoulder_link",
+          "material": "aluminum",
+          "mass_kg": 1.3773
+        },
+        {
+          "path": "/gen3/Geometry/base_link/shoulder_link/half_arm_1_link",
+          "material": "aluminum",
+          "mass_kg": 1.1636
+        },
+        {
+          "path": "/gen3/Geometry/base_link/shoulder_link/half_arm_1_link/half_arm_2_link",
+          "material": "aluminum",
+          "mass_kg": 1.1636
+        },
+        {
+          "path": "/gen3/Geometry/base_link/shoulder_link/half_arm_1_link/half_arm_2_link/forearm_link",
+          "material": "aluminum",
+          "mass_kg": 0.9302
+        },
+        {
+          "path": "/gen3/Geometry/base_link/shoulder_link/half_arm_1_link/half_arm_2_link/forearm_link/spherical_wrist_1_link",
+          "material": "aluminum",
+          "mass_kg": 0.6781
+        },
+        {
+          "path": "/gen3/Geometry/base_link/shoulder_link/half_arm_1_link/half_arm_2_link/forearm_link/spherical_wrist_1_link/spherical_wrist_2_link",
+          "material": "aluminum",
+          "mass_kg": 0.6781
+        },
+        {
+          "path": "/gen3/Geometry/base_link/shoulder_link/half_arm_1_link/half_arm_2_link/forearm_link/spherical_wrist_1_link/spherical_wrist_2_link/bracelet_link",
+          "material": "aluminum",
+          "mass_kg": 0.5
+        }
+      ]
     }
   ]
 }

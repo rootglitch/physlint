@@ -1,0 +1,404 @@
+{
+  "summary": {
+    "model": "nvidia/Cosmos-Reason2-8B",
+    "joint_detection": {
+      "tp": 0,
+      "tn": 5,
+      "fp": 8,
+      "fn": 1,
+      "precision": 0.0,
+      "recall": 0.0,
+      "accuracy": 0.357
+    },
+    "mass_estimation": {
+      "mape_pct": 144.0,
+      "n_prims": 16
+    }
+  },
+  "scenes": [
+    {
+      "name": "menagerie_gen3",
+      "joint_metrics": {
+        "tp": 0,
+        "tn": 3,
+        "fp": 4,
+        "fn": 0,
+        "missed": 0,
+        "total": 7,
+        "precision": 0.0,
+        "recall": null,
+        "accuracy": 0.429,
+        "per_joint": [
+          {
+            "path": "/gen3/Geometry/base_link/shoulder_link/half_arm_1_link/half_arm_2_link/forearm_link/spherical_wrist_1_link/spherical_wrist_2_link/bracelet_link/joint_7",
+            "gt_lower": -Infinity,
+            "gt_upper": Infinity,
+            "gt_violated": false,
+            "pred_violated": true,
+            "pred_lower": -90.0,
+            "pred_upper": 90.0,
+            "confidence": "high",
+            "reasoning": "UNCONSTRAINED joint_valid=true per spec.",
+            "outcome": "FP"
+          },
+          {
+            "path": "/gen3/Geometry/base_link/shoulder_link/half_arm_1_link/half_arm_2_link/forearm_link/spherical_wrist_1_link/spherical_wrist_2_link/joint_6",
+            "gt_lower": -119.75,
+            "gt_upper": 119.75,
+            "gt_violated": false,
+            "pred_violated": false,
+            "pred_lower": -119.75,
+            "pred_upper": 119.75,
+            "confidence": "high",
+            "reasoning": "Matches spec limit of -128.34\u00b0 to +128.34\u00b0 for joint_2. No violation.",
+            "outcome": "TN"
+          },
+          {
+            "path": "/gen3/Geometry/base_link/shoulder_link/half_arm_1_link/half_arm_2_link/forearm_link/spherical_wrist_1_link/joint_5",
+            "gt_lower": -Infinity,
+            "gt_upper": Infinity,
+            "gt_violated": false,
+            "pred_violated": true,
+            "pred_lower": -90.0,
+            "pred_upper": 90.0,
+            "confidence": "high",
+            "reasoning": "UNCONSTRAINED joint_valid=true per spec.",
+            "outcome": "FP"
+          },
+          {
+            "path": "/gen3/Geometry/base_link/shoulder_link/half_arm_1_link/half_arm_2_link/forearm_link/joint_4",
+            "gt_lower": -147.25,
+            "gt_upper": 147.25,
+            "gt_violated": false,
+            "pred_violated": false,
+            "pred_lower": -147.25,
+            "pred_upper": 147.25,
+            "confidence": "high",
+            "reasoning": "Matches spec limit of -147.25\u00b0 to +147.25\u00b0 for joint_4. No violation.",
+            "outcome": "TN"
+          },
+          {
+            "path": "/gen3/Geometry/base_link/shoulder_link/half_arm_1_link/half_arm_2_link/joint_3",
+            "gt_lower": -Infinity,
+            "gt_upper": Infinity,
+            "gt_violated": false,
+            "pred_violated": true,
+            "pred_lower": -90.0,
+            "pred_upper": 90.0,
+            "confidence": "high",
+            "reasoning": "UNCONSTRAINED joint_valid=true per spec.",
+            "outcome": "FP"
+          },
+          {
+            "path": "/gen3/Geometry/base_link/shoulder_link/half_arm_1_link/joint_2",
+            "gt_lower": -128.34,
+            "gt_upper": 128.34,
+            "gt_violated": false,
+            "pred_violated": false,
+            "pred_lower": -128.34,
+            "pred_upper": 128.34,
+            "confidence": "high",
+            "reasoning": "Matches spec limit of -128.34\u00b0 to +128.34\u00b0 for joint_2. No violation.",
+            "outcome": "TN"
+          },
+          {
+            "path": "/gen3/Geometry/base_link/shoulder_link/joint_1",
+            "gt_lower": -Infinity,
+            "gt_upper": Infinity,
+            "gt_violated": false,
+            "pred_violated": true,
+            "pred_lower": -90.0,
+            "pred_upper": 90.0,
+            "confidence": "high",
+            "reasoning": "UNCONSTRAINED joint_valid=true per spec.",
+            "outcome": "FP"
+          }
+        ]
+      },
+      "mass_metrics": {
+        "mape_pct": 144.0,
+        "n_prims": 8,
+        "n_missed": 0,
+        "best_prim": "base_link",
+        "best_ape": 39.0,
+        "worst_prim": "forearm_link",
+        "worst_ape": 261.8,
+        "per_prim": [
+          {
+            "path": "/gen3/Geometry/base_link",
+            "gt_mass_kg": 1.697,
+            "pred_mass_kg": 2.359,
+            "ape_pct": 39.0,
+            "gt_material": "aluminum",
+            "pred_material": "aluminium",
+            "confidence": "high",
+            "reasoning": "Silvery color and lightweight robotic arm context indicate aluminium."
+          },
+          {
+            "path": "/gen3/Geometry/base_link/shoulder_link",
+            "gt_mass_kg": 1.377,
+            "pred_mass_kg": 2.447,
+            "ape_pct": 77.7,
+            "gt_material": "aluminum",
+            "pred_material": "aluminium",
+            "confidence": "high",
+            "reasoning": "Silvery color and lightweight robotic arm context indicate aluminium."
+          },
+          {
+            "path": "/gen3/Geometry/base_link/shoulder_link/half_arm_1_link",
+            "gt_mass_kg": 1.164,
+            "pred_mass_kg": 3.834,
+            "ape_pct": 229.5,
+            "gt_material": "aluminum",
+            "pred_material": "aluminium",
+            "confidence": "high",
+            "reasoning": "Silvery color and lightweight robotic arm context indicate aluminium."
+          },
+          {
+            "path": "/gen3/Geometry/base_link/shoulder_link/half_arm_1_link/half_arm_2_link",
+            "gt_mass_kg": 1.164,
+            "pred_mass_kg": 3.596,
+            "ape_pct": 209.0,
+            "gt_material": "aluminum",
+            "pred_material": "aluminium",
+            "confidence": "high",
+            "reasoning": "Silvery color and lightweight robotic arm context indicate aluminium."
+          },
+          {
+            "path": "/gen3/Geometry/base_link/shoulder_link/half_arm_1_link/half_arm_2_link/forearm_link",
+            "gt_mass_kg": 0.93,
+            "pred_mass_kg": 3.365,
+            "ape_pct": 261.8,
+            "gt_material": "aluminum",
+            "pred_material": "aluminium",
+            "confidence": "high",
+            "reasoning": "Silvery color and lightweight robotic arm context indicate aluminium."
+          },
+          {
+            "path": "/gen3/Geometry/base_link/shoulder_link/half_arm_1_link/half_arm_2_link/forearm_link/spherical_wrist_1_link",
+            "gt_mass_kg": 0.678,
+            "pred_mass_kg": 1.383,
+            "ape_pct": 104.0,
+            "gt_material": "aluminum",
+            "pred_material": "aluminium",
+            "confidence": "high",
+            "reasoning": "Silvery color and lightweight robotic arm context indicate aluminium."
+          },
+          {
+            "path": "/gen3/Geometry/base_link/shoulder_link/half_arm_1_link/half_arm_2_link/forearm_link/spherical_wrist_1_link/spherical_wrist_2_link",
+            "gt_mass_kg": 0.678,
+            "pred_mass_kg": 1.534,
+            "ape_pct": 126.2,
+            "gt_material": "aluminum",
+            "pred_material": "aluminium",
+            "confidence": "high",
+            "reasoning": "Silvery color and lightweight robotic arm context indicate aluminium."
+          },
+          {
+            "path": "/gen3/Geometry/base_link/shoulder_link/half_arm_1_link/half_arm_2_link/forearm_link/spherical_wrist_1_link/spherical_wrist_2_link/bracelet_link",
+            "gt_mass_kg": 0.5,
+            "pred_mass_kg": 1.024,
+            "ape_pct": 104.8,
+            "gt_material": "aluminum",
+            "pred_material": "aluminium",
+            "confidence": "high",
+            "reasoning": "Silvery color and lightweight robotic arm context indicate aluminium."
+          }
+        ]
+      },
+      "chain_of_thought": "=== PASS 1: CONTEXT PRE-PASS ===\n```json\n{\n  \"mechanism_type\": \"Robot Arm\",\n  \"expected_joint_ranges\": \"Multiple revolute joints with varying ranges: joint_1 and joint_3 have unrestricted rotation, joint_2 is limited to -128.34\u00b0 to +128.34\u00b0, joint_4 to -147.25\u00b0 to +147.25\u00b0, joint_5 and joint_6 to -\u221e to +\u221e, and joint_7 to -\u221e to +\u221e. The spherical wrist joints (joint_5 and joint_6) allow full 360\u00b0 rotation, while the other joints have specific angular limits for precise motion control. The design suggests a multi-degree-of-freedom robotic arm with articulated segments for complex manipulation tasks, where joint constraints are critical for ensuring safe and accurate movement within the workspace. The physics simulation must account for these joint limits and the resulting motion constraints to prevent collisions and ensure smooth operation.\"\n}\n```\n\n=== PASS 2: MAIN ANALYSIS ===\n STEP 1 \u2014 REASONING\n\nFor each geometry prim write ONE line:\n  \"Prim <path>: material=<X> because <1-2 word visual cue>. Confidence:<level>.\"\n  (Mass is computed automatically from bbox \u2014 you do NOT need to calculate it.)\nFor each joint prim write 2-3 sentences (full reasoning required for joint validation):\n  Revolute: \"Joint <name>: lower=<X>\u00b0, upper=<Y>\u00b0. <reason why valid/invalid>.\n   Corrected: lower=<A>\u00b0, upper=<B>\u00b0. Confidence:<level>.\"\n  Prismatic: \"Joint <name>: lower=<X>, upper=<Y>, body_length_along_axis=<B>.\n   travel=upper\u2212lower=<T>. <T> vs <B>: <exceeds\u2192VIOLATED, joint_valid=false|fits\u2192valid, joint_valid=true>.\n   Corrected if needed: lower=<A>, upper=<C>. Confidence:<level>.\"\n\nPrim /gen3/Geometry/base_link: material=aluminium because silvery color and lightweight robotic arm context. Confidence:high.\nPrim /gen3/Geometry/base_link/shoulder_link: material=aluminium because silvery color and lightweight robotic arm context. Confidence:high.\nPrim /gen3/Geometry/base_link/shoulder_link/half_arm_1_link: material=aluminium because silvery color and lightweight robotic arm context. Confidence:high.\nPrim /gen3/Geometry/base_link/shoulder_link/half_arm_1_link/half_arm_2_link: material=aluminium because silvery color and lightweight robotic arm context. Confidence:high.\nPrim /gen3/Geometry/base_link/shoulder_link/half_arm_1_link/half_arm_2_link/forearm_link: material=aluminium because silvery color and lightweight robotic arm context. Confidence:high.\nPrim /gen3/Geometry/base_link/shoulder_link/half_arm_1_link/half_arm_2_link/forearm_link/spherical_wrist_1_link: material=aluminium because silvery color and lightweight robotic arm context. Confidence:high.\nPrim /gen3/Geometry/base_link/shoulder_link/half_arm_1_link/half_arm_2_link/forearm_link/spherical_wrist_1_link/spherical_wrist_2_link: material=aluminium because silvery color and lightweight robotic arm context. Confidence:high.\nPrim /gen3/Geometry/base_link/shoulder_link/half_arm_1_link/half_arm_2_link/forearm_link/spherical_wrist_1_link/spherical_wrist_2_link/bracelet_link: material=aluminium because silvery color and lightweight robotic arm context. Confidence:high.\n\nJoint /gen3/Geometry/base_link/shoulder_link/half_arm_1_link/half_arm_2_link/forearm_link/spherical_wrist_1_link/spherical_wrist_2_link/bracelet_link/joint_7: lower=-\u221e, upper=\u221e. UNCONSTRAINED joint_valid=true per spec. Confidence:high.\nJoint /gen3/Geometry/base_link/shoulder_link/half_arm_1_link/half_arm_2_link/forearm_link/spherical_wrist_1_link/spherical_wrist_2_link/joint_6: lower=-119.75\u00b0, upper=119.75\u00b0. Matches spec limit of -128.34\u00b0 to +128.34\u00b0 for joint_2. No violation. Confidence:high.\nJoint /gen3/Geometry/base_link/shoulder_link/half_arm_1_link/half_arm_2_link/forearm_link/spherical_wrist_1_link/joint_5: lower=-\u221e, upper=\u221e. UNCONSTRAINED joint_valid=true per spec. Confidence:high.\nJoint /gen3/Geometry/base_link/shoulder_link/half_arm_1_link/half_arm_2_link/forearm_link/joint_4: lower=-147.25\u00b0, upper=147.25\u00b0. Matches spec limit of -147.25\u00b0 to +147.25\u00b0 for joint_4. No violation. Confidence:high.\nJoint /gen3/Geometry/base_link/shoulder_link/half_arm_1_link/half_arm_2_link/joint_3: lower=-\u221e, upper=\u221e. UNCONSTRAINED joint_valid=true per spec. Confidence:high.\nJoint /gen3/Geometry/base_link/shoulder_link/half_arm_1_link/joint_2: lower=-128.34\u00b0, upper=128.34\u00b0. Matches spec limit of -128.34\u00b0 to +128.34\u00b0 for joint_2. No violation. Confidence:high.\nJoint /gen3/Geometry/base_link/shoulder_link/joint_1: lower=-\u221e, upper=\u221e. UNCONSTRAINED joint_valid=true per spec. Confidence:high.\n\n STEP 2 \u2014 JSON OUTPUT\n\n```json\n{\n  \"geom_prims\": [\n    {\n      \"prim_path\": \"/gen3/Geometry/base_link\",\n      \"material_type\": \"aluminium\",\n      \"mass_kg\": 0.0,\n      \"static_friction\": 0.0,\n      \"dynamic_friction\": 0.0,\n      \"restitution\": 0.0,\n      \"collision_approximation\": \"convexHull\",\n      \"is_rigid\": true,\n      \"confidence\": \"high\",\n      \"reasoning\": \"Silvery color and lightweight robotic arm context indicate aluminium.\"\n    },\n    {\n      \"prim_path\": \"/gen3/Geometry/base_link/shoulder_link\",\n      \"material_type\": \"aluminium\",\n      \"mass_kg\": 0.0,\n      \"static_friction\": 0.0,\n      \"dynamic_friction\": 0.0,\n      \"restitution\": 0.0,\n      \"collision_approximation\": \"convexHull\",\n      \"is_rigid\": true,\n      \"confidence\": \"high\",\n      \"reasoning\": \"Silvery color and lightweight robotic arm context indicate aluminium.\"\n    },\n    {\n      \"prim_path\": \"/gen3/Geometry/base_link/shoulder_link/half_arm_1_link\",\n      \"material_type\": \"aluminium\",\n      \"mass_kg\": 0.0,\n      \"static_friction\": 0.0,\n      \"dynamic_friction\": 0.0,\n      \"restitution\": 0.0,\n      \"collision_approximation\": \"convexHull\",\n      \"is_rigid\": true,\n      \"confidence\": \"high\",\n      \"reasoning\": \"Silvery color and lightweight robotic arm context indicate aluminium.\"\n    },\n    {\n      \"prim_path\": \"/gen3/Geometry/base_link/shoulder_link/half_arm_1_link/half_arm_2_link\",\n      \"material_type\": \"aluminium\",\n      \"mass_kg\": 0.0,\n      \"static_friction\": 0.0,\n      \"dynamic_friction\": 0.0,\n      \"restitution\": 0.0,\n      \"collision_approximation\": \"convexHull\",\n      \"is_rigid\": true,\n      \"confidence\": \"high\",\n      \"reasoning\": \"Silvery color and lightweight robotic arm context indicate aluminium.\"\n    },\n    {\n      \"prim_path\": \"/gen3/Geometry/base_link/shoulder_link/half_arm_1_link/half_arm_2_link/forearm_link\",\n      \"material_type\": \"aluminium\",\n      \"mass_kg\": 0.0,\n      \"static_friction\": 0.0,\n      \"dynamic_friction\": 0.0,\n      \"restitution\": 0.0,\n      \"collision_approximation\": \"convexHull\",\n      \"is_rigid\": true,\n      \"confidence\": \"high\",\n      \"reasoning\": \"Silvery color and lightweight robotic arm context indicate aluminium.\"\n    },\n    {\n      \"prim_path\": \"/gen3/Geometry/base_link/shoulder_link/half_arm_1_link/half_arm_2_link/forearm_link/spherical_wrist_1_link\",\n      \"material_type\": \"aluminium\",\n      \"mass_kg\": 0.0,\n      \"static_friction\": 0.0,\n      \"dynamic_friction\": 0.0,\n      \"restitution\": 0.0,\n      \"collision_approximation\": \"convexHull\",\n      \"is_rigid\": true,\n      \"confidence\": \"high\",\n      \"reasoning\": \"Silvery color and lightweight robotic arm context indicate aluminium.\"\n    },\n    {\n      \"prim_path\": \"/gen3/Geometry/base_link/shoulder_link/half_arm_1_link/half_arm_2_link/forearm_link/spherical_wrist_1_link/spherical_wrist_2_link\",\n      \"material_type\": \"aluminium\",\n      \"mass_kg\": 0.0,\n      \"static_friction\": 0.0,\n      \"dynamic_friction\": 0.0,\n      \"restitution\": 0.0,\n      \"collision_approximation\": \"convexHull\",\n      \"is_rigid\": true,\n      \"confidence\": \"high\",\n      \"reasoning\": \"Silvery color and lightweight robotic arm context indicate aluminium.\"\n    },\n    {\n      \"prim_path\": \"/gen3/Geometry/base_link/shoulder_link/half_arm_1_link/half_arm_2_link/forearm_link/spherical_wrist_1_link/spherical_wrist_2_link/bracelet_link\",\n      \"material_type\": \"aluminium\",\n      \"mass_kg\": 0.0,\n      \"static_friction\": 0.0,\n      \"dynamic_friction\": 0.0,\n      \"restitution\": 0.0,\n      \"collision_approximation\": \"convexHull\",\n      \"is_rigid\": true,\n      \"confidence\": \"high\",\n      \"reasoning\": \"Silvery color and lightweight robotic arm context indicate aluminium.\"\n    }\n  ],\n  \"joint_prims\": [\n    {\n      \"prim_path\": \"/gen3/Geometry/base_link/shoulder_link/half_arm_1_link/half_arm_2_link/forearm_link/spherical_wrist_1_link/spherical_wrist_2_link/bracelet_link/joint_7\",\n      \"lower_limit_deg\": -90,\n      \"upper_limit_deg\": 90,\n      \"joint_valid\": true,\n      \"confidence\": \"high\",\n      \"reasoning\": \"UNCONSTRAINED joint_valid=true per spec.\"\n    },\n    {\n      \"prim_path\": \"/gen3/Geometry/base_link/shoulder_link/half_arm_1_link/half_arm_2_link/forearm_link/spherical_wrist_1_link/spherical_wrist_2_link/joint_6\",\n      \"lower_limit_deg\": -119.75,\n      \"upper_limit_deg\": 119.75,\n      \"joint_valid\": true,\n      \"confidence\": \"high\",\n      \"reasoning\": \"Matches spec limit of -128.34\u00b0 to +128.34\u00b0 for joint_2. No violation.\"\n    },\n    {\n      \"prim_path\": \"/gen3/Geometry/base_link/shoulder_link/half_arm_1_link/half_arm_2_link/forearm_link/spherical_wrist_1_link/joint_5\",\n      \"lower_limit_deg\": -90,\n      \"upper_limit_deg\": 90,\n      \"joint_valid\": true,\n      \"confidence\": \"high\",\n      \"reasoning\": \"UNCONSTRAINED joint_valid=true per spec.\"\n    },\n    {\n      \"prim_path\": \"/gen3/Geometry/base_link/shoulder_link/half_arm_1_link/half_arm_2_link/forearm_link/joint_4\",\n      \"lower_limit_deg\": -147.25,\n      \"upper_limit_deg\": 147.25,\n      \"joint_valid\": true,\n      \"confidence\": \"high\",\n      \"reasoning\": \"Matches spec limit of -147.25\u00b0 to +147.25\u00b0 for joint_4. No violation.\"\n    },\n    {\n      \"prim_path\": \"/gen3/Geometry/base_link/shoulder_link/half_arm_1_link/half_arm_2_link/joint_3\",\n      \"lower_limit_deg\": -90,\n      \"upper_limit_deg\": 90,\n      \"joint_valid\": true,\n      \"confidence\": \"high\",\n      \"reasoning\": \"UNCONSTRAINED joint_valid=true per spec.\"\n    },\n    {\n      \"prim_path\": \"/gen3/Geometry/base_link/shoulder_link/half_arm_1_link/joint_2\",\n      \"lower_limit_deg\": -128.34,\n      \"upper_limit_deg\": 128.34,\n      \"joint_valid\": true,\n      \"confidence\": \"high\",\n      \"reasoning\": \"Matches spec limit of -128.34\u00b0 to +128.34\u00b0 for joint_2. No violation.\"\n    },\n    {\n      \"prim_path\": \"/gen3/Geometry/base_link/shoulder_link/joint_1\",\n      \"lower_limit_deg\": -90,\n      \"upper_limit_deg\": 90,\n      \"joint_valid\": true,\n      \"confidence\": \"high\",\n      \"reasoning\": \"UNCONSTRAINED joint_valid=true per spec.\"\n    }\n  ],\n  \"global_notes\": \"All joints and materials are correctly specified and validated against the provided specs.\"\n}\n```\n\n=== PASS 3: VERIFICATION ===\n```json\n{\n  \"corrections\": [],\n  \"global_notes\": \"The analysis correctly identifies four joints as violating the physics constraints due to their unbounded rotational limits, while three other joints are confirmed to be within valid specifications. No additional corrections are needed as the violations are accurately captured.\"\n}\n```"
+    },
+    {
+      "name": "menagerie_gen3_violated",
+      "joint_metrics": {
+        "tp": 0,
+        "tn": 2,
+        "fp": 4,
+        "fn": 1,
+        "missed": 0,
+        "total": 7,
+        "precision": 0.0,
+        "recall": 0.0,
+        "accuracy": 0.286,
+        "per_joint": [
+          {
+            "path": "/gen3/Geometry/base_link/shoulder_link/half_arm_1_link/half_arm_2_link/forearm_link/spherical_wrist_1_link/spherical_wrist_2_link/bracelet_link/joint_7",
+            "gt_lower": -Infinity,
+            "gt_upper": Infinity,
+            "gt_violated": false,
+            "pred_violated": true,
+            "pred_lower": -90.0,
+            "pred_upper": 90.0,
+            "confidence": "high",
+            "reasoning": "UNCONSTRAINED joint_valid=true per robot spec.",
+            "outcome": "FP"
+          },
+          {
+            "path": "/gen3/Geometry/base_link/shoulder_link/half_arm_1_link/half_arm_2_link/forearm_link/spherical_wrist_1_link/spherical_wrist_2_link/joint_6",
+            "gt_lower": -119.75,
+            "gt_upper": 119.75,
+            "gt_violated": false,
+            "pred_violated": false,
+            "pred_lower": -119.75,
+            "pred_upper": 119.75,
+            "confidence": "high",
+            "reasoning": "Within spec (-119.75\u00b0 to 119.75\u00b0).",
+            "outcome": "TN"
+          },
+          {
+            "path": "/gen3/Geometry/base_link/shoulder_link/half_arm_1_link/half_arm_2_link/forearm_link/spherical_wrist_1_link/joint_5",
+            "gt_lower": -Infinity,
+            "gt_upper": Infinity,
+            "gt_violated": false,
+            "pred_violated": true,
+            "pred_lower": -90.0,
+            "pred_upper": 90.0,
+            "confidence": "high",
+            "reasoning": "UNCONSTRAINED joint_valid=true per robot spec.",
+            "outcome": "FP"
+          },
+          {
+            "path": "/gen3/Geometry/base_link/shoulder_link/half_arm_1_link/half_arm_2_link/forearm_link/joint_4",
+            "gt_lower": -147.25,
+            "gt_upper": 147.25,
+            "gt_violated": false,
+            "pred_violated": false,
+            "pred_lower": -147.25,
+            "pred_upper": 147.25,
+            "confidence": "high",
+            "reasoning": "Within spec (-147.25\u00b0 to 147.25\u00b0).",
+            "outcome": "TN"
+          },
+          {
+            "path": "/gen3/Geometry/base_link/shoulder_link/half_arm_1_link/half_arm_2_link/joint_3",
+            "gt_lower": -Infinity,
+            "gt_upper": Infinity,
+            "gt_violated": false,
+            "pred_violated": true,
+            "pred_lower": -90.0,
+            "pred_upper": 90.0,
+            "confidence": "high",
+            "reasoning": "UNCONSTRAINED joint_valid=true per robot spec.",
+            "outcome": "FP"
+          },
+          {
+            "path": "/gen3/Geometry/base_link/shoulder_link/half_arm_1_link/joint_2",
+            "gt_lower": -128.34,
+            "gt_upper": 237.2,
+            "gt_violated": true,
+            "pred_violated": false,
+            "pred_lower": -128.34,
+            "pred_upper": 237.2,
+            "confidence": "high",
+            "reasoning": "Within spec (-128.34\u00b0 to 237.20\u00b0).",
+            "outcome": "FN"
+          },
+          {
+            "path": "/gen3/Geometry/base_link/shoulder_link/joint_1",
+            "gt_lower": -Infinity,
+            "gt_upper": Infinity,
+            "gt_violated": false,
+            "pred_violated": true,
+            "pred_lower": -90.0,
+            "pred_upper": 90.0,
+            "confidence": "high",
+            "reasoning": "UNCONSTRAINED joint_valid=true per robot spec.",
+            "outcome": "FP"
+          }
+        ]
+      },
+      "mass_metrics": {
+        "mape_pct": 144.0,
+        "n_prims": 8,
+        "n_missed": 0,
+        "best_prim": "base_link",
+        "best_ape": 39.0,
+        "worst_prim": "forearm_link",
+        "worst_ape": 261.8,
+        "per_prim": [
+          {
+            "path": "/gen3/Geometry/base_link",
+            "gt_mass_kg": 1.697,
+            "pred_mass_kg": 2.359,
+            "ape_pct": 39.0,
+            "gt_material": "aluminum",
+            "pred_material": "aluminium",
+            "confidence": "high",
+            "reasoning": "Silvery color and lightweight robotic arm context."
+          },
+          {
+            "path": "/gen3/Geometry/base_link/shoulder_link",
+            "gt_mass_kg": 1.377,
+            "pred_mass_kg": 2.447,
+            "ape_pct": 77.7,
+            "gt_material": "aluminum",
+            "pred_material": "aluminium",
+            "confidence": "high",
+            "reasoning": "Silvery color and lightweight robotic arm context."
+          },
+          {
+            "path": "/gen3/Geometry/base_link/shoulder_link/half_arm_1_link",
+            "gt_mass_kg": 1.164,
+            "pred_mass_kg": 3.834,
+            "ape_pct": 229.5,
+            "gt_material": "aluminum",
+            "pred_material": "aluminium",
+            "confidence": "high",
+            "reasoning": "Silvery color and lightweight robotic arm context."
+          },
+          {
+            "path": "/gen3/Geometry/base_link/shoulder_link/half_arm_1_link/half_arm_2_link",
+            "gt_mass_kg": 1.164,
+            "pred_mass_kg": 3.596,
+            "ape_pct": 209.0,
+            "gt_material": "aluminum",
+            "pred_material": "aluminium",
+            "confidence": "high",
+            "reasoning": "Silvery color and lightweight robotic arm context."
+          },
+          {
+            "path": "/gen3/Geometry/base_link/shoulder_link/half_arm_1_link/half_arm_2_link/forearm_link",
+            "gt_mass_kg": 0.93,
+            "pred_mass_kg": 3.365,
+            "ape_pct": 261.8,
+            "gt_material": "aluminum",
+            "pred_material": "aluminium",
+            "confidence": "high",
+            "reasoning": "Silvery color and lightweight robotic arm context."
+          },
+          {
+            "path": "/gen3/Geometry/base_link/shoulder_link/half_arm_1_link/half_arm_2_link/forearm_link/spherical_wrist_1_link",
+            "gt_mass_kg": 0.678,
+            "pred_mass_kg": 1.383,
+            "ape_pct": 104.0,
+            "gt_material": "aluminum",
+            "pred_material": "aluminium",
+            "confidence": "high",
+            "reasoning": "Silvery color and lightweight robotic arm context."
+          },
+          {
+            "path": "/gen3/Geometry/base_link/shoulder_link/half_arm_1_link/half_arm_2_link/forearm_link/spherical_wrist_1_link/spherical_wrist_2_link",
+            "gt_mass_kg": 0.678,
+            "pred_mass_kg": 1.534,
+            "ape_pct": 126.2,
+            "gt_material": "aluminum",
+            "pred_material": "aluminium",
+            "confidence": "high",
+            "reasoning": "Silvery color and lightweight robotic arm context."
+          },
+          {
+            "path": "/gen3/Geometry/base_link/shoulder_link/half_arm_1_link/half_arm_2_link/forearm_link/spherical_wrist_1_link/spherical_wrist_2_link/bracelet_link",
+            "gt_mass_kg": 0.5,
+            "pred_mass_kg": 1.024,
+            "ape_pct": 104.8,
+            "gt_material": "aluminum",
+            "pred_material": "aluminium",
+            "confidence": "high",
+            "reasoning": "Silvery color and lightweight robotic arm context."
+          }
+        ]
+      },
+      "chain_of_thought": "=== PASS 1: CONTEXT PRE-PASS ===\n```json\n{\n  \"mechanism_type\": \"robotic arm\",\n  \"expected_joint_ranges\": \"revolute joints with varying ranges: joint_1 (-\u221e to \u221e), joint_2 (-128.34\u00b0 to 237.20\u00b0), joint_3 (-\u221e to \u221e), joint_4 (-147.25\u00b0 to 147.25\u00b0), joint_5 (-\u221e to \u221e), joint_6 (-119.75\u00b0 to 119.75\u00b0), and joint_7 (-\u221e to \u221e)\",\n  \"validation_context\": \"validate joint limits and collision avoidance for a robotic arm with multiple revolute joints and varying range constraints.\"\n}\n```\n\n=== PASS 2: MAIN ANALYSIS ===\n STEP 1 \u2014 REASONING\n\nFor each geometry prim write ONE line:\n  \"Prim <path>: material=<X> because <1-2 word visual cue>. Confidence:<level>.\"\n  (Mass is computed automatically from bbox \u2014 you do NOT need to calculate it.)\nFor each joint prim write 2-3 sentences (full reasoning required for joint validation):\n  Revolute: \"Joint <name>: lower=<X>\u00b0, upper=<Y>\u00b0. <reason why valid/invalid>.\n   Corrected: lower=<A>\u00b0, upper=<B>\u00b0. Confidence:<level>.\"\n  Prismatic: \"Joint <name>: lower=<X>, upper=<Y>, body_length_along_axis=<B>.\n   travel=upper\u2212lower=<T>. <T> vs <B>: <exceeds\u2192VIOLATED, joint_valid=false|fits\u2192valid, joint_valid=true>.\n   Corrected if needed: lower=<A>, upper=<C>. Confidence:<level>.\"\n\nPrim /gen3/Geometry/base_link: material=aluminium because silvery color and lightweight robotic arm context. Confidence:high.\nPrim /gen3/Geometry/base_link/shoulder_link: material=aluminium because silvery color and lightweight robotic arm context. Confidence:high.\nPrim /gen3/Geometry/base_link/shoulder_link/half_arm_1_link: material=aluminium because silvery color and lightweight robotic arm context. Confidence:high.\nPrim /gen3/Geometry/base_link/shoulder_link/half_arm_1_link/half_arm_2_link: material=aluminium because silvery color and lightweight robotic arm context. Confidence:high.\nPrim /gen3/Geometry/base_link/shoulder_link/half_arm_1_link/half_arm_2_link/forearm_link: material=aluminium because silvery color and lightweight robotic arm context. Confidence:high.\nPrim /gen3/Geometry/base_link/shoulder_link/half_arm_1_link/half_arm_2_link/forearm_link/spherical_wrist_1_link: material=aluminium because silvery color and lightweight robotic arm context. Confidence:high.\nPrim /gen3/Geometry/base_link/shoulder_link/half_arm_1_link/half_arm_2_link/forearm_link/spherical_wrist_1_link/spherical_wrist_2_link: material=aluminium because silvery color and lightweight robotic arm context. Confidence:high.\nPrim /gen3/Geometry/base_link/shoulder_link/half_arm_1_link/half_arm_2_link/forearm_link/spherical_wrist_1_link/spherical_wrist_2_link/bracelet_link: material=aluminium because silvery color and lightweight robotic arm context. Confidence:high.\n\nJoint /gen3/Geometry/base_link/shoulder_link/half_arm_1_link/half_arm_2_link/forearm_link/spherical_wrist_1_link/spherical_wrist_2_link/bracelet_link/joint_7: lower=-\u221e, upper=\u221e. UNCONSTRAINED joint_valid=true per robot spec. Confidence:high.\nJoint /gen3/Geometry/base_link/shoulder_link/half_arm_1_link/half_arm_2_link/forearm_link/spherical_wrist_1_link/spherical_wrist_2_link/joint_6: lower=-119.75\u00b0, upper=119.75\u00b0. Within spec (-119.75\u00b0 to 119.75\u00b0). Confidence:high.\nJoint /gen3/Geometry/base_link/shoulder_link/half_arm_1_link/half_arm_2_link/forearm_link/spherical_wrist_1_link/joint_5: lower=-\u221e, upper=\u221e. UNCONSTRAINED joint_valid=true per robot spec. Confidence:high.\nJoint /gen3/Geometry/base_link/shoulder_link/half_arm_1_link/half_arm_2_link/forearm_link/joint_4: lower=-147.25\u00b0, upper=147.25\u00b0. Within spec (-147.25\u00b0 to 147.25\u00b0). Confidence:high.\nJoint /gen3/Geometry/base_link/shoulder_link/half_arm_1_link/half_arm_2_link/joint_3: lower=-\u221e, upper=\u221e. UNCONSTRAINED joint_valid=true per robot spec. Confidence:high.\nJoint /gen3/Geometry/base_link/shoulder_link/half_arm_1_link/joint_2: lower=-128.34\u00b0, upper=237.20\u00b0. Within spec (-128.34\u00b0 to 237.20\u00b0). Confidence:high.\nJoint /gen3/Geometry/base_link/shoulder_link/joint_1: lower=-\u221e, upper=\u221e. UNCONSTRAINED joint_valid=true per robot spec. Confidence:high.\n\n STEP 2 \u2014 JSON OUTPUT\n\n```json\n{\n  \"geom_prims\": [\n    {\n      \"prim_path\": \"/gen3/Geometry/base_link\",\n      \"material_type\": \"aluminium\",\n      \"mass_kg\": 0.0,\n      \"static_friction\": 0.0,\n      \"dynamic_friction\": 0.0,\n      \"restitution\": 0.0,\n      \"collision_approximation\": \"convexHull\",\n      \"is_rigid\": true,\n      \"confidence\": \"high\",\n      \"reasoning\": \"Silvery color and lightweight robotic arm context.\"\n    },\n    {\n      \"prim_path\": \"/gen3/Geometry/base_link/shoulder_link\",\n      \"material_type\": \"aluminium\",\n      \"mass_kg\": 0.0,\n      \"static_friction\": 0.0,\n      \"dynamic_friction\": 0.0,\n      \"restitution\": 0.0,\n      \"collision_approximation\": \"convexHull\",\n      \"is_rigid\": true,\n      \"confidence\": \"high\",\n      \"reasoning\": \"Silvery color and lightweight robotic arm context.\"\n    },\n    {\n      \"prim_path\": \"/gen3/Geometry/base_link/shoulder_link/half_arm_1_link\",\n      \"material_type\": \"aluminium\",\n      \"mass_kg\": 0.0,\n      \"static_friction\": 0.0,\n      \"dynamic_friction\": 0.0,\n      \"restitution\": 0.0,\n      \"collision_approximation\": \"convexHull\",\n      \"is_rigid\": true,\n      \"confidence\": \"high\",\n      \"reasoning\": \"Silvery color and lightweight robotic arm context.\"\n    },\n    {\n      \"prim_path\": \"/gen3/Geometry/base_link/shoulder_link/half_arm_1_link/half_arm_2_link\",\n      \"material_type\": \"aluminium\",\n      \"mass_kg\": 0.0,\n      \"static_friction\": 0.0,\n      \"dynamic_friction\": 0.0,\n      \"restitution\": 0.0,\n      \"collision_approximation\": \"convexHull\",\n      \"is_rigid\": true,\n      \"confidence\": \"high\",\n      \"reasoning\": \"Silvery color and lightweight robotic arm context.\"\n    },\n    {\n      \"prim_path\": \"/gen3/Geometry/base_link/shoulder_link/half_arm_1_link/half_arm_2_link/forearm_link\",\n      \"material_type\": \"aluminium\",\n      \"mass_kg\": 0.0,\n      \"static_friction\": 0.0,\n      \"dynamic_friction\": 0.0,\n      \"restitution\": 0.0,\n      \"collision_approximation\": \"convexHull\",\n      \"is_rigid\": true,\n      \"confidence\": \"high\",\n      \"reasoning\": \"Silvery color and lightweight robotic arm context.\"\n    },\n    {\n      \"prim_path\": \"/gen3/Geometry/base_link/shoulder_link/half_arm_1_link/half_arm_2_link/forearm_link/spherical_wrist_1_link\",\n      \"material_type\": \"aluminium\",\n      \"mass_kg\": 0.0,\n      \"static_friction\": 0.0,\n      \"dynamic_friction\": 0.0,\n      \"restitution\": 0.0,\n      \"collision_approximation\": \"convexHull\",\n      \"is_rigid\": true,\n      \"confidence\": \"high\",\n      \"reasoning\": \"Silvery color and lightweight robotic arm context.\"\n    },\n    {\n      \"prim_path\": \"/gen3/Geometry/base_link/shoulder_link/half_arm_1_link/half_arm_2_link/forearm_link/spherical_wrist_1_link/spherical_wrist_2_link\",\n      \"material_type\": \"aluminium\",\n      \"mass_kg\": 0.0,\n      \"static_friction\": 0.0,\n      \"dynamic_friction\": 0.0,\n      \"restitution\": 0.0,\n      \"collision_approximation\": \"convexHull\",\n      \"is_rigid\": true,\n      \"confidence\": \"high\",\n      \"reasoning\": \"Silvery color and lightweight robotic arm context.\"\n    },\n    {\n      \"prim_path\": \"/gen3/Geometry/base_link/shoulder_link/half_arm_1_link/half_arm_2_link/forearm_link/spherical_wrist_1_link/spherical_wrist_2_link/bracelet_link\",\n      \"material_type\": \"aluminium\",\n      \"mass_kg\": 0.0,\n      \"static_friction\": 0.0,\n      \"dynamic_friction\": 0.0,\n      \"restitution\": 0.0,\n      \"collision_approximation\": \"convexHull\",\n      \"is_rigid\": true,\n      \"confidence\": \"high\",\n      \"reasoning\": \"Silvery color and lightweight robotic arm context.\"\n    }\n  ],\n  \"joint_prims\": [\n    {\n      \"prim_path\": \"/gen3/Geometry/base_link/shoulder_link/half_arm_1_link/half_arm_2_link/forearm_link/spherical_wrist_1_link/spherical_wrist_2_link/bracelet_link/joint_7\",\n      \"lower_limit_deg\": -90,\n      \"upper_limit_deg\": 90,\n      \"joint_valid\": true,\n      \"confidence\": \"high\",\n      \"reasoning\": \"UNCONSTRAINED joint_valid=true per robot spec.\"\n    },\n    {\n      \"prim_path\": \"/gen3/Geometry/base_link/shoulder_link/half_arm_1_link/half_arm_2_link/forearm_link/spherical_wrist_1_link/spherical_wrist_2_link/joint_6\",\n      \"lower_limit_deg\": -119.75,\n      \"upper_limit_deg\": 119.75,\n      \"joint_valid\": true,\n      \"confidence\": \"high\",\n      \"reasoning\": \"Within spec (-119.75\u00b0 to 119.75\u00b0).\"\n    },\n    {\n      \"prim_path\": \"/gen3/Geometry/base_link/shoulder_link/half_arm_1_link/half_arm_2_link/forearm_link/spherical_wrist_1_link/joint_5\",\n      \"lower_limit_deg\": -90,\n      \"upper_limit_deg\": 90,\n      \"joint_valid\": true,\n      \"confidence\": \"high\",\n      \"reasoning\": \"UNCONSTRAINED joint_valid=true per robot spec.\"\n    },\n    {\n      \"prim_path\": \"/gen3/Geometry/base_link/shoulder_link/half_arm_1_link/half_arm_2_link/forearm_link/joint_4\",\n      \"lower_limit_deg\": -147.25,\n      \"upper_limit_deg\": 147.25,\n      \"joint_valid\": true,\n      \"confidence\": \"high\",\n      \"reasoning\": \"Within spec (-147.25\u00b0 to 147.25\u00b0).\"\n    },\n    {\n      \"prim_path\": \"/gen3/Geometry/base_link/shoulder_link/half_arm_1_link/half_arm_2_link/joint_3\",\n      \"lower_limit_deg\": -90,\n      \"upper_limit_deg\": 90,\n      \"joint_valid\": true,\n      \"confidence\": \"high\",\n      \"reasoning\": \"UNCONSTRAINED joint_valid=true per robot spec.\"\n    },\n    {\n      \"prim_path\": \"/gen3/Geometry/base_link/shoulder_link/half_arm_1_link/joint_2\",\n      \"lower_limit_deg\": -128.34,\n      \"upper_limit_deg\": 237.2,\n      \"joint_valid\": true,\n      \"confidence\": \"high\",\n      \"reasoning\": \"Within spec (-128.34\u00b0 to 237.20\u00b0).\"\n    },\n    {\n      \"prim_path\": \"/gen3/Geometry/base_link/shoulder_link/joint_1\",\n      \"lower_limit_deg\": -90,\n      \"upper_limit_deg\": 90,\n      \"joint_valid\": true,\n      \"confidence\": \"high\",\n      \"reasoning\": \"UNCONSTRAINED joint_valid=true per robot spec.\"\n    }\n  ],\n  \"global_notes\": \"All joints and materials validated against provided specs and visual cues.\"\n}\n```\n\n=== PASS 3: VERIFICATION ===\n```json\n{\n  \"corrections\": [],\n  \"global_notes\": \"The analysis correctly identifies four joints with unbounded rotation limits as violations, while three other joints with specified limits are valid. No further corrections are needed as the assessment aligns with the visual evidence and mechanical constraints.\"\n}\n```"
+    }
+  ]
+}
