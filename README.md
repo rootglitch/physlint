@@ -8,14 +8,14 @@ Feed any USD file. Get back a compliance report flagging bad joint limits, missi
 
 ## The problem
 
-USD scenes used in robotics simulation ship with no physics properties, or with properties that were never validated:
+Robot assets — arms, quadrupeds, humanoids — are authored in USD and loaded directly into simulation. They routinely ship with physics properties that were never validated:
 
-- Joint limits set to physically impossible values (e.g. a human elbow at 220°)
-- Mass properties missing entirely, or copied from the wrong object
-- No collision geometry — the simulator picks arbitrary defaults
-- Friction values that cause jitter or tunneling at runtime
+- **Robot joint limits set to physically impossible values** — e.g. industrial arm at 259°, exceeding its own datasheet spec; humanoid elbow at 220°, exceeding anatomical range
+- **Link masses off by 10×** — steel links estimated as foam; controller gains tuned to the wrong inertia
+- **Friction errors that cause sim-to-real gap** on manipulation and contact tasks
+- **Missing collision geometry** — the physics engine picks arbitrary defaults
 
-These issues are invisible until the sim explodes. There is no `USD physics lint` equivalent to `eslint` or `mypy`.
+These bugs are silent. The sim runs. The policy fails on the real robot. There is no `USD physics lint` equivalent to `eslint` or `mypy`.
 
 ---
 
@@ -81,38 +81,42 @@ A focused review of joint validity findings. Violations and valid joints are lis
 
 ## Demo
 
-The demo scene (`assets/demo_gripper.usda`) has a stainless-steel pressure vessel, rubber gasket, dark steel support frame, and an orange robot arm with an **intentionally wrong elbow joint limit of 220°** — no physics properties authored anywhere.
+The demo scene (`assets/demo_fr3.usda`) is a Franka Research 3 arm with **two intentionally wrong joint limits** — `fr3_joint2` at 220° and `fr3_joint6` at 258.8°, both exceeding the industrial ±180° spec — with no physics properties authored anywhere.
+
+```bash
+conda run -n physlint python main.py run assets/demo_fr3.usda --dry-run
+```
 
 ### Renders (Blender Cycles, 4 views)
 
 | Top | Front | Side | Isometric |
 |-----|-------|------|-----------|
-| ![top](renders/demo_test/top.png) | ![front](renders/demo_test/front.png) | ![side](renders/demo_test/side.png) | ![isometric](renders/demo_test/isometric.png) |
+| ![top](renders/demo_fr3/top.png) | ![front](renders/demo_fr3/front.png) | ![side](renders/demo_fr3/side.png) | ![isometric](renders/demo_fr3/isometric.png) |
 
 ### Compliance report output
 
 **Status: 🔴 VIOLATIONS FOUND**
 
 | Joint | Status | Original upper | Suggested upper | Reason |
-|-------|--------|---------------|-----------------|--------|
-| `/World/RobotArm/ElbowJoint` | 🔴 violation | **220°** | **145°** | Upper limit of 220° is impossible for a human-like elbow joint |
+|-------|--------|----------------|-----------------|--------|
+| `fr3_joint2` | 🔴 violation | **220.0°** | **180.0°** | Upper 220° exceeds industrial ±180° limit |
+| `fr3_joint6` | 🔴 violation | **258.8°** | **180.0°** | Upper 259° exceeds industrial ±180° limit |
 
 ### Inferred physics properties
 
-| Prim | Material | Mass (kg) | Static μ | Dynamic μ | Restitution |
-|------|----------|-----------|----------|-----------|-------------|
-| `/World/PressureVessel/Body` | steel | 353.25 | 0.45 | 0.35 | 0.30 |
-| `/World/PressureVessel/TopCap` | aluminum | 38.20 | 0.45 | 0.35 | 0.30 |
-| `/World/PressureVessel/BottomCap` | aluminum | 38.20 | 0.45 | 0.35 | 0.30 |
-| `/World/RubberGasket` | **rubber** | 3.30 | **0.70** | **0.60** | **0.05** |
-| `/World/SupportFrame/Base` | concrete | 3.86 | 0.55 | 0.45 | 0.10 |
-| `/World/SupportFrame/PillarLeft` | steel | 4.41 | 0.45 | 0.35 | 0.30 |
-| `/World/SupportFrame/PillarRight` | steel | 4.41 | 0.45 | 0.35 | 0.30 |
-| `/World/RobotArm/UpperArm` | aluminum | 1.09 | 0.45 | 0.35 | 0.30 |
-| `/World/RobotArm/LowerArm` | aluminum | 1.09 | 0.45 | 0.35 | 0.30 |
-| `/World/ValveHandle` | aluminum | 2.70 | 0.45 | 0.35 | 0.30 |
+Cosmos Reason 2 correctly identifies the alternating steel/aluminium link pattern from surface sheen alone — dark grey metallic = steel, light silver = aluminium:
 
-The rubber gasket is correctly identified — zero metallic sheen, near-black matte surface — and gets friction/restitution values appropriate for elastomers rather than metals.
+| Prim | Material | Mass (kg) | Static μ | Restitution |
+|------|----------|-----------|----------|-------------|
+| `base` | steel | 440.33 | 0.45 | 0.30 |
+| `fr3_link0` | **aluminium** | 9.68 | 0.35 | 0.25 |
+| `fr3_link1` | steel | 23.60 | 0.45 | 0.30 |
+| `fr3_link2` | **aluminium** | 8.12 | 0.35 | 0.25 |
+| `fr3_link3` | steel | 26.77 | 0.45 | 0.30 |
+| `fr3_link4` | **aluminium** | 9.21 | 0.35 | 0.25 |
+| `fr3_link5` | steel | 29.92 | 0.45 | 0.30 |
+| `fr3_link6` | **aluminium** | 3.92 | 0.35 | 0.25 |
+| `fr3_link7` | steel | 4.05 | 0.45 | 0.30 |
 
 ---
 
@@ -269,22 +273,23 @@ conda run -n physlint python main.py run your_scene.usda --dry-run --quantize
 ### Run on the included demo scene
 
 ```bash
-conda run -n physlint python main.py run assets/demo_gripper.usda --dry-run
+conda run -n physlint python main.py run assets/demo_fr3.usda --dry-run
 ```
 
 ### Parse only (no rendering or inference)
 
 ```bash
-conda run -n physlint python main.py run assets/demo_gripper.usda --parse-only
+conda run -n physlint python main.py run assets/demo_fr3.usda --parse-only
 ```
 
 Extracts the scene graph without loading the model. Useful for validating USD structure in CI.
 
 ```
-  Found 10 geometry prims, 1 joint prims
-    Geom  /World/PressureVessel/Body       (Cylinder, size=30.00×30.00×50.00)
-    Geom  /World/RubberGasket              (Cylinder, size=33.00×33.00×2.50)
-    Joint /World/RobotArm/ElbowJoint       (PhysicsRevoluteJoint, limits=-10.0°..220.0°)
+  Found 9 geometry prims, 7 joint prims
+    Geom  /fr3/Geometry/base                          (Mesh)
+    Geom  /fr3/Geometry/base/fr3_link0                (Mesh)
+    Joint /fr3/.../fr3_joint2   (PhysicsRevoluteJoint, limits=-102.2°..220.0°)
+    Joint /fr3/.../fr3_joint6   (PhysicsRevoluteJoint, limits=31.2°..258.8°)
 ```
 
 ### All options
@@ -313,6 +318,7 @@ Options:
 physlint/
 ├── main.py                  # CLI — orchestrates all steps
 ├── render_usd.py            # Blender Python script (runs inside Blender process)
+├── make_demo_video.py       # Generates demo_video.mp4 for submission
 ├── environment.yml          # Conda environment
 ├── src/
 │   ├── usd_parser.py        # Extracts scene graph via pxr.Usd; reads material bindings
@@ -323,12 +329,14 @@ physlint/
 │   └── report.py            # Generates JSON + Markdown compliance report
 ├── benchmark.py             # Benchmark runner — evaluates against known GT
 ├── benchmark_results.json   # Recorded benchmark output (latest run)
+├── renders/
+│   └── demo_fr3/            # 4 Blender renders for the FR3 demo scene
 └── assets/
     ├── create_bench_scenes.py      # Generates all 14 benchmark scenes + GT
     ├── benchmark_gt.json           # Ground truth: 53 joints (24 violated), 68 mass prims
     ├── robot_specs.json            # Per-robot joint limit tables (11 robots from Menagerie)
-    ├── demo_gripper.usda           # Demo input (no physics, bad joint limit)
-    ├── demo_gripper_physics.usda   # Demo output (physics authored)
+    ├── demo_fr3.usda               # Demo input — FR3 arm, 2 violated joint limits
+    ├── demo_fr3_report/            # Pre-generated compliance report (report.md + report.json)
     ├── bench_revolute_limits.usda
     ├── bench_mass_materials.usda
     ├── bench_mixed.usda
@@ -342,10 +350,7 @@ physlint/
     ├── bench_excavator.usda
     ├── bench_wrist_3dof.usda
     ├── bench_linear_gantry.usda
-    ├── bench_all_violated.usda
-    └── demo_gripper_report/
-        ├── report.md              # Pre-generated compliance report
-        └── report.json
+    └── bench_all_violated.usda
 ```
 
 ---
